@@ -52,22 +52,26 @@
         <form id="contact-form">
           <div class="form-field">
             <label for="nombre">Nombre y apellido</label>
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </div>
+          <div class="form-field">
+            <label for="empresa">Empresa (opcional)</label>
+            <input type="text" id="empresa" name="empresa" autocomplete="organization">
           </div>
           <div class="form-field">
             <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" autocomplete="email" required>
           </div>
           <div class="form-field">
             <label for="telefono">Teléfono (opcional)</label>
-            <input type="tel" id="telefono" name="telefono">
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel">
           </div>
           <div class="form-field">
-            <label for="empresa">Consulta dirigida a</label>
-            <select id="empresa" name="empresa">
+            <label for="area">Consulta dirigida a</label>
+            <select id="area" name="area">
               <option value="general">Consulta general — Parque Logístico Nacional</option>
-              <option value="geligold">Geligold S.A. — Depósito aduanero</option>
-              <option value="talfir">Talfir S.A. — Depósito fiscal</option>
+              <option value="geligold">Geligold S.A. — Depósito nacional</option>
+              <option value="talfir">Talfir S.A. — Depósito aduanero</option>
               <option value="lamarel">Lamarel — Flete terrestre</option>
               <option value="repremar">Repremar Logistics — Fletes aéreos y marítimos</option>
               <option value="rse">Responsabilidad social</option>
@@ -77,9 +81,13 @@
             <label for="mensaje">Mensaje</label>
             <textarea id="mensaje" name="mensaje" required></textarea>
           </div>
+          <div class="form-field form-field--check">
+            <input type="checkbox" id="consentimiento" name="consentimiento" value="Acepta" required>
+            <label for="consentimiento">Acepto que mis datos se usen solo para responder esta consulta (Ley N.º 18.331 de Protección de Datos Personales).</label>
+          </div>
+          <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-          <p class="form-note" id="form-status" style="display:none; color: var(--gold-500); font-weight:600;"></p>
-          <p class="form-note">Este formulario es informativo. Si preferís, podés escribirnos directamente a los correos de contacto.</p>
+          <p id="form-status" class="form-status" role="status" aria-live="polite" hidden></p>
         </form>
       </div>
 
@@ -87,23 +95,24 @@
         <h2 class="section-title" style="font-size:1.5rem;">Datos de contacto</h2>
         <div class="grid" style="gap:16px;">
           <div class="card">
-            <h3>Geligold S.A.</h3>
+            <h3>Geligold S.A. — Depósito nacional</h3>
             <p>Dr. Pantaleón Pérez 4881, Montevideo</p>
-            <p>Tel. 2525 87 82 — geligold@pln.com.uy</p>
+            <p>Tel. <a href="tel:+59825258782">2525 87 82</a> — <a href="mailto:geligold@pln.com.uy">geligold@pln.com.uy</a></p>
           </div>
           <div class="card">
-            <h3>Talfir S.A.</h3>
+            <h3>Talfir S.A. — Depósito aduanero</h3>
             <p>Veracierto 2990, Montevideo</p>
-            <p>Tel. 2504 61 82 — operativa@talfir.com.uy</p>
+            <p>Tel. <a href="tel:+59825046182">2504 61 82</a> — <a href="mailto:operativa@talfir.com.uy">operativa@talfir.com.uy</a></p>
           </div>
           <div class="card">
-            <h3>Lamarel</h3>
-            <p>Misiones 1372, 6to piso, Montevideo</p>
-            <p>Tel. 2916 94 16 — lamarel@lamarel.com</p>
+            <h3>Lamarel — Flete terrestre</h3>
+            <p>Dr. Pantaleón Pérez 4881, Montevideo</p>
+            <p>Tel. <a href="tel:+59825259960">2525 99 60</a> — <a href="mailto:lamarel@lamarel.com">lamarel@lamarel.com</a></p>
           </div>
           <div class="card">
-            <h3>Repremar Logistics</h3>
-            <p>Tel. 2916 94 16 — logistics@repremar.com</p>
+            <h3>Repremar Logistics — Fletes aéreos y marítimos</h3>
+            <p>Misiones 1372, 6.º piso, Montevideo</p>
+            <p>Tel. <a href="tel:+59829169416">2916 94 16</a> — <a href="mailto:logistics@repremar.com">logistics@repremar.com</a></p>
           </div>
         </div>
       </div>
