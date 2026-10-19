@@ -167,9 +167,9 @@ section {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 22, 40, 0.97);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--gray-200);
 }
 
 .nav-wrap {
@@ -183,7 +183,7 @@ section {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--white);
+  color: var(--navy-950);
 }
 
 .brand-mark {
@@ -210,7 +210,7 @@ section {
 .brand-text span {
   display: block;
   font-size: 0.68rem;
-  color: var(--gold-300);
+  color: var(--gold-500);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -223,7 +223,7 @@ section {
 }
 
 .nav-links a {
-  color: var(--gray-200);
+  color: var(--gray-600);
   font-size: 0.9rem;
   font-weight: 500;
   white-space: nowrap;
@@ -234,8 +234,8 @@ section {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--navy-950);
+  background: var(--gray-100);
 }
 
 .nav-cta {
@@ -257,7 +257,7 @@ section {
 .nav-toggle span {
   width: 24px;
   height: 2px;
-  background: var(--white);
+  background: var(--navy-950);
   border-radius: 2px;
 }
 
@@ -270,9 +270,9 @@ section {
   justify-content: flex-end;
   color: var(--white);
   overflow: hidden;
-  background:
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 26px),
-    linear-gradient(135deg, var(--navy-800), var(--navy-950));
+  background-image: url("../img/hero-placeholder.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .hero::after {
@@ -478,6 +478,32 @@ section {
   color: var(--navy-900);
   min-width: 72px;
   flex-shrink: 0;
+}
+
+/* ---------- Mini timeline (home teaser) ---------- */
+.mini-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.mini-timeline-item {
+  padding-top: 20px;
+  border-top: 3px solid var(--gold-500);
+}
+
+.mini-timeline-year {
+  display: block;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--navy-950);
+  margin-bottom: 8px;
+}
+
+.mini-timeline-item p {
+  color: var(--gray-600);
+  font-size: 0.92rem;
 }
 
 /* ---------- Timeline ---------- */
@@ -852,6 +878,11 @@ button[disabled] {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .grid-2 { grid-template-columns: 1fr; }
 
+  .mini-timeline {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 28px;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -874,7 +905,8 @@ button[disabled] {
     left: 0;
     right: 0;
     height: calc(100vh - 76px);
-    background: var(--navy-950);
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
     flex-direction: column;
     align-items: stretch;
     padding: 20px;
@@ -917,6 +949,11 @@ button[disabled] {
   .grid-4,
   .grid-3 {
     grid-template-columns: 1fr;
+  }
+
+  .mini-timeline {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
   }
 
   .footer-grid {

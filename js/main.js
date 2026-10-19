@@ -80,6 +80,7 @@ var REVEAL_SELECTORS = [
   ".grid > *",
   ".feature > *",
   ".timeline-item",
+  ".mini-timeline > *",
   ".company-card",
   ".cta-band",
   ".quote",
@@ -109,7 +110,7 @@ function initScrollReveal() {
     el.classList.add("reveal");
     // Escalonado: cada hermano espera 0,1 s más que el anterior (máximo 0,4 s).
     var siblings = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
-    if (el.parentElement && el.parentElement.matches(".grid, .feature, .contact-grid")) {
+    if (el.parentElement && el.parentElement.matches(".grid, .feature, .contact-grid, .mini-timeline")) {
       el.style.transitionDelay = Math.min(siblings * 0.1, 0.4) + "s";
     }
   });
