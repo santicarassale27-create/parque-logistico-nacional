@@ -506,7 +506,109 @@ section {
   font-size: 0.92rem;
 }
 
-/* ---------- Timeline ---------- */
+/* ---------- Timeline (horizontal, scrollable) ---------- */
+.timeline-h-wrap {
+  overflow-x: auto;
+  margin-top: 8px;
+  padding-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+
+.timeline-h-track {
+  display: flex;
+  gap: 40px;
+  padding: 44px 4px 4px;
+  min-width: max-content;
+}
+
+.timeline-h-item {
+  position: relative;
+  flex: 0 0 260px;
+  padding-top: 28px;
+  scroll-snap-align: start;
+}
+
+.timeline-h-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + 40px);
+  height: 2px;
+  background: var(--gray-200);
+}
+
+.timeline-h-item:last-child::before {
+  width: 100%;
+}
+
+.timeline-h-item::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--gold-500);
+}
+
+.timeline-h-year {
+  position: absolute;
+  top: -38px;
+  left: 0;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--navy-950);
+}
+
+.timeline-h-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-h-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.timeline-h-card p {
+  color: var(--gray-600);
+  font-size: 0.88rem;
+  margin-bottom: 14px;
+}
+
+.timeline-h-media {
+  margin-top: auto;
+  aspect-ratio: 4 / 3;
+  background: var(--gray-100);
+  border: 1px dashed var(--gray-400);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-600);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 10px;
+}
+
+.timeline-h-hint {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  margin-top: 4px;
+}
+
+/* ---------- Timeline (legacy vertical, kept for other pages) ---------- */
 .timeline {
   position: relative;
   margin-top: 20px;
