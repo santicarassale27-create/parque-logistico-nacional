@@ -167,9 +167,9 @@ section {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 22, 40, 0.97);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--gray-200);
 }
 
 .nav-wrap {
@@ -183,7 +183,7 @@ section {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: var(--white);
+  color: var(--navy-950);
 }
 
 .brand-mark {
@@ -210,7 +210,7 @@ section {
 .brand-text span {
   display: block;
   font-size: 0.68rem;
-  color: var(--gold-300);
+  color: var(--gold-500);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -223,7 +223,7 @@ section {
 }
 
 .nav-links a {
-  color: var(--gray-200);
+  color: var(--gray-600);
   font-size: 0.92rem;
   font-weight: 500;
   padding: 10px 16px;
@@ -233,8 +233,8 @@ section {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--navy-950);
+  background: var(--gray-100);
 }
 
 .nav-cta {
@@ -256,7 +256,7 @@ section {
 .nav-toggle span {
   width: 24px;
   height: 2px;
-  background: var(--white);
+  background: var(--navy-950);
   border-radius: 2px;
 }
 
@@ -269,9 +269,9 @@ section {
   justify-content: flex-end;
   color: var(--white);
   overflow: hidden;
-  background:
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 26px),
-    linear-gradient(135deg, var(--navy-800), var(--navy-950));
+  background-image: url("../img/hero-placeholder.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .hero::after {
