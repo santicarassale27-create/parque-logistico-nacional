@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCounters();
   initContactForm();
   initHistoria();
+  initPlano();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -287,4 +288,26 @@ function initHistoria() {
       fig.style.setProperty("--pos", control.value + "%");
     });
   });
+}
+
+/* ---------- 7. Plano de empresas (página El Parque) ----------
+   Cada local del plano y cada fila de la lista tienen el mismo
+   data-lote. Al pasar el mouse, tocar o enfocar uno, se resaltan los dos. */
+function initPlano() {
+  var plano = document.querySelector(".pq-plano-grid");
+  if (!plano) return;
+  var items = plano.querySelectorAll("[data-lote]");
+
+  function resaltar(lote) {
+    items.forEach(function (el) {
+      el.classList.toggle("activo", el.dataset.lote === lote);
+    });
+  }
+
+  items.forEach(function (el) {
+    el.addEventListener("mouseenter", function () { resaltar(el.dataset.lote); });
+    el.addEventListener("focus", function () { resaltar(el.dataset.lote); });
+    el.addEventListener("click", function () { resaltar(el.dataset.lote); });
+  });
+  plano.addEventListener("mouseleave", function () { resaltar(null); });
 }

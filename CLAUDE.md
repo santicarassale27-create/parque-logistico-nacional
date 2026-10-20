@@ -29,8 +29,8 @@ img/                        Fotos (cuando las haya)
 
 | Persona | Archivos |
 |---|---|
-| Santi | `index.html`, `parque.html`, `empresas.html`, `proyecto.html`, `responsabilidad-social.html`, `img/`, encabezado (nav) |
-| Alfonso | `historia.html` (rediseño), `contacto.html`, `css/style.css`, `js/main.js`, `CLAUDE.md`, `README.md` |
+| Santi | `index.html`, `empresas.html`, `proyecto.html`, `responsabilidad-social.html`, `img/`, encabezado (nav) |
+| Alfonso | `historia.html` y `parque.html` (rediseños), `contacto.html`, `css/style.css`, `js/main.js`, `CLAUDE.md`, `README.md` |
 
 - No modifiques archivos del otro sin que la persona lo pida explícitamente.
 - Si una tarea necesita tocar un archivo del otro (por ejemplo, un estilo nuevo en `style.css`),
@@ -58,6 +58,16 @@ img/                        Fotos (cuando las haya)
 - Estilos con prefijo `hist-` al final de `css/style.css`; títulos con la tipografía Sora (`--font-display`).
 - Lugares de foto provisorios: `<div class="foto">` con una etiqueta `FOTO 01…09` que dice qué foto va. Al llegar la foto, se le pone `style="background-image:url(img/...)"` y se borra la etiqueta.
 - Los textos con clase `pendiente` (subrayado punteado) esperan datos reales de la empresa: no inventarlos.
+
+## Página El Parque
+
+- Estilos con prefijo `pq-` en `css/style.css`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-cifras` y `.hist-next`.
+- Sin textos chicos arriba de los títulos (decisión del equipo; solo se usan en la línea de tiempo de Historia).
+- **Plano de Itapeby 3170:** cada local es un `<g class="lote lote--ESTADO" data-lote="N">` en el SVG y una fila
+  `<li data-lote="N">` en la lista. Para cambiar el estado de un local, cambiar la clase `lote--operando`,
+  `lote--confirmada`, `lote--negociacion` o `lote--libre` y la etiqueta `estado--...` de su fila.
+  Estados confirmados: Fármaco Uruguayo y Gador operando; Droguería Uruguay confirmada; un laboratorio en negociación; 2 locales a definir.
+- El mapa de ubicación es un iframe de Google Maps con la dirección (no necesita clave).
 
 ## Comportamientos automáticos de `js/main.js` (no hace falta tocar el HTML)
 

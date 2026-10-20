@@ -1734,3 +1734,423 @@ button[disabled] {
   .antes-despues { aspect-ratio: 4 / 3; }
   .hist-quote, .hist-sellos { padding: 72px 0; }
 }
+
+/* =========================================================
+   Página El Parque (rediseño)
+   Todo lo de esta página empieza con "pq-". Reutiliza de Historia:
+   .foto, .hist-anim, .hist-cifras, .hist-open-scroll y .hist-next.
+   ========================================================= */
+
+:root {
+  --verde-500: #4f9d69;
+  --verde-100: #e3f1e7;
+  --gold-800: #7a5f0d;
+  --gold-100: #f6efd6;
+  --gold-50: #fdf6df;
+  --navy-100: #e7edf5;
+}
+
+.pq-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--navy-950);
+}
+
+.pq-lead {
+  margin-top: 18px;
+  max-width: 560px;
+  color: var(--gray-600);
+  font-size: 1.05rem;
+}
+
+.pq-center { text-align: center; }
+
+/* ---------- Apertura: título arriba, foto panorámica abajo ---------- */
+.pq-open { padding: 88px 0 56px; }
+
+.pq-open-head {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+
+.pq-open h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--navy-950);
+}
+
+.pq-open-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--navy-900);
+}
+
+.pq-open .hist-open-scroll { margin-top: 24px; }
+.pq-open-foto { aspect-ratio: 21 / 9; }
+
+/* ---------- Cifras: 4 en vez de 3 ---------- */
+.pq-cifras .hist-cifras-list { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- Ubicación ---------- */
+.pq-ubicacion { padding: 40px 0 40px; }
+
+.pq-ubicacion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.pq-distancias {
+  list-style: none;
+  margin-top: 36px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.pq-distancias li {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.pq-km {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
+  color: var(--gold-500);
+}
+
+.pq-distancias h3 { font-size: 1.05rem; }
+.pq-distancias p { color: var(--gray-600); font-size: 0.95rem; }
+
+.pq-mapa {
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+
+.pq-mapa iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ---------- Servicios: filas alternadas foto / texto ---------- */
+.pq-servicios { padding: 40px 0 60px; }
+
+.pq-servicio {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  padding: 56px 0;
+}
+
+.pq-servicio--invertido .pq-servicio-foto { order: 2; }
+
+.pq-servicio-foto { aspect-ratio: 4 / 3; }
+
+.pq-servicio-texto h2 {
+  margin: 18px 0 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+.pq-servicio-texto > p {
+  max-width: 480px;
+  color: var(--gray-600);
+  font-size: 1.05rem;
+}
+
+/* "Opera: [logo]" — quién da el servicio */
+.pq-opera {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px 6px 6px;
+  border: 1px solid var(--gray-200);
+  border-radius: 999px;
+  transition: border-color 0.2s ease;
+}
+
+.pq-opera:hover { border-color: var(--gold-500); }
+
+.pq-opera span {
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+  background: var(--gray-100);
+  border-radius: 999px;
+}
+
+.pq-opera img { height: 26px; width: auto; }
+
+.pq-specs {
+  margin-top: 28px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.pq-specs > div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.pq-specs dt {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.pq-specs dd {
+  font-weight: 600;
+  color: var(--navy-950);
+}
+
+/* ---------- Seguridad y comodidad ---------- */
+.pq-extras {
+  padding: 100px 0;
+  background: var(--gray-50);
+}
+
+.pq-extras-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 36px;
+  margin-top: 56px;
+}
+
+.pq-extras-list li { text-align: center; }
+
+.pq-extras-list svg {
+  width: 52px;
+  height: 52px;
+  padding: 12px;
+  margin-bottom: 18px;
+  fill: none;
+  stroke: var(--gold-500);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.pq-extras-list h3 {
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.pq-extras-list p {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+}
+
+/* ---------- Plano interactivo de empresas ---------- */
+.pq-plano { padding: 110px 0 40px; }
+
+.pq-plano-head { margin-bottom: 48px; }
+.pq-plano-head .pq-lead { max-width: 680px; }
+
+.pq-plano-grid {
+  padding: 40px 40px 32px;
+  background: var(--gray-50);
+  border-radius: 24px;
+}
+
+.pq-plano-svg { width: 100%; height: auto; display: block; }
+
+/* En pantallas chicas el plano mantiene un ancho mínimo y se desliza
+   dentro de su recuadro (la página no se mueve para los costados) */
+.pq-plano-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+.zona { stroke: var(--white); stroke-width: 3; }
+.zona--verde { fill: var(--verde-100); }
+.zona--calle { fill: var(--gray-400); }
+.zona--predio { fill: var(--gray-100); }
+
+.cancha { fill: var(--verde-500); opacity: 0.6; }
+.cancha-linea { fill: none; stroke: var(--white); stroke-width: 2; opacity: 0.8; }
+
+.zona-label {
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--verde-500);
+  text-anchor: middle;
+}
+
+.lote { cursor: pointer; outline: none; }
+
+.lote rect {
+  stroke-width: 2;
+  filter: drop-shadow(0 4px 6px rgba(10, 22, 40, 0.08));
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+
+/* Color de cada local según su estado (igual que la leyenda) */
+.lote--operando rect { fill: var(--gold-100); stroke: var(--gold-400); }
+.lote--confirmada rect { fill: var(--navy-100); stroke: var(--navy-600); }
+.lote--negociacion rect { fill: var(--gray-200); stroke: var(--gray-400); }
+.lote--libre rect { fill: var(--white); stroke: var(--gray-400); stroke-dasharray: 6 5; }
+
+.lote circle {
+  fill: var(--navy-950);
+  transition: fill 0.25s ease, transform 0.25s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.lote text {
+  font-size: 20px;
+  font-weight: 700;
+  fill: var(--white);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* Local resaltado (al pasar el mouse por el plano o por la lista) */
+.lote.activo rect { stroke: var(--navy-950); stroke-width: 3; stroke-dasharray: none; }
+.lote.activo circle { fill: var(--gold-500); transform: scale(1.15); }
+
+.pq-leyenda {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 24px;
+  margin: 20px 0 28px;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.pq-leyenda li { display: flex; align-items: center; gap: 8px; }
+
+.ley {
+  width: 16px;
+  height: 16px;
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+.ley--operando { background: var(--gold-100); border-color: var(--gold-400); }
+.ley--confirmada { background: var(--navy-100); border-color: var(--navy-600); }
+.ley--negociacion { background: var(--gray-200); border-color: var(--gray-400); }
+.ley--libre { background: var(--white); border-color: var(--gray-400); border-style: dashed; }
+.ley--verde { background: var(--verde-100); border-color: var(--verde-500); }
+
+.pq-plano-lista {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.pq-plano-lista li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+.pq-plano-lista li.activo,
+.pq-plano-lista li:focus-visible { background: var(--white); box-shadow: var(--shadow-sm); }
+
+.pq-num {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--white);
+  background: var(--navy-950);
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.pq-plano-lista li.activo .pq-num { background: var(--gold-500); }
+
+.pq-plano-lista strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--navy-950);
+}
+
+.estado {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.estado--operando { color: var(--gold-800); background: var(--gold-100); }
+.estado--confirmada { color: var(--navy-700); background: var(--navy-100); }
+.estado--negociacion { color: var(--gray-800); background: var(--gray-200); }
+.estado--libre, .estado--operando, .estado--confirmada, .estado--negociacion { white-space: nowrap; }
+.estado--libre { color: var(--gray-600); background: var(--white); border: 1px dashed var(--gray-200); }
+
+/* ---------- El Parque: tablet y celular ---------- */
+@media (max-width: 960px) {
+  .pq-open-head,
+  .pq-ubicacion-grid,
+  .pq-servicio { grid-template-columns: 1fr; gap: 36px; }
+
+  .pq-servicio--invertido .pq-servicio-foto { order: 0; }
+  .pq-servicio { padding: 40px 0; }
+  .pq-extras-list { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
+  .pq-plano-lista { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .pq-open { padding: 56px 0 40px; }
+  .pq-open-foto { aspect-ratio: 4 / 3; }
+  .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+  .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
+  .pq-ubicacion { padding: 24px 0 72px; }
+  .pq-distancias li { grid-template-columns: 110px 1fr; }
+  .pq-km { font-size: 1.8rem; }
+  .pq-specs > div { grid-template-columns: 1fr; gap: 2px; }
+  .pq-extras { padding: 72px 0; }
+  .pq-extras-list { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+  .pq-plano { padding: 72px 0 24px; }
+  .pq-plano-grid { padding: 16px; border-radius: 18px; }
+  .pq-plano-svg { min-width: 640px; }
+  .pq-plano-lista { grid-template-columns: 1fr; }
+}
