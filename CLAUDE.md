@@ -29,8 +29,8 @@ img/                        Fotos (cuando las haya)
 
 | Persona | Archivos |
 |---|---|
-| Santi | `index.html`, `historia.html`, `parque.html`, `empresas.html`, `proyecto.html`, `responsabilidad-social.html`, `img/` |
-| Alfonso | `contacto.html`, `css/style.css`, `js/main.js`, `CLAUDE.md`, `README.md` |
+| Santi | `index.html`, `parque.html`, `empresas.html`, `proyecto.html`, `responsabilidad-social.html`, `img/`, encabezado (nav) |
+| Alfonso | `historia.html` (rediseño), `contacto.html`, `css/style.css`, `js/main.js`, `CLAUDE.md`, `README.md` |
 
 - No modifiques archivos del otro sin que la persona lo pida explícitamente.
 - Si una tarea necesita tocar un archivo del otro (por ejemplo, un estilo nuevo en `style.css`),
@@ -52,6 +52,12 @@ img/                        Fotos (cuando las haya)
 - Componentes existentes que hay que reutilizar antes de crear nuevos: `.btn`, `.card`, `.grid-2/3/4`,
   `.feature`, `.section-title`, `.section-lead`, `.eyebrow`, `.stats-strip`, `.cta-band`, `.timeline`.
 - Todo tiene que verse bien en celular (390px de ancho) sin que la página se mueva para los costados.
+
+## Página Historia
+
+- Estilos con prefijo `hist-` al final de `css/style.css`; títulos con la tipografía Sora (`--font-display`).
+- Lugares de foto provisorios: `<div class="foto">` con una etiqueta `FOTO 01…07` que dice qué foto va. Al llegar la foto, se le pone `style="background-image:url(img/...)"` y se borra la etiqueta.
+- Los textos con clase `pendiente` (subrayado punteado) esperan datos reales de la empresa: no inventarlos.
 
 ## Comportamientos automáticos de `js/main.js` (no hace falta tocar el HTML)
 

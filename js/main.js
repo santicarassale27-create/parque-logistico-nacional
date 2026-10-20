@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollReveal();
   initCounters();
   initContactForm();
+  initHistoria();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -84,7 +85,8 @@ var REVEAL_SELECTORS = [
   ".company-card",
   ".cta-band",
   ".quote",
-  ".contact-grid > *"
+  ".contact-grid > *",
+  ".hist-anim"
 ].join(",");
 
 function prefersReducedMotion() {
@@ -98,7 +100,7 @@ function initScrollReveal() {
   var candidates = Array.prototype.slice.call(document.querySelectorAll(REVEAL_SELECTORS))
     .filter(function (el) {
       // Nada de la portada principal ni lo marcado con "no-reveal".
-      return !el.closest(".hero") && !el.closest(".no-reveal");
+      return !el.closest(".hero") && !el.closest(".hist-hero") && !el.closest(".no-reveal");
     });
 
   // Si un elemento está adentro de otro que ya se anima, se anima solo el de afuera.
@@ -227,5 +229,66 @@ function initContactForm() {
         button.disabled = false;
         button.textContent = originalText;
       });
+  });
+}
+
+/* ---------- 6. Página Historia ----------
+   a) La columna fija muestra el capítulo que se está leyendo.
+   b) La línea vertical se llena de dorado a medida que se baja.
+   c) Comparador de fotos "antes / después". */
+function initHistoria() {
+  var lista = document.querySelector(".hist-chapters-list");
+  if (lista) {
+    var capitulos = lista.querySelectorAll(".hist-chapter");
+    var rail = document.querySelector(".hist-rail-inner");
+    var railNum = document.getElementById("rail-num");
+    var railYear = document.getElementById("rail-year");
+    var railName = document.getElementById("rail-name");
+    var actual = null;
+
+    function mostrarCapitulo(cap) {
+      if (cap === actual || !rail) return;
+      actual = cap;
+      rail.classList.add("cambiando");
+      setTimeout(function () {
+        railNum.textContent = cap.dataset.num;
+        railYear.textContent = cap.dataset.year;
+        railName.textContent = cap.dataset.name;
+        rail.classList.remove("cambiando");
+      }, 200);
+    }
+
+    var ticking = false;
+    function actualizar() {
+      ticking = false;
+      var mitad = window.innerHeight * 0.5;
+      var caja = lista.getBoundingClientRect();
+      var progreso = (mitad - caja.top) / caja.height;
+      progreso = Math.max(0, Math.min(1, progreso));
+      lista.style.setProperty("--progreso", progreso.toFixed(4));
+
+      // El capítulo actual es el último cuyo comienzo ya pasó la mitad de la pantalla.
+      var activo = capitulos[0];
+      capitulos.forEach(function (cap) {
+        var arriba = cap.getBoundingClientRect().top;
+        cap.classList.toggle("leido", arriba < mitad);
+        if (arriba < mitad) activo = cap;
+      });
+      mostrarCapitulo(activo);
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(actualizar); }
+    }, { passive: true });
+    window.addEventListener("resize", actualizar);
+    actualizar();
+  }
+
+  document.querySelectorAll(".antes-despues").forEach(function (fig) {
+    var control = fig.querySelector(".antes-despues-control");
+    if (!control) return;
+    control.addEventListener("input", function () {
+      fig.style.setProperty("--pos", control.value + "%");
+    });
   });
 }

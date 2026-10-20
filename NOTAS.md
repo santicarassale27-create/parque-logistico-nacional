@@ -39,7 +39,7 @@ responsabilidad social con el Municipio F y el barrio.
 | Archivo | Contenido | A cargo de |
 |---|---|---|
 | `index.html` | Inicio (resumen de todo) | Santi |
-| `historia.html` | Historia / línea de tiempo | Santi |
+| `historia.html` | Historia en capítulos (rediseño) | Alfonso |
 | `parque.html` | Infraestructura del Parque | Santi |
 | `empresas.html` | Geligold, Talfir, Lamarel, Repremar | Santi |
 | `proyecto.html` | Proyecto Itapeby 3170 | Santi |
