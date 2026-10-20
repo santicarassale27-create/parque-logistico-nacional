@@ -43,8 +43,8 @@
     <div class="pq-open-head">
       <h1>Un parque pensado para mover mercadería</h1>
       <div>
-        <p class="pq-open-lead">Depósito nacional, depósito aduanero, playa de contenedores, flota propia y fletes internacionales, en puntos estratégicos de Montevideo.</p>
-        <a href="#servicios" class="hist-open-scroll">Ver la infraestructura <span aria-hidden="true">↓</span></a>
+        <p class="pq-open-lead">Diez hectáreas en Montevideo con almacenamiento en altura, flota propia y todo lo necesario para el día a día de una operación logística.</p>
+        <a href="#deposito" class="hist-open-scroll">Ver la infraestructura <span aria-hidden="true">↓</span></a>
       </div>
     </div>
     <div class="foto pq-open-foto hist-anim">
@@ -70,55 +70,93 @@
   <div class="container">
     <div class="pq-ubicacion-head">
       <h2 class="pq-title hist-anim">A minutos de todo lo que importa</h2>
-      <p class="pq-lead hist-anim">Una ubicación central en Montevideo, con acceso directo a las principales vías de transporte y a los nodos de comercio exterior del país, más dos sedes del grupo fuera del Parque.</p>
+      <p class="pq-lead hist-anim">Una ubicación central en Montevideo, con acceso directo a las principales vías de transporte y a los nodos de comercio exterior del país.</p>
     </div>
     <figure class="pq-mapa hist-anim">
       <!-- Mapa esquemático de Montevideo (dibujado, no es a escala exacta).
-           Para mover un punto, cambiar el translate(x,y) de su <g class="pin">. -->
+           Para mover un punto, cambiar el translate(x,y) de su <g class="pin">.
+           Los textos están ubicados del lado contrario a las rutas, para no cruzarse. -->
       <div class="pq-mapa-scroll" data-centro="0.55">
       <svg class="pq-mapa-svg" viewBox="0 0 1000 600" role="img" aria-labelledby="mapa-titulo">
-        <title id="mapa-titulo">Mapa de Montevideo con el Parque Logístico Nacional, las otras sedes del grupo, el Puerto, el Aeropuerto y Zona Franca</title>
-        <rect class="mapa-agua" width="1000" height="600"/>
+        <title id="mapa-titulo">Mapa de Montevideo con el Parque Logístico Nacional y sus distancias al Puerto, al Aeropuerto de Carrasco y a Zona Franca</title>
+        <defs>
+          <linearGradient id="mapa-agua-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop class="stop-agua-1" offset="0"/>
+            <stop class="stop-agua-2" offset="1"/>
+          </linearGradient>
+          <radialGradient id="mapa-halo">
+            <stop class="stop-halo-1" offset="0"/>
+            <stop class="stop-halo-2" offset="1"/>
+          </radialGradient>
+          <pattern id="mapa-trama" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)">
+            <path class="mapa-trama-linea" d="M0,0 H22 M0,0 V22"/>
+          </pattern>
+          <clipPath id="mapa-tierra-clip">
+            <path d="M0,0 H1000 V250 L930,280 L860,305 L800,330 L740,350 L680,362 L620,372 L565,392 L515,420 L470,448 L430,472 L398,500 L372,522 L352,516 L334,494 L305,478 L262,470 L215,458 L170,444 L138,428 L132,410 L160,396 L198,378 L222,350 L228,318 L214,292 L186,276 L146,272 L104,282 L70,306 L44,338 L22,372 L0,390 Z"/>
+          </clipPath>
+        </defs>
+
+        <rect width="1000" height="600" fill="url(#mapa-agua-grad)"/>
+        <!-- Tierra: relleno + trama de calles + costa iluminada -->
         <path class="mapa-tierra" d="M0,0 H1000 V250 L930,280 L860,305 L800,330 L740,350 L680,362 L620,372 L565,392 L515,420 L470,448 L430,472 L398,500 L372,522 L352,516 L334,494 L305,478 L262,470 L215,458 L170,444 L138,428 L132,410 L160,396 L198,378 L222,350 L228,318 L214,292 L186,276 L146,272 L104,282 L70,306 L44,338 L22,372 L0,390 Z"/>
+        <rect width="1000" height="600" fill="url(#mapa-trama)" clip-path="url(#mapa-tierra-clip)"/>
+        <path class="mapa-costa-brillo" d="M1000,250 L930,280 L860,305 L800,330 L740,350 L680,362 L620,372 L565,392 L515,420 L470,448 L430,472 L398,500 L372,522 L352,516 L334,494 L305,478 L262,470 L215,458 L170,444 L138,428 L132,410 L160,396 L198,378 L222,350 L228,318 L214,292 L186,276 L146,272 L104,282 L70,306 L44,338 L22,372 L0,390"/>
+        <path class="mapa-costa" d="M1000,250 L930,280 L860,305 L800,330 L740,350 L680,362 L620,372 L565,392 L515,420 L470,448 L430,472 L398,500 L372,522 L352,516 L334,494 L305,478 L262,470 L215,458 L170,444 L138,428 L132,410 L160,396 L198,378 L222,350 L228,318 L214,292 L186,276 L146,272 L104,282 L70,306 L44,338 L22,372 L0,390"/>
+
         <!-- Avenidas principales (aproximadas) -->
-        <path class="mapa-calle" d="M300,410 C420,380 560,350 900,268"/>
-        <path class="mapa-calle" d="M300,410 C380,330 470,260 545,210"/>
-        <path class="mapa-calle" d="M545,210 C640,150 720,90 820,0"/>
-        <path class="mapa-calle" d="M700,345 C790,250 870,160 950,40"/>
-        <path class="mapa-calle" d="M228,330 C300,260 330,180 340,0"/>
-        <path class="mapa-calle mapa-calle--fina" d="M138,428 C260,400 330,420 398,500"/>
-        <path class="mapa-calle mapa-calle--fina" d="M420,380 C470,300 520,250 600,120"/>
-        <!-- Barrios de referencia -->
-        <text class="mapa-barrio" x="200" y="452">Ciudad Vieja</text>
-        <text class="mapa-barrio" x="420" y="440">Pocitos</text>
-        <text class="mapa-barrio" x="345" y="365">Tres Cruces</text>
-        <text class="mapa-barrio" x="200" y="200">Prado</text>
-        <text class="mapa-barrio" x="470" y="290">Unión</text>
-        <text class="mapa-barrio" x="640" y="330">Malvín</text>
-        <text class="mapa-barrio" x="860" y="275">Carrasco</text>
-        <text class="mapa-agua-txt" x="620" y="520">Río de la Plata</text>
-        <text class="mapa-agua-txt mapa-agua-txt--chica" x="120" y="335">Bahía</text>
+        <g clip-path="url(#mapa-tierra-clip)">
+          <path class="mapa-calle" d="M300,410 C420,380 560,350 900,268"/>
+          <path class="mapa-calle" d="M300,410 C380,330 470,260 545,210"/>
+          <path class="mapa-calle" d="M545,210 C640,150 720,90 820,0"/>
+          <path class="mapa-calle" d="M228,330 C300,260 330,180 340,0"/>
+        </g>
+
+        <!-- Anillos de distancia alrededor del Parque -->
+        <g class="mapa-anillos" clip-path="url(#mapa-tierra-clip)">
+          <circle cx="548" cy="212" r="120"/>
+          <circle cx="548" cy="212" r="240"/>
+          <circle cx="548" cy="212" r="360"/>
+        </g>
+        <circle cx="548" cy="212" r="150" fill="url(#mapa-halo)"/>
+
+        <!-- Barrios de referencia (lejos de las rutas) -->
+        <text class="mapa-barrio" x="205" y="455">Ciudad Vieja</text>
+        <text class="mapa-barrio" x="425" y="440">Pocitos</text>
+        <text class="mapa-barrio" x="200" y="190">Prado</text>
+        <text class="mapa-barrio" x="660" y="330">Malvín</text>
+        <text class="mapa-barrio" x="850" y="285">Carrasco</text>
+        <text class="mapa-agua-txt" x="640" y="520">Río de la Plata</text>
+        <text class="mapa-agua-txt mapa-agua-txt--chica" x="150" y="300">Bahía</text>
+
         <!-- Rutas desde el Parque (se dibujan al aparecer) -->
-        <path class="mapa-ruta" pathLength="1" d="M548,212 C430,250 300,300 192,378"/>
-        <path class="mapa-ruta" pathLength="1" d="M548,212 C700,190 820,120 895,52"/>
-        <path class="mapa-ruta" pathLength="1" d="M548,212 C620,150 700,100 790,72"/>
-        <g class="mapa-km" transform="translate(360,282)"><rect x="-34" y="-15" width="68" height="30" rx="15"/><text y="6">12 km</text></g>
-        <g class="mapa-km" transform="translate(760,150)"><rect x="-34" y="-15" width="68" height="30" rx="15"/><text y="6">10 km</text></g>
-        <g class="mapa-km" transform="translate(650,118)"><rect x="-34" y="-15" width="68" height="30" rx="15"/><text y="6">11 km</text></g>
-        <!-- Puntos -->
-        <g class="pin pin--punto" transform="translate(192,378)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="-26" y="-12" text-anchor="end">Puerto de Montevideo</text></g>
-        <g class="pin pin--punto" transform="translate(895,52)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="0" y="34" text-anchor="middle">Aeropuerto de Carrasco</text></g>
-        <g class="pin pin--punto" transform="translate(790,72)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="-26" y="-12" text-anchor="end">Zona Franca</text></g>
-        <g class="pin pin--grupo" transform="translate(585,312)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="26" y="-18">Depósito aduanero</text><text class="pin-sub" x="26" y="0">Talfir · Veracierto 2990</text></g>
-        <g class="pin pin--grupo" transform="translate(178,432)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="0" y="34" text-anchor="middle">Repremar Logistics</text><text class="pin-sub" x="0" y="52" text-anchor="middle">Misiones 1372</text></g>
-        <g class="pin pin--parque" transform="translate(548,212)"><circle class="pin-onda" cy="-16" r="20"/><path d="M0,-40 C-15,-40 -24,-28 -24,-16 C-24,0 0,13 0,13 C0,13 24,0 24,-16 C24,-28 15,-40 0,-40 Z"/><circle cy="-17" r="8"/><text class="pin-txt pin-txt--grande" x="34" y="-22">Parque Logístico Nacional</text><text class="pin-sub" x="34" y="-3">Dr. Pantaleón Pérez 4881</text></g>
+        <path class="mapa-ruta" pathLength="1" d="M548,212 C430,250 300,300 200,372"/>
+        <path class="mapa-ruta" pathLength="1" d="M548,212 C680,215 800,160 900,150"/>
+        <path class="mapa-ruta" pathLength="1" d="M548,212 C610,140 680,90 770,62"/>
+
+        <!-- Puntos: nombre + distancia, del lado libre de líneas -->
+        <g class="pin pin--punto" transform="translate(200,372)">
+          <path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/>
+          <text class="pin-txt" x="-26" y="-22" text-anchor="end">Puerto de Montevideo</text>
+          <text class="pin-km" x="-26" y="-2" text-anchor="end">12 km</text>
+        </g>
+        <g class="pin pin--punto" transform="translate(900,150)">
+          <path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/>
+          <text class="pin-txt" x="0" y="34" text-anchor="middle">Aeropuerto de Carrasco</text>
+          <text class="pin-km" x="0" y="54" text-anchor="middle">10 km</text>
+        </g>
+        <g class="pin pin--punto" transform="translate(770,62)">
+          <path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/>
+          <text class="pin-txt" x="26" y="-20">Zona Franca Montevideo</text>
+          <text class="pin-km" x="26" y="0">11 km</text>
+        </g>
+        <g class="pin pin--parque" transform="translate(548,212)">
+          <circle class="pin-onda" cy="-16" r="20"/>
+          <path d="M0,-40 C-15,-40 -24,-28 -24,-16 C-24,0 0,13 0,13 C0,13 24,0 24,-16 C24,-28 15,-40 0,-40 Z"/><circle cy="-17" r="8"/>
+          <text class="pin-txt pin-txt--grande" x="32" y="36">Parque Logístico Nacional</text>
+          <text class="pin-sub" x="32" y="56">Dr. Pantaleón Pérez 4881</text>
+        </g>
       </svg>
       </div>
-      <figcaption class="pq-mapa-leyenda">
-        <span><i class="ley-pin ley-pin--parque"></i>El Parque</span>
-        <span><i class="ley-pin ley-pin--grupo"></i>Otras sedes del grupo</span>
-        <span><i class="ley-pin ley-pin--punto"></i>Puntos logísticos</span>
-      </figcaption>
     </figure>
     <ul class="pq-distancias">
       <li class="hist-anim"><span class="pq-km" data-counter>12 km</span><div><h3>Puerto de Montevideo</h3><p>Logística marítima y manejo de cargas.</p></div></li>
@@ -128,88 +166,23 @@
   </div>
 </section>
 
-<!-- ============ SERVICIOS (filas alternadas) ============ -->
-<section class="pq-servicios" id="servicios">
+<!-- ============ EL DEPÓSITO ============ -->
+<section class="pq-servicios" id="deposito">
   <div class="container">
-
     <article class="pq-servicio">
       <div class="foto pq-servicio-foto hist-anim"><span class="foto-label">FOTO 02 · Pasillos con estanterías del depósito</span></div>
       <div class="pq-servicio-texto hist-anim">
-        <a href="empresas.html#geligold" class="pq-opera"><span>Opera</span><img src="img/logos/pln.png" alt="Parque Logístico Nacional"></a>
-        <h2>Depósito nacional</h2>
-        <p>Almacenamiento en altura que optimiza cada metro disponible, con estanterías adaptadas a distintos tipos de mercadería.</p>
+        <h2>Almacenamiento en altura</h2>
+        <p>Un depósito diseñado para aprovechar cada metro disponible, con estanterías adaptadas a distintos tipos de mercadería y una flota propia con base en el mismo predio.</p>
         <dl class="pq-specs">
-          <div><dt>Ubicación</dt><dd>Parque · Dr. Pantaleón Pérez 4881</dd></div>
           <div><dt>Superficie</dt><dd>27.000 m² cubiertos</dd></div>
           <div><dt>Altura</dt><dd>Hasta 11 m</dd></div>
           <div><dt>Estanterías</dt><dd>Selectivas y drive-in</dd></div>
           <div><dt>Habilitación</dt><dd>Bromatológica</dd></div>
+          <div><dt>Flota propia</dt><dd>20 camiones, habilitados para cargas peligrosas</dd></div>
         </dl>
       </div>
     </article>
-
-    <article class="pq-servicio pq-servicio--invertido">
-      <div class="foto pq-servicio-foto hist-anim"><span class="foto-label">FOTO 03 · Depósito aduanero y muelles de carga</span></div>
-      <div class="pq-servicio-texto hist-anim">
-        <a href="empresas.html#talfir" class="pq-opera"><span>Opera</span><img src="img/logos/talfir.png" alt="Talfir Warehouse"></a>
-        <h2>Depósito aduanero</h2>
-        <p>La mercadería se almacena sin pagar tributos ni aranceles y puede reembarcarse a su destino final, conservando siempre su titularidad.</p>
-        <dl class="pq-specs">
-          <div><dt>Ubicación</dt><dd>Veracierto 2990</dd></div>
-          <div><dt>Superficie</dt><dd>23.000 m² (7.000 cerrados)</dd></div>
-          <div><dt>Carga</dt><dd>Muelles con rampa hidráulica</dd></div>
-          <div><dt>Áreas abiertas</dt><dd>Para vehículos y maquinaria</dd></div>
-          <div><dt>Habilitación</dt><dd>Bromatológica</dd></div>
-        </dl>
-      </div>
-    </article>
-
-    <article class="pq-servicio">
-      <div class="foto pq-servicio-foto hist-anim"><span class="foto-label">FOTO 04 · Máquina containera en la playa de contenedores</span></div>
-      <div class="pq-servicio-texto hist-anim">
-        <a href="empresas.html#talfir" class="pq-opera"><span>Opera</span><img src="img/logos/talfir.png" alt="Talfir Warehouse"></a>
-        <h2>Playa de contenedores</h2>
-        <p>Una extensa playa operada con máquina containera propia, para manipular y almacenar contenedores llenos y vacíos.</p>
-        <dl class="pq-specs">
-          <div><dt>Ubicación</dt><dd>Depósito aduanero · Veracierto 2990</dd></div>
-          <div><dt>Equipo</dt><dd>Máquina containera propia</dd></div>
-          <div><dt>Contenedores</dt><dd>Llenos y vacíos</dd></div>
-          <div><dt>ISO tank</dt><dd>Zona exclusiva para fluidos y cargas peligrosas</dd></div>
-        </dl>
-      </div>
-    </article>
-
-    <article class="pq-servicio pq-servicio--invertido">
-      <div class="foto pq-servicio-foto hist-anim"><span class="foto-label">FOTO 05 · Camiones de la flota propia</span></div>
-      <div class="pq-servicio-texto hist-anim">
-        <a href="empresas.html#lamarel" class="pq-opera"><span>Opera</span><img src="img/logos/lamarel.png" alt="Lamarel Logística"></a>
-        <h2>Flete terrestre</h2>
-        <p>Flota propia equipada para cargar y descargar de forma eficiente y segura, con unidades para maquinaria especial.</p>
-        <dl class="pq-specs">
-          <div><dt>Base</dt><dd>Parque · Dr. Pantaleón Pérez 4881</dd></div>
-          <div><dt>Flota</dt><dd>20 camiones propios</dd></div>
-          <div><dt>Contenedores</dt><dd>20' y 40'</dd></div>
-          <div><dt>Furgones</dt><dd>32 m³ y 12 m³ con rampa hidráulica</dd></div>
-          <div><dt>Habilitación</dt><dd>Cargas peligrosas</dd></div>
-        </dl>
-      </div>
-    </article>
-
-    <article class="pq-servicio">
-      <div class="foto pq-servicio-foto hist-anim"><span class="foto-label">FOTO 06 · Operación en el Aeropuerto de Carrasco o puerto</span></div>
-      <div class="pq-servicio-texto hist-anim">
-        <a href="empresas.html#repremar" class="pq-opera"><span>Opera</span><img src="img/logos/repremar.png" alt="Repremar Logistics"></a>
-        <h2>Fletes aéreos y marítimos</h2>
-        <p>Agentes internacionales para importaciones y exportaciones a todos los orígenes y destinos, con Departamento Operativo en el Aeropuerto de Carrasco.</p>
-        <dl class="pq-specs">
-          <div><dt>Oficina</dt><dd>Misiones 1372, 6.º piso · Ciudad Vieja</dd></div>
-          <div><dt>Marítimo</dt><dd>Contenedor completo (FCL) y consolidado (LCL)</dd></div>
-          <div><dt>Aéreo</dt><dd>Envíos urgentes, todos los destinos</dd></div>
-          <div><dt>Cargas especiales</dt><dd>Peligrosas, perecederas, animales vivos y frágiles</dd></div>
-        </dl>
-      </div>
-    </article>
-
   </div>
 </section>
 
@@ -250,7 +223,7 @@
 
       <!-- Foto oficinas -->
       <article class="bento-item bento-item--foto hist-anim">
-        <div class="foto"><span class="foto-label">FOTO 07 · Oficinas o sala de reuniones</span></div>
+        <div class="foto"><span class="foto-label">FOTO 03 · Oficinas o sala de reuniones</span></div>
         <div class="bento-foto-texto">
           <h3>Oficinas de última generación</h3>
           <p>Salas de reuniones modernas y una sala de capacitaciones para el equipo y los clientes.</p>
@@ -272,7 +245,7 @@
 
       <!-- Showrooms -->
       <article class="bento-item bento-item--foto bento-item--foto-der hist-anim">
-        <div class="foto"><span class="foto-label">FOTO 08 · Showroom</span></div>
+        <div class="foto"><span class="foto-label">FOTO 04 · Showroom</span></div>
         <div class="bento-foto-texto">
           <h3>Showrooms para exhibir productos</h3>
           <p>Espacios para la exhibición de productos, junto a las oficinas y los depósitos del Parque.</p>
@@ -294,7 +267,7 @@
       <!-- Plano simplificado. Cada local tiene data-lote, que lo conecta con su fila de la lista. -->
       <div class="pq-plano-scroll" data-centro="0.55">
       <!-- PLANO-3D:INICIO (generado por herramientas/generar-plano.py: no editar a mano) -->
-      <svg class="pq-iso" viewBox="0 0 1260 720" role="img" aria-labelledby="plano-titulo">
+      <svg class="pq-iso" viewBox="0 0 1260 770" role="img" aria-labelledby="plano-titulo">
         <title id="plano-titulo">Plano en 3D del predio de Itapeby 3170 con las empresas de cada depósito</title>
         <polygon class="iso-base-lado" points="267.6,573.8 1027.2,233.6 1027.2,247.6 267.6,587.8"/>
         <polygon class="iso-base-lado2" points="120.0,500.0 267.6,573.8 267.6,587.8 120.0,514.0"/>
@@ -308,7 +281,6 @@
         <polygon class="iso-calle" points="212.2,453.9 228.0,446.0 381.5,522.8 364.8,530.3"/>
         <polyline class="iso-calle-linea" points="223.0,451.4 370.3,525.1"/>
         <polygon class="iso-patio" points="464.2,333.7 845.8,142.9 1027.2,233.6 624.6,413.9"/>
-        <polygon class="iso-verde" points="913.4,270.3 1007.0,223.5 1027.2,233.6 928.5,277.8"/>
         <polygon class="iso-patio" points="328.1,485.2 536.9,380.8 559.9,392.4 351.1,496.8"/>
         <polyline class="iso-estac" points="334.6,484.9 350.4,492.8"/>
         <polyline class="iso-estac" points="349.3,477.5 365.2,485.4"/>
@@ -359,75 +331,66 @@
         <polygon class="iso-cerco" points="267.6,573.8 1027.2,233.6 1027.2,227.6 267.6,567.8"/>
         
       <g class="cartel" data-lote="5" tabindex="0">
-        <polyline class="cartel-linea" points="345.0,409.3 345.0,190 348,190" pathLength="1"/>
+        <polyline class="cartel-linea" points="345.0,409.3 345.0,660 353,660" pathLength="1"/>
         <circle class="cartel-punto" cx="345.0" cy="409.3" r="5"/>
-        <circle class="cartel-foto" cx="380" cy="190" r="30"/>
-        <text class="cartel-num" x="380" y="197">5</text>
-        <text class="cartel-titulo" x="422" y="186">Local disponible</text>
-        <text class="cartel-sub estado-txt--libre" x="422" y="206">A definir</text>
+        <circle class="cartel-foto" cx="385" cy="660" r="30"/>
+        <text class="cartel-num" x="385" y="667">5</text>
+        <text class="cartel-titulo" x="427" y="656">Local disponible</text>
+        <text class="cartel-sub estado-txt--libre" x="427" y="676">A definir</text>
       </g>
         
       <g class="cartel" data-lote="6" tabindex="0">
-        <polyline class="cartel-linea" points="453.0,355.3 453.0,110 448,110" pathLength="1"/>
+        <polyline class="cartel-linea" points="453.0,355.3 453.0,605 458,605" pathLength="1"/>
         <circle class="cartel-punto" cx="453.0" cy="355.3" r="5"/>
-        <circle class="cartel-foto" cx="480" cy="110" r="30"/>
-        <text class="cartel-num" x="480" y="117">6</text>
-        <text class="cartel-titulo" x="522" y="106">Local disponible</text>
-        <text class="cartel-sub estado-txt--libre" x="522" y="126">A definir</text>
+        <circle class="cartel-foto" cx="490" cy="605" r="30"/>
+        <text class="cartel-num" x="490" y="612">6</text>
+        <text class="cartel-titulo" x="532" y="601">Local disponible</text>
+        <text class="cartel-sub estado-txt--libre" x="532" y="621">A definir</text>
       </g>
         
       <g class="cartel" data-lote="3" tabindex="0">
-        <polyline class="cartel-linea" points="575.4,290.1 575.4,650 608,650" pathLength="1"/>
+        <polyline class="cartel-linea" points="575.4,290.1 575.4,550 588,550" pathLength="1"/>
         <circle class="cartel-punto" cx="575.4" cy="290.1" r="5"/>
-        <circle class="cartel-foto" cx="640" cy="650" r="30"/>
-        <text class="cartel-num" x="640" y="657">3</text>
-        <text class="cartel-titulo" x="682" y="646">Droguería Uruguay S.A.</text>
-        <text class="cartel-sub estado-txt--confirmada" x="682" y="666">Confirmada</text>
+        <circle class="cartel-foto" cx="620" cy="550" r="30"/>
+        <text class="cartel-num" x="620" y="557">3</text>
+        <text class="cartel-titulo" x="662" y="546">Droguería Uruguay S.A.</text>
+        <text class="cartel-sub estado-txt--confirmada" x="662" y="566">Confirmada</text>
       </g>
         
       <g class="cartel" data-lote="2" tabindex="0">
-        <polyline class="cartel-linea" points="649.2,237.0 649.2,36 648,36" pathLength="1"/>
+        <polyline class="cartel-linea" points="649.2,237.0 649.2,34 648,34" pathLength="1"/>
         <circle class="cartel-punto" cx="649.2" cy="237.0" r="5"/>
-        <circle class="cartel-foto" cx="680" cy="36" r="30"/>
-        <text class="cartel-num" x="680" y="43">2</text>
-        <text class="cartel-titulo" x="722" y="32">Laboratorio Gador S.A.</text>
-        <text class="cartel-sub estado-txt--operando" x="722" y="52">Operando</text>
+        <circle class="cartel-foto" cx="680" cy="34" r="30"/>
+        <text class="cartel-num" x="680" y="41">2</text>
+        <text class="cartel-titulo" x="722" y="30">Laboratorio Gador S.A.</text>
+        <text class="cartel-sub estado-txt--operando" x="722" y="50">Operando</text>
       </g>
         
       <g class="cartel" data-lote="4" tabindex="0">
-        <polyline class="cartel-linea" points="739.2,208.8 739.2,36 938,36" pathLength="1"/>
+        <polyline class="cartel-linea" points="739.2,208.8 739.2,86 748,86" pathLength="1"/>
         <circle class="cartel-punto" cx="739.2" cy="208.8" r="5"/>
-        <circle class="cartel-foto" cx="970" cy="36" r="30"/>
-        <text class="cartel-num" x="970" y="43">4</text>
-        <text class="cartel-titulo" x="1012" y="32">Laboratorio farmacéutico</text>
-        <text class="cartel-sub estado-txt--negociacion" x="1012" y="52">En negociación</text>
+        <circle class="cartel-foto" cx="780" cy="86" r="30"/>
+        <text class="cartel-num" x="780" y="93">4</text>
+        <text class="cartel-titulo" x="822" y="82">Laboratorio farmacéutico</text>
+        <text class="cartel-sub estado-txt--negociacion" x="822" y="102">En negociación</text>
       </g>
         
       <g class="cartel" data-lote="1" tabindex="0">
-        <polyline class="cartel-linea" points="832.8,157.2 832.8,158 968,158" pathLength="1"/>
+        <polyline class="cartel-linea" points="832.8,157.2 832.8,150 968,150" pathLength="1"/>
         <circle class="cartel-punto" cx="832.8" cy="157.2" r="5"/>
-        <circle class="cartel-foto" cx="1000" cy="158" r="30"/>
-        <text class="cartel-num" x="1000" y="165">1</text>
-        <text class="cartel-titulo" x="1042" y="154">Fármaco Uruguayo S.A.</text>
-        <text class="cartel-sub estado-txt--operando" x="1042" y="174">Operando</text>
+        <circle class="cartel-foto" cx="1000" cy="150" r="30"/>
+        <text class="cartel-num" x="1000" y="157">1</text>
+        <text class="cartel-titulo" x="1042" y="146">Fármaco Uruguayo S.A.</text>
+        <text class="cartel-sub estado-txt--operando" x="1042" y="166">Operando</text>
       </g>
         
       <g class="cartel" data-lote="cancha" tabindex="0">
-        <polyline class="cartel-linea" points="242.4,518.0 242.4,622 268,622" pathLength="1"/>
+        <polyline class="cartel-linea" points="242.4,518.0 242.4,715 248,715" pathLength="1"/>
         <circle class="cartel-punto" cx="242.4" cy="518.0" r="5"/>
-        <circle class="cartel-foto" cx="300" cy="622" r="30"/>
-        <text class="cartel-num" x="300" y="629">●</text>
-        <text class="cartel-titulo" x="342" y="618">Cancha de fútbol</text>
-        <text class="cartel-sub estado-txt--verde" x="342" y="638">Para los niños del barrio</text>
-      </g>
-        
-      <g class="cartel" data-lote="plaza" tabindex="0">
-        <polyline class="cartel-linea" points="964.6,249.1 964.6,600 968,600" pathLength="1"/>
-        <circle class="cartel-punto" cx="964.6" cy="249.1" r="5"/>
-        <circle class="cartel-foto" cx="1000" cy="600" r="30"/>
-        <text class="cartel-num" x="1000" y="607">●</text>
-        <text class="cartel-titulo" x="1042" y="596">Plaza pública</text>
-        <text class="cartel-sub estado-txt--verde" x="1042" y="616">Abierta a la comunidad</text>
+        <circle class="cartel-foto" cx="280" cy="715" r="30"/>
+        <text class="cartel-num" x="280" y="722">●</text>
+        <text class="cartel-titulo" x="322" y="711">Cancha de fútbol</text>
+        <text class="cartel-sub estado-txt--verde" x="322" y="731">Para los niños del barrio</text>
       </g>
       </svg>
       <!-- PLANO-3D:FIN -->

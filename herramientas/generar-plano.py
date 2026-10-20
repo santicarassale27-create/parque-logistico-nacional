@@ -20,23 +20,25 @@ from pathlib import Path
 # estado: operando | confirmada | negociacion | libre
 # x, y, ancho, fondo, alto: posición y tamaño del depósito
 # camiones: cuántos camiones dibujar estacionados en sus portones (0 = ninguno)
-# etiqueta: dónde va el cartel (cx, cy en el dibujo final, 1260x720).
-# Regla: poner el cartel a la DERECHA del depósito (cx mayor que el punto de la línea)
-# para que la línea entre al círculo por la izquierda y no cruce el texto.
+# etiqueta: dónde va el cartel (cx, cy en el dibujo final, 1260x770).
+# Reglas para que ninguna línea cruce un texto:
+#  - el cartel va a la DERECHA de su punto (cx mayor que la x del punto);
+#  - carteles de abajo: cuanto más a la derecha, más ARRIBA (cy menor);
+#  - carteles de arriba: cuanto más a la derecha, más ABAJO (cy mayor).
 # ---------------------------------------------------------------
 DEPOSITOS = [
     {"n": 5, "nombre": "Local disponible", "estado": "libre",
-     "x": 175, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "camiones": 0, "etiqueta": (380, 190)},
+     "x": 175, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "camiones": 0, "etiqueta": (385, 660)},
     {"n": 6, "nombre": "Local disponible", "estado": "libre",
-     "x": 325, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "camiones": 0, "etiqueta": (480, 110)},
+     "x": 325, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "camiones": 0, "etiqueta": (490, 605)},
     {"n": 3, "nombre": "Droguería Uruguay S.A.", "estado": "confirmada",
-     "x": 485, "y": 20, "ancho": 90, "fondo": 165, "alto": 56, "camiones": 2, "etiqueta": (640, 650)},
+     "x": 485, "y": 20, "ancho": 90, "fondo": 165, "alto": 56, "camiones": 2, "etiqueta": (620, 550)},
     {"n": 2, "nombre": "Laboratorio Gador S.A.", "estado": "operando",
-     "x": 615, "y": 20, "ancho": 80, "fondo": 120, "alto": 56, "camiones": 1, "etiqueta": (680, 36)},
+     "x": 615, "y": 20, "ancho": 80, "fondo": 120, "alto": 56, "camiones": 1, "etiqueta": (680, 34)},
     {"n": 4, "nombre": "Laboratorio farmacéutico", "estado": "negociacion",
-     "x": 725, "y": 20, "ancho": 80, "fondo": 150, "alto": 50, "camiones": 0, "etiqueta": (970, 36)},
+     "x": 725, "y": 20, "ancho": 80, "fondo": 150, "alto": 50, "camiones": 0, "etiqueta": (780, 86)},
     {"n": 1, "nombre": "Fármaco Uruguayo S.A.", "estado": "operando",
-     "x": 835, "y": 20, "ancho": 100, "fondo": 170, "alto": 62, "camiones": 2, "etiqueta": (1000, 158)},
+     "x": 835, "y": 20, "ancho": 100, "fondo": 170, "alto": 62, "camiones": 2, "etiqueta": (1000, 150)},
 ]
 
 ESTADOS = {
@@ -49,9 +51,7 @@ ESTADOS = {
 # Espacios públicos con cartel propio
 ESPACIOS = [
     {"id": "cancha", "nombre": "Cancha de fútbol", "detalle": "Para los niños del barrio",
-     "punto": (60, 110), "etiqueta": (300, 622)},
-    {"id": "plaza", "nombre": "Plaza pública", "detalle": "Abierta a la comunidad",
-     "punto": (935, 238), "etiqueta": (1000, 600)},
+     "punto": (60, 110), "etiqueta": (280, 715)},
 ]
 
 # ---------------------------------------------------------------
@@ -167,7 +167,6 @@ def generar():
     out.append(f'<polygon class="iso-calle" points="{poligono_suelo([(128,0),(150,0),(150,borde(150)),(128,borde(128))])}"/>')
     out.append(f'<polyline class="iso-calle-linea" points="{poligono_suelo([(139,4),(139,borde(139)-4)])}"/>')
     out.append(f'<polygon class="iso-patio" points="{poligono_suelo([(470,8),(1000,8),(1000,borde(1000)),(470,borde(470))])}"/>')
-    out.append(f'<polygon class="iso-verde" points="{poligono_suelo([(870,232),(1000,232),(1000,borde(1000)),(870,borde(870))])}"/>')
     # Estacionamiento de autos frente a los locales libres
     out.append(f'<polygon class="iso-patio" points="{poligono_suelo([(165,124),(455,124),(455,156),(165,156)])}"/>')
     for i in range(14):
@@ -214,7 +213,7 @@ def generar():
                           *esp["etiqueta"], ancla, f'data-lote="{esp["id"]}"'))
     cuerpo = "\n        ".join(out)
     return f'''<!-- PLANO-3D:INICIO (generado por herramientas/generar-plano.py: no editar a mano) -->
-      <svg class="pq-iso" viewBox="0 0 1260 720" role="img" aria-labelledby="plano-titulo">
+      <svg class="pq-iso" viewBox="0 0 1260 770" role="img" aria-labelledby="plano-titulo">
         <title id="plano-titulo">Plano en 3D del predio de Itapeby 3170 con las empresas de cada depósito</title>
         {cuerpo}
       </svg>

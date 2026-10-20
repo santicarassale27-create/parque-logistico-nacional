@@ -1828,8 +1828,18 @@ button[disabled] {
 
 .pq-mapa-svg { display: block; width: 100%; height: auto; }
 
-.mapa-agua { fill: var(--navy-950); }
-.mapa-tierra { fill: var(--navy-800); stroke: var(--gold-300); stroke-opacity: 0.35; stroke-width: 1.5; }
+.stop-agua-1 { stop-color: var(--navy-900); }
+.stop-agua-2 { stop-color: var(--navy-950); }
+.stop-halo-1 { stop-color: var(--gold-500); stop-opacity: 0.35; }
+.stop-halo-2 { stop-color: var(--gold-500); stop-opacity: 0; }
+
+.mapa-tierra { fill: var(--navy-800); }
+.mapa-trama-linea { fill: none; stroke: var(--white); stroke-opacity: 0.05; stroke-width: 1; }
+.mapa-costa { fill: none; stroke: var(--gold-300); stroke-opacity: 0.6; stroke-width: 1.5; stroke-linejoin: round; }
+.mapa-costa-brillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.12; stroke-width: 9; stroke-linejoin: round; }
+.mapa-anillos circle { fill: none; stroke: var(--gold-300); stroke-opacity: 0.18; stroke-width: 1; stroke-dasharray: 4 6; }
+.pin-km { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--gold-400); }
+
 .mapa-calle { fill: none; stroke: var(--white); stroke-opacity: 0.12; stroke-width: 3; stroke-linecap: round; }
 .mapa-calle--fina { stroke-width: 1.5; }
 
@@ -1854,19 +1864,13 @@ button[disabled] {
 
 /* Rutas y cartelitos de km: se dibujan cuando el mapa aparece en pantalla */
 .mapa-ruta { fill: none; stroke: var(--gold-400); stroke-width: 2.5; stroke-linecap: round; }
-.mapa-km rect { fill: var(--gold-500); }
-.mapa-km text { font-size: 14px; font-weight: 700; fill: var(--navy-950); text-anchor: middle; }
 
 .pq-mapa.reveal .mapa-ruta { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s ease 0.3s; }
 .pq-mapa.reveal.visible .mapa-ruta { stroke-dashoffset: 0; }
-.pq-mapa.reveal .mapa-km { opacity: 0; transition: opacity 0.5s ease 1.6s; }
-.pq-mapa.reveal.visible .mapa-km { opacity: 1; }
 
 .pin path { stroke: var(--navy-950); stroke-width: 2; }
 .pin--punto path { fill: var(--white); }
 .pin--punto circle { fill: var(--navy-950); }
-.pin--grupo path { fill: var(--gold-300); }
-.pin--grupo circle { fill: var(--navy-950); }
 .pin--parque path { fill: var(--gold-500); }
 .pin--parque > circle:not(.pin-onda) { fill: var(--white); }
 
@@ -1887,30 +1891,6 @@ button[disabled] {
   to { transform: scale(2.6); opacity: 0; }
 }
 
-.pq-mapa-leyenda {
-  position: absolute;
-  left: 24px;
-  bottom: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 22px;
-  font-size: 0.8rem;
-  color: var(--gray-200);
-}
-
-.pq-mapa-leyenda span { display: inline-flex; align-items: center; gap: 8px; }
-
-.ley-pin {
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--navy-950);
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px var(--gray-400);
-}
-
-.ley-pin--parque { background: var(--gold-500); }
-.ley-pin--grupo { background: var(--gold-300); }
-.ley-pin--punto { background: var(--white); }
 
 .pq-distancias {
   list-style: none;
@@ -1967,32 +1947,6 @@ button[disabled] {
   color: var(--gray-600);
   font-size: 1.05rem;
 }
-
-/* "Opera: [logo]" — quién da el servicio */
-.pq-opera {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 6px 14px 6px 6px;
-  border: 1px solid var(--gray-200);
-  border-radius: 999px;
-  transition: border-color 0.2s ease;
-}
-
-.pq-opera:hover { border-color: var(--gold-500); }
-
-.pq-opera span {
-  padding: 4px 10px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray-600);
-  background: var(--gray-100);
-  border-radius: 999px;
-}
-
-.pq-opera img { height: 26px; width: auto; }
 
 .pq-specs {
   margin-top: 28px;
@@ -2271,7 +2225,6 @@ button[disabled] {
   /* Mapa y plano: mantienen un ancho mínimo y se deslizan dentro de su recuadro */
   .pq-mapa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .pq-mapa-svg { min-width: 720px; }
-  .pq-mapa-leyenda { position: static; padding: 14px 18px; background: var(--navy-950); }
   .pq-iso { min-width: 820px; }
 
   .pq-extras { padding: 72px 0; }
