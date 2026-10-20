@@ -43,7 +43,7 @@
     <div class="pq-open-head">
       <h1>Un parque pensado para mover mercadería</h1>
       <div>
-        <p class="pq-open-lead">Depósito nacional, depósito aduanero, playa de contenedores, flota propia y fletes internacionales, todo en un mismo predio de Montevideo.</p>
+        <p class="pq-open-lead">Depósito nacional, depósito aduanero, playa de contenedores, flota propia y fletes internacionales, en puntos estratégicos de Montevideo.</p>
         <a href="#servicios" class="hist-open-scroll">Ver la infraestructura <span aria-hidden="true">↓</span></a>
       </div>
     </div>
@@ -67,19 +67,64 @@
 
 <!-- ============ UBICACIÓN ============ -->
 <section class="pq-ubicacion">
-  <div class="container pq-ubicacion-grid">
-    <div>
+  <div class="container">
+    <div class="pq-ubicacion-head">
       <h2 class="pq-title hist-anim">A minutos de todo lo que importa</h2>
-      <p class="pq-lead hist-anim">Una ubicación central en Montevideo, con acceso directo a las principales vías de transporte y a los nodos de comercio exterior del país.</p>
-      <ul class="pq-distancias">
-        <li class="hist-anim"><span class="pq-km" data-counter>12 km</span><div><h3>Puerto de Montevideo</h3><p>Logística marítima y manejo de cargas.</p></div></li>
-        <li class="hist-anim"><span class="pq-km" data-counter>10 km</span><div><h3>Aeropuerto de Carrasco</h3><p>Movilización rápida de cargas aéreas.</p></div></li>
-        <li class="hist-anim"><span class="pq-km" data-counter>11 km</span><div><h3>Zona Franca Montevideo</h3><p>Integración con comercio y almacenamiento fiscal.</p></div></li>
-      </ul>
+      <p class="pq-lead hist-anim">Una ubicación central en Montevideo, con acceso directo a las principales vías de transporte y a los nodos de comercio exterior del país, más dos sedes del grupo fuera del Parque.</p>
     </div>
-    <div class="pq-mapa hist-anim">
-      <iframe title="Ubicación del Parque Logístico Nacional en Google Maps" src="https://www.google.com/maps?q=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+    <figure class="pq-mapa hist-anim">
+      <!-- Mapa esquemático de Montevideo (dibujado, no es a escala exacta).
+           Para mover un punto, cambiar el translate(x,y) de su <g class="pin">. -->
+      <div class="pq-mapa-scroll" data-centro="0.55">
+      <svg class="pq-mapa-svg" viewBox="0 0 1000 600" role="img" aria-labelledby="mapa-titulo">
+        <title id="mapa-titulo">Mapa de Montevideo con el Parque Logístico Nacional, las otras sedes del grupo, el Puerto, el Aeropuerto y Zona Franca</title>
+        <rect class="mapa-agua" width="1000" height="600"/>
+        <path class="mapa-tierra" d="M0,0 H1000 V250 L930,280 L860,305 L800,330 L740,350 L680,362 L620,372 L565,392 L515,420 L470,448 L430,472 L398,500 L372,522 L352,516 L334,494 L305,478 L262,470 L215,458 L170,444 L138,428 L132,410 L160,396 L198,378 L222,350 L228,318 L214,292 L186,276 L146,272 L104,282 L70,306 L44,338 L22,372 L0,390 Z"/>
+        <!-- Avenidas principales (aproximadas) -->
+        <path class="mapa-calle" d="M300,410 C420,380 560,350 900,268"/>
+        <path class="mapa-calle" d="M300,410 C380,330 470,260 545,210"/>
+        <path class="mapa-calle" d="M545,210 C640,150 720,90 820,0"/>
+        <path class="mapa-calle" d="M700,345 C790,250 870,160 950,40"/>
+        <path class="mapa-calle" d="M228,330 C300,260 330,180 340,0"/>
+        <path class="mapa-calle mapa-calle--fina" d="M138,428 C260,400 330,420 398,500"/>
+        <path class="mapa-calle mapa-calle--fina" d="M420,380 C470,300 520,250 600,120"/>
+        <!-- Barrios de referencia -->
+        <text class="mapa-barrio" x="200" y="452">Ciudad Vieja</text>
+        <text class="mapa-barrio" x="420" y="440">Pocitos</text>
+        <text class="mapa-barrio" x="345" y="365">Tres Cruces</text>
+        <text class="mapa-barrio" x="200" y="200">Prado</text>
+        <text class="mapa-barrio" x="470" y="290">Unión</text>
+        <text class="mapa-barrio" x="640" y="330">Malvín</text>
+        <text class="mapa-barrio" x="860" y="275">Carrasco</text>
+        <text class="mapa-agua-txt" x="620" y="520">Río de la Plata</text>
+        <text class="mapa-agua-txt mapa-agua-txt--chica" x="120" y="335">Bahía</text>
+        <!-- Rutas desde el Parque (se dibujan al aparecer) -->
+        <path class="mapa-ruta" pathLength="1" d="M548,212 C430,250 300,300 192,378"/>
+        <path class="mapa-ruta" pathLength="1" d="M548,212 C700,190 820,120 895,52"/>
+        <path class="mapa-ruta" pathLength="1" d="M548,212 C620,150 700,100 790,72"/>
+        <g class="mapa-km" transform="translate(360,282)"><rect x="-34" y="-15" width="68" height="30" rx="15"/><text y="6">12 km</text></g>
+        <g class="mapa-km" transform="translate(760,150)"><rect x="-34" y="-15" width="68" height="30" rx="15"/><text y="6">10 km</text></g>
+        <g class="mapa-km" transform="translate(650,118)"><rect x="-34" y="-15" width="68" height="30" rx="15"/><text y="6">11 km</text></g>
+        <!-- Puntos -->
+        <g class="pin pin--punto" transform="translate(192,378)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="-26" y="-12" text-anchor="end">Puerto de Montevideo</text></g>
+        <g class="pin pin--punto" transform="translate(895,52)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="0" y="34" text-anchor="middle">Aeropuerto de Carrasco</text></g>
+        <g class="pin pin--punto" transform="translate(790,72)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="-26" y="-12" text-anchor="end">Zona Franca</text></g>
+        <g class="pin pin--grupo" transform="translate(585,312)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="26" y="-18">Depósito aduanero</text><text class="pin-sub" x="26" y="0">Talfir · Veracierto 2990</text></g>
+        <g class="pin pin--grupo" transform="translate(178,432)"><path d="M0,-30 C-11,-30 -18,-21 -18,-12 C-18,0 0,10 0,10 C0,10 18,0 18,-12 C18,-21 11,-30 0,-30 Z"/><circle cy="-13" r="6"/><text class="pin-txt" x="0" y="34" text-anchor="middle">Repremar Logistics</text><text class="pin-sub" x="0" y="52" text-anchor="middle">Misiones 1372</text></g>
+        <g class="pin pin--parque" transform="translate(548,212)"><circle class="pin-onda" cy="-16" r="20"/><path d="M0,-40 C-15,-40 -24,-28 -24,-16 C-24,0 0,13 0,13 C0,13 24,0 24,-16 C24,-28 15,-40 0,-40 Z"/><circle cy="-17" r="8"/><text class="pin-txt pin-txt--grande" x="34" y="-22">Parque Logístico Nacional</text><text class="pin-sub" x="34" y="-3">Dr. Pantaleón Pérez 4881</text></g>
+      </svg>
+      </div>
+      <figcaption class="pq-mapa-leyenda">
+        <span><i class="ley-pin ley-pin--parque"></i>El Parque</span>
+        <span><i class="ley-pin ley-pin--grupo"></i>Otras sedes del grupo</span>
+        <span><i class="ley-pin ley-pin--punto"></i>Puntos logísticos</span>
+      </figcaption>
+    </figure>
+    <ul class="pq-distancias">
+      <li class="hist-anim"><span class="pq-km" data-counter>12 km</span><div><h3>Puerto de Montevideo</h3><p>Logística marítima y manejo de cargas.</p></div></li>
+      <li class="hist-anim"><span class="pq-km" data-counter>10 km</span><div><h3>Aeropuerto de Carrasco</h3><p>Movilización rápida de cargas aéreas.</p></div></li>
+      <li class="hist-anim"><span class="pq-km" data-counter>11 km</span><div><h3>Zona Franca Montevideo</h3><p>Integración con comercio y almacenamiento fiscal.</p></div></li>
+    </ul>
   </div>
 </section>
 
@@ -94,6 +139,7 @@
         <h2>Depósito nacional</h2>
         <p>Almacenamiento en altura que optimiza cada metro disponible, con estanterías adaptadas a distintos tipos de mercadería.</p>
         <dl class="pq-specs">
+          <div><dt>Ubicación</dt><dd>Parque · Dr. Pantaleón Pérez 4881</dd></div>
           <div><dt>Superficie</dt><dd>27.000 m² cubiertos</dd></div>
           <div><dt>Altura</dt><dd>Hasta 11 m</dd></div>
           <div><dt>Estanterías</dt><dd>Selectivas y drive-in</dd></div>
@@ -109,6 +155,7 @@
         <h2>Depósito aduanero</h2>
         <p>La mercadería se almacena sin pagar tributos ni aranceles y puede reembarcarse a su destino final, conservando siempre su titularidad.</p>
         <dl class="pq-specs">
+          <div><dt>Ubicación</dt><dd>Veracierto 2990</dd></div>
           <div><dt>Superficie</dt><dd>23.000 m² (7.000 cerrados)</dd></div>
           <div><dt>Carga</dt><dd>Muelles con rampa hidráulica</dd></div>
           <div><dt>Áreas abiertas</dt><dd>Para vehículos y maquinaria</dd></div>
@@ -124,6 +171,7 @@
         <h2>Playa de contenedores</h2>
         <p>Una extensa playa operada con máquina containera propia, para manipular y almacenar contenedores llenos y vacíos.</p>
         <dl class="pq-specs">
+          <div><dt>Ubicación</dt><dd>Depósito aduanero · Veracierto 2990</dd></div>
           <div><dt>Equipo</dt><dd>Máquina containera propia</dd></div>
           <div><dt>Contenedores</dt><dd>Llenos y vacíos</dd></div>
           <div><dt>ISO tank</dt><dd>Zona exclusiva para fluidos y cargas peligrosas</dd></div>
@@ -138,6 +186,7 @@
         <h2>Flete terrestre</h2>
         <p>Flota propia equipada para cargar y descargar de forma eficiente y segura, con unidades para maquinaria especial.</p>
         <dl class="pq-specs">
+          <div><dt>Base</dt><dd>Parque · Dr. Pantaleón Pérez 4881</dd></div>
           <div><dt>Flota</dt><dd>20 camiones propios</dd></div>
           <div><dt>Contenedores</dt><dd>20' y 40'</dd></div>
           <div><dt>Furgones</dt><dd>32 m³ y 12 m³ con rampa hidráulica</dd></div>
@@ -153,6 +202,7 @@
         <h2>Fletes aéreos y marítimos</h2>
         <p>Agentes internacionales para importaciones y exportaciones a todos los orígenes y destinos, con Departamento Operativo en el Aeropuerto de Carrasco.</p>
         <dl class="pq-specs">
+          <div><dt>Oficina</dt><dd>Misiones 1372, 6.º piso · Ciudad Vieja</dd></div>
           <div><dt>Marítimo</dt><dd>Contenedor completo (FCL) y consolidado (LCL)</dd></div>
           <div><dt>Aéreo</dt><dd>Envíos urgentes, todos los destinos</dd></div>
           <div><dt>Cargas especiales</dt><dd>Peligrosas, perecederas, animales vivos y frágiles</dd></div>
@@ -163,37 +213,75 @@
   </div>
 </section>
 
-<!-- ============ SEGURIDAD E INSTALACIONES ============ -->
+<!-- ============ SEGURIDAD Y COMODIDAD (mosaico) ============ -->
 <section class="pq-extras">
   <div class="container">
-    <h2 class="pq-title pq-center hist-anim">Seguridad y comodidad en todo el predio</h2>
-    <ul class="pq-extras-list">
-      <li class="hist-anim">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
-        <h3>Vigilancia 24 horas</h3>
-        <p>Sistema de vigilancia operativo todo el día, todos los días.</p>
-      </li>
-      <li class="hist-anim">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-7.5z"/></svg>
+    <div class="pq-extras-head">
+      <h2 class="pq-title hist-anim">Seguridad y comodidad en todo el predio</h2>
+      <p class="pq-lead hist-anim">La mercadería de nuestros clientes y las personas que trabajan en el Parque están protegidas con sistemas de última generación, en instalaciones pensadas para el día a día de una operación logística.</p>
+    </div>
+
+    <div class="bento">
+      <!-- Bloque grande: seguridad -->
+      <article class="bento-item bento-item--seguridad hist-anim">
+        <svg class="bento-icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span class="bento-cifra">24 h</span>
+        <h3>Vigilancia y control permanentes</h3>
+        <p>Un sistema de vigilancia operativo las 24 horas del día cuida el predio, la mercadería y los activos de cada cliente.</p>
+        <ul class="bento-lista">
+          <li>Vigilancia operativa las 24 horas</li>
+          <li>Sistemas de seguridad de última generación</li>
+          <li>Ambiente protegido para mercadería y activos</li>
+          <li>Altos estándares de protección contra riesgos</li>
+        </ul>
+      </article>
+
+      <!-- Incendios -->
+      <article class="bento-item hist-anim">
+        <svg class="bento-icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-7.5z"/></svg>
         <h3>Protección contra incendios</h3>
-        <p>Detección y extinción avanzadas, con rociadores sprinkler.</p>
-      </li>
-      <li class="hist-anim">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5M16 4v5"/></svg>
-        <h3>Oficinas y salas</h3>
-        <p>Oficinas de última generación, salas de reuniones y de capacitación.</p>
-      </li>
-      <li class="hist-anim">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg>
-        <h3>Showrooms</h3>
-        <p>Espacios para la exhibición de productos.</p>
-      </li>
-      <li class="hist-anim">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 2 2v8M5 3v5M9 3v5M17 3c-2 0-3 2-3 5v5h3v8"/></svg>
-        <h3>Comedor para 100 personas</h3>
-        <p>Un entorno cómodo y funcional para todo el personal.</p>
-      </li>
-    </ul>
+        <p>Sistemas avanzados de detección y extinción, con rociadores sprinkler, para un ambiente seguro en cada depósito.</p>
+      </article>
+
+      <!-- ISO 45001 -->
+      <article class="bento-item bento-item--dorado hist-anim">
+        <span class="bento-cifra" data-counter>310</span>
+        <h3>personas bajo la norma ISO 45001</h3>
+        <p>Seguridad y Salud en el Trabajo para todo el personal del Parque, certificada por el LATU.</p>
+      </article>
+
+      <!-- Foto oficinas -->
+      <article class="bento-item bento-item--foto hist-anim">
+        <div class="foto"><span class="foto-label">FOTO 07 · Oficinas o sala de reuniones</span></div>
+        <div class="bento-foto-texto">
+          <h3>Oficinas de última generación</h3>
+          <p>Salas de reuniones modernas y una sala de capacitaciones para el equipo y los clientes.</p>
+        </div>
+      </article>
+
+      <!-- Bromatología -->
+      <article class="bento-item hist-anim">
+        <svg class="bento-icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7.5 15h9"/></svg>
+        <h3>Habilitación bromatológica</h3>
+        <p>Depósitos habilitados que cumplen rigurosos estándares de seguridad y sanidad.</p>
+      </article>
+
+      <!-- Comedor -->
+      <article class="bento-item hist-anim">
+        <span class="bento-cifra" data-counter>100</span>
+        <h3>lugares en el comedor</h3>
+        <p>Un comedor amplio, cómodo y funcional para todo el personal.</p>
+      </article>
+
+      <!-- Showrooms -->
+      <article class="bento-item bento-item--ancho hist-anim">
+        <svg class="bento-icono" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg>
+        <div>
+          <h3>Showrooms para exhibir productos</h3>
+          <p>Espacios para la exhibición de productos, junto a las oficinas y los depósitos del Parque.</p>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -202,36 +290,118 @@
   <div class="container">
     <div class="pq-plano-head">
       <h2 class="pq-title hist-anim">Un polo farmacéutico en crecimiento</h2>
-      <p class="pq-lead hist-anim">En el predio de Itapeby N.º 3170, el Parque suma seis locales de última generación para la industria farmacéutica, junto a una plaza pública y una cancha de fútbol para el barrio. Pasá el mouse o tocá cada local para ver quién está.</p>
+      <p class="pq-lead hist-anim">En el predio de Itapeby N.º 3170, el Parque suma seis locales de última generación para la industria farmacéutica, junto a una plaza pública y una cancha de fútbol para el barrio. Pasá el mouse por cada depósito para ver quién opera en él.</p>
     </div>
 
     <div class="pq-plano-grid hist-anim">
       <!-- Plano simplificado. Cada local tiene data-lote, que lo conecta con su fila de la lista. -->
-      <div class="pq-plano-scroll">
-      <svg class="pq-plano-svg" viewBox="0 0 1200 520" role="img" aria-labelledby="plano-titulo">
-        <title id="plano-titulo">Plano del predio de Itapeby 3170 con las empresas instaladas</title>
-        <!-- Zonas -->
-        <polygon class="zona zona--verde" points="20,40 150,40 215,300 95,282"/>
-        <polygon class="zona zona--calle" points="150,40 178,40 243,304 215,300"/>
-        <polygon class="zona zona--predio" points="178,40 620,40 620,372 243,304"/>
-        <polygon class="zona zona--predio" points="620,40 790,40 790,400 620,372"/>
-        <polygon class="zona zona--predio" points="790,40 1180,40 1180,450 790,400"/>
-        <polygon class="zona zona--verde" points="790,400 1180,450 1180,505 1020,505"/>
-        <!-- Cancha -->
-        <polygon class="cancha" points="52,78 136,78 186,262 102,248"/>
-        <line class="cancha-linea" x1="77" y1="163" x2="161" y2="170"/>
-        <circle class="cancha-linea" cx="119" cy="167" r="14"/>
-        <!-- Locales -->
-        <g class="lote lote--libre" data-lote="5" tabindex="0" aria-label="Local 5"><rect x="230" y="80" width="160" height="90" rx="10"/><circle cx="310" cy="125" r="22"/><text x="310" y="132">5</text></g>
-        <g class="lote lote--libre" data-lote="6" tabindex="0" aria-label="Local 6"><rect x="420" y="80" width="160" height="90" rx="10"/><circle cx="500" cy="125" r="22"/><text x="500" y="132">6</text></g>
-        <g class="lote lote--confirmada" data-lote="3" tabindex="0" aria-label="Local 3"><rect x="645" y="70" width="120" height="250" rx="10"/><circle cx="705" cy="195" r="22"/><text x="705" y="202">3</text></g>
-        <g class="lote lote--operando" data-lote="2" tabindex="0" aria-label="Local 2"><rect x="815" y="70" width="105" height="160" rx="10"/><circle cx="867" cy="150" r="22"/><text x="867" y="157">2</text></g>
-        <g class="lote lote--negociacion" data-lote="4" tabindex="0" aria-label="Local 4"><rect x="940" y="70" width="105" height="200" rx="10"/><circle cx="992" cy="170" r="22"/><text x="992" y="177">4</text></g>
-        <g class="lote lote--operando" data-lote="1" tabindex="0" aria-label="Local 1"><rect x="1065" y="70" width="100" height="270" rx="10"/><circle cx="1115" cy="205" r="22"/><text x="1115" y="212">1</text></g>
-        <!-- Etiquetas de espacios públicos -->
-        <text class="zona-label" x="130" y="320">Cancha de fútbol</text>
-        <text class="zona-label" x="1090" y="488">Plaza pública</text>
+      <div class="pq-plano-scroll" data-centro="0.55">
+      <!-- PLANO-3D:INICIO (generado por herramientas/generar-plano.py: no editar a mano) -->
+      <svg class="pq-iso" viewBox="0 0 1260 720" role="img" aria-labelledby="plano-titulo">
+        <title id="plano-titulo">Plano en 3D del predio de Itapeby 3170 con las empresas de cada depósito</title>
+        <polygon class="iso-base-lado" points="267.6,573.8 1027.2,233.6 1027.2,247.6 267.6,587.8"/>
+        <polygon class="iso-base-lado2" points="120.0,500.0 267.6,573.8 267.6,587.8 120.0,514.0"/>
+        <polygon class="iso-base" points="120.0,500.0 840.0,140.0 1027.2,233.6 267.6,573.8"/>
+        <polygon class="iso-verde" points="120.0,500.0 206.4,456.8 361.2,534.2 267.6,573.8"/>
+        <polygon class="iso-cancha" points="153.1,503.6 215.0,472.6 328.1,529.2 266.2,560.1"/>
+        <polyline class="iso-cancha-linea" points="209.3,531.7 271.2,500.7"/>
+        <polygon class="iso-cancha-linea" points="153.1,503.6 215.0,472.6 328.1,529.2 266.2,560.1"/>
+        <polygon class="iso-calle" points="212.2,453.9 228.0,446.0 384.2,524.1 367.0,531.3"/>
+        <polygon class="iso-verde" points="906.2,266.7 999.8,219.9 1027.2,233.6 925.7,276.4"/>
+        <polygon class="iso-patio" points="613.2,408.2 994.8,217.4 999.8,219.9 618.2,410.7"/>
+        <ellipse class="iso-arbol-sombra" cx="381.6" cy="501.2" rx="11" ry="5"/><circle class="iso-arbol" cx="375.6" cy="489.2" r="10"/>
+        <ellipse class="iso-arbol-sombra" cx="414.7" cy="484.6" rx="11" ry="5"/><circle class="iso-arbol" cx="408.7" cy="472.6" r="10"/>
+        <ellipse class="iso-arbol-sombra" cx="447.8" cy="468.1" rx="11" ry="5"/><circle class="iso-arbol" cx="441.8" cy="456.1" r="10"/>
+        <ellipse class="iso-arbol-sombra" cx="481.0" cy="451.5" rx="11" ry="5"/><circle class="iso-arbol" cx="475.0" cy="439.5" r="10"/>
+        <ellipse class="iso-arbol-sombra" cx="514.1" cy="435.0" rx="11" ry="5"/><circle class="iso-arbol" cx="508.1" cy="423.0" r="10"/>
+        <ellipse class="iso-arbol-sombra" cx="547.2" cy="418.4" rx="11" ry="5"/><circle class="iso-arbol" cx="541.2" cy="406.4" r="10"/>
+        <ellipse class="iso-arbol-sombra" cx="580.3" cy="401.8" rx="11" ry="5"/><circle class="iso-arbol" cx="574.3" cy="389.8" r="10"/>
+        <g class="lote lote--operando" data-lote="1" tabindex="0" aria-label="1. Fármaco Uruguayo S.A.">
+        <polygon class="cara-lado" points="735.6,206.6 868.8,273.2 868.8,211.2 735.6,144.6"/><polygon class="cara-frente" points="868.8,273.2 940.8,237.2 940.8,175.2 868.8,211.2"/><polygon class="cara-techo" points="735.6,144.6 807.6,108.6 940.8,175.2 868.8,211.2"/></g>
+        <g class="lote lote--negociacion" data-lote="4" tabindex="0" aria-label="4. Laboratorio farmacéutico">
+        <polygon class="cara-lado" points="656.4,246.2 764.4,300.2 764.4,250.2 656.4,196.2"/><polygon class="cara-frente" points="764.4,300.2 822.0,271.4 822.0,221.4 764.4,250.2"/><polygon class="cara-techo" points="656.4,196.2 714.0,167.4 822.0,221.4 764.4,250.2"/></g>
+        <g class="lote lote--operando" data-lote="2" tabindex="0" aria-label="2. Laboratorio Gador S.A.">
+        <polygon class="cara-lado" points="577.2,285.8 663.6,329.0 663.6,273.0 577.2,229.8"/><polygon class="cara-frente" points="663.6,329.0 721.2,300.2 721.2,244.2 663.6,273.0"/><polygon class="cara-techo" points="577.2,229.8 634.8,201.0 721.2,244.2 663.6,273.0"/></g>
+        <g class="lote lote--confirmada" data-lote="3" tabindex="0" aria-label="3. Droguería Uruguay S.A.">
+        <polygon class="cara-lado" points="483.6,332.6 624.0,402.8 624.0,346.8 483.6,276.6"/><polygon class="cara-frente" points="624.0,402.8 688.8,370.4 688.8,314.4 624.0,346.8"/><polygon class="cara-techo" points="483.6,276.6 548.4,244.2 688.8,314.4 624.0,346.8"/></g>
+        <g class="lote lote--libre" data-lote="6" tabindex="0" aria-label="6. Local disponible">
+        <polygon class="cara-lado" points="379.2,395.6 440.4,426.2 440.4,392.2 379.2,361.6"/><polygon class="cara-frente" points="440.4,426.2 526.8,383.0 526.8,349.0 440.4,392.2"/><polygon class="cara-techo" points="379.2,361.6 465.6,318.4 526.8,349.0 440.4,392.2"/></g>
+        <g class="lote lote--libre" data-lote="5" tabindex="0" aria-label="5. Local disponible">
+        <polygon class="cara-lado" points="271.2,449.6 332.4,480.2 332.4,446.2 271.2,415.6"/><polygon class="cara-frente" points="332.4,480.2 418.8,437.0 418.8,403.0 332.4,446.2"/><polygon class="cara-techo" points="271.2,415.6 357.6,372.4 418.8,403.0 332.4,446.2"/></g>
+        
+      <g class="cartel" data-lote="5" tabindex="0">
+        <polyline class="cartel-linea" points="345.0,409.3 345.0,190 348,190" pathLength="1"/>
+        <circle class="cartel-punto" cx="345.0" cy="409.3" r="5"/>
+        <circle class="cartel-foto" cx="380" cy="190" r="30"/>
+        <text class="cartel-num" x="380" y="197">5</text>
+        <text class="cartel-titulo" x="422" y="186">Local disponible</text>
+        <text class="cartel-sub estado-txt--libre" x="422" y="206">A definir</text>
+      </g>
+        
+      <g class="cartel" data-lote="6" tabindex="0">
+        <polyline class="cartel-linea" points="453.0,355.3 453.0,110 448,110" pathLength="1"/>
+        <circle class="cartel-punto" cx="453.0" cy="355.3" r="5"/>
+        <circle class="cartel-foto" cx="480" cy="110" r="30"/>
+        <text class="cartel-num" x="480" y="117">6</text>
+        <text class="cartel-titulo" x="522" y="106">Local disponible</text>
+        <text class="cartel-sub estado-txt--libre" x="522" y="126">A definir</text>
+      </g>
+        
+      <g class="cartel" data-lote="3" tabindex="0">
+        <polyline class="cartel-linea" points="586.2,295.5 586.2,650 608,650" pathLength="1"/>
+        <circle class="cartel-punto" cx="586.2" cy="295.5" r="5"/>
+        <circle class="cartel-foto" cx="640" cy="650" r="30"/>
+        <text class="cartel-num" x="640" y="657">3</text>
+        <text class="cartel-titulo" x="682" y="646">Droguería Uruguay S.A.</text>
+        <text class="cartel-sub estado-txt--confirmada" x="682" y="666">Confirmada</text>
+      </g>
+        
+      <g class="cartel" data-lote="2" tabindex="0">
+        <polyline class="cartel-linea" points="649.2,237.0 649.2,36 648,36" pathLength="1"/>
+        <circle class="cartel-punto" cx="649.2" cy="237.0" r="5"/>
+        <circle class="cartel-foto" cx="680" cy="36" r="30"/>
+        <text class="cartel-num" x="680" y="43">2</text>
+        <text class="cartel-titulo" x="722" y="32">Laboratorio Gador S.A.</text>
+        <text class="cartel-sub estado-txt--operando" x="722" y="52">Operando</text>
+      </g>
+        
+      <g class="cartel" data-lote="4" tabindex="0">
+        <polyline class="cartel-linea" points="739.2,208.8 739.2,36 938,36" pathLength="1"/>
+        <circle class="cartel-punto" cx="739.2" cy="208.8" r="5"/>
+        <circle class="cartel-foto" cx="970" cy="36" r="30"/>
+        <text class="cartel-num" x="970" y="43">4</text>
+        <text class="cartel-titulo" x="1012" y="32">Laboratorio farmacéutico</text>
+        <text class="cartel-sub estado-txt--negociacion" x="1012" y="52">En negociación</text>
+      </g>
+        
+      <g class="cartel" data-lote="1" tabindex="0">
+        <polyline class="cartel-linea" points="838.2,159.9 838.2,158 968,158" pathLength="1"/>
+        <circle class="cartel-punto" cx="838.2" cy="159.9" r="5"/>
+        <circle class="cartel-foto" cx="1000" cy="158" r="30"/>
+        <text class="cartel-num" x="1000" y="165">1</text>
+        <text class="cartel-titulo" x="1042" y="154">Fármaco Uruguayo S.A.</text>
+        <text class="cartel-sub estado-txt--operando" x="1042" y="174">Operando</text>
+      </g>
+        
+      <g class="cartel" data-lote="cancha" tabindex="0">
+        <polyline class="cartel-linea" points="242.4,518.0 242.4,622 268,622" pathLength="1"/>
+        <circle class="cartel-punto" cx="242.4" cy="518.0" r="5"/>
+        <circle class="cartel-foto" cx="300" cy="622" r="30"/>
+        <text class="cartel-num" x="300" y="629">●</text>
+        <text class="cartel-titulo" x="342" y="618">Cancha de fútbol</text>
+        <text class="cartel-sub estado-txt--verde" x="342" y="638">Para los niños del barrio</text>
+      </g>
+        
+      <g class="cartel" data-lote="plaza" tabindex="0">
+        <polyline class="cartel-linea" points="964.6,249.1 964.6,600 968,600" pathLength="1"/>
+        <circle class="cartel-punto" cx="964.6" cy="249.1" r="5"/>
+        <circle class="cartel-foto" cx="1000" cy="600" r="30"/>
+        <text class="cartel-num" x="1000" y="607">●</text>
+        <text class="cartel-titulo" x="1042" y="596">Plaza pública</text>
+        <text class="cartel-sub estado-txt--verde" x="1042" y="616">Abierta a la comunidad</text>
+      </g>
       </svg>
+      <!-- PLANO-3D:FIN -->
       </div>
 
       <ul class="pq-leyenda" aria-hidden="true">
@@ -241,15 +411,6 @@
         <li><i class="ley ley--libre"></i>A definir</li>
         <li><i class="ley ley--verde"></i>Espacio público</li>
       </ul>
-
-      <ol class="pq-plano-lista">
-        <li data-lote="1" tabindex="0"><span class="pq-num">1</span><div><strong>Fármaco Uruguayo S.A.</strong><span class="estado estado--operando">Operando</span></div></li>
-        <li data-lote="2" tabindex="0"><span class="pq-num">2</span><div><strong>Laboratorio Gador S.A.</strong><span class="estado estado--operando">Operando</span></div></li>
-        <li data-lote="3" tabindex="0"><span class="pq-num">3</span><div><strong>Droguería Uruguay S.A.</strong><span class="estado estado--confirmada">Confirmada</span></div></li>
-        <li data-lote="4" tabindex="0"><span class="pq-num">4</span><div><strong>Laboratorio de la industria farmacéutica</strong><span class="estado estado--negociacion">En negociación</span></div></li>
-        <li data-lote="5" tabindex="0"><span class="pq-num">5</span><div><strong>Local</strong><span class="estado estado--libre">A definir</span></div></li>
-        <li data-lote="6" tabindex="0"><span class="pq-num">6</span><div><strong>Local</strong><span class="estado estado--libre">A definir</span></div></li>
-      </ol>
     </div>
   </div>
 </section>

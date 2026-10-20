@@ -311,3 +311,15 @@ function initPlano() {
   });
   plano.addEventListener("mouseleave", function () { resaltar(null); });
 }
+
+/* En celular, el mapa y el plano se deslizan dentro de su recuadro:
+   arrancan centrados en el punto indicado por data-centro (0 = izquierda, 1 = derecha). */
+function centrarDeslizables() {
+  document.querySelectorAll("[data-centro]").forEach(function (el) {
+    var sobra = el.scrollWidth - el.clientWidth;
+    if (sobra > 0) {
+      el.scrollLeft = el.scrollWidth * parseFloat(el.dataset.centro) - el.clientWidth / 2;
+    }
+  });
+}
+window.addEventListener("load", centrarDeslizables);

@@ -63,11 +63,15 @@ img/                        Fotos (cuando las haya)
 
 - Estilos con prefijo `pq-` en `css/style.css`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-cifras` y `.hist-next`.
 - Sin textos chicos arriba de los títulos (decisión del equipo; solo se usan en la línea de tiempo de Historia).
-- **Plano de Itapeby 3170:** cada local es un `<g class="lote lote--ESTADO" data-lote="N">` en el SVG y una fila
-  `<li data-lote="N">` en la lista. Para cambiar el estado de un local, cambiar la clase `lote--operando`,
-  `lote--confirmada`, `lote--negociacion` o `lote--libre` y la etiqueta `estado--...` de su fila.
+- **Plano 3D de Itapeby 3170:** lo genera `herramientas/generar-plano.py` (no editar el SVG a mano).
+  Para cambiar depósitos, empresas o estados: editar la lista `DEPOSITOS` del script y correr
+  `python3 herramientas/generar-plano.py`. Estados: `operando`, `confirmada`, `negociacion`, `libre`.
+  Regla de carteles: cada cartel va a la derecha de su depósito para que la línea no cruce el texto.
   Estados confirmados: Fármaco Uruguayo y Gador operando; Droguería Uruguay confirmada; un laboratorio en negociación; 2 locales a definir.
-- El mapa de ubicación es un iframe de Google Maps con la dirección (no necesita clave).
+  El plano está incompleto: falta el plano completo del predio que va a pasar la empresa.
+- **Mapa de ubicación:** SVG dibujado a mano dentro de `parque.html` (no es Google Maps). Cada punto es un
+  `<g class="pin">` con `transform="translate(x,y)"`. Sedes fuera del Parque: depósito aduanero Talfir
+  (Veracierto 2990) y oficina de Repremar (Misiones 1372). La posición de Talfir es aproximada.
 
 ## Comportamientos automáticos de `js/main.js` (no hace falta tocar el HTML)
 

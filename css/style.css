@@ -1748,6 +1748,8 @@ button[disabled] {
   --gold-100: #f6efd6;
   --gold-50: #fdf6df;
   --navy-100: #e7edf5;
+  --navy-200: #c9d6e8;
+  --navy-300: #9fb3cf;
 }
 
 .pq-title {
@@ -1801,55 +1803,141 @@ button[disabled] {
 /* ---------- Cifras: 4 en vez de 3 ---------- */
 .pq-cifras .hist-cifras-list { grid-template-columns: repeat(4, 1fr); }
 
-/* ---------- Ubicación ---------- */
-.pq-ubicacion { padding: 40px 0 40px; }
+/* ---------- Ubicación: mapa dibujado a todo el ancho ---------- */
+.pq-ubicacion { padding: 40px 0 60px; }
 
-.pq-ubicacion-grid {
+.pq-ubicacion-head,
+.pq-extras-head {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 72px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 40px;
 }
+
+.pq-ubicacion-head .pq-lead,
+.pq-extras-head .pq-lead { margin-top: 0; }
+
+.pq-mapa {
+  position: relative;
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--navy-950);
+}
+
+.pq-mapa-svg { display: block; width: 100%; height: auto; }
+
+.mapa-agua { fill: var(--navy-950); }
+.mapa-tierra { fill: var(--navy-800); stroke: var(--gold-300); stroke-opacity: 0.35; stroke-width: 1.5; }
+.mapa-calle { fill: none; stroke: var(--white); stroke-opacity: 0.12; stroke-width: 3; stroke-linecap: round; }
+.mapa-calle--fina { stroke-width: 1.5; }
+
+.mapa-barrio {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--white);
+  fill-opacity: 0.35;
+}
+
+.mapa-agua-txt {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  fill: var(--white);
+  fill-opacity: 0.2;
+}
+
+.mapa-agua-txt--chica { font-size: 14px; }
+
+/* Rutas y cartelitos de km: se dibujan cuando el mapa aparece en pantalla */
+.mapa-ruta { fill: none; stroke: var(--gold-400); stroke-width: 2.5; stroke-linecap: round; }
+.mapa-km rect { fill: var(--gold-500); }
+.mapa-km text { font-size: 14px; font-weight: 700; fill: var(--navy-950); text-anchor: middle; }
+
+.pq-mapa.reveal .mapa-ruta { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s ease 0.3s; }
+.pq-mapa.reveal.visible .mapa-ruta { stroke-dashoffset: 0; }
+.pq-mapa.reveal .mapa-km { opacity: 0; transition: opacity 0.5s ease 1.6s; }
+.pq-mapa.reveal.visible .mapa-km { opacity: 1; }
+
+.pin path { stroke: var(--navy-950); stroke-width: 2; }
+.pin--punto path { fill: var(--white); }
+.pin--punto circle { fill: var(--navy-950); }
+.pin--grupo path { fill: var(--gold-300); }
+.pin--grupo circle { fill: var(--navy-950); }
+.pin--parque path { fill: var(--gold-500); }
+.pin--parque > circle:not(.pin-onda) { fill: var(--white); }
+
+.pin-txt { font-size: 15px; font-weight: 700; fill: var(--white); }
+.pin-txt--grande { font-size: 19px; }
+.pin-sub { font-size: 13px; fill: var(--white); fill-opacity: 0.6; }
+
+/* Onda que "late" alrededor del Parque */
+.pin-onda {
+  fill: var(--gold-500);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pin-onda 2.4s ease-out infinite;
+}
+
+@keyframes pin-onda {
+  from { transform: scale(0.6); opacity: 0.5; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+.pq-mapa-leyenda {
+  position: absolute;
+  left: 24px;
+  bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  font-size: 0.8rem;
+  color: var(--gray-200);
+}
+
+.pq-mapa-leyenda span { display: inline-flex; align-items: center; gap: 8px; }
+
+.ley-pin {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--navy-950);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--gray-400);
+}
+
+.ley-pin--parque { background: var(--gold-500); }
+.ley-pin--grupo { background: var(--gold-300); }
+.ley-pin--punto { background: var(--white); }
 
 .pq-distancias {
   list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
   margin-top: 36px;
-  border-top: 1px solid var(--gray-200);
 }
 
 .pq-distancias li {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 20px;
-  align-items: center;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--gray-200);
+  padding-top: 22px;
+  border-top: 1px solid var(--gray-200);
 }
 
 .pq-km {
+  display: block;
+  margin-bottom: 8px;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
+  line-height: 1;
   letter-spacing: -0.02em;
   color: var(--gold-500);
 }
 
 .pq-distancias h3 { font-size: 1.05rem; }
 .pq-distancias p { color: var(--gray-600); font-size: 0.95rem; }
-
-.pq-mapa {
-  aspect-ratio: 4 / 3;
-  border-radius: 20px;
-  overflow: hidden;
-  background: var(--gray-100);
-}
-
-.pq-mapa iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
 
 /* ---------- Servicios: filas alternadas foto / texto ---------- */
 .pq-servicios { padding: 40px 0 60px; }
@@ -1932,112 +2020,202 @@ button[disabled] {
   color: var(--navy-950);
 }
 
-/* ---------- Seguridad y comodidad ---------- */
+/* ---------- Seguridad y comodidad: mosaico (bento) ---------- */
 .pq-extras {
   padding: 100px 0;
   background: var(--gray-50);
 }
 
-.pq-extras-list {
-  list-style: none;
+.bento {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 36px;
-  margin-top: 56px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(210px, auto);
+  gap: 18px;
 }
 
-.pq-extras-list li { text-align: center; }
+.bento-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px;
+  background: var(--white);
+  border-radius: 22px;
+  box-shadow: var(--shadow-sm);
+}
 
-.pq-extras-list svg {
-  width: 52px;
-  height: 52px;
-  padding: 12px;
-  margin-bottom: 18px;
+.bento-item h3 { font-size: 1.1rem; color: var(--navy-950); }
+.bento-item p { color: var(--gray-600); font-size: 0.95rem; }
+
+.bento-icono {
+  width: 48px;
+  height: 48px;
+  padding: 11px;
+  margin-bottom: 6px;
   fill: none;
   stroke: var(--gold-500);
   stroke-width: 1.6;
   stroke-linecap: round;
   stroke-linejoin: round;
-  background: var(--white);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
+  background: var(--gold-50);
+  border-radius: 14px;
 }
 
-.pq-extras-list h3 {
-  margin-bottom: 6px;
-  font-size: 1rem;
+.bento-cifra {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold-500);
 }
 
-.pq-extras-list p {
-  color: var(--gray-600);
-  font-size: 0.9rem;
+/* Bloque grande oscuro (2 columnas x 2 filas) */
+.bento-item--seguridad {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 40px;
+  background: var(--navy-950);
 }
 
-/* ---------- Plano interactivo de empresas ---------- */
+.bento-item--seguridad h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--white);
+}
+
+.bento-item--seguridad p { color: var(--gray-200); font-size: 1rem; max-width: 440px; }
+.bento-item--seguridad .bento-icono { background: rgba(255, 255, 255, 0.06); }
+.bento-item--seguridad .bento-cifra { font-size: 4.4rem; margin-top: auto; }
+
+.bento-lista {
+  list-style: none;
+  margin-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-lista li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: var(--white);
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-lista li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  background: var(--gold-500);
+  border-radius: 50%;
+}
+
+/* Bloque dorado */
+.bento-item--dorado { background: var(--gold-500); }
+.bento-item--dorado .bento-cifra,
+.bento-item--dorado h3 { color: var(--navy-950); }
+.bento-item--dorado p { color: var(--navy-900); }
+
+/* Bloque con foto (2 columnas) */
+.bento-item--foto {
+  grid-column: span 2;
+  flex-direction: row;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bento-item--foto .foto { flex: 1; border-radius: 0; min-height: 210px; }
+
+.bento-foto-texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px;
+}
+
+/* Bloque ancho horizontal (2 columnas) */
+.bento-item--ancho {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+
+.bento-item--ancho .bento-icono { flex-shrink: 0; margin: 0; }
+
+/* ---------- Plano 3D del predio de Itapeby ----------
+   El SVG lo genera herramientas/generar-plano.py */
 .pq-plano { padding: 110px 0 40px; }
-
-.pq-plano-head { margin-bottom: 48px; }
+.pq-plano-head { margin-bottom: 40px; }
 .pq-plano-head .pq-lead { max-width: 680px; }
 
 .pq-plano-grid {
-  padding: 40px 40px 32px;
+  padding: 32px 32px 24px;
   background: var(--gray-50);
   border-radius: 24px;
 }
 
-.pq-plano-svg { width: 100%; height: auto; display: block; }
-
-/* En pantallas chicas el plano mantiene un ancho mínimo y se desliza
-   dentro de su recuadro (la página no se mueve para los costados) */
 .pq-plano-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.pq-iso { display: block; width: 100%; height: auto; }
 
-.zona { stroke: var(--white); stroke-width: 3; }
-.zona--verde { fill: var(--verde-100); }
-.zona--calle { fill: var(--gray-400); }
-.zona--predio { fill: var(--gray-100); }
+.iso-base { fill: var(--white); stroke: var(--gray-200); stroke-width: 1.5; }
+.iso-base-lado { fill: var(--gray-200); }
+.iso-base-lado2 { fill: var(--gray-400); fill-opacity: 0.6; }
+.iso-verde { fill: var(--verde-100); }
+.iso-cancha { fill: var(--verde-500); fill-opacity: 0.55; }
+.iso-cancha-linea { fill: none; stroke: var(--white); stroke-width: 1.5; }
+.iso-calle { fill: var(--gray-400); }
+.iso-patio { fill: var(--gray-100); }
+.iso-arbol { fill: var(--verde-500); }
+.iso-arbol-sombra { fill: var(--navy-950); fill-opacity: 0.12; }
 
-.cancha { fill: var(--verde-500); opacity: 0.6; }
-.cancha-linea { fill: none; stroke: var(--white); stroke-width: 2; opacity: 0.8; }
+/* Depósitos: 3 caras (techo, frente y lado) con color según su estado */
+.lote { cursor: pointer; outline: none; transition: transform 0.3s ease; }
+.lote polygon { stroke: var(--white); stroke-width: 1; stroke-linejoin: round; transition: fill 0.3s ease; }
 
-.zona-label {
-  font-size: 15px;
-  font-weight: 600;
-  fill: var(--verde-500);
-  text-anchor: middle;
-}
+.lote--operando .cara-techo { fill: var(--gold-100); }
+.lote--operando .cara-frente { fill: var(--gold-300); }
+.lote--operando .cara-lado { fill: var(--gold-400); }
 
-.lote { cursor: pointer; outline: none; }
+.lote--confirmada .cara-techo { fill: var(--navy-100); }
+.lote--confirmada .cara-frente { fill: var(--navy-200); }
+.lote--confirmada .cara-lado { fill: var(--navy-300); }
 
-.lote rect {
-  stroke-width: 2;
-  filter: drop-shadow(0 4px 6px rgba(10, 22, 40, 0.08));
-  transition: fill 0.25s ease, stroke 0.25s ease;
-}
+.lote--negociacion .cara-techo { fill: var(--gray-100); }
+.lote--negociacion .cara-frente { fill: var(--gray-200); }
+.lote--negociacion .cara-lado { fill: var(--gray-400); }
 
-/* Color de cada local según su estado (igual que la leyenda) */
-.lote--operando rect { fill: var(--gold-100); stroke: var(--gold-400); }
-.lote--confirmada rect { fill: var(--navy-100); stroke: var(--navy-600); }
-.lote--negociacion rect { fill: var(--gray-200); stroke: var(--gray-400); }
-.lote--libre rect { fill: var(--white); stroke: var(--gray-400); stroke-dasharray: 6 5; }
+.lote--libre polygon { fill: var(--white); fill-opacity: 0.7; stroke: var(--gray-400); stroke-dasharray: 5 4; }
 
-.lote circle {
-  fill: var(--navy-950);
-  transition: fill 0.25s ease, transform 0.25s ease;
-  transform-box: fill-box;
-  transform-origin: center;
-}
+/* Depósito resaltado: "sube" un poco */
+.lote.activo { transform: translateY(-8px); }
+.lote.activo .cara-techo { fill: var(--gold-50); }
 
-.lote text {
-  font-size: 20px;
-  font-weight: 700;
-  fill: var(--white);
-  text-anchor: middle;
-  pointer-events: none;
-}
+/* Carteles con línea quebrada hasta cada depósito */
+.cartel { cursor: pointer; outline: none; }
+.cartel-linea { fill: none; stroke: var(--gold-500); stroke-width: 1.5; }
+.cartel-punto { fill: var(--gold-500); stroke: var(--white); stroke-width: 2; }
+.cartel-foto { fill: var(--white); stroke: var(--gray-200); stroke-width: 2; transition: stroke 0.25s ease; }
+.cartel-num { font-size: 18px; font-weight: 700; fill: var(--navy-950); text-anchor: middle; pointer-events: none; }
+.cartel-titulo { font-size: 17px; font-weight: 700; fill: var(--navy-950); }
+.cartel-sub { font-size: 13px; font-weight: 700; }
+.cartel.activo .cartel-foto { stroke: var(--gold-500); stroke-width: 4; }
 
-/* Local resaltado (al pasar el mouse por el plano o por la lista) */
-.lote.activo rect { stroke: var(--navy-950); stroke-width: 3; stroke-dasharray: none; }
-.lote.activo circle { fill: var(--gold-500); transform: scale(1.15); }
+.estado-txt--operando { fill: var(--gold-800); }
+.estado-txt--confirmada { fill: var(--navy-700); }
+.estado-txt--negociacion { fill: var(--gray-600); }
+.estado-txt--libre { fill: var(--gray-400); }
+.estado-txt--verde { fill: var(--verde-500); }
+
+/* Las líneas se dibujan cuando el plano aparece en pantalla */
+.pq-plano-grid.reveal .cartel-linea { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.2s ease 0.4s; }
+.pq-plano-grid.reveal.visible .cartel-linea { stroke-dashoffset: 0; }
 
 .pq-leyenda {
   list-style: none;
@@ -2045,7 +2223,7 @@ button[disabled] {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px 24px;
-  margin: 20px 0 28px;
+  margin-top: 12px;
   font-size: 0.85rem;
   color: var(--gray-600);
 }
@@ -2060,82 +2238,30 @@ button[disabled] {
 }
 
 .ley--operando { background: var(--gold-100); border-color: var(--gold-400); }
-.ley--confirmada { background: var(--navy-100); border-color: var(--navy-600); }
+.ley--confirmada { background: var(--navy-100); border-color: var(--navy-300); }
 .ley--negociacion { background: var(--gray-200); border-color: var(--gray-400); }
 .ley--libre { background: var(--white); border-color: var(--gray-400); border-style: dashed; }
 .ley--verde { background: var(--verde-100); border-color: var(--verde-500); }
 
-.pq-plano-lista {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px 16px;
-  padding-top: 24px;
-  border-top: 1px solid var(--gray-200);
+@media (prefers-reduced-motion: reduce) {
+  .pin-onda { animation: none; opacity: 0; }
+  .lote, .lote polygon { transition: none; }
 }
-
-.pq-plano-lista li {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  cursor: pointer;
-  outline: none;
-  transition: background 0.2s ease;
-}
-
-.pq-plano-lista li.activo,
-.pq-plano-lista li:focus-visible { background: var(--white); box-shadow: var(--shadow-sm); }
-
-.pq-num {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--white);
-  background: var(--navy-950);
-  border-radius: 50%;
-  transition: background 0.2s ease;
-}
-
-.pq-plano-lista li.activo .pq-num { background: var(--gold-500); }
-
-.pq-plano-lista strong {
-  display: block;
-  font-size: 0.95rem;
-  color: var(--navy-950);
-}
-
-.estado {
-  display: inline-block;
-  margin-top: 4px;
-  padding: 2px 10px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  border-radius: 999px;
-}
-
-.estado--operando { color: var(--gold-800); background: var(--gold-100); }
-.estado--confirmada { color: var(--navy-700); background: var(--navy-100); }
-.estado--negociacion { color: var(--gray-800); background: var(--gray-200); }
-.estado--libre, .estado--operando, .estado--confirmada, .estado--negociacion { white-space: nowrap; }
-.estado--libre { color: var(--gray-600); background: var(--white); border: 1px dashed var(--gray-200); }
 
 /* ---------- El Parque: tablet y celular ---------- */
 @media (max-width: 960px) {
   .pq-open-head,
-  .pq-ubicacion-grid,
-  .pq-servicio { grid-template-columns: 1fr; gap: 36px; }
+  .pq-ubicacion-head,
+  .pq-extras-head,
+  .pq-servicio { grid-template-columns: 1fr; gap: 24px; }
 
+  .pq-servicio { gap: 36px; padding: 40px 0; }
   .pq-servicio--invertido .pq-servicio-foto { order: 0; }
-  .pq-servicio { padding: 40px 0; }
-  .pq-extras-list { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
-  .pq-plano-lista { grid-template-columns: repeat(2, 1fr); }
+  .pq-distancias { grid-template-columns: 1fr; gap: 0; }
+  .pq-distancias li { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: center; padding: 18px 0; }
+  .pq-km { margin: 0; font-size: 2rem; }
+
+  .bento { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 760px) {
@@ -2143,14 +2269,24 @@ button[disabled] {
   .pq-open-foto { aspect-ratio: 4 / 3; }
   .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
-  .pq-ubicacion { padding: 24px 0 72px; }
-  .pq-distancias li { grid-template-columns: 110px 1fr; }
-  .pq-km { font-size: 1.8rem; }
+  .pq-ubicacion { padding: 24px 0 40px; }
   .pq-specs > div { grid-template-columns: 1fr; gap: 2px; }
+
+  /* Mapa y plano: mantienen un ancho mínimo y se deslizan dentro de su recuadro */
+  .pq-mapa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .pq-mapa-svg { min-width: 720px; }
+  .pq-mapa-leyenda { position: static; padding: 14px 18px; background: var(--navy-950); }
+  .pq-iso { min-width: 820px; }
+
   .pq-extras { padding: 72px 0; }
-  .pq-extras-list { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-item--seguridad,
+  .bento-item--foto,
+  .bento-item--ancho { grid-column: auto; grid-row: auto; }
+  .bento-item--seguridad { padding: 28px; }
+  .bento-item--foto { flex-direction: column; }
+  .bento-item--ancho { flex-direction: column; align-items: flex-start; }
+
   .pq-plano { padding: 72px 0 24px; }
   .pq-plano-grid { padding: 16px; border-radius: 18px; }
-  .pq-plano-svg { min-width: 640px; }
-  .pq-plano-lista { grid-template-columns: 1fr; }
 }
