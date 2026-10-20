@@ -1095,7 +1095,7 @@ button[disabled] {
     linear-gradient(160deg, var(--gray-100), var(--gray-200));
   background-size: cover;
   background-position: center;
-  border-radius: 4px;
+  border-radius: 20px;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
@@ -1109,7 +1109,7 @@ button[disabled] {
   letter-spacing: 0.04em;
   color: var(--gray-600);
   background: rgba(255, 255, 255, 0.85);
-  border-radius: 3px;
+  border-radius: 8px;
 }
 
 .foto--fondo {
@@ -1143,108 +1143,119 @@ button[disabled] {
 
 .foto.reveal.visible::after { transform: scaleY(0); }
 
-/* ---------- Apertura ---------- */
-.hist-hero {
-  position: relative;
-  min-height: 78vh;
-  display: flex;
-  align-items: flex-end;
-  padding: 0;
-  color: var(--white);
+/* ---------- Apertura: texto + collage ---------- */
+.hist-open {
+  padding: 96px 0 72px;
+  overflow: hidden;
 }
 
-.hist-hero > .foto {
-  position: absolute;
-  inset: 0;
-  border-radius: 0;
-  align-items: flex-start;
-  justify-content: flex-end;
+.hist-open-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 72px;
+  align-items: center;
 }
 
-.hist-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(10, 20, 32, 0.1) 30%, rgba(10, 20, 32, 0.85) 100%);
-  pointer-events: none;
-}
-
-.hist-hero-inner {
-  position: relative;
-  z-index: 1;
-  padding-top: 120px;
-  padding-bottom: 72px;
-}
-
-.hist-hero h1 {
+.hist-open h1 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
   line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  max-width: 820px;
+  letter-spacing: -0.025em;
+  color: var(--navy-950);
 }
 
-.hist-hero-years {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin: 26px 0 22px;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  color: var(--gold-300);
+/* Raya dorada corta debajo del título */
+.hist-open h1::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 28px;
+  background: var(--gold-500);
+  border-radius: 2px;
 }
 
-.hist-hero-dash {
-  width: 80px;
-  height: 1px;
-  background: var(--gold-300);
-}
-
-.hist-hero p {
-  max-width: 560px;
-  color: var(--gray-200);
-  font-size: 1.08rem;
-}
-
-/* ---------- Introducción ---------- */
-.hist-intro { padding: 110px 0 90px; }
-
-.hist-statement {
+.hist-open-lead {
+  margin-top: 28px;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.45rem, 2.6vw, 2.1rem);
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--navy-900);
+}
+
+.hist-open-sub {
+  margin-top: 16px;
+  color: var(--gray-600);
+}
+
+.hist-open-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding-bottom: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
   color: var(--navy-950);
-  max-width: 900px;
+  border-bottom: 2px solid var(--gold-500);
 }
 
-.hist-figures {
+.hist-open-scroll span { transition: transform 0.25s ease; }
+.hist-open-scroll:hover span { transform: translateY(4px); }
+
+/* Collage: una foto alta a la izquierda y dos a la derecha, desfasadas */
+.hist-collage {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 72px;
-  border-top: 1px solid var(--gray-200);
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+  height: 560px;
 }
 
-.hist-figures > div {
-  padding: 28px 24px 0 0;
+.hist-collage .foto { height: auto; }
+.hist-collage-a { grid-row: 1 / 3; }
+.hist-collage-b { margin-top: 48px; }
+.hist-collage-c { margin-bottom: 48px; }
+
+/* ---------- Cifras ---------- */
+.hist-cifras { padding: 24px 0 96px; }
+
+.hist-cifras-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 48px 24px;
+  background: var(--gray-50);
+  border-radius: 24px;
 }
 
-.hist-figures dt {
+.hist-cifras-list > div {
+  padding: 0 24px;
+  text-align: center;
+}
+
+.hist-cifras-list > div + div { border-left: 1px solid var(--gray-200); }
+
+.hist-cifras-list dt {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(2rem, 3.4vw, 2.8rem);
-  color: var(--navy-950);
-  line-height: 1.1;
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold-500);
 }
 
-.hist-figures dd {
-  margin-top: 6px;
+.hist-cifras-list dd {
+  margin-top: 12px;
   color: var(--gray-600);
-  font-size: 0.92rem;
+  font-size: 0.98rem;
+}
+
+.hist-cifras-list dd strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--navy-950);
 }
 
 /* ---------- Capítulos ---------- */
@@ -1264,16 +1275,6 @@ button[disabled] {
   gap: 6px;
 }
 
-.hist-rail-num {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gray-400);
-}
-
-.hist-rail-num b { color: var(--gold-500); }
-
 .hist-rail-year {
   font-family: var(--font-display);
   font-weight: 600;
@@ -1284,14 +1285,8 @@ button[disabled] {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.hist-rail-name {
-  font-size: 1rem;
-  color: var(--gray-600);
-  transition: opacity 0.3s ease;
-}
 
-.hist-rail-inner.cambiando .hist-rail-year,
-.hist-rail-inner.cambiando .hist-rail-name {
+.hist-rail-inner.cambiando .hist-rail-year {
   opacity: 0;
   transform: translateY(8px);
 }
@@ -1346,21 +1341,6 @@ button[disabled] {
 
 .hist-chapter-head { position: relative; }
 
-/* Número grande, solo contorno, detrás del título */
-.hist-chapter-num {
-  position: absolute;
-  right: 0;
-  top: -40px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(6rem, 12vw, 10rem);
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--gray-200);
-  pointer-events: none;
-  user-select: none;
-}
-
 .hist-chapter-head h2 {
   position: relative;
   font-family: var(--font-display);
@@ -1410,7 +1390,7 @@ button[disabled] {
   position: relative;
   aspect-ratio: 16 / 9;
   margin: 36px 0 40px;
-  border-radius: 4px;
+  border-radius: 20px;
   overflow: hidden;
   user-select: none;
 }
@@ -1558,57 +1538,68 @@ button[disabled] {
   text-underline-offset: 6px;
 }
 
-/* ---------- Reconocimientos ---------- */
-.hist-sellos { padding: 110px 0 90px; }
+/* ---------- Reconocimientos (grilla de sellos centrada) ---------- */
+.hist-sellos {
+  padding: 100px 0;
+  background: var(--gray-50);
+  text-align: center;
+}
+
+.hist-sellos .section-title { margin-bottom: 0; }
 
 .hist-sellos-list {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 40px;
+  gap: 48px;
+  margin-top: 56px;
 }
 
 .hist-sellos-list li {
-  padding: 8px 36px 8px 0;
-  border-right: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.hist-sellos-list li + li { padding-left: 36px; }
-.hist-sellos-list li:last-child { border-right: none; }
-
+/* Lugar del logo: cuando llegue, se reemplaza por <img class="sello-logo" src="..."> */
 .sello-logo {
-  height: 64px;
-  max-width: 180px;
-  margin-bottom: 22px;
+  width: 150px;
+  height: 180px;
+  margin-bottom: 26px;
+  padding: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--gray-400);
+  background: var(--white);
   border: 1px dashed var(--gray-200);
-  border-radius: 4px;
+  border-radius: 14px;
+  object-fit: contain;
 }
 
 .hist-sellos-list h3 {
-  font-size: 1.05rem;
   margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--navy-950);
 }
 
 .hist-sellos-list p {
+  max-width: 300px;
   color: var(--gray-600);
   font-size: 0.95rem;
 }
 
 /* ---------- Siguiente ---------- */
-.hist-next { padding: 0 0 110px; }
+.hist-next { padding: 96px 0 110px; }
 
 .hist-next-link {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: 48px;
-  border-top: 1px solid var(--gray-200);
 }
 
 .hist-next-title {
@@ -1657,29 +1648,30 @@ button[disabled] {
   }
 
   .hist-rail-year { font-size: 1.4rem; }
-  .hist-rail-name { font-size: 0.9rem; }
 
-  .hist-figures { grid-template-columns: repeat(2, 1fr); row-gap: 8px; }
+  .hist-open-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hist-collage { height: 440px; }
 
   .hist-quote-inner { grid-template-columns: 1fr; gap: 40px; }
   .hist-quote .foto--retrato { max-width: 320px; }
 
-  .hist-sellos-list { grid-template-columns: 1fr; }
-
-  .hist-sellos-list li,
-  .hist-sellos-list li + li {
-    padding: 28px 0;
-    border-right: none;
-    border-bottom: 1px solid var(--gray-200);
-  }
+  .hist-sellos-list { grid-template-columns: 1fr; gap: 56px; }
 }
 
 @media (max-width: 760px) {
-  .hist-intro { padding: 72px 0 56px; }
+  .hist-open { padding: 56px 0 48px; }
+  .hist-collage { height: 340px; gap: 12px; }
+  .hist-collage-b { margin-top: 28px; }
+  .hist-collage-c { margin-bottom: 28px; }
+  .hist-cifras { padding: 8px 0 64px; }
+  .hist-cifras-list { padding: 28px 4px; border-radius: 18px; }
+  .hist-cifras-list > div { padding: 0 8px; }
+  .hist-cifras-list dt { font-size: 2.3rem; }
+  .hist-cifras-list dd { font-size: 0.8rem; margin-top: 8px; }
+  .hist-cifras-list dd strong { font-size: 0.92rem; }
   .hist-chapters-list { padding-left: 28px; }
   .hist-chapter::before { left: -35px; }
   .hist-chapter { padding-bottom: 80px; }
-  .hist-chapter-num { display: none; }
   .hist-hitos li { grid-template-columns: 1fr; gap: 6px; }
   .antes-despues { aspect-ratio: 4 / 3; }
   .hist-quote, .hist-sellos { padding: 72px 0; }

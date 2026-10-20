@@ -37,44 +37,42 @@
   </div>
 </header>
 
-<!-- ============ APERTURA ============ -->
-<section class="hist-hero">
-  <div class="foto foto--fondo" aria-hidden="true">
-    <span class="foto-label">FOTO 01 · Vista aérea del predio (dron) o foto de archivo de los inicios</span>
-  </div>
-  <div class="container hist-hero-inner">
-    <div class="eyebrow">Nuestra historia</div>
-    <h1>Tres décadas construyendo el Parque</h1>
-    <div class="hist-hero-years" aria-label="De 1994 a 2026">
-      <span>1994</span><span class="hist-hero-dash"></span><span>2026</span>
+<!-- ============ APERTURA: texto + collage de fotos ============ -->
+<section class="hist-open">
+  <div class="container hist-open-grid">
+    <div class="hist-open-text">
+      <h1>Tres décadas construyendo el Parque</h1>
+      <p class="hist-open-lead">Una empresa familiar que creció paso a paso: primero un depósito, después un predio propio, más tarde un parque completo y hoy un proyecto que transforma el barrio que lo rodea.</p>
+      <p class="hist-open-sub">Lo que empezó como un depósito fiscal en Parque Guaraní es hoy un parque logístico integral en Montevideo, comprometido con el desarrollo de su comunidad.</p>
+      <a href="#capitulos" class="hist-open-scroll">Recorrer la historia <span aria-hidden="true">↓</span></a>
     </div>
-    <p>Lo que empezó como un depósito fiscal en Parque Guaraní hoy es un parque logístico integral de 10 hectáreas en Montevideo, y un actor activo en el desarrollo del Municipio F.</p>
+    <div class="hist-collage" aria-hidden="true">
+      <div class="foto hist-collage-a hist-anim"><span class="foto-label">FOTO 01 · El Parque hoy (fachada o vista aérea)</span></div>
+      <div class="foto hist-collage-b hist-anim"><span class="foto-label">FOTO 02 · Archivo de los inicios</span></div>
+      <div class="foto hist-collage-c hist-anim"><span class="foto-label">FOTO 03 · Equipo o familia</span></div>
+    </div>
   </div>
 </section>
 
-<!-- ============ INTRODUCCIÓN ============ -->
-<section class="hist-intro">
+<!-- ============ CIFRAS ============ -->
+<section class="hist-cifras">
   <div class="container">
-    <p class="hist-statement hist-anim">Una empresa familiar que creció paso a paso: primero un depósito, después un predio propio, más tarde un parque completo y hoy un proyecto que transforma el barrio que lo rodea.</p>
-    <dl class="hist-figures">
-      <div class="hist-anim"><dt data-counter>32 años</dt><dd>de trayectoria</dd></div>
-      <div class="hist-anim"><dt data-counter>10 ha</dt><dd>de predio en Montevideo</dd></div>
-      <div class="hist-anim"><dt data-counter>310</dt><dd>personas trabajando en el Parque</dd></div>
-      <div class="hist-anim"><dt data-counter>4</dt><dd>empresas operando en conjunto</dd></div>
+    <dl class="hist-cifras-list">
+      <div class="hist-anim"><dt data-counter>32</dt><dd><strong>años</strong> de trayectoria familiar</dd></div>
+      <div class="hist-anim"><dt data-counter>310</dt><dd><strong>personas</strong> trabajando en el Parque</dd></div>
+      <div class="hist-anim"><dt data-counter>4</dt><dd><strong>empresas</strong> operando en conjunto</dd></div>
     </dl>
   </div>
 </section>
 
-<!-- ============ CAPÍTULOS ============ -->
+<!-- ============ LÍNEA DE TIEMPO ============ -->
 <section class="hist-chapters" id="capitulos">
   <div class="container hist-chapters-grid">
 
-    <!-- Columna fija: muestra el capítulo que se está leyendo -->
+    <!-- Columna fija: muestra el año que se está leyendo -->
     <aside class="hist-rail" aria-hidden="true">
       <div class="hist-rail-inner">
-        <span class="hist-rail-num">Capítulo <b id="rail-num">01</b></span>
         <span class="hist-rail-year" id="rail-year">1994</span>
-        <span class="hist-rail-name" id="rail-name">Los inicios</span>
       </div>
     </aside>
 
@@ -82,16 +80,15 @@
       <!-- Línea que se llena de dorado al bajar -->
       <div class="hist-progress" aria-hidden="true"><div class="hist-progress-fill"></div></div>
 
-      <!-- Capítulo 1 -->
-      <article class="hist-chapter" data-num="01" data-year="1994" data-name="Los inicios">
+      <!-- Etapa 1 -->
+      <article class="hist-chapter" data-year="1994">
         <header class="hist-chapter-head hist-anim">
-          <span class="hist-chapter-num">01</span>
-          <div class="eyebrow">1994 – 1996 · Los inicios</div>
+          <div class="eyebrow">1994 – 1996</div>
           <h2>Un depósito fiscal y la decisión de crecer</h2>
           <p>El proyecto nace como un emprendimiento familiar dedicado al almacenaje y la logística, con una idea clara: un servicio cercano, eficiente y confiable.</p>
         </header>
         <div class="foto foto--grande hist-anim">
-          <span class="foto-label">FOTO 02 · El depósito en los años 90 (archivo)</span>
+          <span class="foto-label">FOTO 04 · El depósito en los años 90 (archivo)</span>
         </div>
         <ol class="hist-hitos">
           <li class="hist-anim"><span class="hist-hito-year">1994</span><div><h3>Inicios en Parque Guaraní</h3><p>Se instala un Depósito Fiscal Aduanero, operativo hasta 1998. Desde 1999 el predio se arrienda a diferentes empresas.</p></div></li>
@@ -99,27 +96,25 @@
         </ol>
       </article>
 
-      <!-- Capítulo 2 -->
-      <article class="hist-chapter" data-num="02" data-year="2010" data-name="Crecimiento">
+      <!-- Etapa 2 -->
+      <article class="hist-chapter" data-year="2010">
         <header class="hist-chapter-head hist-anim">
-          <span class="hist-chapter-num">02</span>
-          <div class="eyebrow">2010 · Crecimiento</div>
+          <div class="eyebrow">2010</div>
           <h2>De depósito a parque logístico</h2>
           <p>A medida que la demanda creció, el Parque amplió sus instalaciones y su red de servicios, invirtiendo en infraestructura, estanterías de última generación y sistemas de gestión.</p>
         </header>
         <div class="foto foto--grande hist-anim">
-          <span class="foto-label">FOTO 03 · Construcción del primer local (2010)</span>
+          <span class="foto-label">FOTO 05 · Construcción del primer local (2010)</span>
         </div>
         <ol class="hist-hitos">
           <li class="hist-anim"><span class="hist-hito-year">2010</span><div><h3>Construcción del primer local</h3><p>Se construye el primer local, profesionalizando y ampliando los servicios logísticos del Parque.</p></div></li>
         </ol>
       </article>
 
-      <!-- Capítulo 3 -->
-      <article class="hist-chapter" data-num="03" data-year="2022" data-name="Transformación">
+      <!-- Etapa 3 -->
+      <article class="hist-chapter" data-year="2016">
         <header class="hist-chapter-head hist-anim">
-          <span class="hist-chapter-num">03</span>
-          <div class="eyebrow">2016 – 2022 · Transformación</div>
+          <div class="eyebrow">2016 – 2022</div>
           <h2>Recuperar el predio de Itapeby</h2>
           <p>El predio lindero de Itapeby N.º 3170 se había convertido en un problema de seguridad y salubridad para el barrio. En 2022 se decidió recuperarlo.</p>
         </header>
@@ -127,10 +122,10 @@
         <!-- Antes / después: se arrastra la barra para comparar -->
         <figure class="antes-despues hist-anim" style="--pos: 50%;">
           <div class="foto foto--fondo antes-despues-capa">
-            <span class="foto-label">FOTO 04 · Predio de Itapeby ANTES (2016–2021)</span>
+            <span class="foto-label">FOTO 06 · Predio de Itapeby ANTES (2016–2021)</span>
           </div>
           <div class="foto antes-despues-capa antes-despues-despues">
-            <span class="foto-label">FOTO 05 · El mismo predio DESPUÉS (2022)</span>
+            <span class="foto-label">FOTO 07 · El mismo predio DESPUÉS (2022)</span>
           </div>
           <span class="antes-despues-tag antes-despues-tag--izq">Antes</span>
           <span class="antes-despues-tag antes-despues-tag--der">Después</span>
@@ -145,21 +140,20 @@
         </ol>
       </article>
 
-      <!-- Capítulo 4 -->
-      <article class="hist-chapter" data-num="04" data-year="2026" data-name="Comunidad y futuro">
+      <!-- Etapa 4 -->
+      <article class="hist-chapter" data-year="2024">
         <header class="hist-chapter-head hist-anim">
-          <span class="hist-chapter-num">04</span>
-          <div class="eyebrow">2024 – 2026 · Comunidad y futuro</div>
+          <div class="eyebrow">2024 – 2026</div>
           <h2>Un parque que crece junto al barrio</h2>
-          <p>El Parque se consolida como un actor del Municipio F: convenios, formación laboral para jóvenes de la zona y un nuevo proyecto reconocido de Interés Municipal.</p>
+          <p>El Parque se consolida como un actor de su comunidad: convenios con el gobierno local, formación laboral para jóvenes de la zona y un nuevo proyecto declarado de Interés Municipal.</p>
         </header>
         <div class="foto foto--grande hist-anim">
-          <span class="foto-label">FOTO 06 · Escuela de Autoelevadores o entrega de diplomas</span>
+          <span class="foto-label">FOTO 08 · Escuela de Autoelevadores o entrega de diplomas</span>
         </div>
         <ol class="hist-hitos">
-          <li class="hist-anim"><span class="hist-hito-year">2024–25</span><div><h3>Convenios con el Municipio F</h3><p>Acuerdos para brindar servicios y apoyo a la comunidad.</p></div></li>
+          <li class="hist-anim"><span class="hist-hito-year">2024–25</span><div><h3>Convenios con el gobierno local</h3><p>Acuerdos con el Municipio F de Montevideo para brindar servicios y apoyo a la comunidad.</p></div></li>
           <li class="hist-anim"><span class="hist-hito-year">2025</span><div><h3>Proyecto de Interés Municipal</h3><p>En marzo, el desarrollo en Itapeby N.º 3170 es declarado formalmente Proyecto de Interés Municipal.</p></div></li>
-          <li class="hist-anim"><span class="hist-hito-year">2025–26</span><div><h3>Escuela de Conducción de Autoelevadores</h3><p>Dos ediciones junto al Municipio F, con examen práctico tomado por la Intendencia de Montevideo.</p></div></li>
+          <li class="hist-anim"><span class="hist-hito-year">2025–26</span><div><h3>Escuela de Conducción de Autoelevadores</h3><p>Dos ediciones junto al Municipio F de Montevideo, con examen práctico tomado por la Intendencia.</p></div></li>
           <li class="hist-anim"><span class="hist-hito-year">2026</span><div><h3>Certificación ISO 45001</h3><p>Las 310 personas que trabajan en el Parque quedan bajo la norma de Seguridad y Salud en el Trabajo, certificada por el LATU.</p></div></li>
         </ol>
       </article>
@@ -171,7 +165,7 @@
 <section class="hist-quote">
   <div class="container hist-quote-inner">
     <div class="foto foto--retrato hist-anim">
-      <span class="foto-label">FOTO 07 · Retrato del fundador o de la familia</span>
+      <span class="foto-label">FOTO 09 · Retrato del fundador o de la familia</span>
     </div>
     <blockquote class="hist-anim">
       <p class="pendiente">Acá va una frase real del fundador sobre cómo empezó todo y qué significa el Parque para la familia.</p>
@@ -183,7 +177,6 @@
 <!-- ============ RECONOCIMIENTOS ============ -->
 <section class="hist-sellos">
   <div class="container">
-    <div class="eyebrow">Respaldos</div>
     <h2 class="section-title">Reconocimientos y habilitaciones</h2>
     <ul class="hist-sellos-list">
       <li class="hist-anim">
@@ -192,9 +185,9 @@
         <p>Seguridad y Salud en el Trabajo para las 310 personas del Parque, certificada por el LATU.</p>
       </li>
       <li class="hist-anim">
-        <div class="sello-logo">LOGO · Municipio F</div>
+        <div class="sello-logo">LOGO · Municipio F de Montevideo</div>
         <h3>Interés Municipal · 2025</h3>
-        <p>El proyecto de Itapeby 3170 fue declarado Proyecto de Interés Municipal por el Municipio F.</p>
+        <p>El proyecto de Itapeby 3170 fue declarado Proyecto de Interés Municipal por el Municipio F de Montevideo.</p>
       </li>
       <li class="hist-anim">
         <div class="sello-logo">LOGO · Habilitación bromatológica</div>
@@ -209,7 +202,6 @@
 <section class="hist-next">
   <div class="container">
     <a href="parque.html" class="hist-next-link">
-      <span class="eyebrow">Siguiente</span>
       <span class="hist-next-title">Conocé el Parque hoy <span aria-hidden="true">→</span></span>
       <span class="hist-next-sub">27.000 m² cubiertos, depósito aduanero, playa de contenedores y flota propia.</span>
     </a>
