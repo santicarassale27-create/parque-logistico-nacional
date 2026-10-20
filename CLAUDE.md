@@ -63,9 +63,12 @@ img/                        Fotos (cuando las haya)
 
 - Estilos con prefijo `pq-` en `css/style.css`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-cifras` y `.hist-next`.
 - Sin textos chicos arriba de los títulos (decisión del equipo; solo se usan en la línea de tiempo de Historia).
+- Sin íconos arriba de los títulos del mosaico de seguridad (decisión del equipo).
 - **Plano 3D de Itapeby 3170:** lo genera `herramientas/generar-plano.py` (no editar el SVG a mano).
   Para cambiar depósitos, empresas o estados: editar la lista `DEPOSITOS` del script y correr
   `python3 herramientas/generar-plano.py`. Estados: `operando`, `confirmada`, `negociacion`, `libre`.
+  Cada depósito tiene `camiones` (cuántos camiones dibujar en sus portones). Los portones, ventanas,
+  claraboyas, autos, árboles y el cerco se dibujan solos. Sin leyenda debajo del plano (decisión del equipo).
   Regla de carteles: cada cartel va a la derecha de su depósito para que la línea no cruce el texto.
   Estados confirmados: Fármaco Uruguayo y Gador operando; Droguería Uruguay confirmada; un laboratorio en negociación; 2 locales a definir.
   El plano está incompleto: falta el plano completo del predio que va a pasar la empresa.

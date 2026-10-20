@@ -2036,6 +2036,7 @@ button[disabled] {
 .bento-item {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;   /* texto abajo, estilo editorial */
   gap: 10px;
   padding: 28px;
   background: var(--white);
@@ -2043,22 +2044,16 @@ button[disabled] {
   box-shadow: var(--shadow-sm);
 }
 
-.bento-item h3 { font-size: 1.1rem; color: var(--navy-950); }
+.bento-item h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--navy-950);
+}
 .bento-item p { color: var(--gray-600); font-size: 0.95rem; }
 
-.bento-icono {
-  width: 48px;
-  height: 48px;
-  padding: 11px;
-  margin-bottom: 6px;
-  fill: none;
-  stroke: var(--gold-500);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  background: var(--gold-50);
-  border-radius: 14px;
-}
 
 .bento-cifra {
   font-family: var(--font-display);
@@ -2071,6 +2066,7 @@ button[disabled] {
 
 /* Bloque grande oscuro (2 columnas x 2 filas) */
 .bento-item--seguridad {
+  justify-content: flex-start;
   grid-column: span 2;
   grid-row: span 2;
   padding: 40px;
@@ -2085,8 +2081,7 @@ button[disabled] {
 }
 
 .bento-item--seguridad p { color: var(--gray-200); font-size: 1rem; max-width: 440px; }
-.bento-item--seguridad .bento-icono { background: rgba(255, 255, 255, 0.06); }
-.bento-item--seguridad .bento-cifra { font-size: 4.4rem; margin-top: auto; }
+.bento-item--seguridad .bento-cifra { font-size: 4.4rem; margin-bottom: auto; }
 
 .bento-lista {
   list-style: none;
@@ -2140,14 +2135,9 @@ button[disabled] {
 }
 
 /* Bloque ancho horizontal (2 columnas) */
-.bento-item--ancho {
-  grid-column: span 2;
-  flex-direction: row;
-  align-items: center;
-  gap: 24px;
-}
+/* Foto a la derecha en vez de a la izquierda */
+.bento-item--foto-der .foto { order: 2; }
 
-.bento-item--ancho .bento-icono { flex-shrink: 0; margin: 0; }
 
 /* ---------- Plano 3D del predio de Itapeby ----------
    El SVG lo genera herramientas/generar-plano.py */
@@ -2171,7 +2161,7 @@ button[disabled] {
 .iso-cancha { fill: var(--verde-500); fill-opacity: 0.55; }
 .iso-cancha-linea { fill: none; stroke: var(--white); stroke-width: 1.5; }
 .iso-calle { fill: var(--gray-400); }
-.iso-patio { fill: var(--gray-100); }
+.iso-patio { fill: var(--gray-200); }
 .iso-arbol { fill: var(--verde-500); }
 .iso-arbol-sombra { fill: var(--navy-950); fill-opacity: 0.12; }
 
@@ -2192,6 +2182,37 @@ button[disabled] {
 .lote--negociacion .cara-lado { fill: var(--gray-400); }
 
 .lote--libre polygon { fill: var(--white); fill-opacity: 0.7; stroke: var(--gray-400); stroke-dasharray: 5 4; }
+
+/* Detalles de los depósitos */
+.lote .porton { fill: var(--navy-950); fill-opacity: 0.55; stroke: none; }
+.lote .ventanas { fill: var(--white); fill-opacity: 0.55; stroke: none; }
+.lote .claraboya { fill: var(--white); fill-opacity: 0.75; stroke: none; }
+
+/* Camiones, autos y entorno */
+.sombra { fill: var(--navy-950); fill-opacity: 0.1; }
+.camion polygon, .auto polygon { stroke: var(--white); stroke-width: 0.6; stroke-linejoin: round; }
+.camion-caja .c-techo { fill: var(--white); }
+.camion-caja .c-frente { fill: var(--gray-100); }
+.camion-caja .c-lado { fill: var(--gray-400); }
+.camion-cabina .c-techo { fill: var(--navy-600); }
+.camion-cabina .c-frente { fill: var(--navy-800); }
+.camion-cabina .c-lado { fill: var(--navy-700); }
+.camion .camion-vidrio { fill: var(--navy-100); stroke: none; }
+
+.auto--blanco .c-techo, .auto--blanco .c-frente { fill: var(--white); }
+.auto--blanco .c-lado { fill: var(--gray-200); }
+.auto--azul .c-techo, .auto--azul .c-frente { fill: var(--navy-600); }
+.auto--azul .c-lado { fill: var(--navy-800); }
+.auto--gris .c-techo, .auto--gris .c-frente { fill: var(--gray-400); }
+.auto--gris .c-lado { fill: var(--gray-600); }
+.auto--dorado .c-techo, .auto--dorado .c-frente { fill: var(--gold-300); }
+.auto--dorado .c-lado { fill: var(--gold-500); }
+.auto-techo .c-techo { fill-opacity: 0.85; }
+
+.iso-arbol-luz { fill: var(--white); fill-opacity: 0.25; }
+.iso-calle-linea { fill: none; stroke: var(--white); stroke-width: 1.2; stroke-dasharray: 6 6; }
+.iso-estac { fill: none; stroke: var(--white); stroke-width: 1.2; }
+.iso-cerco { fill: var(--gray-400); fill-opacity: 0.35; }
 
 /* Depósito resaltado: "sube" un poco */
 .lote.activo { transform: translateY(-8px); }
@@ -2217,31 +2238,6 @@ button[disabled] {
 .pq-plano-grid.reveal .cartel-linea { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.2s ease 0.4s; }
 .pq-plano-grid.reveal.visible .cartel-linea { stroke-dashoffset: 0; }
 
-.pq-leyenda {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px 24px;
-  margin-top: 12px;
-  font-size: 0.85rem;
-  color: var(--gray-600);
-}
-
-.pq-leyenda li { display: flex; align-items: center; gap: 8px; }
-
-.ley {
-  width: 16px;
-  height: 16px;
-  border: 2px solid;
-  border-radius: 5px;
-}
-
-.ley--operando { background: var(--gold-100); border-color: var(--gold-400); }
-.ley--confirmada { background: var(--navy-100); border-color: var(--navy-300); }
-.ley--negociacion { background: var(--gray-200); border-color: var(--gray-400); }
-.ley--libre { background: var(--white); border-color: var(--gray-400); border-style: dashed; }
-.ley--verde { background: var(--verde-100); border-color: var(--verde-500); }
 
 @media (prefers-reduced-motion: reduce) {
   .pin-onda { animation: none; opacity: 0; }
@@ -2281,11 +2277,10 @@ button[disabled] {
   .pq-extras { padding: 72px 0; }
   .bento { grid-template-columns: 1fr; }
   .bento-item--seguridad,
-  .bento-item--foto,
-  .bento-item--ancho { grid-column: auto; grid-row: auto; }
+  .bento-item--foto { grid-column: auto; grid-row: auto; }
+  .bento-item--foto-der .foto { order: 0; }
   .bento-item--seguridad { padding: 28px; }
   .bento-item--foto { flex-direction: column; }
-  .bento-item--ancho { flex-direction: column; align-items: flex-start; }
 
   .pq-plano { padding: 72px 0 24px; }
   .pq-plano-grid { padding: 16px; border-radius: 18px; }

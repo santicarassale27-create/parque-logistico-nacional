@@ -19,23 +19,24 @@ from pathlib import Path
 # Datos (editar acá)
 # estado: operando | confirmada | negociacion | libre
 # x, y, ancho, fondo, alto: posición y tamaño del depósito
+# camiones: cuántos camiones dibujar estacionados en sus portones (0 = ninguno)
 # etiqueta: dónde va el cartel (cx, cy en el dibujo final, 1260x720).
 # Regla: poner el cartel a la DERECHA del depósito (cx mayor que el punto de la línea)
 # para que la línea entre al círculo por la izquierda y no cruce el texto.
 # ---------------------------------------------------------------
 DEPOSITOS = [
     {"n": 5, "nombre": "Local disponible", "estado": "libre",
-     "x": 175, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "etiqueta": (380, 190)},
+     "x": 175, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "camiones": 0, "etiqueta": (380, 190)},
     {"n": 6, "nombre": "Local disponible", "estado": "libre",
-     "x": 325, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "etiqueta": (480, 110)},
+     "x": 325, "y": 35, "ancho": 120, "fondo": 85, "alto": 34, "camiones": 0, "etiqueta": (480, 110)},
     {"n": 3, "nombre": "Droguería Uruguay S.A.", "estado": "confirmada",
-     "x": 485, "y": 20, "ancho": 90, "fondo": 195, "alto": 56, "etiqueta": (640, 650)},
+     "x": 485, "y": 20, "ancho": 90, "fondo": 165, "alto": 56, "camiones": 2, "etiqueta": (640, 650)},
     {"n": 2, "nombre": "Laboratorio Gador S.A.", "estado": "operando",
-     "x": 615, "y": 20, "ancho": 80, "fondo": 120, "alto": 56, "etiqueta": (680, 36)},
+     "x": 615, "y": 20, "ancho": 80, "fondo": 120, "alto": 56, "camiones": 1, "etiqueta": (680, 36)},
     {"n": 4, "nombre": "Laboratorio farmacéutico", "estado": "negociacion",
-     "x": 725, "y": 20, "ancho": 80, "fondo": 150, "alto": 50, "etiqueta": (970, 36)},
+     "x": 725, "y": 20, "ancho": 80, "fondo": 150, "alto": 50, "camiones": 0, "etiqueta": (970, 36)},
     {"n": 1, "nombre": "Fármaco Uruguayo S.A.", "estado": "operando",
-     "x": 835, "y": 20, "ancho": 100, "fondo": 185, "alto": 62, "etiqueta": (1000, 158)},
+     "x": 835, "y": 20, "ancho": 100, "fondo": 170, "alto": 62, "camiones": 2, "etiqueta": (1000, 158)},
 ]
 
 ESTADOS = {
@@ -67,13 +68,63 @@ def pts(*coords):
     return " ".join(f"{a},{b}" for a, b in coords)
 
 
-def caja(x, y, w, d, h):
-    """Devuelve los polígonos de las 3 caras visibles de un bloque."""
+def caja(x, y, w, d, h, z0=0):
+    """Devuelve los polígonos de las 3 caras visibles de un bloque (techo, frente, lado)."""
     x1, y1 = x + w, y + d
     techo = pts(p(x, y, h), p(x1, y, h), p(x1, y1, h), p(x, y1, h))
-    frente = pts(p(x, y1, 0), p(x1, y1, 0), p(x1, y1, h), p(x, y1, h))   # cara hacia la calle
-    lado = pts(p(x, y, 0), p(x, y1, 0), p(x, y1, h), p(x, y, h))          # cara izquierda
+    frente = pts(p(x, y1, z0), p(x1, y1, z0), p(x1, y1, h), p(x, y1, h))   # cara hacia la calle
+    lado = pts(p(x, y, z0), p(x, y1, z0), p(x, y1, h), p(x, y, h))          # cara izquierda
     return techo, frente, lado
+
+
+def bloque(clase, x, y, w, d, h, z0=0):
+    techo, frente, lado = caja(x, y, w, d, h, z0)
+    return (f'<g class="{clase}"><polygon class="c-lado" points="{lado}"/>'
+            f'<polygon class="c-frente" points="{frente}"/><polygon class="c-techo" points="{techo}"/></g>')
+
+
+def detalles_deposito(dep):
+    """Portones en el frente, ventanas en el costado y claraboyas en el techo."""
+    x, y, w, d, h = dep["x"], dep["y"], dep["ancho"], dep["fondo"], dep["alto"]
+    x1, y1 = x + w, y + d
+    out = []
+    # Portones de carga (cara de adelante)
+    n = max(1, int(w // 26))
+    paso = w / n
+    alto_porton = min(22, h * 0.45)
+    for i in range(n):
+        cx = x + paso * (i + 0.5)
+        out.append(f'<polygon class="porton" points="{pts(p(cx-6.5,y1,0), p(cx+6.5,y1,0), p(cx+6.5,y1,alto_porton), p(cx-6.5,y1,alto_porton))}"/>')
+    # Franja de ventanas (cara izquierda)
+    out.append(f'<polygon class="ventanas" points="{pts(p(x,y+10,h-15), p(x,y1-10,h-15), p(x,y1-10,h-8), p(x,y+10,h-8))}"/>')
+    # Claraboyas en el techo
+    for f in (0.3, 0.7):
+        cx = x + w * f
+        out.append(f'<polygon class="claraboya" points="{pts(p(cx-4,y+12,h), p(cx+4,y+12,h), p(cx+4,y1-12,h), p(cx-4,y1-12,h))}"/>')
+    return "".join(out)
+
+
+def camion(cx, y_porton):
+    """Camión estacionado de culata contra un portón: caja blanca + cabina."""
+    sombra = pts(p(cx-10, y_porton+3, 0), p(cx+11, y_porton+3, 0), p(cx+11, y_porton+50, 0), p(cx-10, y_porton+50, 0))
+    return (f'<g class="camion"><polygon class="sombra" points="{sombra}"/>'
+            + bloque("camion-caja", cx-7.5, y_porton+2, 15, 34, 19, 3)
+            + bloque("camion-cabina", cx-7.5, y_porton+37, 15, 11, 16, 1)
+            + f'<polygon class="camion-vidrio" points="{pts(p(cx-6,y_porton+48,9), p(cx+6,y_porton+48,9), p(cx+6,y_porton+48,14), p(cx-6,y_porton+48,14))}"/>'
+            + '</g>')
+
+
+def auto(cx, cy, color):
+    return (f'<g class="auto auto--{color}">'
+            + bloque("auto-cuerpo", cx-6, cy-10, 12, 20, 6)
+            + bloque("auto-techo", cx-4.5, cy-5, 9, 10, 11, 6) + '</g>')
+
+
+def arbol(x, y, r=10):
+    a, b = p(x, y, 0)
+    return (f'<ellipse class="iso-arbol-sombra" cx="{a+6}" cy="{b+3}" rx="{r+1}" ry="{r/2}"/>'
+            f'<circle class="iso-arbol" cx="{a}" cy="{b-r+1}" r="{r}"/>'
+            f'<circle class="iso-arbol-luz" cx="{a-r*0.35}" cy="{b-r*1.3+1}" r="{r*0.35}"/>')
 
 
 def poligono_suelo(coords, z=0):
@@ -100,30 +151,58 @@ def cartel(n, titulo, sub, clase_sub, cx, cy, ancla, data):
 
 def generar():
     out = []
+    borde = lambda x: 205 + 0.055 * x          # línea de adelante del predio
     # Plataforma del predio (con espesor)
     sitio = [(0, 0), (1000, 0), (1000, 260), (0, 205)]
     out.append(f'<polygon class="iso-base-lado" points="{pts(p(0,205,0), p(1000,260,0), p(1000,260,-14), p(0,205,-14))}"/>')
     out.append(f'<polygon class="iso-base-lado2" points="{pts(p(0,0,0), p(0,205,0), p(0,205,-14), p(0,0,-14))}"/>')
     out.append(f'<polygon class="iso-base" points="{poligono_suelo(sitio)}"/>')
-    # Verde de la cancha, calle interna y plaza
-    out.append(f'<polygon class="iso-verde" points="{poligono_suelo([(0,0),(120,0),(120,215),(0,205)])}"/>')
+    # Cancha, calle interna, plaza y patio de maniobras
+    out.append(f'<polygon class="iso-verde" points="{poligono_suelo([(0,0),(120,0),(120,borde(120)),(0,205)])}"/>')
     out.append(f'<polygon class="iso-cancha" points="{poligono_suelo([(18,28),(104,28),(104,185),(18,185)])}"/>')
     out.append(f'<polyline class="iso-cancha-linea" points="{poligono_suelo([(18,106),(104,106)])}"/>')
     out.append(f'<polygon class="iso-cancha-linea" points="{poligono_suelo([(18,28),(104,28),(104,185),(18,185)])}"/>')
-    out.append(f'<polygon class="iso-calle" points="{poligono_suelo([(128,0),(150,0),(150,217),(128,215)])}"/>')
-    out.append(f'<polygon class="iso-verde" points="{poligono_suelo([(870,222),(1000,222),(1000,260),(870,249)])}"/>')
-    # Zona de maniobra frente a los depósitos
-    out.append(f'<polygon class="iso-patio" points="{poligono_suelo([(470,215),(1000,215),(1000,222),(470,222)])}"/>')
-    # Árboles (adelante, sobre la calle)
-    for tx in range(180, 460, 46):
-        a, b = p(tx, 175, 0)
-        out.append(f'<ellipse class="iso-arbol-sombra" cx="{a+6}" cy="{b+3}" rx="11" ry="5"/>'
-                   f'<circle class="iso-arbol" cx="{a}" cy="{b-9}" r="10"/>')
-    # Depósitos: de atrás hacia adelante para que se tapen bien
-    for dep in sorted(DEPOSITOS, key=lambda d: (d["y"] + d["fondo"] / 2) - (d["x"] + d["ancho"] / 2)):
-        techo, frente, lado = caja(dep["x"], dep["y"], dep["ancho"], dep["fondo"], dep["alto"])
-        out.append(f'''<g class="lote lote--{dep["estado"]}" data-lote="{dep["n"]}" tabindex="0" aria-label="{dep["n"]}. {dep["nombre"]}">
-        <polygon class="cara-lado" points="{lado}"/><polygon class="cara-frente" points="{frente}"/><polygon class="cara-techo" points="{techo}"/></g>''')
+    out.append(f'<polygon class="iso-cancha-linea" points="{poligono_suelo([(42,28),(80,28),(80,48),(42,48)])}"/>')
+    out.append(f'<polygon class="iso-cancha-linea" points="{poligono_suelo([(42,165),(80,165),(80,185),(42,185)])}"/>')
+    out.append(f'<polygon class="iso-calle" points="{poligono_suelo([(128,0),(150,0),(150,borde(150)),(128,borde(128))])}"/>')
+    out.append(f'<polyline class="iso-calle-linea" points="{poligono_suelo([(139,4),(139,borde(139)-4)])}"/>')
+    out.append(f'<polygon class="iso-patio" points="{poligono_suelo([(470,8),(1000,8),(1000,borde(1000)),(470,borde(470))])}"/>')
+    out.append(f'<polygon class="iso-verde" points="{poligono_suelo([(870,232),(1000,232),(1000,borde(1000)),(870,borde(870))])}"/>')
+    # Estacionamiento de autos frente a los locales libres
+    out.append(f'<polygon class="iso-patio" points="{poligono_suelo([(165,124),(455,124),(455,156),(165,156)])}"/>')
+    for i in range(14):
+        x = 170 + i * 20.5
+        out.append(f'<polyline class="iso-estac" points="{poligono_suelo([(x,128),(x,150)])}"/>')
+    # Elementos con volumen: se dibujan de atrás hacia adelante
+    objetos = []
+    colores = ["blanco", "azul", "gris", "dorado", "blanco", "azul"]
+    for i, slot in enumerate([0, 1, 3, 4, 6, 8, 9]):
+        cx = 180 + slot * 20.5
+        objetos.append((140 - cx, auto(cx, 140, colores[i % len(colores)])))
+    for dep in DEPOSITOS:
+        x, y, w, d = dep["x"], dep["y"], dep["ancho"], dep["fondo"]
+        techo, frente, lado = caja(x, y, w, d, dep["alto"])
+        extra = "" if dep["estado"] == "libre" else detalles_deposito(dep)
+        svg = (f'<g class="lote lote--{dep["estado"]}" data-lote="{dep["n"]}" tabindex="0" aria-label="{dep["n"]}. {dep["nombre"]}">'
+               f'<polygon class="cara-lado" points="{lado}"/><polygon class="cara-frente" points="{frente}"/>'
+               f'<polygon class="cara-techo" points="{techo}"/>{extra}</g>')
+        objetos.append(((y + d / 2) - (x + w / 2), svg))
+        # Camiones en los primeros portones
+        n = max(1, int(w // 26)); paso = w / n
+        for i in range(dep.get("camiones", 0)):
+            cx = x + paso * (i + 0.5)
+            objetos.append(((y + d + 22) - cx, camion(cx, y + d)))
+    # Árboles: fila sobre el frente, junto a la cancha y en la plaza
+    for tx in range(172, 462, 40):
+        objetos.append(((borde(tx) - 14) - tx, arbol(tx, borde(tx) - 14)))
+    for ty in (30, 80, 130):
+        objetos.append((ty - 115, arbol(115, ty, 8)))
+    for tx in (895, 935, 975):
+        objetos.append(((borde(tx) - 12) - tx, arbol(tx, borde(tx) - 12, 9)))
+    for _, svg in sorted(objetos, key=lambda o: o[0]):
+        out.append(svg)
+    # Cerco en el frente del predio
+    out.append(f'<polygon class="iso-cerco" points="{pts(p(0,205,0), p(1000,260,0), p(1000,260,6), p(0,205,6))}"/>')
     # Carteles
     for dep in DEPOSITOS:
         ancla = p(dep["x"] + dep["ancho"] / 2, dep["y"] + dep["fondo"] / 2, dep["alto"])
