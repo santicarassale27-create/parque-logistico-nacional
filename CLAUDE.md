@@ -75,3 +75,9 @@ img/                        Fotos (cuando las haya)
   - Lamarel — Flete terrestre (20 camiones propios, cargas peligrosas) — Dr. Pantaleón Pérez 4881 — 2525 99 60 — lamarel@lamarel.com
   - Repremar Logistics — Fletes aéreos y marítimos (FCL/LCL) — Misiones 1372, 6.º piso — 2916 94 16 — logistics@repremar.com
 - Pendiente de confirmar con la empresa: año de fundación (la web dice 1994, el material dice "35 años").
+
+## Pie de página
+
+- Es **idéntico en las 7 páginas** (marca + menú, dirección + logos de las empresas, copyright).
+  Si se cambia, se cambia en todas: copiar el `<footer>` completo de una página a las demás.
+- Los logos de las empresas están en `img/logos/` (sacados del PDF institucional).

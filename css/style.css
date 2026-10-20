@@ -906,63 +906,128 @@ button[disabled] {
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer ----------
+   Igual en todas las páginas: arriba marca + menú, al medio
+   dirección y logos de las empresas, abajo el copyright. */
 .site-footer {
   background: var(--navy-950);
   color: var(--gray-200);
-  padding: 64px 0 28px;
+  padding: 72px 0 32px;
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
 }
 
-.footer-brand .brand-text strong {
-  color: var(--white);
+.site-footer .brand { color: var(--white); }
+.site-footer .brand-text span { color: var(--gold-300); }
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 32px;
 }
 
-.footer-brand p {
-  color: var(--gray-400);
-  font-size: 0.9rem;
-  margin-top: 14px;
-  max-width: 280px;
-}
-
-.footer-col h4 {
-  color: var(--white);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 16px;
-}
-
-.footer-col ul li {
-  margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-  color: var(--gray-400);
-  font-size: 0.92rem;
+.footer-nav a:not(.btn) {
+  color: var(--gray-200);
+  font-size: 0.95rem;
   transition: color 0.2s ease;
 }
 
-.footer-col ul li a:hover {
-  color: var(--gold-400);
+.footer-nav a:not(.btn):hover { color: var(--gold-400); }
+.footer-nav .btn { margin-left: 8px; }
+
+.footer-mid {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 64px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-contact {
+  font-style: normal;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--white);
+}
+
+.footer-contact p + p { margin-top: 16px; }
+.footer-contact a { transition: color 0.2s ease; }
+.footer-contact a:hover { color: var(--gold-400); }
+
+.footer-logos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.footer-logos-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.footer-logos ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+/* Cada logo va en una "placa" blanca, como los sellos de certificación */
+.footer-logos a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 72px;
+  padding: 10px 14px;
+  background: var(--white);
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.footer-logos a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footer-logos img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding-top: 24px;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   color: var(--gray-400);
-  flex-wrap: wrap;
-  gap: 12px;
+}
+
+/* Pie de página en tablet y celular */
+@media (max-width: 1100px) {
+  .footer-top { flex-direction: column; align-items: flex-start; }
+  .footer-nav .btn { margin-left: 0; }
+  .footer-mid { flex-direction: column; align-items: flex-start; margin-top: 48px; }
+  .footer-logos { align-items: flex-start; }
+  .footer-logos ul { justify-content: flex-start; }
+}
+
+@media (max-width: 760px) {
+  .site-footer { padding: 56px 0 28px; }
+  .footer-nav { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .footer-logos ul { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
+  .footer-logos a { width: 100%; }
 }
 
 /* ---------- Responsive ---------- */
@@ -985,9 +1050,6 @@ button[disabled] {
     row-gap: 28px;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 
   .contact-grid {
     grid-template-columns: 1fr;
@@ -1058,9 +1120,6 @@ button[disabled] {
     row-gap: 24px;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
 
   section {
     padding: 52px 0;
