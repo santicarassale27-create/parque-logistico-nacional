@@ -1619,7 +1619,6 @@ button[disabled] {
 .hist-next-link:hover .hist-next-title { color: var(--gold-500); }
 .hist-next-link:hover .hist-next-title span { transform: translateX(10px); }
 
-.hist-next-sub { color: var(--gray-600); }
 
 /* ---------- Historia: tablet y celular ---------- */
 @media (max-width: 960px) {
