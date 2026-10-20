@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initScrollReveal();
   initCounters();
   initContactForm();
+  initHistoria();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -84,7 +85,8 @@ var REVEAL_SELECTORS = [
   ".company-card",
   ".cta-band",
   ".quote",
-  ".contact-grid > *"
+  ".contact-grid > *",
+  ".hist-anim"
 ].join(",");
 
 function prefersReducedMotion() {
@@ -227,5 +229,62 @@ function initContactForm() {
         button.disabled = false;
         button.textContent = originalText;
       });
+  });
+}
+
+/* ---------- 6. Página Historia ----------
+   a) La columna fija muestra el año de la etapa que se está leyendo.
+   b) La línea vertical se llena de dorado a medida que se baja.
+   c) Comparador de fotos "antes / después". */
+function initHistoria() {
+  var lista = document.querySelector(".hist-chapters-list");
+  if (lista) {
+    var capitulos = lista.querySelectorAll(".hist-chapter");
+    var rail = document.querySelector(".hist-rail-inner");
+    var railYear = document.getElementById("rail-year");
+    var actual = null;
+
+    function mostrarCapitulo(cap) {
+      if (cap === actual || !rail || !railYear) return;
+      actual = cap;
+      rail.classList.add("cambiando");
+      setTimeout(function () {
+        railYear.textContent = cap.dataset.year;
+        rail.classList.remove("cambiando");
+      }, 200);
+    }
+
+    var ticking = false;
+    function actualizar() {
+      ticking = false;
+      var mitad = window.innerHeight * 0.5;
+      var caja = lista.getBoundingClientRect();
+      var progreso = (mitad - caja.top) / caja.height;
+      progreso = Math.max(0, Math.min(1, progreso));
+      lista.style.setProperty("--progreso", progreso.toFixed(4));
+
+      // La etapa actual es la última cuyo comienzo ya pasó la mitad de la pantalla.
+      var activo = capitulos[0];
+      capitulos.forEach(function (cap) {
+        var arriba = cap.getBoundingClientRect().top;
+        cap.classList.toggle("leido", arriba < mitad);
+        if (arriba < mitad) activo = cap;
+      });
+      mostrarCapitulo(activo);
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(actualizar); }
+    }, { passive: true });
+    window.addEventListener("resize", actualizar);
+    actualizar();
+  }
+
+  document.querySelectorAll(".antes-despues").forEach(function (fig) {
+    var control = fig.querySelector(".antes-despues-control");
+    if (!control) return;
+    control.addEventListener("input", function () {
+      fig.style.setProperty("--pos", control.value + "%");
+    });
   });
 }

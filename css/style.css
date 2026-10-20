@@ -1131,3 +1131,606 @@ button[disabled] {
     text-align: center;
   }
 }
+
+/* =========================================================
+   Página Historia (rediseño)
+   Todo lo de esta página empieza con "hist-", más los
+   componentes reutilizables .foto (lugar de foto) y
+   .antes-despues (comparador de fotos).
+   ========================================================= */
+
+:root {
+  --font-display: "Sora", var(--font-sans);
+}
+
+/* ---------- Lugar para foto (provisorio) ----------
+   Cuando llegue la foto real, se reemplaza el <div class="foto">
+   por un <img> con la misma clase de tamaño, o se le pone
+   style="background-image:url(img/...)" al div. */
+.foto {
+  position: relative;
+  background:
+    repeating-linear-gradient(135deg, rgba(10, 22, 40, 0.035) 0 1px, transparent 1px 14px),
+    linear-gradient(160deg, var(--gray-100), var(--gray-200));
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.foto-label {
+  margin: 14px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gray-600);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+}
+
+.foto--fondo {
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 16px),
+    linear-gradient(160deg, #3a4350, #1d232b);
+}
+
+.foto--fondo .foto-label {
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.foto--grande { aspect-ratio: 16 / 9; margin: 36px 0 8px; }
+.foto--retrato { aspect-ratio: 4 / 5; }
+
+/* La foto se "revela": una cortina del color del fondo se corre hacia arriba */
+.foto.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.foto.reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--fondo-seccion, var(--white));
+  transform-origin: top;
+  transition: transform 1.1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.foto.reveal.visible::after { transform: scaleY(0); }
+
+/* ---------- Apertura: texto + collage ---------- */
+.hist-open {
+  padding: 96px 0 72px;
+  overflow: hidden;
+}
+
+.hist-open-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.hist-open h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--navy-950);
+}
+
+/* Raya dorada corta debajo del título */
+.hist-open h1::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 28px;
+  background: var(--gold-500);
+  border-radius: 2px;
+}
+
+.hist-open-lead {
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--navy-900);
+}
+
+.hist-open-sub {
+  margin-top: 16px;
+  color: var(--gray-600);
+}
+
+.hist-open-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding-bottom: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--navy-950);
+  border-bottom: 2px solid var(--gold-500);
+}
+
+.hist-open-scroll span { transition: transform 0.25s ease; }
+.hist-open-scroll:hover span { transform: translateY(4px); }
+
+/* Collage: una foto alta a la izquierda y dos a la derecha, desfasadas */
+.hist-collage {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+  height: 560px;
+}
+
+.hist-collage .foto { height: auto; }
+.hist-collage-a { grid-row: 1 / 3; }
+.hist-collage-b { margin-top: 48px; }
+.hist-collage-c { margin-bottom: 48px; }
+
+/* ---------- Cifras ---------- */
+.hist-cifras { padding: 24px 0 96px; }
+
+.hist-cifras-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 48px 24px;
+  background: var(--gray-50);
+  border-radius: 24px;
+}
+
+.hist-cifras-list > div {
+  padding: 0 24px;
+  text-align: center;
+}
+
+.hist-cifras-list > div + div { border-left: 1px solid var(--gray-200); }
+
+.hist-cifras-list dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold-500);
+}
+
+.hist-cifras-list dd {
+  margin-top: 12px;
+  color: var(--gray-600);
+  font-size: 0.98rem;
+}
+
+.hist-cifras-list dd strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--navy-950);
+}
+
+/* ---------- Capítulos ---------- */
+.hist-chapters { padding: 40px 0 120px; }
+
+.hist-chapters-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 56px;
+}
+
+.hist-rail-inner {
+  position: sticky;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hist-rail-year {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 4.2rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--navy-950);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+
+.hist-rail-inner.cambiando .hist-rail-year {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.hist-chapters-list {
+  position: relative;
+  padding-left: 56px;
+}
+
+.hist-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gray-200);
+}
+
+.hist-progress-fill {
+  width: 100%;
+  height: 100%;
+  background: var(--gold-500);
+  transform-origin: top;
+  transform: scaleY(var(--progreso, 0));
+}
+
+.hist-chapter {
+  position: relative;
+  padding-bottom: 120px;
+}
+
+.hist-chapter:last-child { padding-bottom: 0; }
+
+/* Punto del capítulo sobre la línea */
+.hist-chapter::before {
+  content: "";
+  position: absolute;
+  left: -63px;
+  top: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+.hist-chapter.leido::before {
+  border-color: var(--gold-500);
+  background: var(--gold-500);
+}
+
+.hist-chapter-head { position: relative; }
+
+.hist-chapter-head h2 {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.02em;
+  max-width: 540px;
+  margin-bottom: 16px;
+}
+
+.hist-chapter-head p {
+  position: relative;
+  color: var(--gray-600);
+  font-size: 1.08rem;
+  max-width: 620px;
+}
+
+.hist-hitos { list-style: none; }
+
+.hist-hitos li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.hist-hito-year {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--gold-500);
+}
+
+.hist-hitos h3 {
+  font-size: 1.08rem;
+  margin-bottom: 6px;
+}
+
+.hist-hitos p {
+  color: var(--gray-600);
+  font-size: 0.97rem;
+}
+
+/* ---------- Antes / después ---------- */
+.antes-despues {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 36px 0 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.antes-despues-capa {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  margin: 0;
+}
+
+.antes-despues-capa .foto-label { margin-bottom: 52px; }
+.antes-despues-despues { justify-content: flex-end; }
+
+/* La foto de "después" se recorta según la posición de la barra */
+.antes-despues-despues { clip-path: inset(0 0 0 var(--pos)); }
+
+.antes-despues-linea {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--white);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.antes-despues-linea span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.antes-despues-linea span::before {
+  content: "‹ ›";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--navy-950);
+  letter-spacing: 2px;
+}
+
+.antes-despues-tag {
+  position: absolute;
+  top: 16px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.antes-despues-tag--izq { left: 16px; }
+.antes-despues-tag--der { right: 16px; }
+
+/* Control invisible que cubre toda la foto: se arrastra en cualquier parte */
+.antes-despues-control {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.antes-despues-control:focus-visible ~ .antes-despues-linea span {
+  outline: 3px solid var(--gold-500);
+}
+
+.antes-despues figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: var(--white);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+}
+
+/* ---------- La voz de la familia ---------- */
+.hist-quote {
+  --fondo-seccion: var(--gray-50);
+  padding: 110px 0;
+  background: var(--gray-50);
+}
+
+.hist-quote-inner {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.hist-quote blockquote p {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--navy-950);
+}
+
+.hist-quote blockquote::before {
+  content: "“";
+  display: block;
+  font-size: 5rem;
+  line-height: 0.6;
+  color: var(--gold-500);
+  margin-bottom: 18px;
+}
+
+.hist-quote blockquote footer {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hist-quote blockquote footer span {
+  color: var(--gray-600);
+  font-size: 0.92rem;
+}
+
+/* Texto pendiente de confirmar con la empresa: subrayado punteado */
+.pendiente {
+  text-decoration: underline dotted var(--gold-500);
+  text-underline-offset: 6px;
+}
+
+/* ---------- Reconocimientos (grilla de sellos centrada) ---------- */
+.hist-sellos {
+  padding: 100px 0;
+  background: var(--gray-50);
+  text-align: center;
+}
+
+.hist-sellos .section-title { margin-bottom: 0; }
+
+.hist-sellos-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 56px;
+}
+
+.hist-sellos-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Lugar del logo: cuando llegue, se reemplaza por <img class="sello-logo" src="..."> */
+.sello-logo {
+  width: 150px;
+  height: 180px;
+  margin-bottom: 26px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  background: var(--white);
+  border: 1px dashed var(--gray-200);
+  border-radius: 14px;
+  object-fit: contain;
+}
+
+.hist-sellos-list h3 {
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--navy-950);
+}
+
+.hist-sellos-list p {
+  max-width: 300px;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+}
+
+/* ---------- Siguiente ---------- */
+.hist-next { padding: 96px 0 110px; }
+
+.hist-next-link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hist-next-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  letter-spacing: -0.02em;
+  color: var(--navy-950);
+  transition: color 0.25s ease;
+}
+
+.hist-next-title span {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.hist-next-link:hover .hist-next-title { color: var(--gold-500); }
+.hist-next-link:hover .hist-next-title span { transform: translateX(10px); }
+
+
+/* ---------- Historia: tablet y celular ---------- */
+@media (max-width: 960px) {
+  .hist-chapters-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* La columna fija pasa a ser una barra fina pegada debajo del encabezado */
+  .hist-rail {
+    position: sticky;
+    top: 76px;
+    z-index: 5;
+    margin: 0 -24px 32px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .hist-rail-inner {
+    position: static;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .hist-rail-year { font-size: 1.4rem; }
+
+  .hist-open-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hist-collage { height: 440px; }
+
+  .hist-quote-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hist-quote .foto--retrato { max-width: 320px; }
+
+  .hist-sellos-list { grid-template-columns: 1fr; gap: 56px; }
+}
+
+@media (max-width: 760px) {
+  .hist-open { padding: 56px 0 48px; }
+  .hist-collage { height: 340px; gap: 12px; }
+  .hist-collage-b { margin-top: 28px; }
+  .hist-collage-c { margin-bottom: 28px; }
+  .hist-cifras { padding: 8px 0 64px; }
+  .hist-cifras-list { padding: 28px 4px; border-radius: 18px; }
+  .hist-cifras-list > div { padding: 0 8px; }
+  .hist-cifras-list dt { font-size: 2.3rem; }
+  .hist-cifras-list dd { font-size: 0.8rem; margin-top: 8px; }
+  .hist-cifras-list dd strong { font-size: 0.92rem; }
+  .hist-chapters-list { padding-left: 28px; }
+  .hist-chapter::before { left: -35px; }
+  .hist-chapter { padding-bottom: 80px; }
+  .hist-hitos li { grid-template-columns: 1fr; gap: 6px; }
+  .antes-despues { aspect-ratio: 4 / 3; }
+  .hist-quote, .hist-sellos { padding: 72px 0; }
+}
