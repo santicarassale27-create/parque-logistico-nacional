@@ -29,8 +29,8 @@ img/                        Fotos (cuando las haya)
 
 | Persona | Archivos |
 |---|---|
-| Santi | `index.html`, `parque.html`, `empresas.html`, `proyecto.html`, `responsabilidad-social.html`, `img/`, encabezado (nav) |
-| Alfonso | `historia.html` (rediseño), `contacto.html`, `css/style.css`, `js/main.js`, `CLAUDE.md`, `README.md` |
+| Santi | `index.html`, `empresas.html`, `proyecto.html`, `responsabilidad-social.html`, `img/`, encabezado (nav) |
+| Alfonso | `historia.html` y `parque.html` (rediseños), `contacto.html`, `css/style.css`, `js/main.js`, `CLAUDE.md`, `README.md` |
 
 - No modifiques archivos del otro sin que la persona lo pida explícitamente.
 - Si una tarea necesita tocar un archivo del otro (por ejemplo, un estilo nuevo en `style.css`),
@@ -58,6 +58,28 @@ img/                        Fotos (cuando las haya)
 - Estilos con prefijo `hist-` al final de `css/style.css`; títulos con la tipografía Sora (`--font-display`).
 - Lugares de foto provisorios: `<div class="foto">` con una etiqueta `FOTO 01…09` que dice qué foto va. Al llegar la foto, se le pone `style="background-image:url(img/...)"` y se borra la etiqueta.
 - Los textos con clase `pendiente` (subrayado punteado) esperan datos reales de la empresa: no inventarlos.
+
+## Página El Parque
+
+- Estilos con prefijo `pq-` en `css/style.css`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-cifras` y `.hist-next`.
+- Sin textos chicos arriba de los títulos (decisión del equipo; solo se usan en la línea de tiempo de Historia).
+- Sin íconos arriba de los títulos del mosaico de seguridad (decisión del equipo).
+- **Plano 3D de Itapeby 3170:** lo genera `herramientas/generar-plano.py` (no editar el SVG a mano).
+  Para cambiar depósitos, empresas o estados: editar la lista `DEPOSITOS` del script y correr
+  `python3 herramientas/generar-plano.py`. Estados: `operando`, `confirmada`, `negociacion`, `libre`.
+  Cada depósito tiene `camiones` (cuántos camiones dibujar en sus portones). Los portones, ventanas,
+  claraboyas, autos, árboles y el cerco se dibujan solos. Sin leyenda debajo del plano (decisión del equipo).
+  Regla de carteles (para que ninguna línea cruce un texto): cada cartel va a la derecha de su punto; los de abajo,
+  cuanto más a la derecha más arriba; los de arriba, cuanto más a la derecha más abajo. Sin plaza en el plano.
+  Estados confirmados: Fármaco Uruguayo y Gador operando; Droguería Uruguay confirmada; un laboratorio en negociación; 2 locales a definir.
+  El plano está incompleto: falta el plano completo del predio que va a pasar la empresa.
+- **Mapa de ubicación:** SVG dibujado a mano dentro de `parque.html` (no es Google Maps). Muestra solo el Parque y
+  sus distancias al Puerto (12 km), Aeropuerto (10 km) y Zona Franca (11 km), con los km dentro de cada cartel.
+  Sin otras sedes ni leyenda (decisión del equipo). Cada punto es un `<g class="pin">` con `transform="translate(x,y)"`;
+  los textos van del lado contrario a las rutas para que no se crucen.
+- Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
+  Acá queda solo una fila sobre el depósito del Parque.
+- Fotos de la página: FOTO 01 vista aérea, 02 pasillos del depósito, 03 oficinas, 04 showroom.
 
 ## Comportamientos automáticos de `js/main.js` (no hace falta tocar el HTML)
 
