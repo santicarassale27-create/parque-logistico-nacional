@@ -1799,6 +1799,32 @@ button[disabled] {
 .m3-anillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.22; stroke-width: 1; stroke-dasharray: 4 6; }
 .m3-edif-lado { fill: var(--navy-700); stroke: var(--navy-800); stroke-width: 0.5; }
 .m3-edif-techo { fill: var(--navy-600); }
+.m3-edif--claro .m3-edif-techo { fill: var(--navy-300); fill-opacity: 0.55; }
+.m3-edif--luz .m3-edif-techo { fill: var(--gold-300); fill-opacity: 0.85; }
+.m3-edif--zf .m3-edif-techo { fill: var(--navy-200); fill-opacity: 0.8; }
+.m3-edif--zf .m3-edif-lado { fill: var(--navy-600); }
+
+/* Detalles: parques, hipódromo, rambla, aeropuerto, puerto y barcos */
+.m3-parque { fill: var(--verde-500); fill-opacity: 0.35; }
+.m3-arbol { fill: var(--verde-500); fill-opacity: 0.9; }
+.m3-hipodromo { fill: var(--gold-800); fill-opacity: 0.55; }
+.m3-rambla { fill: none; stroke: var(--white); stroke-opacity: 0.22; stroke-width: 2; stroke-linejoin: round; }
+.m3-pista { fill: var(--gray-600); fill-opacity: 0.9; }
+.m3-pista-linea { fill: none; stroke: var(--white); stroke-opacity: 0.8; stroke-width: 1; stroke-dasharray: 5 5; }
+.m3-muelle { fill: var(--gray-400); }
+.m3-muelle-lado { fill: var(--gray-600); }
+.m3-cont-dorado-techo { fill: var(--gold-300); }
+.m3-cont-dorado-lado { fill: var(--gold-500); }
+.m3-cont-blanco-techo { fill: var(--white); }
+.m3-cont-blanco-lado { fill: var(--gray-200); }
+.m3-cont-azul-techo { fill: var(--navy-300); }
+.m3-cont-azul-lado { fill: var(--navy-600); }
+.m3-grua { fill: none; stroke: var(--gold-400); stroke-width: 2; stroke-linejoin: round; }
+.m3-barco { fill: var(--gray-200); }
+.m3-barco-lado { fill: var(--navy-700); }
+.m3-barco-puente { fill: var(--white); }
+.m3-barco-puente-lado { fill: var(--gray-400); }
+.m3-estela { fill: none; stroke: var(--white); stroke-opacity: 0.25; stroke-width: 1.5; }
 .m3-barrio {
   font-size: 12px;
   font-weight: 600;
@@ -1824,18 +1850,24 @@ button[disabled] {
 
 .m3-columna-lado { fill: var(--gold-500); stroke: var(--gold-400); stroke-width: 0.6; }
 .m3-columna-techo { fill: var(--gold-300); }
+/* Ondas tipo radar que salen del Parque y recorren todo el mapa */
 .m3-onda {
   fill: none;
   stroke: var(--gold-400);
   stroke-width: 2;
+  opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
-  animation: m3-onda 2.4s ease-out infinite;
+  animation: m3-onda 7.5s cubic-bezier(0.25, 0.6, 0.4, 1) infinite;
 }
 
+.m3-onda--2 { animation-delay: 2.5s; }
+.m3-onda--3 { animation-delay: 5s; }
+
 @keyframes m3-onda {
-  from { transform: scale(0.6); opacity: 0.9; }
-  to { transform: scale(2.6); opacity: 0; }
+  0% { transform: scale(0.6); opacity: 0.9; }
+  70% { opacity: 0.25; }
+  100% { transform: scale(17); opacity: 0; }
 }
 
 /* Arcos en el aire desde el Parque: se dibujan cuando el mapa aparece */
@@ -1847,6 +1879,16 @@ button[disabled] {
 .pin-txt--grande { font-size: 19px; }
 .pin-sub { font-size: 13px; fill: var(--white); fill-opacity: 0.6; }
 .pin-km { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--gold-400); }
+
+/* Contorno oscuro detrás de los textos del mapa: se leen aunque pasen sobre edificios o grúas */
+.pin-txt, .pin-km, .pin-sub, .m3-barrio {
+  paint-order: stroke;
+  stroke: var(--navy-950);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.m3-barrio { stroke-width: 3px; stroke-opacity: 0.8; }
 
 @media (prefers-reduced-motion: reduce) {
   .m3-onda { animation: none; opacity: 0; }

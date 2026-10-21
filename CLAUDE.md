@@ -78,6 +78,8 @@ img/                        Fotos (cuando las haya)
   con relieve, edificios, el Parque como columna dorada y arcos hasta el Puerto (12 km), Aeropuerto (10 km) y
   Zona Franca (11 km). Para mover un punto o cambiar la vista, editar `PUNTOS`, `GIRO` o `INCLINACION` y correr el script.
   Si un arco pisa un cartel, bajar su `"arco"`. Sin otras sedes ni leyenda (decisión del equipo).
+  Detalles editables en el script: `PARQUES`, `HIPODROMO`, `PISTA` (aeropuerto), `BARCOS`, `MUELLES` (puerto).
+  Del Parque salen 3 ondas tipo radar que recorren todo el mapa (animación `m3-onda` en `style.css`).
 - Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
   Acá queda solo una fila sobre el depósito del Parque.
 - Fotos de la página: FOTO 01 vista aérea, 02 pasillos del depósito, 03 oficinas, 04 showroom.

@@ -43,6 +43,17 @@ AVENIDAS = [  # curvas Bézier cúbicas (aproximadas)
     [(228, 330), (300, 260), (330, 180), (340, 0)],
 ]
 
+# Detalles del mapa
+PARQUES = [  # áreas verdes (polígonos)
+    [(178, 170), (232, 162), (252, 196), (226, 228), (186, 222)],          # Prado
+    [(352, 360), (398, 352), (410, 384), (370, 396)],                      # Parque Batlle
+    [(292, 452), (330, 448), (336, 466), (300, 470)],                      # Parque Rodó
+]
+HIPODROMO = (452, 112)        # Hipódromo de Maroñas (cerca del Parque)
+PISTA = [(858, 180), (960, 128)]   # pista del aeropuerto (de punta a punta)
+BARCOS = [(112, 322, 20), (168, 300, -15), (520, 540, 5), (820, 470, -20)]   # x, y, ángulo
+MUELLES = [((178, 386), 145), ((196, 372), 140), ((212, 356), 135)]           # punto en la costa y dirección
+
 # Vista
 GIRO = math.radians(-14)      # rotación del mapa
 INCLINACION = 0.56            # 1 = visto desde arriba; menos = más "acostado"
@@ -130,6 +141,38 @@ def arco(a, b, za, zb, factor=0.32):
     return "M" + " L".join(f"{px},{py}" for px, py in puntos)
 
 
+def rotado(cx, cy, w, d, ang):
+    """Rectángulo centrado en (cx, cy) de ancho w y largo d, girado ang grados."""
+    a = math.radians(ang)
+    esquinas = []
+    for ex, ey in ((-w / 2, -d / 2), (w / 2, -d / 2), (w / 2, d / 2), (-w / 2, d / 2)):
+        esquinas.append((cx + ex * math.cos(a) - ey * math.sin(a), cy + ex * math.sin(a) + ey * math.cos(a)))
+    return esquinas
+
+
+def barco(cx, cy, ang):
+    a = math.radians(ang)
+    casco = []
+    for ex, ey in ((0, -22), (6, -14), (6, 18), (-6, 18), (-6, -14)):
+        casco.append((cx + ex * math.cos(a) - ey * math.sin(a), cy + ex * math.sin(a) + ey * math.cos(a)))
+    estela = [(cx + ex * math.cos(a) - ey * math.sin(a), cy + ex * math.sin(a) + ey * math.cos(a)) for ex, ey in ((-5, 22), (0, 60), (5, 22))]
+    out = [f'<polyline class="m3-estela" points="{poli(estela, 0)}"/>']
+    out += paredes(casco, 0, 4, "m3-barco-lado")
+    out.append(f'<polygon class="m3-barco" points="{poli(casco, 4)}"/>')
+    puente = rotado(cx + 8 * math.sin(a), cy - 8 * math.cos(a), 8, 7, ang)
+    out += paredes(puente, 4, 9, "m3-barco-puente-lado")
+    out.append(f'<polygon class="m3-barco-puente" points="{poli(puente, 9)}"/>')
+    return "".join(out)
+
+
+def caja_clase(x, y, w, d, h, z0, clase):
+    x1, y1 = x + w, y + d
+    esquinas = [(x, y), (x1, y), (x1, y1), (x, y1)]
+    out = paredes(esquinas, z0, z0 + h, clase + "-lado")
+    out.append(f'<polygon class="{clase}-techo" points="{poli(esquinas, z0 + h)}"/>')
+    return "".join(out)
+
+
 # ---------------------------------------------------------------
 # Dibujo
 # ---------------------------------------------------------------
@@ -148,6 +191,19 @@ def generar():
     for r in (50, 95, 140):
         o.append(f'<polyline class="m3-ola" points="{anillo(640, 520, r, 0)}" clip-path="url(#m3-agua-clip)"/>')
 
+    # Barcos (antes de la tierra: la costa los tapa si quedan detrás)
+    for bx_, by_, ang in BARCOS:
+        o.append(barco(bx_, by_, ang))
+    # Muelles del puerto, sobre el agua
+    muelles_svg = []
+    for (mx, my), ang in MUELLES:
+        a = math.radians(ang)
+        cx, cy = mx + 20 * math.sin(a), my - 20 * math.cos(a)
+        muelle = rotado(cx, cy, 9, 44, ang)
+        muelles_svg += paredes(muelle, 0, 5, "m3-muelle-lado")
+        muelles_svg.append(f'<polygon class="m3-muelle" points="{poli(muelle, 5)}"/>')
+    o += muelles_svg
+
     # Tierra en relieve
     o += paredes(TIERRA, 0, T, "m3-tierra-lado")
     o.append(f'<polygon class="m3-tierra" points="{poli(TIERRA, T)}"/>')
@@ -165,6 +221,32 @@ def generar():
     for av in AVENIDAS:
         o.append(f'<polyline class="m3-avenida" points="{pts([P(x, y, T) for x, y in bezier(av)])}" clip-path="url(#m3-tierra-clip)"/>')
 
+    # Parques con árboles
+    for parque in PARQUES:
+        o.append(f'<polygon class="m3-parque" points="{poli(parque, T)}"/>')
+        xs = [a for a, _ in parque]; ys = [b for _, b in parque]
+        for i in range(14):
+            tx = min(xs) + (max(xs) - min(xs)) * ((i * 0.618) % 1)
+            ty = min(ys) + (max(ys) - min(ys)) * ((i * 0.382 + 0.2) % 1)
+            if adentro(tx, ty, parque):
+                ax_, ay_ = P(tx, ty, T + 3)
+                o.append(f'<circle class="m3-arbol" cx="{ax_}" cy="{ay_}" r="3.2"/>')
+    # Hipódromo de Maroñas: pista oval con césped adentro
+    hx_, hy_ = HIPODROMO
+    def ovalo(rx, ry, z):
+        return pts([P(hx_ + rx * math.cos(t / 40 * 2 * math.pi), hy_ + ry * math.sin(t / 40 * 2 * math.pi), z) for t in range(41)])
+    o.append(f'<polygon class="m3-hipodromo" points="{ovalo(34, 19, T)}"/>')
+    o.append(f'<polygon class="m3-parque" points="{ovalo(26, 12, T + 0.2)}"/>')
+    # Pista del aeropuerto
+    (ax0, ay0), (ax1, ay1) = PISTA
+    largo = math.hypot(ax1 - ax0, ay1 - ay0); ang = math.degrees(math.atan2(ay1 - ay0, ax1 - ax0)) - 90
+    pista = rotado((ax0 + ax1) / 2, (ay0 + ay1) / 2, 9, largo, ang)
+    o.append(f'<polygon class="m3-pista" points="{poli(pista, T + 0.3)}"/>')
+    o.append(f'<polyline class="m3-pista-linea" points="{poli([(ax0, ay0), (ax1, ay1)], T + 0.4)}"/>')
+    # Rambla: un camino que acompaña la costa
+    rambla = [(x, y - 8) for x, y in COSTA if x >= 232]
+    o.append(f'<polyline class="m3-rambla" points="{poli(rambla, T + 0.2)}"/>')
+
     # Costa iluminada
     o.append(f'<polyline class="m3-costa-brillo" points="{poli(COSTA, T)}"/>')
     o.append(f'<polyline class="m3-costa" points="{poli(COSTA, T)}"/>')
@@ -173,27 +255,58 @@ def generar():
     for r in (120, 240, 360):
         o.append(f'<polyline class="m3-anillo" points="{anillo(PARQUE["x"], PARQUE["y"], r, T)}" clip-path="url(#m3-tierra-clip)"/>')
 
-    # Edificios bajitos (más densos en el Centro). Pseudoaleatorio fijo: siempre sale igual.
+    # Edificios (más densos en el Centro, torres sobre la costa de Pocitos). Pseudoaleatorio fijo.
     semilla = 7
     def azar():
         nonlocal semilla
         semilla = (semilla * 1103515245 + 12345) % 2 ** 31
         return semilla / 2 ** 31
-    edificios = []
+    objetos = []
     reservados = [(PARQUE["x"], PARQUE["y"])] + [(p["x"], p["y"]) for p in PUNTOS]
-    for _ in range(900):
+    zonas_libres = PARQUES + [[(HIPODROMO[0] - 36, HIPODROMO[1] - 22), (HIPODROMO[0] + 36, HIPODROMO[1] - 22),
+                               (HIPODROMO[0] + 36, HIPODROMO[1] + 22), (HIPODROMO[0] - 36, HIPODROMO[1] + 22)]]
+    for _ in range(1500):
         x, y = azar() * 1000, azar() * 600
-        if not adentro(x, y, TIERRA) or dist_costa(x, y) < 14:
+        if not adentro(x, y, TIERRA) or dist_costa(x, y) < 12:
             continue
-        if any(math.hypot(x - a, y - b) < 34 for a, b in reservados):
+        if any(math.hypot(x - a, y - b) < 36 for a, b in reservados) or any(adentro(x, y, z) for z in zonas_libres):
             continue
         centro = math.hypot(x - 300, y - 400)
-        if azar() > max(0.10, 1 - centro / 380):
+        if azar() > max(0.08, 1 - centro / 400):
             continue
-        h = 3 + azar() * (16 if centro < 160 else 7)
-        edificios.append((x, y, h))
-    for x, y, h in sorted(edificios, key=lambda e: P(e[0], e[1])[1]):
-        o.append(caja(x - 4, y - 4, 8, 8, h, T))
+        costa_pocitos = 360 < x < 560 and dist_costa(x, y) < 30
+        if costa_pocitos:
+            h = 18 + azar() * 22
+        else:
+            h = 3 + azar() * (16 if centro < 170 else 7)
+        tam = 7 + azar() * 4
+        clase = "m3-edif" + (" m3-edif--luz" if azar() < 0.09 else "") + (" m3-edif--claro" if azar() < 0.3 else "")
+        objetos.append((P(x, y)[1], f'<g class="{clase}">' + caja(x - tam / 2, y - tam / 2, tam, tam, h, T) + '</g>'))
+    # Zona Franca: grupo de edificios propios
+    zf = PUNTOS[2]
+    for i in range(9):
+        ang = i / 9 * 2 * math.pi + 0.3
+        r = 40 + (i % 3) * 9
+        x, y = zf["x"] + r * math.cos(ang), zf["y"] + 0.7 * r * math.sin(ang)
+        if adentro(x, y, TIERRA):
+            objetos.append((P(x, y)[1], '<g class="m3-edif m3-edif--zf">' + caja(x - 7, y - 5, 14, 10, 9 + (i % 4) * 4, T) + '</g>'))
+    # Terminal del aeropuerto
+    ap = PUNTOS[1]
+    objetos.append((P(ap["x"] - 40, ap["y"] + 22)[1], '<g class="m3-edif m3-edif--zf">' + caja(ap["x"] - 58, ap["y"] + 16, 30, 12, 8, T) + '</g>'))
+    # Contenedores y grúas en los muelles del puerto
+    colores = ["dorado", "blanco", "azul", "dorado", "azul", "blanco"]
+    for k, ((mx, my), ang) in enumerate(MUELLES):
+        a = math.radians(ang)
+        for j in range(3):
+            d = 10 + j * 11
+            cx, cy = mx + d * math.sin(a), my - d * math.cos(a)
+            objetos.append((P(cx, cy)[1], caja_clase(cx - 3, cy - 3, 6, 6, 4 + (j % 2) * 3, 5, f"m3-cont-{colores[(k + j) % 6]}")))
+        gx, gy = mx + 38 * math.sin(a), my - 38 * math.cos(a)
+        bx0, by0 = P(gx, gy, 5); bx1, by1 = P(gx, gy, 32)
+        bx2, by2 = P(gx + 14 * math.sin(a), gy - 14 * math.cos(a), 32)
+        objetos.append((by0, f'<polyline class="m3-grua" points="{bx0},{by0} {bx1},{by1} {bx2},{by2}"/>'))
+    for _, svg in sorted(objetos, key=lambda o_: o_[0]):
+        o.append(svg)
 
     # Barrios
     for nombre, x, y in BARRIOS:
@@ -204,7 +317,11 @@ def generar():
 
     # Halo y base del Parque
     o.append(f'<polygon class="m3-halo" points="{anillo(PARQUE["x"], PARQUE["y"], 70, T)}" fill="url(#m3-halo-grad)"/>')
-    o.append(f'<polygon class="m3-onda" points="{anillo(PARQUE["x"], PARQUE["y"], 24, T)}"/>')
+    # Ondas que salen del Parque y recorren todo el mapa (recortadas al tablero)
+    o.append('<g clip-path="url(#m3-agua-clip)">')
+    for i in range(3):
+        o.append(f'<polygon class="m3-onda m3-onda--{i + 1}" points="{anillo(PARQUE["x"], PARQUE["y"], 24, T)}" vector-effect="non-scaling-stroke"/>')
+    o.append('</g>')
 
     # Pines de los puntos
     ALTO_PIN = 42
