@@ -1925,7 +1925,13 @@ button[disabled] {
 
 .m3-roca { fill: var(--gray-400); }
 .m3-roca-lado { fill: var(--gray-600); }
-.m3-escollera { fill: none; stroke: var(--gray-400); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+/* Puerto del Buceo */
+.m3-darsena { fill: var(--mar-500); }
+.m3-pantalan { fill: var(--arena-300); }
+.m3-pantalan-lado { fill: var(--arena-500); }
+.m3-lancha { fill: var(--white); }
+.m3-lancha-lado { fill: var(--gray-400); }
+.m3-lancha-cabina { fill: var(--gray-200); }
 /* Ondas tipo radar que salen del Parque y recorren todo el mapa */
 .m3-onda {
   fill: none;

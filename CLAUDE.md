@@ -92,7 +92,7 @@ img/                        Fotos (cuando las haya)
   Colores: la tierra va en azul oscuro (como toda la web) y el mar y la arena con colores reales para que se entiendan:
   mar azul con degradé y franja turquesa en la orilla (`--mar-*`), arena color arena con borde de arena mojada (`--arena-*`).
   Costa: arena por toda la rambla, desde Carrasco hasta donde empieza Ciudad Vieja (`PLAYAS`; en Ciudad Vieja no hay arena), espuma de olas animada, rocas de
-  Punta Carretas (`ROCAS`) y el Puerto del Buceo con su escollera (`BUCEO`).
+  Punta Carretas (`ROCAS`) y el Puerto del Buceo (`BUCEO`: dársena de agua calma, dos escolleras de piedra, muelles y lanchas amarradas).
   Sin faro, sin veleros, sin hipódromo, sin Parque Roosevelt, sin grúas y sin redondeles en el agua (decisiones del equipo);
   "Río de la Plata" va solo como texto.
 - Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
