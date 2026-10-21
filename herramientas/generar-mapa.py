@@ -71,20 +71,9 @@ ZONA_FRANCA = {"x": 808, "y": 60, "rx": 48, "ry": 31}
 ZF_OFICINAS = [(-36, -4, 16), (-27, -20, 12), (-9, -26, 15), (11, -25, 12), (-29, 14, 14), (-10, 22, 20), (11, 21, 24)]  # dx, dy, alto
 ZF_NAVES = [(28, -16), (28, 2)]     # naves logísticas (dx, dy)
 
-# Costa: arena (rango de x), rocas de Punta Carretas, Puerto del Buceo
+# Costa: arena (rango de x) y rocas de Punta Carretas (sin Puerto del Buceo, decisión del equipo)
 PLAYAS = [(262, 1000)]       # toda la rambla, de Carrasco hasta donde empieza Ciudad Vieja (ahí no hay arena)
 ROCAS = [(366, 530, 4), (378, 528, 3), (356, 524, 3), (386, 522, 2.5), (348, 520, 2.5)]   # x, y, tamaño
-# Puerto del Buceo, en medidas "locales": u = a lo largo de la costa (hacia el oeste), v = mar adentro.
-# Escollera grande (este) que se curva hacia el oeste, escollera chica (oeste), la boca entre las dos,
-# agua calma adentro, 3 muelles flotantes y lanchas amarradas (sin veleros, decisión del equipo).
-BUCEO = {
-    "origen": (521, 417),
-    "escollera": [(0, 0), (2, 12), (4, 24), (10, 31), (20, 33), (29, 31)],
-    "escollera_chica": [(42, 0), (42, 13), (38, 20)],
-    "muelles": [12, 21, 30],          # u de cada muelle (salen de la costa hacia adentro)
-    "largo_muelle": 17,
-    "lanchas": [(12, 6, 1), (12, 12, -1), (21, 5, -1), (21, 11, 1), (21, 15, -1), (30, 7, 1), (30, 13, -1)],  # u, v, lado
-}
 
 # Vista
 GIRO = math.radians(-14)      # rotación del mapa
@@ -340,44 +329,6 @@ def generar():
         piedra = [(rx_ + t_ * math.cos(k * 1.256 + rx_), ry_ + t_ * 0.8 * math.sin(k * 1.256 + rx_)) for k in range(5)]
         o += paredes(piedra, 0, t_ * 0.7, "m3-roca-lado")
         o.append(f'<polygon class="m3-roca" points="{poli(piedra, t_ * 0.7)}"/>')
-    # Puerto del Buceo: dársena de agua calma, escolleras de piedra, muelles y lanchas
-    ox, oy = BUCEO["origen"]
-    U = (-0.849, 0.528)      # dirección de la costa (hacia el oeste)
-    V = (0.528, 0.849)       # dirección mar adentro
-
-    def L(u, v):
-        return (ox + u * U[0] + v * V[0], oy + u * U[1] + v * V[1])
-
-    def banda(linea, ancho):
-        """Convierte una línea en una franja de ese ancho (para las escolleras)."""
-        lado_a = desplazar(linea, ancho / 2)
-        lado_b = desplazar(linea, -ancho / 2)
-        return lado_a + lado_b[::-1]
-
-    darsena = BUCEO["escollera"] + BUCEO["escollera_chica"][::-1]
-    o.append(f'<polygon class="m3-darsena" points="{poli([L(u, v) for u, v in darsena], 0.4)}"/>')
-    for u in BUCEO["muelles"]:
-        muelle = [L(u - 0.8, -1), L(u + 0.8, -1), L(u + 0.8, BUCEO["largo_muelle"]), L(u - 0.8, BUCEO["largo_muelle"])]
-        o += paredes(muelle, 0.4, 1.4, "m3-pantalan-lado")
-        o.append(f'<polygon class="m3-pantalan" points="{poli(muelle, 1.4)}"/>')
-    for u, v, lado in BUCEO["lanchas"]:
-        cu = u + lado * 2.4
-        casco = [L(cu, v - 2.6), L(cu + 1.1, v - 1.2), L(cu + 1.1, v + 2.4), L(cu - 1.1, v + 2.4), L(cu - 1.1, v - 1.2)]
-        o += paredes(casco, 0.4, 1.6, "m3-lancha-lado")
-        o.append(f'<polygon class="m3-lancha" points="{poli(casco, 1.6)}"/>')
-        cabina = [L(cu - 0.6, v), L(cu + 0.6, v), L(cu + 0.6, v + 1.3), L(cu - 0.6, v + 1.3)]
-        o.append(f'<polygon class="m3-lancha-cabina" points="{poli(cabina, 2.4)}"/>')
-    for nombre in ("escollera", "escollera_chica"):
-        linea = [L(u, v) for u, v in BUCEO[nombre]]
-        muro = banda(linea, 3.2)
-        o += paredes(muro, 0, 3, "m3-roca-lado")
-        o.append(f'<polygon class="m3-roca" points="{poli(muro, 3)}"/>')
-        # bloques de piedra sueltos del lado del mar, para que se lea como escollera
-        for i, (x, y) in enumerate(desplazar(linea, 2.4 if nombre == "escollera" else -2.4)[1:]):
-            t_ = 1.3 + 0.4 * (i % 2)
-            piedra = [(x + t_ * math.cos(k * 1.256 + i), y + t_ * 0.8 * math.sin(k * 1.256 + i)) for k in range(5)]
-            o += paredes(piedra, 0, t_, "m3-roca-lado")
-            o.append(f'<polygon class="m3-roca" points="{poli(piedra, t_)}"/>')
 
     # Tejido urbano: manzanas vistas desde arriba, con la misma perspectiva del mapa (un solo patrón, liviano)
     ca, sa = math.cos(GIRO) * ESCALA, math.sin(GIRO) * ESCALA
