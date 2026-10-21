@@ -482,10 +482,45 @@ section {
 
 /* =========================================================
    Página Empresas (rediseño)
-   Una sección grande por empresa, alternando foto/texto a los
+   Apertura unificada (título + foto, como Historia/El Parque) y
+   una sección grande por empresa, alternando foto/texto a los
    costados (reutiliza .feature y .foto). Lo nuevo acá empieza
    con "emp-".
    ========================================================= */
+
+/* ---------- Apertura: título + foto panorámica ---------- */
+.emp-open {
+  padding: 96px 0 72px;
+  overflow: hidden;
+}
+
+.emp-open-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+
+.emp-open-head h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--navy-950);
+}
+
+.emp-open-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--navy-900);
+}
+
+.emp-open .hist-open-scroll { margin-top: 24px; }
+.emp-open-foto { aspect-ratio: 21 / 9; }
+
 .emp-block {
   scroll-margin-top: 96px; /* que el anchor (#geligold, etc.) no quede tapado por el header */
 }
@@ -2149,6 +2184,9 @@ button[disabled] {
 .bento-item--dorado h3 { color: var(--navy-950); }
 .bento-item--dorado p { color: var(--navy-900); }
 
+/* Modificador genérico: ocupa 2 columnas (para combinar con otro, ej. --dorado) */
+.bento-item--ancho { grid-column: span 2; }
+
 /* Bloque con foto (2 columnas) */
 .bento-item--foto {
   grid-column: span 2;
@@ -2293,11 +2331,14 @@ button[disabled] {
   .pq-km { margin: 0; font-size: 2rem; }
 
   .bento { grid-template-columns: repeat(2, 1fr); }
+  .emp-open-head { grid-template-columns: 1fr; gap: 24px; }
 }
 
 @media (max-width: 760px) {
   .pq-open { padding: 56px 0 40px; }
   .pq-open-foto { aspect-ratio: 4 / 3; }
+  .emp-open { padding: 56px 0 40px; }
+  .emp-open-foto { aspect-ratio: 4 / 3; }
   .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
   .pq-ubicacion { padding: 24px 0 40px; }
@@ -2311,7 +2352,8 @@ button[disabled] {
   .pq-extras { padding: 72px 0; }
   .bento { grid-template-columns: 1fr; }
   .bento-item--seguridad,
-  .bento-item--foto { grid-column: auto; grid-row: auto; }
+  .bento-item--foto,
+  .bento-item--ancho { grid-column: auto; grid-row: auto; }
   .bento-item--foto-der .foto { order: 0; }
   .bento-item--seguridad { padding: 28px; }
   .bento-item--foto { flex-direction: column; }
