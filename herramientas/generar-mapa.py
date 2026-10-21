@@ -71,9 +71,8 @@ ZONA_FRANCA = {"x": 808, "y": 60, "rx": 48, "ry": 31}
 ZF_OFICINAS = [(-36, -4, 16), (-27, -20, 12), (-9, -26, 15), (11, -25, 12), (-29, 14, 14), (-10, 22, 20), (11, 21, 24)]  # dx, dy, alto
 ZF_NAVES = [(28, -16), (28, 2)]     # naves logísticas (dx, dy)
 
-# Costa: playas de arena (rango de x), rocas y faro de Punta Carretas, Puerto del Buceo
+# Costa: playas de arena (rango de x), rocas de Punta Carretas, Puerto del Buceo
 PLAYAS = [(380, 470), (520, 690), (745, 1000)]       # Pocitos, Buceo–Malvín, Carrasco
-FARO = (364, 508)
 ROCAS = [(366, 530, 4), (378, 528, 3), (356, 524, 3), (386, 522, 2.5), (348, 520, 2.5)]   # x, y, tamaño
 BUCEO = {"escollera": [(519, 421), (525, 431), (523, 441), (515, 447), (504, 449)], "veleros": [(510, 436), (502, 440), (516, 440)]}
 
@@ -323,6 +322,7 @@ def generar():
         borde_agua = desplazar(tramo, 8)
         arena = [P(x, y, 1.4) for x, y in tramo] + [P(x, y, 0.2) for x, y in borde_agua[::-1]]
         o.append(f'<polygon class="m3-arena" points="{pts(arena)}"/>')
+        o.append(f'<polyline class="m3-arena-mojada" points="{poli(borde_agua, 0.3)}"/>')
         o.append(f'<polyline class="m3-espuma" points="{poli(desplazar(tramo, 7.5), 0.3)}"/>')
         o.append(f'<polyline class="m3-espuma m3-espuma--2" points="{poli(desplazar(tramo, 10.5), 0.2)}"/>')
     # Rocas de Punta Carretas
@@ -491,14 +491,6 @@ def generar():
             objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3, 2.8)))
     for _, svg in sorted(objetos, key=lambda o_: o_[0]):
         o.append(svg)
-
-    # Faro de Punta Carretas
-    fx, fy = FARO
-    torre = [(fx + 2.6 * math.cos(math.radians(60 * k)), fy + 2.6 * math.sin(math.radians(60 * k))) for k in range(6)]
-    o += paredes(torre, T, T + 22, "m3-faro-lado")
-    o.append(f'<polygon class="m3-faro-techo" points="{poli(torre, T + 22)}"/>')
-    lx, ly = P(fx, fy, T + 24)
-    o.append(f'<circle class="m3-faro-luz" cx="{lx}" cy="{ly}" r="4"/>')
 
     # Barrios
     for nombre, x, y in BARRIOS:

@@ -1703,6 +1703,13 @@ button[disabled] {
   --navy-100: #e7edf5;
   --navy-200: #c9d6e8;
   --navy-300: #9fb3cf;
+  /* Mar y arena del mapa 3D: colores propios para que se entienda qué son */
+  --mar-900: #0e3352;
+  --mar-700: #165a85;
+  --mar-500: #2380b0;
+  --mar-300: #5fb4d6;
+  --arena-300: #e8d3a2;
+  --arena-500: #c9ad72;
 }
 
 .pq-title {
@@ -1781,14 +1788,14 @@ button[disabled] {
 
 .pq-mapa-svg { display: block; width: 100%; height: auto; }
 
-.stop-agua-1 { stop-color: var(--navy-900); }
-.stop-agua-2 { stop-color: var(--navy-950); }
+.stop-agua-1 { stop-color: var(--mar-500); }
+.stop-agua-2 { stop-color: var(--mar-700); }
 .stop-halo-1 { stop-color: var(--gold-500); stop-opacity: 0.35; }
 .stop-halo-2 { stop-color: var(--gold-500); stop-opacity: 0; }
 
 /* Mapa 3D (lo genera herramientas/generar-mapa.py) */
-.m3-tablero-lado { fill: var(--navy-950); stroke: var(--navy-900); stroke-width: 1; }
-.m3-agua { stroke: var(--navy-700); stroke-width: 1; }
+.m3-tablero-lado { fill: var(--mar-900); stroke: var(--mar-700); stroke-width: 1; }
+.m3-agua { stroke: var(--mar-300); stroke-opacity: 0.5; stroke-width: 1; }
 .m3-tierra-lado { fill: var(--navy-700); stroke: var(--navy-700); stroke-width: 0.6; }
 .m3-tierra { fill: var(--navy-800); }
 .m3-avenida { fill: none; stroke: var(--white); stroke-opacity: 0.16; stroke-width: 2.5; stroke-linecap: round; }
@@ -1869,7 +1876,7 @@ button[disabled] {
   font-style: italic;
   text-anchor: middle;
   fill: var(--white);
-  fill-opacity: 0.22;
+  fill-opacity: 0.55;
 }
 
 .m3-pin-base { fill: var(--white); fill-opacity: 0.18; stroke: var(--white); stroke-opacity: 0.5; }
@@ -1897,9 +1904,10 @@ button[disabled] {
 .m3-nave-techo { fill: var(--gray-100); }
 .m3-nave-lado { fill: var(--gray-400); }
 
-/* Costa: agua clara, arena, espuma, rocas, faro y Puerto del Buceo */
-.m3-agua-baja { fill: var(--navy-600); fill-opacity: 0.22; }
-.m3-arena { fill: var(--gold-100); fill-opacity: 0.85; }
+/* Costa: agua clara, arena, espuma, rocas y Puerto del Buceo */
+.m3-agua-baja { fill: var(--mar-300); fill-opacity: 0.35; }
+.m3-arena { fill: var(--arena-300); }
+.m3-arena-mojada { fill: none; stroke: var(--arena-500); stroke-width: 2; stroke-linecap: round; }
 .m3-espuma {
   fill: none;
   stroke: var(--white);
@@ -1920,20 +1928,6 @@ button[disabled] {
 .m3-escollera { fill: none; stroke: var(--gray-400); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 .m3-velero-casco { fill: var(--white); }
 .m3-velero-vela { fill: var(--white); fill-opacity: 0.9; }
-.m3-faro-lado { fill: var(--white); stroke: var(--gray-200); stroke-width: 0.5; }
-.m3-faro-techo { fill: var(--gold-500); }
-.m3-faro-luz {
-  fill: var(--gold-300);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: m3-faro 2s ease-in-out infinite;
-}
-
-@keyframes m3-faro {
-  0%, 100% { opacity: 0.35; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.5); }
-}
-
 /* Ondas tipo radar que salen del Parque y recorren todo el mapa */
 .m3-onda {
   fill: none;
@@ -1976,7 +1970,7 @@ button[disabled] {
 
 @media (prefers-reduced-motion: reduce) {
   .m3-onda { animation: none; opacity: 0; }
-  .m3-espuma, .m3-faro-luz { animation: none; }
+  .m3-espuma { animation: none; }
 }
 
 .pq-distancias {

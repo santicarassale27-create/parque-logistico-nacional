@@ -75,7 +75,7 @@ img/                        Fotos (cuando las haya)
   Estados confirmados: Fármaco Uruguayo y Gador operando; Droguería Uruguay confirmada; un laboratorio en negociación; 2 locales a definir.
   El plano está incompleto: falta el plano completo del predio que va a pasar la empresa.
 - **Mapa 3D de ubicación:** lo genera `herramientas/generar-mapa.py` (no editar el SVG a mano). Montevideo en maqueta
-  con relieve, edificios, el Parque como columna dorada y arcos hasta el Puerto (12 km), Aeropuerto (10 km) y
+  con relieve, edificios, el Parque en miniatura y arcos hasta el Puerto (12 km), Aeropuerto (10 km) y
   Zona Franca (11 km). Para mover un punto o cambiar la vista, editar `PUNTOS`, `GIRO` o `INCLINACION` y correr el script.
   Si un arco pisa un cartel, bajar su `"arco"`. Sin otras sedes ni leyenda (decisión del equipo).
   El Parque se dibuja como una maqueta en miniatura (terreno dorado, depósitos, camiones), sin pin: los arcos salen
@@ -89,9 +89,11 @@ img/                        Fotos (cuando las haya)
   de calle en Carrasco. Los nombres de barrio van fuera de las zonas verdes.
   Zona Franca (`ZONA_FRANCA`, `ZF_OFICINAS`, `ZF_NAVES`): campus de Zonamerica sobre Ruta 8 con césped, anillo interno,
   oficinas de vidrio con pisos, naves logísticas, estacionamientos y árboles (sin lago: no está confirmado).
-  Costa: agua más clara en la orilla, arena en las playas (`PLAYAS`: Pocitos, Buceo–Malvín, Carrasco), espuma de
-  olas animada, rocas y faro de Punta Carretas (`ROCAS`, `FARO`) y el Puerto del Buceo con escollera y veleros (`BUCEO`).
-  Sin hipódromo, sin Parque Roosevelt, sin grúas y sin redondeles en el agua (decisiones del equipo);
+  Colores: la tierra va en azul oscuro (como toda la web) y el mar y la arena con colores reales para que se entiendan:
+  mar azul con degradé y franja turquesa en la orilla (`--mar-*`), arena color arena con borde de arena mojada (`--arena-*`).
+  Costa: arena en las playas (`PLAYAS`: Pocitos, Buceo–Malvín, Carrasco), espuma de olas animada, rocas de
+  Punta Carretas (`ROCAS`) y el Puerto del Buceo con escollera y veleros (`BUCEO`).
+  Sin faro, sin hipódromo, sin Parque Roosevelt, sin grúas y sin redondeles en el agua (decisiones del equipo);
   "Río de la Plata" va solo como texto.
 - Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
   Acá queda solo una fila sobre el depósito del Parque.
