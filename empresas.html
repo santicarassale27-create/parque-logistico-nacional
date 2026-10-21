@@ -37,18 +37,32 @@
   </div>
 </header>
 
-<!-- ============ APERTURA: título + foto panorámica ============ -->
-<section class="emp-open">
-  <div class="container">
-    <div class="emp-open-head">
+<!-- ============ APERTURA: hero oscuro + mosaico de 4 empresas ============ -->
+<section class="emp-hero">
+  <div class="container emp-hero-grid">
+    <div>
+      <div class="eyebrow">Ecosistema</div>
       <h1>Cuatro empresas, un mismo predio</h1>
-      <div>
-        <p class="emp-open-lead">Geligold S.A. lidera el Parque Logístico Nacional, junto a otras empresas especializadas que trabajan de forma coordinada dentro del mismo predio: depósito, transporte terrestre y fletes internacionales.</p>
-        <a href="#geligold" class="hist-open-scroll">Conocé cada empresa <span aria-hidden="true">↓</span></a>
-      </div>
+      <p>Geligold S.A. lidera el Parque Logístico Nacional, junto a otras empresas especializadas que trabajan de forma coordinada dentro del mismo predio: depósito, transporte terrestre y fletes internacionales.</p>
+      <a href="#geligold" class="btn btn-outline" style="margin-top: 28px;">Conocé cada empresa <span aria-hidden="true">↓</span></a>
     </div>
-    <div class="foto emp-open-foto hist-anim">
-      <span class="foto-label">FOTO · Vista aérea del Parque con los locales de las 4 empresas</span>
+    <div class="emp-hero-tiles">
+      <a href="#geligold" class="emp-hero-tile">
+        <span class="emp-hero-tile-foto">Foto</span>
+        <span class="emp-hero-tile-label"><strong>Geligold S.A.</strong><span>Depósito nacional</span></span>
+      </a>
+      <a href="#talfir" class="emp-hero-tile">
+        <span class="emp-hero-tile-foto">Foto</span>
+        <span class="emp-hero-tile-label"><strong>Talfir S.A.</strong><span>Depósito aduanero</span></span>
+      </a>
+      <a href="#lamarel" class="emp-hero-tile">
+        <span class="emp-hero-tile-foto">Foto</span>
+        <span class="emp-hero-tile-label"><strong>Lamarel</strong><span>Flete terrestre</span></span>
+      </a>
+      <a href="#repremar" class="emp-hero-tile">
+        <span class="emp-hero-tile-foto">Foto</span>
+        <span class="emp-hero-tile-label"><strong>Repremar</strong><span>Aéreo y marítimo</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -199,41 +213,34 @@
   </div>
 </section>
 
-<!-- ============ POR QUÉ FUNCIONA (mosaico) ============ -->
-<section class="pq-extras">
+<!-- ============ POR QUÉ FUNCIONA (flujo de 3 pasos) ============ -->
+<section>
   <div class="container">
-    <div class="pq-extras-head">
-      <h2 class="pq-title hist-anim">Un mismo predio, servicios complementarios</h2>
-      <p class="pq-lead hist-anim">Operar en conjunto permite a nuestros clientes resolver depósito, trámites aduaneros y transporte terrestre, aéreo y marítimo sin salir del predio, reduciendo tiempos y optimizando costos logísticos.</p>
+    <div class="emp-flow-head">
+      <div class="eyebrow hist-anim">Por qué funciona</div>
+      <h2 class="section-title hist-anim">Un mismo predio, servicios complementarios</h2>
+      <p class="section-lead hist-anim">La mercadería de un cliente puede pasar por las tres etapas sin salir nunca del Parque: entra, se guarda y sale rumbo a cualquier destino.</p>
     </div>
 
-    <div class="bento">
-      <!-- Bloque grande: depósito -->
-      <article class="bento-item bento-item--seguridad hist-anim">
-        <h3>Depósito fiscal y nacional</h3>
-        <p>Geligold y Talfir gestionan el almacenamiento, tanto fiscal como general, con habilitación bromatológica y seguridad 24 horas.</p>
-        <ul class="bento-lista">
-          <li>Depósito nacional — Geligold S.A.</li>
-          <li>Depósito aduanero de 23.000 m² — Talfir S.A.</li>
-          <li>Habilitación bromatológica</li>
-          <li>Vigilancia las 24 horas</li>
-        </ul>
+    <div class="emp-flow">
+      <div class="emp-flow-line" aria-hidden="true"></div>
+
+      <article class="emp-flow-step hist-anim">
+        <span class="emp-flow-num">1</span>
+        <h3>Depósito</h3>
+        <p>Geligold y Talfir gestionan el almacenamiento, fiscal y nacional, con habilitación bromatológica y seguridad las 24 horas.</p>
       </article>
 
-      <!-- Transporte terrestre -->
-      <article class="bento-item bento-item--dorado bento-item--ancho hist-anim">
-        <span class="bento-cifra" data-counter>20</span>
-        <h3>camiones de flota propia — Lamarel</h3>
-        <p>Distribuye la mercadería con flota propia hacia cualquier punto del país, con unidades habilitadas para cargas peligrosas.</p>
+      <article class="emp-flow-step hist-anim">
+        <span class="emp-flow-num">2</span>
+        <h3>Transporte terrestre</h3>
+        <p>Lamarel distribuye la mercadería con flota propia (20 camiones) hacia cualquier punto del país.</p>
       </article>
 
-      <!-- Comercio exterior -->
-      <article class="bento-item bento-item--foto hist-anim">
-        <div class="foto"><span class="foto-label">FOTO · Operativa aérea o marítima de Repremar</span></div>
-        <div class="bento-foto-texto">
-          <h3>Comercio exterior — Repremar Logistics</h3>
-          <p>Conecta las operaciones con el mundo mediante fletes aéreos y marítimos, FCL y LCL.</p>
-        </div>
+      <article class="emp-flow-step hist-anim">
+        <span class="emp-flow-num">3</span>
+        <h3>Comercio exterior</h3>
+        <p>Repremar Logistics conecta las operaciones con el mundo mediante fletes aéreos y marítimos, FCL y LCL.</p>
       </article>
     </div>
   </div>

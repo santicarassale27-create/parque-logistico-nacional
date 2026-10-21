@@ -482,44 +482,103 @@ section {
 
 /* =========================================================
    Página Empresas (rediseño)
-   Apertura unificada (título + foto, como Historia/El Parque) y
-   una sección grande por empresa, alternando foto/texto a los
-   costados (reutiliza .feature y .foto). Lo nuevo acá empieza
-   con "emp-".
+   Apertura propia (hero oscuro + mosaico de 4 fotos, una por
+   empresa, clickeables) y una sección grande por empresa,
+   alternando foto/texto a los costados (reutiliza .feature y
+   .foto). Lo nuevo acá empieza con "emp-".
    ========================================================= */
 
-/* ---------- Apertura: título + foto panorámica ---------- */
-.emp-open {
-  padding: 96px 0 72px;
+/* ---------- Apertura: hero oscuro + mosaico de 4 empresas ---------- */
+.emp-hero {
+  background: linear-gradient(160deg, var(--navy-950), var(--navy-800));
+  color: var(--white);
+  padding: 110px 0 90px;
   overflow: hidden;
 }
 
-.emp-open-head {
+.emp-hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
-  align-items: end;
-  margin-bottom: 48px;
+  align-items: center;
 }
 
-.emp-open-head h1 {
+.emp-hero h1 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(2.4rem, 4.8vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  color: var(--navy-950);
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 14px 0 20px;
 }
 
-.emp-open-lead {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-  line-height: 1.5;
-  color: var(--navy-900);
+.emp-hero p {
+  color: var(--gray-200);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 460px;
 }
 
-.emp-open .hist-open-scroll { margin-top: 24px; }
-.emp-open-foto { aspect-ratio: 21 / 9; }
+.emp-hero-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.emp-hero-tile {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0 2px, rgba(255, 255, 255, 0.015) 2px 18px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.emp-hero-tile:hover {
+  border-color: var(--gold-500);
+  transform: translateY(-3px);
+}
+
+.emp-hero-tile-foto {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3px 7px;
+  border-radius: 5px;
+}
+
+.emp-hero-tile-label {
+  padding: 14px;
+  background: linear-gradient(180deg, transparent, rgba(5, 10, 18, 0.8));
+}
+
+.emp-hero-tile-label strong {
+  display: block;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+
+.emp-hero-tile-label span {
+  display: block;
+  margin-top: 2px;
+  color: var(--gold-300);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 .emp-block {
   scroll-margin-top: 96px; /* que el anchor (#geligold, etc.) no quede tapado por el header */
@@ -594,6 +653,65 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* ---------- "Por qué funciona": flujo de 3 pasos conectados ---------- */
+.emp-flow-head {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.emp-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.emp-flow-line {
+  position: absolute;
+  top: 34px;
+  left: 16.666%;
+  right: 16.666%;
+  height: 2px;
+  background: var(--gold-500);
+  opacity: 0.35;
+}
+
+.emp-flow-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+}
+
+.emp-flow-num {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--navy-950);
+  color: var(--gold-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  box-shadow: 0 0 0 6px var(--white);
+}
+
+.emp-flow-step h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--navy-950);
+}
+
+.emp-flow-step p {
+  color: var(--gray-600);
+  font-size: 0.92rem;
+  max-width: 280px;
 }
 
 /* ---------- Mini timeline (home teaser) ---------- */
@@ -2184,9 +2302,6 @@ button[disabled] {
 .bento-item--dorado h3 { color: var(--navy-950); }
 .bento-item--dorado p { color: var(--navy-900); }
 
-/* Modificador genérico: ocupa 2 columnas (para combinar con otro, ej. --dorado) */
-.bento-item--ancho { grid-column: span 2; }
-
 /* Bloque con foto (2 columnas) */
 .bento-item--foto {
   grid-column: span 2;
@@ -2331,14 +2446,15 @@ button[disabled] {
   .pq-km { margin: 0; font-size: 2rem; }
 
   .bento { grid-template-columns: repeat(2, 1fr); }
-  .emp-open-head { grid-template-columns: 1fr; gap: 24px; }
+  .emp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 760px) {
   .pq-open { padding: 56px 0 40px; }
   .pq-open-foto { aspect-ratio: 4 / 3; }
-  .emp-open { padding: 56px 0 40px; }
-  .emp-open-foto { aspect-ratio: 4 / 3; }
+  .emp-hero { padding: 64px 0 56px; }
+  .emp-flow { grid-template-columns: 1fr; gap: 36px; }
+  .emp-flow-line { display: none; }
   .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
   .pq-ubicacion { padding: 24px 0 40px; }
@@ -2352,8 +2468,7 @@ button[disabled] {
   .pq-extras { padding: 72px 0; }
   .bento { grid-template-columns: 1fr; }
   .bento-item--seguridad,
-  .bento-item--foto,
-  .bento-item--ancho { grid-column: auto; grid-row: auto; }
+  .bento-item--foto { grid-column: auto; grid-row: auto; }
   .bento-item--foto-der .foto { order: 0; }
   .bento-item--seguridad { padding: 28px; }
   .bento-item--foto { flex-direction: column; }
