@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initCounters();
   initContactForm();
   initHistoria();
+  initPlano();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -288,3 +289,37 @@ function initHistoria() {
     });
   });
 }
+
+/* ---------- 7. Plano de empresas (página El Parque) ----------
+   Cada local del plano y cada fila de la lista tienen el mismo
+   data-lote. Al pasar el mouse, tocar o enfocar uno, se resaltan los dos. */
+function initPlano() {
+  var plano = document.querySelector(".pq-plano-grid");
+  if (!plano) return;
+  var items = plano.querySelectorAll("[data-lote]");
+
+  function resaltar(lote) {
+    items.forEach(function (el) {
+      el.classList.toggle("activo", el.dataset.lote === lote);
+    });
+  }
+
+  items.forEach(function (el) {
+    el.addEventListener("mouseenter", function () { resaltar(el.dataset.lote); });
+    el.addEventListener("focus", function () { resaltar(el.dataset.lote); });
+    el.addEventListener("click", function () { resaltar(el.dataset.lote); });
+  });
+  plano.addEventListener("mouseleave", function () { resaltar(null); });
+}
+
+/* En celular, el mapa y el plano se deslizan dentro de su recuadro:
+   arrancan centrados en el punto indicado por data-centro (0 = izquierda, 1 = derecha). */
+function centrarDeslizables() {
+  document.querySelectorAll("[data-centro]").forEach(function (el) {
+    var sobra = el.scrollWidth - el.clientWidth;
+    if (sobra > 0) {
+      el.scrollLeft = el.scrollWidth * parseFloat(el.dataset.centro) - el.clientWidth / 2;
+    }
+  });
+}
+window.addEventListener("load", centrarDeslizables);

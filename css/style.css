@@ -1816,3 +1816,507 @@ button[disabled] {
   .antes-despues { aspect-ratio: 4 / 3; }
   .hist-quote, .hist-sellos { padding: 72px 0; }
 }
+
+/* =========================================================
+   Página El Parque (rediseño)
+   Todo lo de esta página empieza con "pq-". Reutiliza de Historia:
+   .foto, .hist-anim, .hist-cifras, .hist-open-scroll y .hist-next.
+   ========================================================= */
+
+:root {
+  --verde-500: #4f9d69;
+  --verde-100: #e3f1e7;
+  --gold-800: #7a5f0d;
+  --gold-100: #f6efd6;
+  --gold-50: #fdf6df;
+  --navy-100: #e7edf5;
+  --navy-200: #c9d6e8;
+  --navy-300: #9fb3cf;
+}
+
+.pq-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--navy-950);
+}
+
+.pq-lead {
+  margin-top: 18px;
+  max-width: 560px;
+  color: var(--gray-600);
+  font-size: 1.05rem;
+}
+
+.pq-center { text-align: center; }
+
+/* ---------- Apertura: título arriba, foto panorámica abajo ---------- */
+.pq-open { padding: 88px 0 56px; }
+
+.pq-open-head {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 48px;
+}
+
+.pq-open h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--navy-950);
+}
+
+.pq-open-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--navy-900);
+}
+
+.pq-open .hist-open-scroll { margin-top: 24px; }
+.pq-open-foto { aspect-ratio: 21 / 9; }
+
+/* ---------- Cifras: 4 en vez de 3 ---------- */
+.pq-cifras .hist-cifras-list { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- Ubicación: mapa dibujado a todo el ancho ---------- */
+.pq-ubicacion { padding: 40px 0 60px; }
+
+.pq-ubicacion-head,
+.pq-extras-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 40px;
+}
+
+.pq-ubicacion-head .pq-lead,
+.pq-extras-head .pq-lead { margin-top: 0; }
+
+.pq-mapa {
+  position: relative;
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--navy-950);
+}
+
+.pq-mapa-svg { display: block; width: 100%; height: auto; }
+
+.stop-agua-1 { stop-color: var(--navy-900); }
+.stop-agua-2 { stop-color: var(--navy-950); }
+.stop-halo-1 { stop-color: var(--gold-500); stop-opacity: 0.35; }
+.stop-halo-2 { stop-color: var(--gold-500); stop-opacity: 0; }
+
+.mapa-tierra { fill: var(--navy-800); }
+.mapa-trama-linea { fill: none; stroke: var(--white); stroke-opacity: 0.05; stroke-width: 1; }
+.mapa-costa { fill: none; stroke: var(--gold-300); stroke-opacity: 0.6; stroke-width: 1.5; stroke-linejoin: round; }
+.mapa-costa-brillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.12; stroke-width: 9; stroke-linejoin: round; }
+.mapa-anillos circle { fill: none; stroke: var(--gold-300); stroke-opacity: 0.18; stroke-width: 1; stroke-dasharray: 4 6; }
+.pin-km { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--gold-400); }
+
+.mapa-calle { fill: none; stroke: var(--white); stroke-opacity: 0.12; stroke-width: 3; stroke-linecap: round; }
+.mapa-calle--fina { stroke-width: 1.5; }
+
+.mapa-barrio {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--white);
+  fill-opacity: 0.35;
+}
+
+.mapa-agua-txt {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  fill: var(--white);
+  fill-opacity: 0.2;
+}
+
+.mapa-agua-txt--chica { font-size: 14px; }
+
+/* Rutas y cartelitos de km: se dibujan cuando el mapa aparece en pantalla */
+.mapa-ruta { fill: none; stroke: var(--gold-400); stroke-width: 2.5; stroke-linecap: round; }
+
+.pq-mapa.reveal .mapa-ruta { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s ease 0.3s; }
+.pq-mapa.reveal.visible .mapa-ruta { stroke-dashoffset: 0; }
+
+.pin path { stroke: var(--navy-950); stroke-width: 2; }
+.pin--punto path { fill: var(--white); }
+.pin--punto circle { fill: var(--navy-950); }
+.pin--parque path { fill: var(--gold-500); }
+.pin--parque > circle:not(.pin-onda) { fill: var(--white); }
+
+.pin-txt { font-size: 15px; font-weight: 700; fill: var(--white); }
+.pin-txt--grande { font-size: 19px; }
+.pin-sub { font-size: 13px; fill: var(--white); fill-opacity: 0.6; }
+
+/* Onda que "late" alrededor del Parque */
+.pin-onda {
+  fill: var(--gold-500);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pin-onda 2.4s ease-out infinite;
+}
+
+@keyframes pin-onda {
+  from { transform: scale(0.6); opacity: 0.5; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+
+.pq-distancias {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 36px;
+}
+
+.pq-distancias li {
+  padding-top: 22px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.pq-km {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--gold-500);
+}
+
+.pq-distancias h3 { font-size: 1.05rem; }
+.pq-distancias p { color: var(--gray-600); font-size: 0.95rem; }
+
+/* ---------- Servicios: filas alternadas foto / texto ---------- */
+.pq-servicios { padding: 40px 0 60px; }
+
+.pq-servicio {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  padding: 56px 0;
+}
+
+.pq-servicio--invertido .pq-servicio-foto { order: 2; }
+
+.pq-servicio-foto { aspect-ratio: 4 / 3; }
+
+.pq-servicio-texto h2 {
+  margin: 18px 0 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+.pq-servicio-texto > p {
+  max-width: 480px;
+  color: var(--gray-600);
+  font-size: 1.05rem;
+}
+
+.pq-specs {
+  margin-top: 28px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.pq-specs > div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.pq-specs dt {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.pq-specs dd {
+  font-weight: 600;
+  color: var(--navy-950);
+}
+
+/* ---------- Seguridad y comodidad: mosaico (bento) ---------- */
+.pq-extras {
+  padding: 100px 0;
+  background: var(--gray-50);
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(210px, auto);
+  gap: 18px;
+}
+
+.bento-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;   /* texto abajo, estilo editorial */
+  gap: 10px;
+  padding: 28px;
+  background: var(--white);
+  border-radius: 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.bento-item h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--navy-950);
+}
+.bento-item p { color: var(--gray-600); font-size: 0.95rem; }
+
+
+.bento-cifra {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 3.2rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gold-500);
+}
+
+/* Bloque grande oscuro (2 columnas x 2 filas) */
+.bento-item--seguridad {
+  justify-content: flex-start;
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 40px;
+  background: var(--navy-950);
+}
+
+.bento-item--seguridad h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--white);
+}
+
+.bento-item--seguridad p { color: var(--gray-200); font-size: 1rem; max-width: 440px; }
+.bento-item--seguridad .bento-cifra { font-size: 4.4rem; margin-bottom: auto; }
+
+.bento-lista {
+  list-style: none;
+  margin-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-lista li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: var(--white);
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.bento-lista li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  background: var(--gold-500);
+  border-radius: 50%;
+}
+
+/* Bloque dorado */
+.bento-item--dorado { background: var(--gold-500); }
+.bento-item--dorado .bento-cifra,
+.bento-item--dorado h3 { color: var(--navy-950); }
+.bento-item--dorado p { color: var(--navy-900); }
+
+/* Bloque con foto (2 columnas) */
+.bento-item--foto {
+  grid-column: span 2;
+  flex-direction: row;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bento-item--foto .foto { flex: 1; border-radius: 0; min-height: 210px; }
+
+.bento-foto-texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px;
+}
+
+/* Bloque ancho horizontal (2 columnas) */
+/* Foto a la derecha en vez de a la izquierda */
+.bento-item--foto-der .foto { order: 2; }
+
+
+/* ---------- Plano 3D del predio de Itapeby ----------
+   El SVG lo genera herramientas/generar-plano.py */
+.pq-plano { padding: 110px 0 40px; }
+.pq-plano-head { margin-bottom: 40px; }
+.pq-plano-head .pq-lead { max-width: 680px; }
+
+.pq-plano-grid {
+  padding: 32px 32px 24px;
+  background: var(--gray-50);
+  border-radius: 24px;
+}
+
+.pq-plano-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.pq-iso { display: block; width: 100%; height: auto; }
+
+.iso-base { fill: var(--white); stroke: var(--gray-200); stroke-width: 1.5; }
+.iso-base-lado { fill: var(--gray-200); }
+.iso-base-lado2 { fill: var(--gray-400); fill-opacity: 0.6; }
+.iso-verde { fill: var(--verde-100); }
+.iso-cancha { fill: var(--verde-500); fill-opacity: 0.55; }
+.iso-cancha-linea { fill: none; stroke: var(--white); stroke-width: 1.5; }
+.iso-calle { fill: var(--gray-400); }
+.iso-patio { fill: var(--gray-200); }
+.iso-arbol { fill: var(--verde-500); }
+.iso-arbol-sombra { fill: var(--navy-950); fill-opacity: 0.12; }
+
+/* Depósitos: 3 caras (techo, frente y lado) con color según su estado */
+.lote { cursor: pointer; outline: none; transition: transform 0.3s ease; }
+.lote polygon { stroke: var(--white); stroke-width: 1; stroke-linejoin: round; transition: fill 0.3s ease; }
+
+.lote--operando .cara-techo { fill: var(--gold-100); }
+.lote--operando .cara-frente { fill: var(--gold-300); }
+.lote--operando .cara-lado { fill: var(--gold-400); }
+
+.lote--confirmada .cara-techo { fill: var(--navy-100); }
+.lote--confirmada .cara-frente { fill: var(--navy-200); }
+.lote--confirmada .cara-lado { fill: var(--navy-300); }
+
+.lote--negociacion .cara-techo { fill: var(--gray-100); }
+.lote--negociacion .cara-frente { fill: var(--gray-200); }
+.lote--negociacion .cara-lado { fill: var(--gray-400); }
+
+.lote--libre polygon { fill: var(--white); fill-opacity: 0.7; stroke: var(--gray-400); stroke-dasharray: 5 4; }
+
+/* Detalles de los depósitos */
+.lote .porton { fill: var(--navy-950); fill-opacity: 0.55; stroke: none; }
+.lote .ventanas { fill: var(--white); fill-opacity: 0.55; stroke: none; }
+.lote .claraboya { fill: var(--white); fill-opacity: 0.75; stroke: none; }
+
+/* Camiones, autos y entorno */
+.sombra { fill: var(--navy-950); fill-opacity: 0.1; }
+.camion polygon, .auto polygon { stroke: var(--white); stroke-width: 0.6; stroke-linejoin: round; }
+.camion-caja .c-techo { fill: var(--white); }
+.camion-caja .c-frente { fill: var(--gray-100); }
+.camion-caja .c-lado { fill: var(--gray-400); }
+.camion-cabina .c-techo { fill: var(--navy-600); }
+.camion-cabina .c-frente { fill: var(--navy-800); }
+.camion-cabina .c-lado { fill: var(--navy-700); }
+.camion .camion-vidrio { fill: var(--navy-100); stroke: none; }
+
+.auto--blanco .c-techo, .auto--blanco .c-frente { fill: var(--white); }
+.auto--blanco .c-lado { fill: var(--gray-200); }
+.auto--azul .c-techo, .auto--azul .c-frente { fill: var(--navy-600); }
+.auto--azul .c-lado { fill: var(--navy-800); }
+.auto--gris .c-techo, .auto--gris .c-frente { fill: var(--gray-400); }
+.auto--gris .c-lado { fill: var(--gray-600); }
+.auto--dorado .c-techo, .auto--dorado .c-frente { fill: var(--gold-300); }
+.auto--dorado .c-lado { fill: var(--gold-500); }
+.auto-techo .c-techo { fill-opacity: 0.85; }
+
+.iso-arbol-luz { fill: var(--white); fill-opacity: 0.25; }
+.iso-calle-linea { fill: none; stroke: var(--white); stroke-width: 1.2; stroke-dasharray: 6 6; }
+.iso-estac { fill: none; stroke: var(--white); stroke-width: 1.2; }
+.iso-cerco { fill: var(--gray-400); fill-opacity: 0.35; }
+
+/* Depósito resaltado: "sube" un poco */
+.lote.activo { transform: translateY(-8px); }
+.lote.activo .cara-techo { fill: var(--gold-50); }
+
+/* Carteles con línea quebrada hasta cada depósito */
+.cartel { cursor: pointer; outline: none; }
+.cartel-linea { fill: none; stroke: var(--gold-500); stroke-width: 1.5; }
+.cartel-punto { fill: var(--gold-500); stroke: var(--white); stroke-width: 2; }
+.cartel-foto { fill: var(--white); stroke: var(--gray-200); stroke-width: 2; transition: stroke 0.25s ease; }
+.cartel-num { font-size: 18px; font-weight: 700; fill: var(--navy-950); text-anchor: middle; pointer-events: none; }
+.cartel-titulo { font-size: 17px; font-weight: 700; fill: var(--navy-950); }
+.cartel-sub { font-size: 13px; font-weight: 700; }
+.cartel.activo .cartel-foto { stroke: var(--gold-500); stroke-width: 4; }
+
+.estado-txt--operando { fill: var(--gold-800); }
+.estado-txt--confirmada { fill: var(--navy-700); }
+.estado-txt--negociacion { fill: var(--gray-600); }
+.estado-txt--libre { fill: var(--gray-400); }
+.estado-txt--verde { fill: var(--verde-500); }
+
+/* Las líneas se dibujan cuando el plano aparece en pantalla */
+.pq-plano-grid.reveal .cartel-linea { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.2s ease 0.4s; }
+.pq-plano-grid.reveal.visible .cartel-linea { stroke-dashoffset: 0; }
+
+
+@media (prefers-reduced-motion: reduce) {
+  .pin-onda { animation: none; opacity: 0; }
+  .lote, .lote polygon { transition: none; }
+}
+
+/* ---------- El Parque: tablet y celular ---------- */
+@media (max-width: 960px) {
+  .pq-open-head,
+  .pq-ubicacion-head,
+  .pq-extras-head,
+  .pq-servicio { grid-template-columns: 1fr; gap: 24px; }
+
+  .pq-servicio { gap: 36px; padding: 40px 0; }
+  .pq-servicio--invertido .pq-servicio-foto { order: 0; }
+  .pq-distancias { grid-template-columns: 1fr; gap: 0; }
+  .pq-distancias li { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: center; padding: 18px 0; }
+  .pq-km { margin: 0; font-size: 2rem; }
+
+  .bento { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .pq-open { padding: 56px 0 40px; }
+  .pq-open-foto { aspect-ratio: 4 / 3; }
+  .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+  .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
+  .pq-ubicacion { padding: 24px 0 40px; }
+  .pq-specs > div { grid-template-columns: 1fr; gap: 2px; }
+
+  /* Mapa y plano: mantienen un ancho mínimo y se deslizan dentro de su recuadro */
+  .pq-mapa-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .pq-mapa-svg { min-width: 720px; }
+  .pq-iso { min-width: 820px; }
+
+  .pq-extras { padding: 72px 0; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-item--seguridad,
+  .bento-item--foto { grid-column: auto; grid-row: auto; }
+  .bento-item--foto-der .foto { order: 0; }
+  .bento-item--seguridad { padding: 28px; }
+  .bento-item--foto { flex-direction: column; }
+
+  .pq-plano { padding: 72px 0 24px; }
+  .pq-plano-grid { padding: 16px; border-radius: 18px; }
+}
