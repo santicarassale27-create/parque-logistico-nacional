@@ -25,7 +25,7 @@ GOOGLE_MAPS = "https://www.google.com/maps/search/?api=1&amp;query=Dr.%20Pantale
 PUNTOS = [
     {"x": 200, "y": 372, "nombre": "Puerto de Montevideo", "km": "12 km"},
     {"x": 897, "y": 128, "nombre": "Aeropuerto de Carrasco", "km": "10 km", "arco": 0.16},
-    {"x": 770, "y": 62, "nombre": "Zona Franca Montevideo", "km": "11 km"},
+    {"x": 784, "y": 50, "nombre": "Zona Franca Montevideo", "km": "11 km"},
 ]
 
 BARRIOS = [("Ciudad Vieja", 215, 445), ("Pocitos", 430, 430), ("Prado", 205, 248),
@@ -64,6 +64,18 @@ BARCOS = [
     {"x": 840, "y": 440, "destino": (1000, 395)},    # en el río, saliendo hacia el este
 ]
 MUELLES = [(160, 396), (198, 378), (222, 350)]       # puntos de la costa donde nacen los muelles
+
+# Zona Franca (Zonamerica): campus de negocios sobre Ruta 8, con césped, anillo interno,
+# oficinas de vidrio, naves logísticas y un espacio verde central.
+ZONA_FRANCA = {"x": 808, "y": 60, "rx": 48, "ry": 31}
+ZF_OFICINAS = [(-36, -4, 16), (-27, -20, 12), (-9, -26, 15), (11, -25, 12), (-29, 14, 14), (-10, 22, 20), (11, 21, 24)]  # dx, dy, alto
+ZF_NAVES = [(28, -16), (28, 2)]     # naves logísticas (dx, dy)
+
+# Costa: playas de arena (rango de x), rocas y faro de Punta Carretas, Puerto del Buceo
+PLAYAS = [(380, 470), (520, 690), (745, 1000)]       # Pocitos, Buceo–Malvín, Carrasco
+FARO = (364, 508)
+ROCAS = [(366, 530, 4), (378, 528, 3), (356, 524, 3), (386, 522, 2.5), (348, 520, 2.5)]   # x, y, tamaño
+BUCEO = {"escollera": [(519, 421), (525, 431), (523, 441), (515, 447), (504, 449)], "veleros": [(510, 436), (502, 440), (516, 440)]}
 
 # Vista
 GIRO = math.radians(-14)      # rotación del mapa
@@ -213,6 +225,32 @@ def avion(cx, cy, ang, z, sombra_z=None):
     return out + f'<polygon class="m3-avion" points="{poli(pts_, z)}"/>'
 
 
+def desplazar(linea, d):
+    """Copia de una línea corrida d unidades hacia el agua (a la izquierda yendo de este a oeste)."""
+    out = []
+    for i, (x, y) in enumerate(linea):
+        a = linea[max(i - 1, 0)]; b = linea[min(i + 1, len(linea) - 1)]
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        n = math.hypot(dx, dy) or 1
+        out.append((x + d * dy / n, y - d * dx / n))
+    return out
+
+
+def caja_vidrio(x, y, w, d, h, z0):
+    """Edificio de oficinas de vidrio: paredes con franjas de ventanas por piso."""
+    x1, y1 = x + w, y + d
+    esq = [(x, y), (x1, y), (x1, y1), (x, y1)]
+    out = paredes_visibles(esq, z0, z0 + h, "m3-vidrio-lado")
+    vista = (math.sin(GIRO), math.cos(GIRO))
+    for i in range(4):
+        a, b = esq[i], esq[(i + 1) % 4]
+        if (b[1] - a[1]) * vista[0] - (b[0] - a[0]) * vista[1] > 0:
+            for z in range(int(z0) + 3, int(z0 + h) - 1, 3):
+                out.append(f'<polyline class="m3-vidrio-piso" points="{pts([P(*a, z), P(*b, z)])}"/>')
+    out.append(f'<polygon class="m3-vidrio-techo" points="{poli(esq, z0 + h)}"/>')
+    return "".join(out)
+
+
 def barco(cx, cy, ang):
     a = math.radians(ang)
     casco = []
@@ -273,6 +311,32 @@ def generar():
     o.append(f'<polygon class="m3-tierra" points="{poli(TIERRA, T)}"/>')
     o.append(f'<clipPath id="m3-tierra-clip"><polygon points="{poli(TIERRA, T)}"/></clipPath>')
 
+    # Costa: agua más clara cerca de la orilla (solo la costa sur)
+    sur = [pt for pt in COSTA if pt[0] >= 232]
+    o.append(f'<polygon class="m3-agua-baja" points="{poli(sur + desplazar(sur, 24)[::-1], 0)}" clip-path="url(#m3-agua-clip)"/>')
+    o.append(f'<polygon class="m3-agua-baja" points="{poli(sur + desplazar(sur, 11)[::-1], 0)}" clip-path="url(#m3-agua-clip)"/>')
+    # Playas de arena y espuma de las olas
+    for xa, xb in PLAYAS:
+        tramo = [pt for pt in sur if xa <= pt[0] <= xb]
+        if len(tramo) < 2:
+            continue
+        borde_agua = desplazar(tramo, 8)
+        arena = [P(x, y, 1.4) for x, y in tramo] + [P(x, y, 0.2) for x, y in borde_agua[::-1]]
+        o.append(f'<polygon class="m3-arena" points="{pts(arena)}"/>')
+        o.append(f'<polyline class="m3-espuma" points="{poli(desplazar(tramo, 7.5), 0.3)}"/>')
+        o.append(f'<polyline class="m3-espuma m3-espuma--2" points="{poli(desplazar(tramo, 10.5), 0.2)}"/>')
+    # Rocas de Punta Carretas
+    for rx_, ry_, t_ in ROCAS:
+        piedra = [(rx_ + t_ * math.cos(k * 1.256 + rx_), ry_ + t_ * 0.8 * math.sin(k * 1.256 + rx_)) for k in range(5)]
+        o += paredes(piedra, 0, t_ * 0.7, "m3-roca-lado")
+        o.append(f'<polygon class="m3-roca" points="{poli(piedra, t_ * 0.7)}"/>')
+    # Puerto del Buceo: escollera y veleros
+    o.append(f'<polyline class="m3-escollera" points="{poli(BUCEO["escollera"], 2)}"/>')
+    for vx, vy in BUCEO["veleros"]:
+        c0, c1, c2 = P(vx, vy, 0.5), P(vx, vy, 13), P(vx + 5, vy, 2)
+        o.append(f'<ellipse class="m3-velero-casco" cx="{c0[0]}" cy="{c0[1]}" rx="4" ry="1.7"/>'
+                 f'<polygon class="m3-velero-vela" points="{c0[0]},{c0[1] - 1} {c1[0]},{c1[1]} {c2[0]},{c2[1] - 1}"/>')
+
     # Tejido urbano: manzanas vistas desde arriba, con la misma perspectiva del mapa (un solo patrón, liviano)
     ca, sa = math.cos(GIRO) * ESCALA, math.sin(GIRO) * ESCALA
     ma, mb, mc, md = ca, sa * INCLINACION, -sa, ca * INCLINACION
@@ -320,6 +384,17 @@ def generar():
     rambla = [(x, y - 8) for x, y in COSTA if x >= 232]
     o.append(f'<polyline class="m3-rambla" points="{poli(rambla, T + 0.2)}"/>')
 
+    # Zona Franca: campus con césped, anillo interno, estacionamientos y cerco
+    ZF = ZONA_FRANCA
+    campus = forma_organica(ZF["x"], ZF["y"], ZF["rx"], ZF["ry"])
+    o.append(f'<polygon class="m3-zf-cesped" points="{poli(campus, T + 0.2)}"/>')
+    anillo_zf = [P(ZF["x"] + 22 * math.cos(t / 40 * 2 * math.pi), ZF["y"] + 14 * math.sin(t / 40 * 2 * math.pi), T + 0.3) for t in range(41)]
+    o.append(f'<polyline class="m3-zf-anillo" points="{pts(anillo_zf)}"/>')
+    for ex in (-1, 1):
+        est = [(ZF["x"] + ex * 40 - 6, ZF["y"] + 6), (ZF["x"] + ex * 40 + 6, ZF["y"] + 6), (ZF["x"] + ex * 40 + 6, ZF["y"] + 16), (ZF["x"] + ex * 40 - 6, ZF["y"] + 16)]
+        o.append(f'<polygon class="m3-zf-estac" points="{poli(est, T + 0.3)}"/>')
+    o.append(f'<polygon class="m3-zf-cerco" points="{poli(campus, T + 0.6)}"/>')
+
     # Costa iluminada
     o.append(f'<polyline class="m3-costa-brillo" points="{poli(COSTA, T)}"/>')
     o.append(f'<polyline class="m3-costa" points="{poli(COSTA, T)}"/>')
@@ -341,7 +416,8 @@ def generar():
     largo_p = math.hypot(px1 - px0, py1 - py0)
     nxp, nyp = (py1 - py0) / largo_p, -(px1 - px0) / largo_p
     zona_pista = rotado((px0 + px1) / 2 + nxp * 18, (py0 + py1) / 2 + nyp * 18, 80, largo_p + 30, ang_pista)
-    zonas_libres = [forma_organica(pq["x"], pq["y"], pq["rx"] + 6, pq["ry"] + 5) for pq in PARQUES] + [zona_pista]
+    zonas_libres = ([forma_organica(pq["x"], pq["y"], pq["rx"] + 6, pq["ry"] + 5) for pq in PARQUES] + [zona_pista]
+                    + [forma_organica(ZONA_FRANCA["x"], ZONA_FRANCA["y"], ZONA_FRANCA["rx"] + 5, ZONA_FRANCA["ry"] + 5)])
     for _ in range(2600):
         x, y = azar() * 1000, azar() * 600
         if not adentro(x, y, TIERRA) or dist_costa(x, y) < 12:
@@ -359,14 +435,18 @@ def generar():
         tam = 7 + azar() * 4
         clase = "m3-edif" + (" m3-edif--luz" if azar() < 0.09 else "") + (" m3-edif--claro" if azar() < 0.3 else "")
         objetos.append((P(x, y)[1], f'<g class="{clase}">' + caja(x - tam / 2, y - tam / 2, tam, tam, h, T) + '</g>'))
-    # Zona Franca: grupo de edificios propios
-    zf = PUNTOS[2]
-    for i in range(9):
-        ang = i / 9 * 2 * math.pi + 0.3
-        r = 40 + (i % 3) * 9
-        x, y = zf["x"] + r * math.cos(ang), zf["y"] + 0.7 * r * math.sin(ang)
-        if adentro(x, y, TIERRA):
-            objetos.append((P(x, y)[1], '<g class="m3-edif m3-edif--zf">' + caja(x - 7, y - 5, 14, 10, 9 + (i % 4) * 4, T) + '</g>'))
+    # Zona Franca: oficinas de vidrio, naves logísticas y árboles en el centro del campus
+    for dx, dy, h in ZF_OFICINAS:
+        x, y = ZONA_FRANCA["x"] + dx, ZONA_FRANCA["y"] + dy
+        objetos.append((P(x, y)[1], caja_vidrio(x - 5, y - 3.5, 10, 7, h, T)))
+    for dx, dy in ZF_NAVES:
+        x, y = ZONA_FRANCA["x"] + dx, ZONA_FRANCA["y"] + dy
+        objetos.append((P(x, y)[1], caja_clase(x - 6, y - 6, 12, 12, 8, T, "m3-nave")))
+    for k in range(18):
+        t = k / 18 * 2 * math.pi
+        rr = 0.55 if k % 2 else 0.25
+        tx, ty = ZONA_FRANCA["x"] + 18 * rr * math.cos(t) * 2, ZONA_FRANCA["y"] + 11 * rr * math.sin(t) * 2
+        objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3, 2.8)))
     # Aeropuerto: terminal, torre de control y un avión despegando
     (ax0, ay0), (ax1, ay1) = PISTA
     largo = math.hypot(ax1 - ax0, ay1 - ay0)
@@ -411,6 +491,14 @@ def generar():
             objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3, 2.8)))
     for _, svg in sorted(objetos, key=lambda o_: o_[0]):
         o.append(svg)
+
+    # Faro de Punta Carretas
+    fx, fy = FARO
+    torre = [(fx + 2.6 * math.cos(math.radians(60 * k)), fy + 2.6 * math.sin(math.radians(60 * k))) for k in range(6)]
+    o += paredes(torre, T, T + 22, "m3-faro-lado")
+    o.append(f'<polygon class="m3-faro-techo" points="{poli(torre, T + 22)}"/>')
+    lx, ly = P(fx, fy, T + 24)
+    o.append(f'<circle class="m3-faro-luz" cx="{lx}" cy="{ly}" r="4"/>')
 
     # Barrios
     for nombre, x, y in BARRIOS:

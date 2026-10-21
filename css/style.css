@@ -1799,8 +1799,6 @@ button[disabled] {
 .m3-edif-techo { fill: var(--navy-600); }
 .m3-edif--claro .m3-edif-techo { fill: var(--navy-300); fill-opacity: 0.55; }
 .m3-edif--luz .m3-edif-techo { fill: var(--gold-300); fill-opacity: 0.85; }
-.m3-edif--zf .m3-edif-techo { fill: var(--navy-200); fill-opacity: 0.8; }
-.m3-edif--zf .m3-edif-lado { fill: var(--navy-600); }
 
 /* Detalles: parques, hipódromo, rambla, aeropuerto, puerto y barcos */
 .m3-parque { fill: var(--verde-500); fill-opacity: 0.42; stroke: var(--verde-500); stroke-opacity: 0.7; stroke-width: 1; }
@@ -1888,6 +1886,54 @@ button[disabled] {
 .m3-pln-porton { fill: var(--navy-800); }
 .m3-pln-camion-techo { fill: var(--white); }
 .m3-pln-camion-lado { fill: var(--navy-600); }
+/* Zona Franca (Zonamerica): campus con oficinas de vidrio y naves logísticas */
+.m3-zf-cesped { fill: var(--verde-500); fill-opacity: 0.3; }
+.m3-zf-anillo { fill: none; stroke: var(--gray-200); stroke-opacity: 0.55; stroke-width: 2.5; }
+.m3-zf-estac { fill: var(--gray-600); fill-opacity: 0.7; }
+.m3-zf-cerco { fill: none; stroke: var(--gold-300); stroke-opacity: 0.5; stroke-width: 1; stroke-dasharray: 3 3; }
+.m3-vidrio-techo { fill: var(--navy-100); }
+.m3-vidrio-lado { fill: var(--navy-300); stroke: var(--navy-200); stroke-width: 0.5; }
+.m3-vidrio-piso { fill: none; stroke: var(--white); stroke-opacity: 0.55; stroke-width: 0.8; }
+.m3-nave-techo { fill: var(--gray-100); }
+.m3-nave-lado { fill: var(--gray-400); }
+
+/* Costa: agua clara, arena, espuma, rocas, faro y Puerto del Buceo */
+.m3-agua-baja { fill: var(--navy-600); fill-opacity: 0.22; }
+.m3-arena { fill: var(--gold-100); fill-opacity: 0.85; }
+.m3-espuma {
+  fill: none;
+  stroke: var(--white);
+  stroke-opacity: 0.55;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 10 7;
+  animation: m3-olas 6s linear infinite;
+}
+.m3-espuma--2 { stroke-opacity: 0.25; stroke-dasharray: 6 12; animation-duration: 9s; }
+
+@keyframes m3-olas {
+  to { stroke-dashoffset: -68; }
+}
+
+.m3-roca { fill: var(--gray-400); }
+.m3-roca-lado { fill: var(--gray-600); }
+.m3-escollera { fill: none; stroke: var(--gray-400); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.m3-velero-casco { fill: var(--white); }
+.m3-velero-vela { fill: var(--white); fill-opacity: 0.9; }
+.m3-faro-lado { fill: var(--white); stroke: var(--gray-200); stroke-width: 0.5; }
+.m3-faro-techo { fill: var(--gold-500); }
+.m3-faro-luz {
+  fill: var(--gold-300);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: m3-faro 2s ease-in-out infinite;
+}
+
+@keyframes m3-faro {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
 /* Ondas tipo radar que salen del Parque y recorren todo el mapa */
 .m3-onda {
   fill: none;
@@ -1930,6 +1976,7 @@ button[disabled] {
 
 @media (prefers-reduced-motion: reduce) {
   .m3-onda { animation: none; opacity: 0; }
+  .m3-espuma, .m3-faro-luz { animation: none; }
 }
 
 .pq-distancias {

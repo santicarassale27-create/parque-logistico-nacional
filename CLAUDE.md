@@ -87,6 +87,10 @@ img/                        Fotos (cuando las haya)
   (aeropuerto con terminal, torre, plataforma con aviones y uno despegando hacia el oeste), `BARCOS` (cada uno con
   `destino`: la proa apunta ahí y la estela queda detrás), `MUELLES` (hacia la bahía, con contenedores) y arbolado
   de calle en Carrasco. Los nombres de barrio van fuera de las zonas verdes.
+  Zona Franca (`ZONA_FRANCA`, `ZF_OFICINAS`, `ZF_NAVES`): campus de Zonamerica sobre Ruta 8 con césped, anillo interno,
+  oficinas de vidrio con pisos, naves logísticas, estacionamientos y árboles (sin lago: no está confirmado).
+  Costa: agua más clara en la orilla, arena en las playas (`PLAYAS`: Pocitos, Buceo–Malvín, Carrasco), espuma de
+  olas animada, rocas y faro de Punta Carretas (`ROCAS`, `FARO`) y el Puerto del Buceo con escollera y veleros (`BUCEO`).
   Sin hipódromo, sin Parque Roosevelt, sin grúas y sin redondeles en el agua (decisiones del equipo);
   "Río de la Plata" va solo como texto.
 - Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
