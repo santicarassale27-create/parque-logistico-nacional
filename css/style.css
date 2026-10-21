@@ -486,13 +486,6 @@ section {
    costados (reutiliza .feature y .foto). Lo nuevo acá empieza
    con "emp-".
    ========================================================= */
-.emp-lead {
-  max-width: 760px;
-  color: var(--gray-600);
-  font-size: 1.05rem;
-  margin-bottom: 0;
-}
-
 .emp-block {
   scroll-margin-top: 96px; /* que el anchor (#geligold, etc.) no quede tapado por el header */
 }
@@ -560,6 +553,12 @@ section {
 
 .emp-contact a:hover {
   color: var(--gold-500);
+}
+
+.emp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 /* ---------- Mini timeline (home teaser) ---------- */
