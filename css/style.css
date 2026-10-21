@@ -1789,7 +1789,6 @@ button[disabled] {
 /* Mapa 3D (lo genera herramientas/generar-mapa.py) */
 .m3-tablero-lado { fill: var(--navy-950); stroke: var(--navy-900); stroke-width: 1; }
 .m3-agua { stroke: var(--navy-700); stroke-width: 1; }
-.m3-ola { fill: none; stroke: var(--white); stroke-opacity: 0.06; stroke-width: 1.2; }
 .m3-tierra-lado { fill: var(--navy-700); stroke: var(--navy-700); stroke-width: 0.6; }
 .m3-tierra { fill: var(--navy-800); }
 .m3-trama { fill: none; stroke: var(--white); stroke-opacity: 0.05; stroke-width: 1; }
@@ -1805,9 +1804,12 @@ button[disabled] {
 .m3-edif--zf .m3-edif-lado { fill: var(--navy-600); }
 
 /* Detalles: parques, hipódromo, rambla, aeropuerto, puerto y barcos */
-.m3-parque { fill: var(--verde-500); fill-opacity: 0.35; }
-.m3-arbol { fill: var(--verde-500); fill-opacity: 0.9; }
-.m3-hipodromo { fill: var(--gold-800); fill-opacity: 0.55; }
+.m3-parque { fill: var(--verde-500); fill-opacity: 0.42; stroke: var(--verde-500); stroke-opacity: 0.7; stroke-width: 1; }
+.m3-sendero { fill: none; stroke: var(--gold-100); stroke-opacity: 0.45; stroke-width: 1.5; stroke-linecap: round; }
+.m3-arbol-sombra { fill: var(--navy-950); fill-opacity: 0.35; }
+.m3-arbol-tronco { stroke: var(--gold-800); stroke-width: 1.4; }
+.m3-arbol-copa { fill: var(--verde-500); }
+.m3-arbol-brillo { fill: var(--verde-100); fill-opacity: 0.45; }
 .m3-rambla { fill: none; stroke: var(--white); stroke-opacity: 0.22; stroke-width: 2; stroke-linejoin: round; }
 .m3-pista { fill: var(--gray-600); fill-opacity: 0.9; }
 .m3-pista-linea { fill: none; stroke: var(--white); stroke-opacity: 0.8; stroke-width: 1; stroke-dasharray: 5 5; }
@@ -1819,7 +1821,6 @@ button[disabled] {
 .m3-cont-blanco-lado { fill: var(--gray-200); }
 .m3-cont-azul-techo { fill: var(--navy-300); }
 .m3-cont-azul-lado { fill: var(--navy-600); }
-.m3-grua { fill: none; stroke: var(--gold-400); stroke-width: 2; stroke-linejoin: round; }
 .m3-barco { fill: var(--gray-200); }
 .m3-barco-lado { fill: var(--navy-700); }
 .m3-barco-puente { fill: var(--white); }
@@ -1848,8 +1849,25 @@ button[disabled] {
 .m3-pin-cabeza { fill: var(--white); stroke: var(--navy-950); stroke-width: 2; }
 .m3-pin-ojo { fill: var(--navy-950); }
 
-.m3-columna-lado { fill: var(--gold-500); stroke: var(--gold-400); stroke-width: 0.6; }
-.m3-columna-techo { fill: var(--gold-300); }
+/* El Parque en miniatura: terreno dorado, depósitos y un pin que flota */
+.m3-pln-terreno { fill: var(--gold-500); fill-opacity: 0.35; stroke: var(--gold-400); stroke-width: 1.2; }
+.m3-pln-terreno-lado { fill: var(--gold-800); }
+.m3-pln-dep-techo { fill: var(--white); }
+.m3-pln-dep-lado { fill: var(--gold-300); stroke: var(--gold-400); stroke-width: 0.5; }
+.m3-pln-claraboya { fill: none; stroke: var(--gold-300); stroke-width: 1.2; }
+.m3-pln-porton { fill: var(--navy-800); }
+.m3-pln-camion-techo { fill: var(--white); }
+.m3-pln-camion-lado { fill: var(--navy-600); }
+.m3-pln-sombra { fill: var(--navy-950); fill-opacity: 0.45; }
+.m3-pln-pin path { fill: var(--gold-500); stroke: var(--white); stroke-width: 2; }
+.m3-pln-pin circle { fill: var(--white); }
+.m3-pln-pin { animation: m3-flotar 3s ease-in-out infinite; }
+
+@keyframes m3-flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
 /* Ondas tipo radar que salen del Parque y recorren todo el mapa */
 .m3-onda {
   fill: none;
@@ -1892,6 +1910,7 @@ button[disabled] {
 
 @media (prefers-reduced-motion: reduce) {
   .m3-onda { animation: none; opacity: 0; }
+  .m3-pln-pin { animation: none; }
 }
 
 .pq-distancias {

@@ -44,15 +44,22 @@ AVENIDAS = [  # curvas Bézier cúbicas (aproximadas)
 ]
 
 # Detalles del mapa
-PARQUES = [  # áreas verdes (polígonos)
-    [(178, 170), (232, 162), (252, 196), (226, 228), (186, 222)],          # Prado
-    [(352, 360), (398, 352), (410, 384), (370, 396)],                      # Parque Batlle
-    [(292, 452), (330, 448), (336, 466), (300, 470)],                      # Parque Rodó
+# Parques: centro (x, y), radios (rx, ry). La forma se hace orgánica sola.
+PARQUES = [
+    {"nombre": "Prado", "x": 205, "y": 200, "rx": 42, "ry": 28},
+    {"nombre": "Parque Batlle", "x": 382, "y": 370, "rx": 28, "ry": 18},
+    {"nombre": "Parque Rodó", "x": 318, "y": 455, "rx": 22, "ry": 11},
 ]
-HIPODROMO = (452, 112)        # Hipódromo de Maroñas (cerca del Parque)
 PISTA = [(858, 180), (960, 128)]   # pista del aeropuerto (de punta a punta)
-BARCOS = [(112, 322, 20), (168, 300, -15), (520, 540, 5), (820, 470, -20)]   # x, y, ángulo
-MUELLES = [((178, 386), 145), ((196, 372), 140), ((212, 356), 135)]           # punto en la costa y dirección
+BAHIA = (130, 330)                 # centro de la bahía (hacia donde salen los muelles)
+# Barcos: posición y destino (la proa apunta al destino y la estela queda detrás)
+BARCOS = [
+    {"x": 118, "y": 318, "destino": (176, 380)},     # entrando al puerto
+    {"x": 62, "y": 372, "destino": (160, 396)},      # entrando al puerto
+    {"x": 470, "y": 535, "destino": (300, 548)},     # en el río, yendo hacia el puerto
+    {"x": 840, "y": 440, "destino": (1000, 395)},    # en el río, saliendo hacia el este
+]
+MUELLES = [(160, 396), (198, 378), (222, 350)]       # puntos de la costa donde nacen los muelles
 
 # Vista
 GIRO = math.radians(-14)      # rotación del mapa
@@ -150,6 +157,32 @@ def rotado(cx, cy, w, d, ang):
     return esquinas
 
 
+def angulo_hacia(dx, dy):
+    """Ángulo para que el 'frente' de un objeto (barco, muelle) apunte en la dirección (dx, dy)."""
+    return math.degrees(math.atan2(dx, -dy))
+
+
+def forma_organica(cx, cy, rx, ry, n=28):
+    """Contorno suave e irregular (para parques)."""
+    out = []
+    for i in range(n):
+        t = i / n * 2 * math.pi
+        k = 1 + 0.10 * math.sin(3 * t + cx) + 0.06 * math.sin(5 * t + cy)
+        out.append((cx + rx * k * math.cos(t), cy + ry * k * math.sin(t)))
+    return out
+
+
+def arbol(x, y, z, r=3.6):
+    """Árbol en 3D: sombra en el suelo, tronco y copa con brillo."""
+    sx, sy = P(x + 3, y + 2, z)
+    bx, by = P(x, y, z)
+    cx, cy = P(x, y, z + 7)
+    return (f'<ellipse class="m3-arbol-sombra" cx="{sx}" cy="{sy}" rx="{r + 1}" ry="{r * 0.5}"/>'
+            f'<line class="m3-arbol-tronco" x1="{bx}" y1="{by}" x2="{cx}" y2="{cy}"/>'
+            f'<circle class="m3-arbol-copa" cx="{cx}" cy="{cy - r * 0.6}" r="{r}"/>'
+            f'<circle class="m3-arbol-brillo" cx="{cx - r * 0.35}" cy="{cy - r * 1.0}" r="{r * 0.4}"/>')
+
+
 def barco(cx, cy, ang):
     a = math.radians(ang)
     casco = []
@@ -187,19 +220,20 @@ def generar():
     o += paredes(borde, -ESPESOR_MAQUETA, 0, "m3-tablero-lado")
     o.append(f'<polygon class="m3-agua" points="{poli(borde, 0)}" fill="url(#m3-agua-grad)"/>')
     o.append(f'<clipPath id="m3-agua-clip"><polygon points="{poli(borde, 0)}"/></clipPath>')
-    # Ondas suaves en el agua
-    for r in (50, 95, 140):
-        o.append(f'<polyline class="m3-ola" points="{anillo(640, 520, r, 0)}" clip-path="url(#m3-agua-clip)"/>')
 
     # Barcos (antes de la tierra: la costa los tapa si quedan detrás)
-    for bx_, by_, ang in BARCOS:
-        o.append(barco(bx_, by_, ang))
+    for b in BARCOS:
+        if adentro(b["x"], b["y"], TIERRA):
+            print(f"Aviso: el barco en ({b['x']}, {b['y']}) quedó sobre tierra")
+        dx, dy = b["destino"][0] - b["x"], b["destino"][1] - b["y"]
+        o.append(barco(b["x"], b["y"], angulo_hacia(dx, dy)))
     # Muelles del puerto, sobre el agua
     muelles_svg = []
-    for (mx, my), ang in MUELLES:
+    for mx, my in MUELLES:
+        ang = angulo_hacia(BAHIA[0] - mx, BAHIA[1] - my)
         a = math.radians(ang)
-        cx, cy = mx + 20 * math.sin(a), my - 20 * math.cos(a)
-        muelle = rotado(cx, cy, 9, 44, ang)
+        cx, cy = mx + 15 * math.sin(a), my - 15 * math.cos(a)
+        muelle = rotado(cx, cy, 9, 32, ang)
         muelles_svg += paredes(muelle, 0, 5, "m3-muelle-lado")
         muelles_svg.append(f'<polygon class="m3-muelle" points="{poli(muelle, 5)}"/>')
     o += muelles_svg
@@ -221,22 +255,14 @@ def generar():
     for av in AVENIDAS:
         o.append(f'<polyline class="m3-avenida" points="{pts([P(x, y, T) for x, y in bezier(av)])}" clip-path="url(#m3-tierra-clip)"/>')
 
-    # Parques con árboles
-    for parque in PARQUES:
-        o.append(f'<polygon class="m3-parque" points="{poli(parque, T)}"/>')
-        xs = [a for a, _ in parque]; ys = [b for _, b in parque]
-        for i in range(14):
-            tx = min(xs) + (max(xs) - min(xs)) * ((i * 0.618) % 1)
-            ty = min(ys) + (max(ys) - min(ys)) * ((i * 0.382 + 0.2) % 1)
-            if adentro(tx, ty, parque):
-                ax_, ay_ = P(tx, ty, T + 3)
-                o.append(f'<circle class="m3-arbol" cx="{ax_}" cy="{ay_}" r="3.2"/>')
-    # Hipódromo de Maroñas: pista oval con césped adentro
-    hx_, hy_ = HIPODROMO
-    def ovalo(rx, ry, z):
-        return pts([P(hx_ + rx * math.cos(t / 40 * 2 * math.pi), hy_ + ry * math.sin(t / 40 * 2 * math.pi), z) for t in range(41)])
-    o.append(f'<polygon class="m3-hipodromo" points="{ovalo(34, 19, T)}"/>')
-    o.append(f'<polygon class="m3-parque" points="{ovalo(26, 12, T + 0.2)}"/>')
+    # Parques: césped con forma orgánica, un sendero y árboles en 3D (los árboles van con los edificios)
+    formas_parques = []
+    for pq in PARQUES:
+        forma = forma_organica(pq["x"], pq["y"], pq["rx"], pq["ry"])
+        formas_parques.append(forma)
+        o.append(f'<polygon class="m3-parque" points="{poli(forma, T + 0.2)}"/>')
+        sendero = [(pq["x"] - pq["rx"] * 0.8 + i * pq["rx"] * 0.16, pq["y"] + pq["ry"] * 0.25 * math.sin(i * 0.9)) for i in range(11)]
+        o.append(f'<polyline class="m3-sendero" points="{poli(sendero, T + 0.3)}"/>')
     # Pista del aeropuerto
     (ax0, ay0), (ax1, ay1) = PISTA
     largo = math.hypot(ax1 - ax0, ay1 - ay0); ang = math.degrees(math.atan2(ay1 - ay0, ax1 - ax0)) - 90
@@ -263,13 +289,15 @@ def generar():
         return semilla / 2 ** 31
     objetos = []
     reservados = [(PARQUE["x"], PARQUE["y"])] + [(p["x"], p["y"]) for p in PUNTOS]
-    zonas_libres = PARQUES + [[(HIPODROMO[0] - 36, HIPODROMO[1] - 22), (HIPODROMO[0] + 36, HIPODROMO[1] - 22),
-                               (HIPODROMO[0] + 36, HIPODROMO[1] + 22), (HIPODROMO[0] - 36, HIPODROMO[1] + 22)]]
+    (px0, py0), (px1, py1) = PISTA
+    ang_pista = math.degrees(math.atan2(py1 - py0, px1 - px0)) - 90
+    zona_pista = rotado((px0 + px1) / 2, (py0 + py1) / 2, 34, math.hypot(px1 - px0, py1 - py0) + 24, ang_pista)
+    zonas_libres = [forma_organica(pq["x"], pq["y"], pq["rx"] + 6, pq["ry"] + 5) for pq in PARQUES] + [zona_pista]
     for _ in range(1500):
         x, y = azar() * 1000, azar() * 600
         if not adentro(x, y, TIERRA) or dist_costa(x, y) < 12:
             continue
-        if any(math.hypot(x - a, y - b) < 36 for a, b in reservados) or any(adentro(x, y, z) for z in zonas_libres):
+        if any(math.hypot(x - a, y - b) < 44 for a, b in reservados) or any(adentro(x, y, z) for z in zonas_libres):
             continue
         centro = math.hypot(x - 300, y - 400)
         if azar() > max(0.08, 1 - centro / 400):
@@ -290,21 +318,24 @@ def generar():
         x, y = zf["x"] + r * math.cos(ang), zf["y"] + 0.7 * r * math.sin(ang)
         if adentro(x, y, TIERRA):
             objetos.append((P(x, y)[1], '<g class="m3-edif m3-edif--zf">' + caja(x - 7, y - 5, 14, 10, 9 + (i % 4) * 4, T) + '</g>'))
-    # Terminal del aeropuerto
-    ap = PUNTOS[1]
-    objetos.append((P(ap["x"] - 40, ap["y"] + 22)[1], '<g class="m3-edif m3-edif--zf">' + caja(ap["x"] - 58, ap["y"] + 16, 30, 12, 8, T) + '</g>'))
-    # Contenedores y grúas en los muelles del puerto
+    # Contenedores en los muelles del puerto
     colores = ["dorado", "blanco", "azul", "dorado", "azul", "blanco"]
-    for k, ((mx, my), ang) in enumerate(MUELLES):
-        a = math.radians(ang)
-        for j in range(3):
-            d = 10 + j * 11
+    for k, (mx, my) in enumerate(MUELLES):
+        a = math.radians(angulo_hacia(BAHIA[0] - mx, BAHIA[1] - my))
+        for j in range(2):
+            d = 9 + j * 9
             cx, cy = mx + d * math.sin(a), my - d * math.cos(a)
             objetos.append((P(cx, cy)[1], caja_clase(cx - 3, cy - 3, 6, 6, 4 + (j % 2) * 3, 5, f"m3-cont-{colores[(k + j) % 6]}")))
-        gx, gy = mx + 38 * math.sin(a), my - 38 * math.cos(a)
-        bx0, by0 = P(gx, gy, 5); bx1, by1 = P(gx, gy, 32)
-        bx2, by2 = P(gx + 14 * math.sin(a), gy - 14 * math.cos(a), 32)
-        objetos.append((by0, f'<polyline class="m3-grua" points="{bx0},{by0} {bx1},{by1} {bx2},{by2}"/>'))
+    # Árboles de los parques (repartidos en una grilla con un poco de desorden)
+    for forma, pq in zip(formas_parques, PARQUES):
+        paso = 7
+        for gx_ in range(int(pq["x"] - pq["rx"]), int(pq["x"] + pq["rx"]), paso):
+            for gy_ in range(int(pq["y"] - pq["ry"]), int(pq["y"] + pq["ry"]), paso):
+                tx, ty = gx_ + 3 * math.sin(gy_), gy_ + 3 * math.cos(gx_)
+                hueco = abs(ty - pq["y"] - pq["ry"] * 0.25 * math.sin((tx - pq["x"] + pq["rx"] * 0.8) / (pq["rx"] * 0.16) * 0.9)) < 3
+                margen = forma_organica(pq["x"], pq["y"], pq["rx"] - 4, pq["ry"] - 3)
+                if adentro(tx, ty, margen) and not hueco and (gx_ + gy_) % 5 != 0:
+                    objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3)))
     for _, svg in sorted(objetos, key=lambda o_: o_[0]):
         o.append(svg)
 
@@ -332,13 +363,38 @@ def generar():
         o.append(f'<line class="m3-pin-tallo" x1="{bx}" y1="{by}" x2="{hx}" y2="{hy}"/>')
         o.append(f'<circle class="m3-pin-cabeza" cx="{hx}" cy="{hy}" r="9"/><circle class="m3-pin-ojo" cx="{hx}" cy="{hy}" r="3.5"/>')
 
-    # Columna dorada del Parque (prisma hexagonal)
-    ALTO_COL = 70
-    hexa = [(PARQUE["x"] + 13 * math.cos(math.radians(60 * i + 30)), PARQUE["y"] + 13 * math.sin(math.radians(60 * i + 30))) for i in range(6)]
-    o += paredes(hexa, T, T + ALTO_COL, "m3-columna-lado")
-    o.append(f'<polygon class="m3-columna-techo" points="{poli(hexa, T + ALTO_COL)}"/>')
+    # El Parque en miniatura: terreno dorado, depósitos, oficina, camión y un pin que flota arriba
+    X, Y = PARQUE["x"], PARQUE["y"]
+    terreno = [(X - 28, Y - 20), (X + 28, Y - 20), (X + 28, Y + 20), (X - 28, Y + 20)]
+    o += paredes(terreno, T, T + 3, "m3-pln-terreno-lado")
+    o.append(f'<polygon class="m3-pln-terreno" points="{poli(terreno, T + 3)}"/>')
+    def deposito_pln(x, y, w, d, h):
+        x1, y1 = x + w, y + d
+        esq = [(x, y), (x1, y), (x1, y1), (x, y1)]
+        out = paredes(esq, T + 3, T + 3 + h, "m3-pln-dep-lado")
+        out.append(f'<polygon class="m3-pln-dep-techo" points="{poli(esq, T + 3 + h)}"/>')
+        for f in (0.33, 0.66):  # claraboyas
+            cx = x + w * f
+            out.append(f'<polyline class="m3-pln-claraboya" points="{poli([(cx, y + 3), (cx, y1 - 3)], T + 3.3 + h)}"/>')
+        n = max(1, int(w // 7))  # portones en el frente
+        for i in range(n):
+            cx = x + w * (i + 0.5) / n
+            out.append(f'<polygon class="m3-pln-porton" points="{pts([P(cx - 1.8, y1, T + 3), P(cx + 1.8, y1, T + 3), P(cx + 1.8, y1, T + 3 + h * 0.5), P(cx - 1.8, y1, T + 3 + h * 0.5)])}"/>')
+        return "".join(out)
+    o.append(deposito_pln(X - 25, Y - 17, 22, 20, 14))
+    o.append(deposito_pln(X + 1, Y - 17, 24, 20, 17))
+    o.append(deposito_pln(X - 25, Y + 7, 12, 9, 7))
+    o.append(caja_clase(X + 6, Y + 6, 5, 11, 5, T + 3, "m3-pln-camion"))
+    o.append(caja_clase(X + 14, Y + 6, 5, 11, 5, T + 3, "m3-pln-camion"))
+    # Pin flotante (con sombra sobre el terreno)
+    ALTO_COL = 58
+    sx, sy = P(X, Y, T + 3)
+    pxp, pyp = P(X, Y, T + ALTO_COL)
+    o.append(f'<ellipse class="m3-pln-sombra" cx="{sx}" cy="{sy}" rx="11" ry="4.5"/>')
+    o.append(f'<g class="m3-pln-pin"><path transform="translate({pxp},{pyp})" d="M0,-24 C-13,-24 -20,-14 -20,-4 C-20,10 0,24 0,24 C0,24 20,10 20,-4 C20,-14 13,-24 0,-24 Z"/>'
+             f'<circle cx="{pxp}" cy="{pyp - 4}" r="7"/></g>')
 
-    # Arcos desde la punta de la columna hasta cada pin
+    # Arcos desde el pin del Parque hasta cada punto
     for p in PUNTOS:
         o.append(f'<path class="mapa-ruta" pathLength="1" d="{arco((PARQUE["x"], PARQUE["y"]), (p["x"], p["y"]), T + ALTO_COL, T + ALTO_PIN, p.get("arco", 0.32))}"/>')
 
@@ -353,9 +409,9 @@ def generar():
         dy = p.get("dy", 0)
         o.append(f'<text class="pin-txt" x="{tx}" y="{hy - 4 + dy}" text-anchor="{ancla}">{p["nombre"]}</text>')
         o.append(f'<text class="pin-km" x="{tx}" y="{hy + 16 + dy}" text-anchor="{ancla}">{p["km"]}</text>')
-    bx, by = P(PARQUE["x"], PARQUE["y"], T)
-    o.append(f'<text class="pin-txt pin-txt--grande" x="{bx + 26}" y="{by + 30}">{PARQUE["nombre"]}</text>')
-    o.append(f'<text class="pin-sub" x="{bx + 26}" y="{by + 50}">{PARQUE["detalle"]}</text>')
+    bx, by = P(PARQUE["x"] + 28, PARQUE["y"] + 20, T)
+    o.append(f'<text class="pin-txt pin-txt--grande" x="{bx + 10}" y="{by + 22}">{PARQUE["nombre"]}</text>')
+    o.append(f'<text class="pin-sub" x="{bx + 10}" y="{by + 42}">{PARQUE["detalle"]}</text>')
 
     # Tamaño del dibujo: todo lo proyectado + margen
     todos = [P(x, y, z) for x, y in borde for z in (-ESPESOR_MAQUETA, 0)] + [P(PARQUE["x"], PARQUE["y"], T + ALTO_COL + 160)]

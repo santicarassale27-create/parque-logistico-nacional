@@ -78,8 +78,12 @@ img/                        Fotos (cuando las haya)
   con relieve, edificios, el Parque como columna dorada y arcos hasta el Puerto (12 km), Aeropuerto (10 km) y
   Zona Franca (11 km). Para mover un punto o cambiar la vista, editar `PUNTOS`, `GIRO` o `INCLINACION` y correr el script.
   Si un arco pisa un cartel, bajar su `"arco"`. Sin otras sedes ni leyenda (decisión del equipo).
-  Detalles editables en el script: `PARQUES`, `HIPODROMO`, `PISTA` (aeropuerto), `BARCOS`, `MUELLES` (puerto).
-  Del Parque salen 3 ondas tipo radar que recorren todo el mapa (animación `m3-onda` en `style.css`).
+  El Parque se dibuja como una maqueta en miniatura (terreno dorado, depósitos, camiones) con un pin dorado que flota;
+  de ese pin salen los arcos y 3 ondas tipo radar que recorren todo el mapa (`m3-onda` en `style.css`).
+  Detalles editables en el script: `PARQUES` (Prado, Batlle, Rodó: césped, sendero y árboles 3D), `PISTA`
+  (aeropuerto, sin nada encima), `BARCOS` (cada uno con `destino`: la proa apunta ahí y la estela queda detrás),
+  `MUELLES` (salen de la costa hacia la bahía, con contenedores). Sin hipódromo, sin grúas y sin redondeles en el agua
+  (decisiones del equipo); "Río de la Plata" va solo como texto.
 - Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
   Acá queda solo una fila sobre el depósito del Parque.
 - Fotos de la página: FOTO 01 vista aérea, 02 pasillos del depósito, 03 oficinas, 04 showroom.
