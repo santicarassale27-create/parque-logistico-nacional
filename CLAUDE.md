@@ -74,10 +74,10 @@ img/                        Fotos (cuando las haya)
   cuanto más a la derecha más arriba; los de arriba, cuanto más a la derecha más abajo. Sin plaza en el plano.
   Estados confirmados: Fármaco Uruguayo y Gador operando; Droguería Uruguay confirmada; un laboratorio en negociación; 2 locales a definir.
   El plano está incompleto: falta el plano completo del predio que va a pasar la empresa.
-- **Mapa de ubicación:** SVG dibujado a mano dentro de `parque.html` (no es Google Maps). Muestra solo el Parque y
-  sus distancias al Puerto (12 km), Aeropuerto (10 km) y Zona Franca (11 km), con los km dentro de cada cartel.
-  Sin otras sedes ni leyenda (decisión del equipo). Cada punto es un `<g class="pin">` con `transform="translate(x,y)"`;
-  los textos van del lado contrario a las rutas para que no se crucen.
+- **Mapa 3D de ubicación:** lo genera `herramientas/generar-mapa.py` (no editar el SVG a mano). Montevideo en maqueta
+  con relieve, edificios, el Parque como columna dorada y arcos hasta el Puerto (12 km), Aeropuerto (10 km) y
+  Zona Franca (11 km). Para mover un punto o cambiar la vista, editar `PUNTOS`, `GIRO` o `INCLINACION` y correr el script.
+  Si un arco pisa un cartel, bajar su `"arco"`. Sin otras sedes ni leyenda (decisión del equipo).
 - Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
   Acá queda solo una fila sobre el depósito del Parque.
 - Fotos de la página: FOTO 01 vista aérea, 02 pasillos del depósito, 03 oficinas, 04 showroom.

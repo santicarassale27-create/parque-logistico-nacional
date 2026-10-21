@@ -1786,64 +1786,71 @@ button[disabled] {
 .stop-halo-1 { stop-color: var(--gold-500); stop-opacity: 0.35; }
 .stop-halo-2 { stop-color: var(--gold-500); stop-opacity: 0; }
 
-.mapa-tierra { fill: var(--navy-800); }
-.mapa-trama-linea { fill: none; stroke: var(--white); stroke-opacity: 0.05; stroke-width: 1; }
-.mapa-costa { fill: none; stroke: var(--gold-300); stroke-opacity: 0.6; stroke-width: 1.5; stroke-linejoin: round; }
-.mapa-costa-brillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.12; stroke-width: 9; stroke-linejoin: round; }
-.mapa-anillos circle { fill: none; stroke: var(--gold-300); stroke-opacity: 0.18; stroke-width: 1; stroke-dasharray: 4 6; }
-.pin-km { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--gold-400); }
-
-.mapa-calle { fill: none; stroke: var(--white); stroke-opacity: 0.12; stroke-width: 3; stroke-linecap: round; }
-.mapa-calle--fina { stroke-width: 1.5; }
-
-.mapa-barrio {
+/* Mapa 3D (lo genera herramientas/generar-mapa.py) */
+.m3-tablero-lado { fill: var(--navy-950); stroke: var(--navy-900); stroke-width: 1; }
+.m3-agua { stroke: var(--navy-700); stroke-width: 1; }
+.m3-ola { fill: none; stroke: var(--white); stroke-opacity: 0.06; stroke-width: 1.2; }
+.m3-tierra-lado { fill: var(--navy-700); stroke: var(--navy-700); stroke-width: 0.6; }
+.m3-tierra { fill: var(--navy-800); }
+.m3-trama { fill: none; stroke: var(--white); stroke-opacity: 0.05; stroke-width: 1; }
+.m3-avenida { fill: none; stroke: var(--white); stroke-opacity: 0.16; stroke-width: 2.5; stroke-linecap: round; }
+.m3-costa { fill: none; stroke: var(--gold-300); stroke-opacity: 0.7; stroke-width: 1.5; stroke-linejoin: round; }
+.m3-costa-brillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.14; stroke-width: 10; stroke-linejoin: round; }
+.m3-anillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.22; stroke-width: 1; stroke-dasharray: 4 6; }
+.m3-edif-lado { fill: var(--navy-700); stroke: var(--navy-800); stroke-width: 0.5; }
+.m3-edif-techo { fill: var(--navy-600); }
+.m3-barrio {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  text-anchor: middle;
   fill: var(--white);
-  fill-opacity: 0.35;
+  fill-opacity: 0.4;
 }
-
-.mapa-agua-txt {
+.m3-agua-txt {
   font-family: var(--font-display);
   font-size: 20px;
   font-style: italic;
+  text-anchor: middle;
   fill: var(--white);
-  fill-opacity: 0.2;
+  fill-opacity: 0.22;
 }
 
-.mapa-agua-txt--chica { font-size: 14px; }
+.m3-pin-base { fill: var(--white); fill-opacity: 0.18; stroke: var(--white); stroke-opacity: 0.5; }
+.m3-pin-tallo { stroke: var(--white); stroke-width: 2; }
+.m3-pin-cabeza { fill: var(--white); stroke: var(--navy-950); stroke-width: 2; }
+.m3-pin-ojo { fill: var(--navy-950); }
 
-/* Rutas y cartelitos de km: se dibujan cuando el mapa aparece en pantalla */
+.m3-columna-lado { fill: var(--gold-500); stroke: var(--gold-400); stroke-width: 0.6; }
+.m3-columna-techo { fill: var(--gold-300); }
+.m3-onda {
+  fill: none;
+  stroke: var(--gold-400);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: m3-onda 2.4s ease-out infinite;
+}
+
+@keyframes m3-onda {
+  from { transform: scale(0.6); opacity: 0.9; }
+  to { transform: scale(2.6); opacity: 0; }
+}
+
+/* Arcos en el aire desde el Parque: se dibujan cuando el mapa aparece */
 .mapa-ruta { fill: none; stroke: var(--gold-400); stroke-width: 2.5; stroke-linecap: round; }
-
 .pq-mapa.reveal .mapa-ruta { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s ease 0.3s; }
 .pq-mapa.reveal.visible .mapa-ruta { stroke-dashoffset: 0; }
-
-.pin path { stroke: var(--navy-950); stroke-width: 2; }
-.pin--punto path { fill: var(--white); }
-.pin--punto circle { fill: var(--navy-950); }
-.pin--parque path { fill: var(--gold-500); }
-.pin--parque > circle:not(.pin-onda) { fill: var(--white); }
 
 .pin-txt { font-size: 15px; font-weight: 700; fill: var(--white); }
 .pin-txt--grande { font-size: 19px; }
 .pin-sub { font-size: 13px; fill: var(--white); fill-opacity: 0.6; }
+.pin-km { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--gold-400); }
 
-/* Onda que "late" alrededor del Parque */
-.pin-onda {
-  fill: var(--gold-500);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pin-onda 2.4s ease-out infinite;
+@media (prefers-reduced-motion: reduce) {
+  .m3-onda { animation: none; opacity: 0; }
 }
-
-@keyframes pin-onda {
-  from { transform: scale(0.6); opacity: 0.5; }
-  to { transform: scale(2.6); opacity: 0; }
-}
-
 
 .pq-distancias {
   list-style: none;
@@ -2147,7 +2154,6 @@ button[disabled] {
 
 
 @media (prefers-reduced-motion: reduce) {
-  .pin-onda { animation: none; opacity: 0; }
   .lote, .lote polygon { transition: none; }
 }
 
