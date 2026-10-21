@@ -1183,7 +1183,6 @@ button[disabled] {
 }
 
 .foto--grande { aspect-ratio: 16 / 9; margin: 36px 0 8px; }
-.foto--retrato { aspect-ratio: 4 / 5; }
 
 /* La foto se "revela": una cortina del color del fondo se corre hacia arriba */
 .foto.reveal {
@@ -1547,50 +1546,6 @@ button[disabled] {
   pointer-events: none;
 }
 
-/* ---------- La voz de la familia ---------- */
-.hist-quote {
-  --fondo-seccion: var(--gray-50);
-  padding: 110px 0;
-  background: var(--gray-50);
-}
-
-.hist-quote-inner {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 72px;
-  align-items: center;
-}
-
-.hist-quote blockquote p {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: var(--navy-950);
-}
-
-.hist-quote blockquote::before {
-  content: "“";
-  display: block;
-  font-size: 5rem;
-  line-height: 0.6;
-  color: var(--gold-500);
-  margin-bottom: 18px;
-}
-
-.hist-quote blockquote footer {
-  margin-top: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.hist-quote blockquote footer span {
-  color: var(--gray-600);
-  font-size: 0.92rem;
-}
-
 /* Texto pendiente de confirmar con la empresa: subrayado punteado */
 .pendiente {
   text-decoration: underline dotted var(--gold-500);
@@ -1710,8 +1665,6 @@ button[disabled] {
   .hist-open-grid { grid-template-columns: 1fr; gap: 48px; }
   .hist-collage { height: 440px; }
 
-  .hist-quote-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hist-quote .foto--retrato { max-width: 320px; }
 
   .hist-sellos-list { grid-template-columns: 1fr; gap: 56px; }
 }
@@ -1732,7 +1685,7 @@ button[disabled] {
   .hist-chapter { padding-bottom: 80px; }
   .hist-hitos li { grid-template-columns: 1fr; gap: 6px; }
   .antes-despues { aspect-ratio: 4 / 3; }
-  .hist-quote, .hist-sellos { padding: 72px 0; }
+  .hist-sellos { padding: 72px 0; }
 }
 
 /* =========================================================

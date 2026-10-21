@@ -56,8 +56,9 @@ img/                        Fotos (cuando las haya)
 ## Página Historia
 
 - Estilos con prefijo `hist-` al final de `css/style.css`; títulos con la tipografía Sora (`--font-display`).
-- Lugares de foto provisorios: `<div class="foto">` con una etiqueta `FOTO 01…09` que dice qué foto va. Al llegar la foto, se le pone `style="background-image:url(img/...)"` y se borra la etiqueta.
+- Lugares de foto provisorios: `<div class="foto">` con una etiqueta `FOTO 01…08` que dice qué foto va. Al llegar la foto, se le pone `style="background-image:url(img/...)"` y se borra la etiqueta.
 - Los textos con clase `pendiente` (subrayado punteado) esperan datos reales de la empresa: no inventarlos.
+- Sin foto ni frase del fundador: la familia prefiere no aparecer en la web (decisión confirmada).
 
 ## Página El Parque
 
