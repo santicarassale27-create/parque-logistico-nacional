@@ -71,10 +71,10 @@ ZONA_FRANCA = {"x": 808, "y": 60, "rx": 48, "ry": 31}
 ZF_OFICINAS = [(-36, -4, 16), (-27, -20, 12), (-9, -26, 15), (11, -25, 12), (-29, 14, 14), (-10, 22, 20), (11, 21, 24)]  # dx, dy, alto
 ZF_NAVES = [(28, -16), (28, 2)]     # naves logísticas (dx, dy)
 
-# Costa: playas de arena (rango de x), rocas de Punta Carretas, Puerto del Buceo
-PLAYAS = [(380, 470), (520, 690), (745, 1000)]       # Pocitos, Buceo–Malvín, Carrasco
+# Costa: arena (rango de x), rocas de Punta Carretas, Puerto del Buceo
+PLAYAS = [(262, 1000)]       # toda la rambla, de Carrasco hasta donde empieza Ciudad Vieja (ahí no hay arena)
 ROCAS = [(366, 530, 4), (378, 528, 3), (356, 524, 3), (386, 522, 2.5), (348, 520, 2.5)]   # x, y, tamaño
-BUCEO = {"escollera": [(519, 421), (525, 431), (523, 441), (515, 447), (504, 449)], "veleros": [(510, 436), (502, 440), (516, 440)]}
+BUCEO = {"escollera": [(519, 421), (525, 431), (523, 441), (515, 447), (504, 449)]}
 
 # Vista
 GIRO = math.radians(-14)      # rotación del mapa
@@ -330,12 +330,8 @@ def generar():
         piedra = [(rx_ + t_ * math.cos(k * 1.256 + rx_), ry_ + t_ * 0.8 * math.sin(k * 1.256 + rx_)) for k in range(5)]
         o += paredes(piedra, 0, t_ * 0.7, "m3-roca-lado")
         o.append(f'<polygon class="m3-roca" points="{poli(piedra, t_ * 0.7)}"/>')
-    # Puerto del Buceo: escollera y veleros
+    # Puerto del Buceo: escollera (sin veleros, decisión del equipo)
     o.append(f'<polyline class="m3-escollera" points="{poli(BUCEO["escollera"], 2)}"/>')
-    for vx, vy in BUCEO["veleros"]:
-        c0, c1, c2 = P(vx, vy, 0.5), P(vx, vy, 13), P(vx + 5, vy, 2)
-        o.append(f'<ellipse class="m3-velero-casco" cx="{c0[0]}" cy="{c0[1]}" rx="4" ry="1.7"/>'
-                 f'<polygon class="m3-velero-vela" points="{c0[0]},{c0[1] - 1} {c1[0]},{c1[1]} {c2[0]},{c2[1] - 1}"/>')
 
     # Tejido urbano: manzanas vistas desde arriba, con la misma perspectiva del mapa (un solo patrón, liviano)
     ca, sa = math.cos(GIRO) * ESCALA, math.sin(GIRO) * ESCALA
