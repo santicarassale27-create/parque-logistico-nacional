@@ -22,11 +22,11 @@ PARQUE = {"x": 548, "y": 212, "nombre": "Parque Logístico Nacional", "detalle":
 # "arco": qué tan alto va el arco (proporción de la distancia). Bajarlo si el arco pisa un cartel.
 PUNTOS = [
     {"x": 200, "y": 372, "nombre": "Puerto de Montevideo", "km": "12 km"},
-    {"x": 900, "y": 150, "nombre": "Aeropuerto de Carrasco", "km": "10 km", "arco": 0.16},
+    {"x": 897, "y": 128, "nombre": "Aeropuerto de Carrasco", "km": "10 km", "arco": 0.16},
     {"x": 770, "y": 62, "nombre": "Zona Franca Montevideo", "km": "11 km"},
 ]
 
-BARRIOS = [("Ciudad Vieja", 215, 445), ("Pocitos", 430, 430), ("Prado", 210, 200),
+BARRIOS = [("Ciudad Vieja", 215, 445), ("Pocitos", 430, 430), ("Prado", 205, 248),
            ("Carrasco", 860, 285), ("Unión", 470, 300)]
 
 # Costa (de este a oeste). El resto del borde de la tierra es el borde del mapa.
@@ -45,12 +45,16 @@ AVENIDAS = [  # curvas Bézier cúbicas (aproximadas)
 
 # Detalles del mapa
 # Parques: centro (x, y), radios (rx, ry). La forma se hace orgánica sola.
+# "bosque": True = árboles más juntos y oscuros, sin sendero (Roosevelt).
 PARQUES = [
     {"nombre": "Prado", "x": 205, "y": 200, "rx": 42, "ry": 28},
     {"nombre": "Parque Batlle", "x": 382, "y": 370, "rx": 28, "ry": 18},
     {"nombre": "Parque Rodó", "x": 318, "y": 455, "rx": 22, "ry": 11},
+    # Parque Roosevelt: bosque enorme entre el aeropuerto (norte) y la rambla (sur)
+    {"nombre": "Parque Roosevelt", "x": 928, "y": 226, "rx": 72, "ry": 30, "bosque": True},
 ]
-PISTA = [(858, 180), (960, 128)]   # pista del aeropuerto (de punta a punta)
+PISTA = [(852, 175), (972, 114)]   # pista del aeropuerto (de punta a punta)
+# Aeropuerto: la terminal, la torre y la plataforma quedan al norte de la pista
 BAHIA = (130, 330)                 # centro de la bahía (hacia donde salen los muelles)
 # Barcos: posición y destino (la proa apunta al destino y la estela queda detrás)
 BARCOS = [
@@ -172,15 +176,27 @@ def forma_organica(cx, cy, rx, ry, n=28):
     return out
 
 
-def arbol(x, y, z, r=3.6):
+def arbol(x, y, z, r=3.6, extra=""):
     """Árbol en 3D: sombra en el suelo, tronco y copa con brillo."""
     sx, sy = P(x + 3, y + 2, z)
     bx, by = P(x, y, z)
     cx, cy = P(x, y, z + 7)
     return (f'<ellipse class="m3-arbol-sombra" cx="{sx}" cy="{sy}" rx="{r + 1}" ry="{r * 0.5}"/>'
             f'<line class="m3-arbol-tronco" x1="{bx}" y1="{by}" x2="{cx}" y2="{cy}"/>'
-            f'<circle class="m3-arbol-copa" cx="{cx}" cy="{cy - r * 0.6}" r="{r}"/>'
+            f'<circle class="m3-arbol-copa {extra}" cx="{cx}" cy="{cy - r * 0.6}" r="{r}"/>'
             f'<circle class="m3-arbol-brillo" cx="{cx - r * 0.35}" cy="{cy - r * 1.0}" r="{r * 0.4}"/>')
+
+
+def avion(cx, cy, ang, z, sombra_z=None):
+    """Avión visto desde arriba: fuselaje, alas y cola. La nariz apunta según ang."""
+    forma = [(0, -10), (1.3, -7), (1.3, -2), (9, 1.5), (9, 3), (1.3, 2), (1.3, 7), (4, 9.5), (4, 10.6),
+             (0, 10), (-4, 10.6), (-4, 9.5), (-1.3, 7), (-1.3, 2), (-9, 3), (-9, 1.5), (-1.3, -2), (-1.3, -7)]
+    a = math.radians(ang)
+    pts_ = [(cx + ex * 0.8 * math.cos(a) - ey * 0.8 * math.sin(a), cy + ex * 0.8 * math.sin(a) + ey * 0.8 * math.cos(a)) for ex, ey in forma]
+    out = ""
+    if sombra_z is not None:
+        out += f'<polygon class="m3-avion-sombra" points="{poli([(x + 2, y + 2) for x, y in pts_], sombra_z)}"/>'
+    return out + f'<polygon class="m3-avion" points="{poli(pts_, z)}"/>'
 
 
 def barco(cx, cy, ang):
@@ -260,7 +276,10 @@ def generar():
     for pq in PARQUES:
         forma = forma_organica(pq["x"], pq["y"], pq["rx"], pq["ry"])
         formas_parques.append(forma)
-        o.append(f'<polygon class="m3-parque" points="{poli(forma, T + 0.2)}"/>')
+        clase_pq = "m3-parque m3-parque--bosque" if pq.get("bosque") else "m3-parque"
+        o.append(f'<polygon class="{clase_pq}" points="{poli(forma, T + 0.2)}" clip-path="url(#m3-tierra-clip)"/>')
+        if pq.get("bosque"):
+            continue
         sendero = [(pq["x"] - pq["rx"] * 0.8 + i * pq["rx"] * 0.16, pq["y"] + pq["ry"] * 0.25 * math.sin(i * 0.9)) for i in range(11)]
         o.append(f'<polyline class="m3-sendero" points="{poli(sendero, T + 0.3)}"/>')
     # Pista del aeropuerto
@@ -269,6 +288,16 @@ def generar():
     pista = rotado((ax0 + ax1) / 2, (ay0 + ay1) / 2, 9, largo, ang)
     o.append(f'<polygon class="m3-pista" points="{poli(pista, T + 0.3)}"/>')
     o.append(f'<polyline class="m3-pista-linea" points="{poli([(ax0, ay0), (ax1, ay1)], T + 0.4)}"/>')
+    ux, uy = (ax1 - ax0) / largo, (ay1 - ay0) / largo          # dirección de la pista
+    nx, ny = uy, -ux                                            # perpendicular, hacia el norte
+    mx_, my_ = (ax0 + ax1) / 2, (ay0 + ay1) / 2
+    plataforma = rotado(mx_ + nx * 20, my_ + ny * 20, 22, 70, ang)
+    o.append(f'<polygon class="m3-plataforma" points="{poli(plataforma, T + 0.3)}"/>')
+    calle_rodaje = [(mx_ - ux * 30, my_ - uy * 30), (mx_ - ux * 30 + nx * 12, my_ - uy * 30 + ny * 12)]
+    o.append(f'<polyline class="m3-rodaje" points="{poli(calle_rodaje, T + 0.4)}"/>')
+    for k in (-18, 2, 22):   # aviones estacionados, con la nariz hacia la terminal
+        cx, cy = mx_ + ux * k + nx * 19, my_ + uy * k + ny * 19
+        o.append(avion(cx, cy, angulo_hacia(nx, ny), T + 0.6))
     # Rambla: un camino que acompaña la costa
     rambla = [(x, y - 8) for x, y in COSTA if x >= 232]
     o.append(f'<polyline class="m3-rambla" points="{poli(rambla, T + 0.2)}"/>')
@@ -291,7 +320,9 @@ def generar():
     reservados = [(PARQUE["x"], PARQUE["y"])] + [(p["x"], p["y"]) for p in PUNTOS]
     (px0, py0), (px1, py1) = PISTA
     ang_pista = math.degrees(math.atan2(py1 - py0, px1 - px0)) - 90
-    zona_pista = rotado((px0 + px1) / 2, (py0 + py1) / 2, 34, math.hypot(px1 - px0, py1 - py0) + 24, ang_pista)
+    largo_p = math.hypot(px1 - px0, py1 - py0)
+    nxp, nyp = (py1 - py0) / largo_p, -(px1 - px0) / largo_p
+    zona_pista = rotado((px0 + px1) / 2 + nxp * 18, (py0 + py1) / 2 + nyp * 18, 80, largo_p + 30, ang_pista)
     zonas_libres = [forma_organica(pq["x"], pq["y"], pq["rx"] + 6, pq["ry"] + 5) for pq in PARQUES] + [zona_pista]
     for _ in range(1500):
         x, y = azar() * 1000, azar() * 600
@@ -318,6 +349,21 @@ def generar():
         x, y = zf["x"] + r * math.cos(ang), zf["y"] + 0.7 * r * math.sin(ang)
         if adentro(x, y, TIERRA):
             objetos.append((P(x, y)[1], '<g class="m3-edif m3-edif--zf">' + caja(x - 7, y - 5, 14, 10, 9 + (i % 4) * 4, T) + '</g>'))
+    # Aeropuerto: terminal, torre de control y un avión despegando
+    (ax0, ay0), (ax1, ay1) = PISTA
+    largo = math.hypot(ax1 - ax0, ay1 - ay0)
+    ux, uy = (ax1 - ax0) / largo, (ay1 - ay0) / largo
+    nx, ny = uy, -ux
+    mx_, my_ = (ax0 + ax1) / 2, (ay0 + ay1) / 2
+    terminal = rotado(mx_ + nx * 36, my_ + ny * 36, 12, 60, math.degrees(math.atan2(uy, ux)) - 90)
+    objetos.append((P(mx_ + nx * 36, my_ + ny * 36)[1], ''.join(paredes(terminal, T, T + 9, "m3-terminal-lado"))
+                    + f'<polygon class="m3-terminal-techo" points="{poli(terminal, T + 9)}"/>'))
+    tx_, ty_ = mx_ - ux * 40 + nx * 30, my_ - uy * 40 + ny * 30
+    objetos.append((P(tx_, ty_)[1], caja_clase(tx_ - 2, ty_ - 2, 4, 4, 26, T, "m3-torre")
+                    + caja_clase(tx_ - 4, ty_ - 4, 8, 8, 5, T + 26, "m3-torre-cabina")))
+    dx_, dy_ = ax1 - ux * 52, ay1 - uy * 52
+    objetos.append((P(dx_, dy_)[1], avion(dx_, dy_, angulo_hacia(ux, uy), T + 9, sombra_z=T + 0.5)))
+
     # Contenedores en los muelles del puerto
     colores = ["dorado", "blanco", "azul", "dorado", "azul", "blanco"]
     for k, (mx, my) in enumerate(MUELLES):
@@ -328,13 +374,16 @@ def generar():
             objetos.append((P(cx, cy)[1], caja_clase(cx - 3, cy - 3, 6, 6, 4 + (j % 2) * 3, 5, f"m3-cont-{colores[(k + j) % 6]}")))
     # Árboles de los parques (repartidos en una grilla con un poco de desorden)
     for forma, pq in zip(formas_parques, PARQUES):
-        paso = 7
+        paso = 5 if pq.get("bosque") else 7
         for gx_ in range(int(pq["x"] - pq["rx"]), int(pq["x"] + pq["rx"]), paso):
             for gy_ in range(int(pq["y"] - pq["ry"]), int(pq["y"] + pq["ry"]), paso):
                 tx, ty = gx_ + 3 * math.sin(gy_), gy_ + 3 * math.cos(gx_)
                 hueco = abs(ty - pq["y"] - pq["ry"] * 0.25 * math.sin((tx - pq["x"] + pq["rx"] * 0.8) / (pq["rx"] * 0.16) * 0.9)) < 3
                 margen = forma_organica(pq["x"], pq["y"], pq["rx"] - 4, pq["ry"] - 3)
-                if adentro(tx, ty, margen) and not hueco and (gx_ + gy_) % 5 != 0:
+                if pq.get("bosque"):
+                    if adentro(tx, ty, margen) and adentro(tx, ty, TIERRA) and dist_costa(tx, ty) > 7:
+                        objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3, 3.2, "m3-arbol--pino")))
+                elif adentro(tx, ty, margen) and not hueco and (gx_ + gy_) % 5 != 0:
                     objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3)))
     for _, svg in sorted(objetos, key=lambda o_: o_[0]):
         o.append(svg)
@@ -386,17 +435,13 @@ def generar():
     o.append(deposito_pln(X - 25, Y + 7, 12, 9, 7))
     o.append(caja_clase(X + 6, Y + 6, 5, 11, 5, T + 3, "m3-pln-camion"))
     o.append(caja_clase(X + 14, Y + 6, 5, 11, 5, T + 3, "m3-pln-camion"))
-    # Pin flotante (con sombra sobre el terreno)
-    ALTO_COL = 58
-    sx, sy = P(X, Y, T + 3)
-    pxp, pyp = P(X, Y, T + ALTO_COL)
-    o.append(f'<ellipse class="m3-pln-sombra" cx="{sx}" cy="{sy}" rx="11" ry="4.5"/>')
-    o.append(f'<g class="m3-pln-pin"><path transform="translate({pxp},{pyp})" d="M0,-24 C-13,-24 -20,-14 -20,-4 C-20,10 0,24 0,24 C0,24 20,10 20,-4 C20,-14 13,-24 0,-24 Z"/>'
-             f'<circle cx="{pxp}" cy="{pyp - 4}" r="7"/></g>')
+    # Punto de salida de los arcos: techo del depósito más alto del Parque
+    ALTO_COL = 20
+    SALIDA = (X + 13, Y - 7)
 
-    # Arcos desde el pin del Parque hasta cada punto
+    # Arcos desde el depósito del Parque hasta cada punto
     for p in PUNTOS:
-        o.append(f'<path class="mapa-ruta" pathLength="1" d="{arco((PARQUE["x"], PARQUE["y"]), (p["x"], p["y"]), T + ALTO_COL, T + ALTO_PIN, p.get("arco", 0.32))}"/>')
+        o.append(f'<path class="mapa-ruta" pathLength="1" d="{arco(SALIDA, (p["x"], p["y"]), T + ALTO_COL, T + ALTO_PIN, p.get("arco", 0.32))}"/>')
 
     # Carteles: del lado contrario al Parque para no cruzar los arcos
     px_col, _ = P(PARQUE["x"], PARQUE["y"], T)
@@ -414,7 +459,7 @@ def generar():
     o.append(f'<text class="pin-sub" x="{bx + 10}" y="{by + 42}">{PARQUE["detalle"]}</text>')
 
     # Tamaño del dibujo: todo lo proyectado + margen
-    todos = [P(x, y, z) for x, y in borde for z in (-ESPESOR_MAQUETA, 0)] + [P(PARQUE["x"], PARQUE["y"], T + ALTO_COL + 160)]
+    todos = [P(x, y, z) for x, y in borde for z in (-ESPESOR_MAQUETA, 0)] + [P(PARQUE["x"], PARQUE["y"], T + 200)]
     xs, ys = [a for a, _ in todos], [b for _, b in todos]
     x0, y0, x1, y1 = min(xs) - 20, min(ys) - 10, max(xs) + 20, max(ys) + 20
     cuerpo = "\n          ".join(o)

@@ -1810,8 +1810,19 @@ button[disabled] {
 .m3-arbol-tronco { stroke: var(--gold-800); stroke-width: 1.4; }
 .m3-arbol-copa { fill: var(--verde-500); }
 .m3-arbol-brillo { fill: var(--verde-100); fill-opacity: 0.45; }
+.m3-parque--bosque { fill-opacity: 0.55; }
+.m3-arbol-copa.m3-arbol--pino { fill: var(--verde-500); filter: brightness(0.8); }
 .m3-rambla { fill: none; stroke: var(--white); stroke-opacity: 0.22; stroke-width: 2; stroke-linejoin: round; }
 .m3-pista { fill: var(--gray-600); fill-opacity: 0.9; }
+.m3-plataforma { fill: var(--gray-600); fill-opacity: 0.6; }
+.m3-rodaje { fill: none; stroke: var(--gray-400); stroke-width: 3; }
+.m3-avion { fill: var(--white); stroke: var(--gray-400); stroke-width: 0.5; }
+.m3-avion-sombra { fill: var(--navy-950); fill-opacity: 0.4; }
+.m3-terminal-techo { fill: var(--navy-200); }
+.m3-terminal-lado { fill: var(--navy-600); stroke: var(--navy-300); stroke-width: 0.5; }
+.m3-torre-techo, .m3-torre-cabina-lado { fill: var(--navy-200); }
+.m3-torre-lado { fill: var(--navy-600); }
+.m3-torre-cabina-techo { fill: var(--gold-300); }
 .m3-pista-linea { fill: none; stroke: var(--white); stroke-opacity: 0.8; stroke-width: 1; stroke-dasharray: 5 5; }
 .m3-muelle { fill: var(--gray-400); }
 .m3-muelle-lado { fill: var(--gray-600); }
@@ -1858,16 +1869,6 @@ button[disabled] {
 .m3-pln-porton { fill: var(--navy-800); }
 .m3-pln-camion-techo { fill: var(--white); }
 .m3-pln-camion-lado { fill: var(--navy-600); }
-.m3-pln-sombra { fill: var(--navy-950); fill-opacity: 0.45; }
-.m3-pln-pin path { fill: var(--gold-500); stroke: var(--white); stroke-width: 2; }
-.m3-pln-pin circle { fill: var(--white); }
-.m3-pln-pin { animation: m3-flotar 3s ease-in-out infinite; }
-
-@keyframes m3-flotar {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
 /* Ondas tipo radar que salen del Parque y recorren todo el mapa */
 .m3-onda {
   fill: none;
@@ -1910,7 +1911,6 @@ button[disabled] {
 
 @media (prefers-reduced-motion: reduce) {
   .m3-onda { animation: none; opacity: 0; }
-  .m3-pln-pin { animation: none; }
 }
 
 .pq-distancias {
