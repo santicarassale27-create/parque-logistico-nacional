@@ -47,19 +47,19 @@
       <a href="#geligold" class="btn btn-outline" style="margin-top: 28px;">Conocé cada empresa <span aria-hidden="true">↓</span></a>
     </div>
     <div class="emp-hero-tiles">
-      <a href="#geligold" class="emp-hero-tile">
+      <a href="#geligold" class="emp-hero-tile emp-color--geligold">
         <span class="emp-hero-tile-foto">Foto</span>
         <span class="emp-hero-tile-label"><strong>Geligold S.A.</strong><span>Depósito nacional</span></span>
       </a>
-      <a href="#talfir" class="emp-hero-tile">
+      <a href="#talfir" class="emp-hero-tile emp-color--talfir">
         <span class="emp-hero-tile-foto">Foto</span>
         <span class="emp-hero-tile-label"><strong>Talfir S.A.</strong><span>Depósito aduanero</span></span>
       </a>
-      <a href="#lamarel" class="emp-hero-tile">
+      <a href="#lamarel" class="emp-hero-tile emp-color--lamarel">
         <span class="emp-hero-tile-foto">Foto</span>
         <span class="emp-hero-tile-label"><strong>Lamarel</strong><span>Flete terrestre</span></span>
       </a>
-      <a href="#repremar" class="emp-hero-tile">
+      <a href="#repremar" class="emp-hero-tile emp-color--repremar">
         <span class="emp-hero-tile-foto">Foto</span>
         <span class="emp-hero-tile-label"><strong>Repremar</strong><span>Aéreo y marítimo</span></span>
       </a>
@@ -213,35 +213,55 @@
   </div>
 </section>
 
-<!-- ============ POR QUÉ FUNCIONA (flujo de 3 pasos) ============ -->
-<section>
+<!-- ============ POR QUÉ FUNCIONA (tarjetas con ícono) ============ -->
+<section class="emp-steps-section">
   <div class="container">
-    <div class="emp-flow-head">
+    <div class="emp-steps-head">
       <div class="eyebrow hist-anim">Por qué funciona</div>
       <h2 class="section-title hist-anim">Un mismo predio, servicios complementarios</h2>
       <p class="section-lead hist-anim">La mercadería de un cliente puede pasar por las tres etapas sin salir nunca del Parque: entra, se guarda y sale rumbo a cualquier destino.</p>
     </div>
 
-    <div class="emp-flow">
-      <div class="emp-flow-line" aria-hidden="true"></div>
+    <div class="emp-steps">
 
-      <article class="emp-flow-step hist-anim">
-        <span class="emp-flow-num">1</span>
+      <article class="emp-step-card emp-color--geligold hist-anim">
+        <div class="emp-step-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 10.5 12 4l9 6.5"/>
+            <path d="M5 9.5V20h14V9.5"/>
+            <path d="M9 20v-6h6v6"/>
+          </svg>
+        </div>
+        <span class="emp-step-eyebrow">Paso 1</span>
         <h3>Depósito</h3>
         <p>Geligold y Talfir gestionan el almacenamiento, fiscal y nacional, con habilitación bromatológica y seguridad las 24 horas.</p>
       </article>
 
-      <article class="emp-flow-step hist-anim">
-        <span class="emp-flow-num">2</span>
+      <article class="emp-step-card emp-color--lamarel hist-anim">
+        <div class="emp-step-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7h11v9H3z"/>
+            <path d="M14 10h4l3 3v3h-7z"/>
+            <circle cx="7" cy="18" r="1.6"/>
+            <circle cx="17.5" cy="18" r="1.6"/>
+          </svg>
+        </div>
+        <span class="emp-step-eyebrow">Paso 2</span>
         <h3>Transporte terrestre</h3>
         <p>Lamarel distribuye la mercadería con flota propia (20 camiones) hacia cualquier punto del país.</p>
       </article>
 
-      <article class="emp-flow-step hist-anim">
-        <span class="emp-flow-num">3</span>
+      <article class="emp-step-card emp-color--repremar hist-anim">
+        <div class="emp-step-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 3 3 10.5l7.5 2.5L13 21l3-7.5L21 3z"/>
+          </svg>
+        </div>
+        <span class="emp-step-eyebrow">Paso 3</span>
         <h3>Comercio exterior</h3>
         <p>Repremar Logistics conecta las operaciones con el mundo mediante fletes aéreos y marítimos, FCL y LCL.</p>
       </article>
+
     </div>
   </div>
 </section>

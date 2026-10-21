@@ -488,15 +488,32 @@ section {
    .foto). Lo nuevo acá empieza con "emp-".
    ========================================================= */
 
-/* ---------- Apertura: hero oscuro + mosaico de 4 empresas ---------- */
+/* ---------- Apertura: hero oscuro + mosaico de 4 empresas ----------
+   Fondo con resplandores de los 4 colores de empresa (abajo), para
+   que no sea un azul plano y anticipe los colores del mosaico. */
 .emp-hero {
-  background: linear-gradient(160deg, var(--navy-950), var(--navy-800));
+  position: relative;
+  background: var(--navy-950);
   color: var(--white);
   padding: 110px 0 90px;
   overflow: hidden;
 }
 
+.emp-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(560px circle at 10% 15%, rgba(201, 162, 39, 0.22), transparent 60%),
+    radial-gradient(520px circle at 95% 10%, rgba(79, 143, 224, 0.2), transparent 60%),
+    radial-gradient(520px circle at 15% 95%, rgba(224, 134, 63, 0.18), transparent 60%),
+    radial-gradient(560px circle at 90% 90%, rgba(79, 157, 105, 0.2), transparent 60%);
+  pointer-events: none;
+}
+
 .emp-hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
@@ -537,12 +554,13 @@ section {
   background:
     repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0 2px, rgba(255, 255, 255, 0.015) 2px 18px);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  border-top: 3px solid var(--tile-color, var(--gold-500));
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .emp-hero-tile:hover {
-  border-color: var(--gold-500);
   transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 .emp-hero-tile-foto {
@@ -573,12 +591,18 @@ section {
 .emp-hero-tile-label span {
   display: block;
   margin-top: 2px;
-  color: var(--gold-300);
+  color: var(--tile-color-texto, var(--gold-300));
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* Un color por empresa: se usa acá (mosaico) y en "Por qué funciona" */
+.emp-color--geligold { --tile-color: var(--gold-500); --tile-color-texto: var(--gold-300); }
+.emp-color--talfir { --tile-color: var(--azul-500); --tile-color-texto: var(--azul-300); }
+.emp-color--lamarel { --tile-color: var(--naranja-500); --tile-color-texto: var(--naranja-300); }
+.emp-color--repremar { --tile-color: var(--verde-500); --tile-color-texto: var(--verde-300); }
 
 .emp-block {
   scroll-margin-top: 96px; /* que el anchor (#geligold, etc.) no quede tapado por el header */
@@ -655,63 +679,77 @@ section {
   gap: 12px;
 }
 
-/* ---------- "Por qué funciona": flujo de 3 pasos conectados ---------- */
-.emp-flow-head {
+/* ---------- "Por qué funciona": tarjetas de servicio con ícono ----------
+   Una tarjeta por etapa, con su propio color (el mismo que su
+   empresa en el mosaico de apertura) y un ícono dibujado a mano en
+   SVG. Conectadas por una flecha entre tarjeta y tarjeta. */
+.emp-steps-section {
+  background: var(--gray-50);
+  padding: 100px 0;
+}
+
+.emp-steps-head {
   max-width: 640px;
   margin-bottom: 48px;
 }
 
-.emp-flow {
-  position: relative;
+.emp-steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 28px;
 }
 
-.emp-flow-line {
-  position: absolute;
-  top: 34px;
-  left: 16.666%;
-  right: 16.666%;
-  height: 2px;
-  background: var(--gold-500);
-  opacity: 0.35;
-}
-
-.emp-flow-step {
+.emp-step-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 14px;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--tile-color, var(--gold-500));
 }
 
-.emp-flow-num {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: var(--navy-950);
-  color: var(--gold-400);
+.emp-step-card:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 44px;
+  right: -33px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  z-index: 1;
+}
+
+.emp-step-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--tile-color, var(--gold-500));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
+  margin-bottom: 20px;
+}
+
+.emp-step-eyebrow {
+  display: block;
+  font-size: 0.74rem;
   font-weight: 700;
-  font-size: 1.6rem;
-  box-shadow: 0 0 0 6px var(--white);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tile-color, var(--gold-500));
+  margin-bottom: 8px;
 }
 
-.emp-flow-step h3 {
+.emp-step-card h3 {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--navy-950);
+  margin-bottom: 10px;
 }
 
-.emp-flow-step p {
+.emp-step-card p {
   color: var(--gray-600);
   font-size: 0.92rem;
-  max-width: 280px;
 }
 
 /* ---------- Mini timeline (home teaser) ---------- */
@@ -1977,6 +2015,7 @@ button[disabled] {
 
 :root {
   --verde-500: #4f9d69;
+  --verde-300: #a9d9b9;
   --verde-100: #e3f1e7;
   --gold-800: #7a5f0d;
   --gold-100: #f6efd6;
@@ -1984,6 +2023,11 @@ button[disabled] {
   --navy-100: #e7edf5;
   --navy-200: #c9d6e8;
   --navy-300: #9fb3cf;
+  /* Colores de empresa (página Empresas): uno por empresa, para diferenciarlas */
+  --azul-500: #4f8fe0;
+  --azul-300: #a9c9f2;
+  --naranja-500: #e0863f;
+  --naranja-300: #f2c192;
 }
 
 .pq-title {
@@ -2453,8 +2497,9 @@ button[disabled] {
   .pq-open { padding: 56px 0 40px; }
   .pq-open-foto { aspect-ratio: 4 / 3; }
   .emp-hero { padding: 64px 0 56px; }
-  .emp-flow { grid-template-columns: 1fr; gap: 36px; }
-  .emp-flow-line { display: none; }
+  .emp-steps-section { padding: 72px 0; }
+  .emp-steps { grid-template-columns: 1fr; gap: 44px; }
+  .emp-step-card:not(:last-child)::after { content: "↓"; top: auto; right: auto; bottom: -38px; left: 32px; }
   .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
   .pq-ubicacion { padding: 24px 0 40px; }
