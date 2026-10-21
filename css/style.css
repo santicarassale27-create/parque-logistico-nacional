@@ -1791,7 +1791,6 @@ button[disabled] {
 .m3-agua { stroke: var(--navy-700); stroke-width: 1; }
 .m3-tierra-lado { fill: var(--navy-700); stroke: var(--navy-700); stroke-width: 0.6; }
 .m3-tierra { fill: var(--navy-800); }
-.m3-trama { fill: none; stroke: var(--white); stroke-opacity: 0.05; stroke-width: 1; }
 .m3-avenida { fill: none; stroke: var(--white); stroke-opacity: 0.16; stroke-width: 2.5; stroke-linecap: round; }
 .m3-costa { fill: none; stroke: var(--gold-300); stroke-opacity: 0.7; stroke-width: 1.5; stroke-linejoin: round; }
 .m3-costa-brillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.14; stroke-width: 10; stroke-linejoin: round; }
@@ -1814,6 +1813,26 @@ button[disabled] {
 .m3-arbol-copa.m3-arbol--pino { fill: var(--verde-500); filter: brightness(0.8); }
 .m3-rambla { fill: none; stroke: var(--white); stroke-opacity: 0.22; stroke-width: 2; stroke-linejoin: round; }
 .m3-pista { fill: var(--gray-600); fill-opacity: 0.9; }
+.m3-campo { fill: var(--navy-800); }
+.m3-manzana { fill: var(--navy-700); fill-opacity: 0.55; }
+.m3-lote { fill: none; stroke: var(--navy-800); stroke-width: 0.6; }
+
+/* El Parque y su cartel llevan a Google Maps */
+.m3-pln-link { cursor: pointer; }
+.m3-pln-link:hover .m3-pln-terreno,
+.m3-pln-link:focus-visible .m3-pln-terreno { fill-opacity: 0.7; stroke-width: 2.5; }
+.m3-pln-link:hover .pin-link { text-decoration: underline; }
+.m3-pln-link:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 4px; }
+.pin-link {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--gold-400);
+  paint-order: stroke;
+  stroke: var(--navy-950);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
 .m3-plataforma { fill: var(--gray-600); fill-opacity: 0.6; }
 .m3-rodaje { fill: none; stroke: var(--gray-400); stroke-width: 3; }
 .m3-avion { fill: var(--white); stroke: var(--gray-400); stroke-width: 0.5; }

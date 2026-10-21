@@ -80,11 +80,15 @@ img/                        Fotos (cuando las haya)
   Si un arco pisa un cartel, bajar su `"arco"`. Sin otras sedes ni leyenda (decisión del equipo).
   El Parque se dibuja como una maqueta en miniatura (terreno dorado, depósitos, camiones), sin pin: los arcos salen
   del techo del depósito más alto y de ahí salen 3 ondas tipo radar que recorren todo el mapa (`m3-onda` en `style.css`).
-  Detalles editables en el script: `PARQUES` (Prado, Batlle, Rodó con césped, sendero y árboles 3D; Parque Roosevelt
-  como bosque grande entre el aeropuerto y la rambla), `PISTA` (aeropuerto con terminal, torre de control, plataforma
-  con aviones y uno despegando), `BARCOS` (cada uno con `destino`: la proa apunta ahí y la estela queda detrás),
-  `MUELLES` (salen de la costa hacia la bahía, con contenedores). Los nombres de barrio van fuera de las zonas verdes.
-  Sin hipódromo, sin grúas y sin redondeles en el agua (decisiones del equipo); "Río de la Plata" va solo como texto.
+  **Tocar el Parque (o su cartel) abre Google Maps** con la dirección en una pestaña nueva (`GOOGLE_MAPS` en el script).
+  Toda la tierra lleva el tejido urbano (manzanas, un patrón en la misma perspectiva) y encima edificios 3D;
+  quedan libres los parques, el aeropuerto, la costa y el agua.
+  Detalles editables en el script: `PARQUES` (Prado, Batlle, Rodó con césped, sendero y árboles 3D), `PISTA`
+  (aeropuerto con terminal, torre, plataforma con aviones y uno despegando hacia el oeste), `BARCOS` (cada uno con
+  `destino`: la proa apunta ahí y la estela queda detrás), `MUELLES` (hacia la bahía, con contenedores) y arbolado
+  de calle en Carrasco. Los nombres de barrio van fuera de las zonas verdes.
+  Sin hipódromo, sin Parque Roosevelt, sin grúas y sin redondeles en el agua (decisiones del equipo);
+  "Río de la Plata" va solo como texto.
 - Lo que opera cada empresa (aduanero, contenedores, fletes) se explica en Empresas, no en esta página.
   Acá queda solo una fila sobre el depósito del Parque.
 - Fotos de la página: FOTO 01 vista aérea, 02 pasillos del depósito, 03 oficinas, 04 showroom.

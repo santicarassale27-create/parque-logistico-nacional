@@ -18,6 +18,8 @@ from pathlib import Path
 # Datos (editar acá)
 # ---------------------------------------------------------------
 PARQUE = {"x": 548, "y": 212, "nombre": "Parque Logístico Nacional", "detalle": "Dr. Pantaleón Pérez 4881"}
+# Al tocar el Parque en el mapa se abre Google Maps con esta dirección (en una pestaña nueva)
+GOOGLE_MAPS = "https://www.google.com/maps/search/?api=1&amp;query=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay"
 
 # "arco": qué tan alto va el arco (proporción de la distancia). Bajarlo si el arco pisa un cartel.
 PUNTOS = [
@@ -50,8 +52,6 @@ PARQUES = [
     {"nombre": "Prado", "x": 205, "y": 200, "rx": 42, "ry": 28},
     {"nombre": "Parque Batlle", "x": 382, "y": 370, "rx": 28, "ry": 18},
     {"nombre": "Parque Rodó", "x": 318, "y": 455, "rx": 22, "ry": 11},
-    # Parque Roosevelt: bosque enorme entre el aeropuerto (norte) y la rambla (sur)
-    {"nombre": "Parque Roosevelt", "x": 928, "y": 226, "rx": 72, "ry": 30, "bosque": True},
 ]
 PISTA = [(852, 175), (972, 114)]   # pista del aeropuerto (de punta a punta)
 # Aeropuerto: la terminal, la torre y la plataforma quedan al norte de la pista
@@ -125,10 +125,24 @@ def paredes(coords, z0, z1, clase):
     return [c for _, c in sorted(caras)]
 
 
+def paredes_visibles(esquinas, z0, z1, clase):
+    """Como paredes(), pero solo las caras que miran hacia el que mira (las de atrás quedan tapadas igual).
+    Las esquinas tienen que estar en sentido horario: (x,y), (x1,y), (x1,y1), (x,y1)."""
+    vista = (math.sin(GIRO), math.cos(GIRO))          # dirección del mapa que en pantalla es "hacia abajo"
+    out = []
+    for i in range(len(esquinas)):
+        a, b = esquinas[i], esquinas[(i + 1) % len(esquinas)]
+        normal = (b[1] - a[1], -(b[0] - a[0]))
+        if normal[0] * vista[0] + normal[1] * vista[1] > 0:
+            q = [P(*a, z0), P(*b, z0), P(*b, z1), P(*a, z1)]
+            out.append(f'<polygon class="{clase}" points="{pts(q)}"/>')
+    return out
+
+
 def caja(x, y, w, d, h, z0):
     x1, y1 = x + w, y + d
     esquinas = [(x, y), (x1, y), (x1, y1), (x, y1)]
-    out = paredes(esquinas, z0, z0 + h, "m3-edif-lado")
+    out = paredes_visibles(esquinas, z0, z0 + h, "m3-edif-lado")
     out.append(f'<polygon class="m3-edif-techo" points="{poli(esquinas, z0 + h)}"/>')
     return "".join(out)
 
@@ -217,7 +231,7 @@ def barco(cx, cy, ang):
 def caja_clase(x, y, w, d, h, z0, clase):
     x1, y1 = x + w, y + d
     esquinas = [(x, y), (x1, y), (x1, y1), (x, y1)]
-    out = paredes(esquinas, z0, z0 + h, clase + "-lado")
+    out = paredes_visibles(esquinas, z0, z0 + h, clase + "-lado")
     out.append(f'<polygon class="{clase}-techo" points="{poli(esquinas, z0 + h)}"/>')
     return "".join(out)
 
@@ -259,13 +273,15 @@ def generar():
     o.append(f'<polygon class="m3-tierra" points="{poli(TIERRA, T)}"/>')
     o.append(f'<clipPath id="m3-tierra-clip"><polygon points="{poli(TIERRA, T)}"/></clipPath>')
 
-    # Trama de calles (sobre la tierra)
-    lineas = []
-    for k in range(-20, 60):
-        c = k * 26
-        lineas.append(f'M{pts([P(c, 0, T), P(c - 400, 600, T)]).replace(" ", " L")}')
-        lineas.append(f'M{pts([P(0, c, T), P(1000, c - 300, T)]).replace(" ", " L")}')
-    o.append(f'<path class="m3-trama" d="{" ".join(lineas)}" clip-path="url(#m3-tierra-clip)"/>')
+    # Tejido urbano: manzanas vistas desde arriba, con la misma perspectiva del mapa (un solo patrón, liviano)
+    ca, sa = math.cos(GIRO) * ESCALA, math.sin(GIRO) * ESCALA
+    ma, mb, mc, md = ca, sa * INCLINACION, -sa, ca * INCLINACION
+    me, mf = -(ma * 500 + mc * 300), -(mb * 500 + md * 300) - T
+    o.append(f'<pattern id="m3-manzanas" width="14" height="14" patternUnits="userSpaceOnUse" '
+             f'patternTransform="matrix({ma:.4f} {mb:.4f} {mc:.4f} {md:.4f} {me:.2f} {mf:.2f})">'
+             '<rect class="m3-manzana" x="2" y="2" width="10" height="10" rx="1"/>'
+             '<path class="m3-lote" d="M7,2.5 V11.5 M2.5,7 H11.5"/></pattern>')
+    o.append(f'<polygon points="{poli(TIERRA, T)}" fill="url(#m3-manzanas)"/>')
 
     # Avenidas
     for av in AVENIDAS:
@@ -286,11 +302,13 @@ def generar():
     (ax0, ay0), (ax1, ay1) = PISTA
     largo = math.hypot(ax1 - ax0, ay1 - ay0); ang = math.degrees(math.atan2(ay1 - ay0, ax1 - ax0)) - 90
     pista = rotado((ax0 + ax1) / 2, (ay0 + ay1) / 2, 9, largo, ang)
-    o.append(f'<polygon class="m3-pista" points="{poli(pista, T + 0.3)}"/>')
-    o.append(f'<polyline class="m3-pista-linea" points="{poli([(ax0, ay0), (ax1, ay1)], T + 0.4)}"/>')
     ux, uy = (ax1 - ax0) / largo, (ay1 - ay0) / largo          # dirección de la pista
     nx, ny = uy, -ux                                            # perpendicular, hacia el norte
     mx_, my_ = (ax0 + ax1) / 2, (ay0 + ay1) / 2
+    campo = rotado(mx_ + nx * 16, my_ + ny * 16, 70, largo + 26, ang)
+    o.append(f'<polygon class="m3-campo" points="{poli(campo, T + 0.1)}"/>')
+    o.append(f'<polygon class="m3-pista" points="{poli(pista, T + 0.3)}"/>')
+    o.append(f'<polyline class="m3-pista-linea" points="{poli([(ax0, ay0), (ax1, ay1)], T + 0.4)}"/>')
     plataforma = rotado(mx_ + nx * 20, my_ + ny * 20, 22, 70, ang)
     o.append(f'<polygon class="m3-plataforma" points="{poli(plataforma, T + 0.3)}"/>')
     calle_rodaje = [(mx_ - ux * 30, my_ - uy * 30), (mx_ - ux * 30 + nx * 12, my_ - uy * 30 + ny * 12)]
@@ -324,14 +342,14 @@ def generar():
     nxp, nyp = (py1 - py0) / largo_p, -(px1 - px0) / largo_p
     zona_pista = rotado((px0 + px1) / 2 + nxp * 18, (py0 + py1) / 2 + nyp * 18, 80, largo_p + 30, ang_pista)
     zonas_libres = [forma_organica(pq["x"], pq["y"], pq["rx"] + 6, pq["ry"] + 5) for pq in PARQUES] + [zona_pista]
-    for _ in range(1500):
+    for _ in range(2600):
         x, y = azar() * 1000, azar() * 600
         if not adentro(x, y, TIERRA) or dist_costa(x, y) < 12:
             continue
         if any(math.hypot(x - a, y - b) < 44 for a, b in reservados) or any(adentro(x, y, z) for z in zonas_libres):
             continue
         centro = math.hypot(x - 300, y - 400)
-        if azar() > max(0.08, 1 - centro / 400):
+        if azar() > max(0.22, 1 - centro / 400):
             continue
         costa_pocitos = 360 < x < 560 and dist_costa(x, y) < 30
         if costa_pocitos:
@@ -361,8 +379,8 @@ def generar():
     tx_, ty_ = mx_ - ux * 40 + nx * 30, my_ - uy * 40 + ny * 30
     objetos.append((P(tx_, ty_)[1], caja_clase(tx_ - 2, ty_ - 2, 4, 4, 26, T, "m3-torre")
                     + caja_clase(tx_ - 4, ty_ - 4, 8, 8, 5, T + 26, "m3-torre-cabina")))
-    dx_, dy_ = ax1 - ux * 52, ay1 - uy * 52
-    objetos.append((P(dx_, dy_)[1], avion(dx_, dy_, angulo_hacia(ux, uy), T + 9, sombra_z=T + 0.5)))
+    dx_, dy_ = ax0 - ux * 12, ay0 - uy * 12          # ya despegó: pasando la punta oeste de la pista, en el aire
+    objetos.append((P(dx_, dy_)[1] + 40, avion(dx_, dy_, angulo_hacia(-ux, -uy), T + 18, sombra_z=T + 0.5)))
 
     # Contenedores en los muelles del puerto
     colores = ["dorado", "blanco", "azul", "dorado", "azul", "blanco"]
@@ -385,6 +403,12 @@ def generar():
                         objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3, 3.2, "m3-arbol--pino")))
                 elif adentro(tx, ty, margen) and not hueco and (gx_ + gy_) % 5 != 0:
                     objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3)))
+    # Arbolado de calle en Carrasco (pocos, sin tapar el nombre del barrio)
+    for k in range(70):
+        tx, ty = 790 + azar() * 210, 215 + azar() * 80
+        cerca_nombre = abs(tx - 860) < 40 and abs(ty - 285) < 14
+        if adentro(tx, ty, TIERRA) and dist_costa(tx, ty) > 10 and not adentro(tx, ty, zona_pista) and not cerca_nombre:
+            objetos.append((P(tx, ty)[1], arbol(tx, ty, T + 0.3, 2.8)))
     for _, svg in sorted(objetos, key=lambda o_: o_[0]):
         o.append(svg)
 
@@ -414,6 +438,8 @@ def generar():
 
     # El Parque en miniatura: terreno dorado, depósitos, oficina, camión y un pin que flota arriba
     X, Y = PARQUE["x"], PARQUE["y"]
+    o.append(f'<a class="m3-pln-link" href="{GOOGLE_MAPS}" target="_blank" rel="noopener noreferrer" '
+             'aria-label="Ver el Parque Logístico Nacional en Google Maps"><title>Ver en Google Maps</title>')
     terreno = [(X - 28, Y - 20), (X + 28, Y - 20), (X + 28, Y + 20), (X - 28, Y + 20)]
     o += paredes(terreno, T, T + 3, "m3-pln-terreno-lado")
     o.append(f'<polygon class="m3-pln-terreno" points="{poli(terreno, T + 3)}"/>')
@@ -435,6 +461,7 @@ def generar():
     o.append(deposito_pln(X - 25, Y + 7, 12, 9, 7))
     o.append(caja_clase(X + 6, Y + 6, 5, 11, 5, T + 3, "m3-pln-camion"))
     o.append(caja_clase(X + 14, Y + 6, 5, 11, 5, T + 3, "m3-pln-camion"))
+    o.append('</a>')
     # Punto de salida de los arcos: techo del depósito más alto del Parque
     ALTO_COL = 20
     SALIDA = (X + 13, Y - 7)
@@ -455,8 +482,11 @@ def generar():
         o.append(f'<text class="pin-txt" x="{tx}" y="{hy - 4 + dy}" text-anchor="{ancla}">{p["nombre"]}</text>')
         o.append(f'<text class="pin-km" x="{tx}" y="{hy + 16 + dy}" text-anchor="{ancla}">{p["km"]}</text>')
     bx, by = P(PARQUE["x"] + 28, PARQUE["y"] + 20, T)
+    o.append(f'<a class="m3-pln-link" href="{GOOGLE_MAPS}" target="_blank" rel="noopener noreferrer" aria-label="Ver la dirección en Google Maps">')
     o.append(f'<text class="pin-txt pin-txt--grande" x="{bx + 10}" y="{by + 22}">{PARQUE["nombre"]}</text>')
     o.append(f'<text class="pin-sub" x="{bx + 10}" y="{by + 42}">{PARQUE["detalle"]}</text>')
+    o.append(f'<text class="pin-link" x="{bx + 10}" y="{by + 62}">Ver en Google Maps ↗</text>')
+    o.append('</a>')
 
     # Tamaño del dibujo: todo lo proyectado + margen
     todos = [P(x, y, z) for x, y in borde for z in (-ESPESOR_MAQUETA, 0)] + [P(PARQUE["x"], PARQUE["y"], T + 200)]
