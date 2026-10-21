@@ -551,10 +551,9 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background:
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0 2px, rgba(255, 255, 255, 0.015) 2px 18px);
+  background: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .emp-hero-tile:hover {
@@ -562,36 +561,15 @@ section {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
-.emp-hero-tile-foto {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.1);
-  padding: 3px 7px;
-  border-radius: 5px;
-}
-
-/* Logo de la empresa, centrado en el cuadrante (provisorio, hasta
-   que la foto real reemplace el placeholder de fondo) */
+/* El logo ocupa todo el cuadrante (provisorio, hasta que haya foto
+   real; ahí este logo pasa a la chapa chica de cada empresa). */
 .emp-hero-tile-logo {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 64px;
-  height: 64px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.95);
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  padding: 30px;
 }
 
 .emp-hero-tile-logo img {
@@ -601,8 +579,10 @@ section {
 }
 
 .emp-hero-tile-label {
+  position: relative;
+  z-index: 1;
   padding: 14px;
-  background: linear-gradient(180deg, transparent, rgba(5, 10, 18, 0.8));
+  background: linear-gradient(180deg, transparent, rgba(5, 10, 18, 0.85));
 }
 
 .emp-hero-tile-label strong {
