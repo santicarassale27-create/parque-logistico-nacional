@@ -602,10 +602,10 @@ section {
 }
 
 /* Un color por empresa: se usa acá (mosaico) y en "Por qué funciona" */
-.emp-color--geligold { --tile-color: var(--gold-500); --tile-color-texto: var(--gold-300); }
-.emp-color--talfir { --tile-color: var(--azul-500); --tile-color-texto: var(--azul-300); }
-.emp-color--lamarel { --tile-color: var(--naranja-500); --tile-color-texto: var(--naranja-300); }
-.emp-color--repremar { --tile-color: var(--verde-500); --tile-color-texto: var(--verde-300); }
+.emp-color--geligold { --tile-color-texto: var(--gold-300); }
+.emp-color--talfir { --tile-color-texto: var(--azul-300); }
+.emp-color--lamarel { --tile-color-texto: var(--naranja-300); }
+.emp-color--repremar { --tile-color-texto: var(--verde-300); }
 
 .emp-block {
   scroll-margin-top: 96px; /* que el anchor (#geligold, etc.) no quede tapado por el header */
@@ -675,7 +675,7 @@ section {
   border: none;
   padding: 0;
   border-radius: 0;
-  color: var(--tile-color, var(--gold-500));
+  color: var(--gold-500);
   font-size: 0.85rem;
 }
 
