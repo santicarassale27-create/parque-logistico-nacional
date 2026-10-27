@@ -602,10 +602,10 @@ section {
 }
 
 /* Un color por empresa: se usa acá (mosaico) y en "Por qué funciona" */
-.emp-color--geligold { --tile-color-texto: var(--gold-300); }
-.emp-color--talfir { --tile-color-texto: var(--azul-300); }
-.emp-color--lamarel { --tile-color-texto: var(--naranja-300); }
-.emp-color--repremar { --tile-color-texto: var(--verde-300); }
+.emp-color--geligold { --tile-color: var(--gold-500); --tile-color-texto: var(--gold-300); }
+.emp-color--talfir { --tile-color: var(--azul-500); --tile-color-texto: var(--azul-300); }
+.emp-color--lamarel { --tile-color: var(--naranja-500); --tile-color-texto: var(--naranja-300); }
+.emp-color--repremar { --tile-color: var(--verde-500); --tile-color-texto: var(--verde-300); }
 
 .emp-block {
   scroll-margin-top: 96px; /* que el anchor (#geligold, etc.) no quede tapado por el header */
@@ -664,8 +664,19 @@ section {
 .emp-specs {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px 18px;
   margin-bottom: 24px;
+}
+
+/* Sin el recuadro redondeado del .badge genérico: solo el texto,
+   en el color de la empresa (.emp-color--<empresa> en la sección). */
+.emp-specs .badge {
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  color: var(--tile-color, var(--gold-500));
+  font-size: 0.85rem;
 }
 
 .emp-contact {
@@ -680,6 +691,19 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+/* Botones de "Escribirle a X" / "Visitar sitio": al revés del
+   .btn-outline-dark normal — llenos de entrada, blancos al pasar
+   el mouse. */
+.emp-actions .btn-outline-dark {
+  background: var(--navy-950);
+  color: var(--white);
+}
+
+.emp-actions .btn-outline-dark:hover {
+  background: var(--white);
+  color: var(--navy-950);
 }
 
 /* ---------- "Por qué funciona": franja editorial oscura ----------
