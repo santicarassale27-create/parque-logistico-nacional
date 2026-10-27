@@ -1952,6 +1952,92 @@ button[disabled] {
   .hist-sellos { padding: 72px 0; }
 }
 
+/* ---------- Historia: un fondo distinto por sección ----------
+   Solo afecta a historia.html (<body class="pagina-historia">), así El Parque y
+   Empresas, que reutilizan .hist-cifras y .hist-next, quedan como están.
+   Ritmo: crema (apertura) → azul noche (cifras) → blanco y crema alternados
+   (etapas) → azul noche (reconocimientos) → crema (siguiente) → pie oscuro. */
+:root {
+  --crema-50: #fbf7ee;
+  --crema-100: #f4ecda;
+}
+
+/* Apertura: crema cálido con un resplandor dorado detrás del collage */
+.pagina-historia .hist-open {
+  --fondo-seccion: var(--crema-50);
+  background:
+    radial-gradient(circle at 82% 30%, color-mix(in srgb, var(--gold-300) 30%, transparent), transparent 45%),
+    linear-gradient(180deg, var(--crema-50), var(--crema-100));
+}
+
+/* Cifras: franja azul noche de lado a lado, números dorados */
+.pagina-historia .hist-cifras {
+  padding: 88px 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--gold-300) 9%, transparent), transparent 55%),
+    var(--navy-950);
+}
+
+.pagina-historia .hist-cifras-list { padding: 0; background: none; border-radius: 0; }
+.pagina-historia .hist-cifras-list > div + div { border-left-color: var(--navy-700); }
+.pagina-historia .hist-cifras-list dd { color: var(--navy-300); }
+.pagina-historia .hist-cifras-list dd strong { color: var(--white); }
+
+/* Etapas: bandas blancas y crema alternadas, de borde a borde de la pantalla.
+   La banda es un ::after detrás de todo (z-index -1), así la línea dorada y
+   los puntos de cada etapa quedan siempre por encima. */
+.pagina-historia .hist-chapters {
+  padding: 0;
+  overflow-x: clip;               /* la banda sobresale a los costados sin mover la página */
+}
+
+.pagina-historia .hist-chapter,
+.pagina-historia .hist-chapter:last-child { padding: 110px 0; }
+.pagina-historia .hist-chapter::before { top: 120px; }
+
+.pagina-historia .hist-chapter--tono { --fondo-seccion: var(--crema-50); }
+
+.pagina-historia .hist-chapter--tono::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -100vw;
+  right: -100vw;
+  z-index: -1;
+  background: var(--crema-50);
+  border-top: 1px solid var(--crema-100);
+  border-bottom: 1px solid var(--crema-100);
+}
+
+.pagina-historia .hist-rail { padding-top: 110px; }
+
+/* Reconocimientos: azul noche, con los logos en tarjetas blancas */
+.pagina-historia .hist-sellos {
+  background:
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--gold-300) 8%, transparent), transparent 55%),
+    var(--navy-900);
+}
+
+.pagina-historia .hist-sellos .section-title,
+.pagina-historia .hist-sellos-list h3 { color: var(--white); }
+.pagina-historia .hist-sellos-list p { color: var(--navy-300); }
+.pagina-historia .sello-logo { border: none; box-shadow: var(--shadow-lg); }
+
+/* Siguiente: crema, para cerrar en claro antes del pie oscuro */
+.pagina-historia .hist-next { background: var(--crema-100); }
+
+@media (max-width: 960px) {
+  .pagina-historia .hist-rail { padding-top: 12px; margin-bottom: 0; }
+}
+
+@media (max-width: 760px) {
+  .pagina-historia .hist-cifras { padding: 56px 0; }
+  .pagina-historia .hist-chapter,
+  .pagina-historia .hist-chapter:last-child { padding: 72px 0; }
+  .pagina-historia .hist-chapter::before { top: 82px; }
+}
+
 /* =========================================================
    Página El Parque (rediseño)
    Todo lo de esta página empieza con "pq-". Reutiliza de Historia:

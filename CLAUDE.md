@@ -59,6 +59,10 @@ img/                        Fotos (cuando las haya)
 - Lugares de foto provisorios: `<div class="foto">` con una etiqueta `FOTO 01…08` que dice qué foto va. Al llegar la foto, se le pone `style="background-image:url(img/...)"` y se borra la etiqueta.
 - Los textos con clase `pendiente` (subrayado punteado) esperan datos reales de la empresa: no inventarlos.
 - Sin foto ni frase del fundador: la familia prefiere no aparecer en la web (decisión confirmada).
+- Fondos por sección (para que la página no sea toda blanca): apertura crema con brillo dorado, cifras en azul noche,
+  etapas alternando blanco y crema (`hist-chapter--tono` en las etapas 2 y 4), reconocimientos en azul noche y
+  "Conocé más" en crema. Los estilos van con `.pagina-historia` (clase del `<body>`), así no cambian El Parque ni
+  Empresas, que reutilizan `.hist-cifras` y `.hist-next`. Colores `--crema-50` y `--crema-100`.
 
 ## Página El Parque
 
