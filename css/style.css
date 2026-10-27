@@ -480,6 +480,270 @@ section {
   flex-shrink: 0;
 }
 
+/* =========================================================
+   Página Empresas (rediseño)
+   Apertura propia (hero oscuro + mosaico de 4 fotos, una por
+   empresa, clickeables) y una sección grande por empresa,
+   alternando foto/texto a los costados (reutiliza .feature y
+   .foto). Lo nuevo acá empieza con "emp-".
+   ========================================================= */
+
+/* ---------- Apertura: hero oscuro + mosaico de 4 empresas ----------
+   Fondo con resplandores de los 4 colores de empresa (abajo), para
+   que no sea un azul plano y anticipe los colores del mosaico. */
+.emp-hero {
+  position: relative;
+  background: var(--navy-950);
+  color: var(--white);
+  padding: 110px 0 90px;
+  overflow: hidden;
+}
+
+.emp-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(680px circle at 10% 15%, rgba(201, 162, 39, 0.46), transparent 65%),
+    radial-gradient(640px circle at 95% 10%, rgba(79, 143, 224, 0.44), transparent 65%),
+    radial-gradient(640px circle at 15% 95%, rgba(224, 134, 63, 0.4), transparent 65%),
+    radial-gradient(680px circle at 90% 90%, rgba(79, 157, 105, 0.44), transparent 65%);
+  pointer-events: none;
+}
+
+.emp-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.emp-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 14px 0 20px;
+}
+
+.emp-hero p {
+  color: var(--gray-200);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.emp-hero-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.emp-hero-tile {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.emp-hero-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* El logo ocupa todo el cuadrante (provisorio, hasta que haya foto
+   real; ahí este logo pasa a la chapa chica de cada empresa). */
+.emp-hero-tile-logo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.emp-hero-tile-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.emp-hero-tile-label {
+  position: relative;
+  z-index: 1;
+  padding: 14px;
+  background: linear-gradient(180deg, transparent, rgba(5, 10, 18, 0.85));
+}
+
+.emp-hero-tile-label strong {
+  display: block;
+  color: var(--white);
+  font-size: 0.95rem;
+}
+
+.emp-hero-tile-label span {
+  display: block;
+  margin-top: 2px;
+  color: var(--tile-color-texto, var(--gold-300));
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Un color por empresa: se usa acá (mosaico) y en "Por qué funciona" */
+.emp-color--geligold { --tile-color-texto: var(--gold-300); }
+.emp-color--talfir { --tile-color-texto: var(--azul-300); }
+.emp-color--lamarel { --tile-color-texto: var(--naranja-300); }
+.emp-color--repremar { --tile-color-texto: var(--verde-300); }
+
+.emp-block {
+  scroll-margin-top: 96px; /* que el anchor (#geligold, etc.) no quede tapado por el header */
+}
+
+.emp-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.emp-logo-chip {
+  width: 76px;
+  height: 76px;
+  border-radius: 16px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  flex-shrink: 0;
+}
+
+.emp-logo-chip img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.emp-head-text strong {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--navy-950);
+  line-height: 1.2;
+}
+
+.emp-head-text span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+.emp-text {
+  color: var(--gray-600);
+  font-size: 0.98rem;
+  margin-bottom: 20px;
+}
+
+.emp-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.emp-contact {
+  margin-bottom: 24px;
+}
+
+.emp-contact a:hover {
+  color: var(--gold-500);
+}
+
+.emp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- "Por qué funciona": franja editorial oscura ----------
+   Banda oscura de ancho completo, 3 columnas separadas por líneas,
+   cada una con un número gigante "fantasma" (solo contorno) detrás
+   del título, estilo editorial. Sin íconos, un único acento (dorado). */
+.emp-process {
+  background: var(--navy-950);
+  color: var(--white);
+  padding: 110px 0;
+}
+
+.emp-process-head {
+  max-width: 640px;
+  margin-bottom: 64px;
+}
+
+.emp-process-head .eyebrow { color: var(--gold-400); }
+.emp-process-head .eyebrow::before { background: var(--gold-400); }
+.emp-process-head .section-title { color: var(--white); }
+.emp-process-head .section-lead { color: var(--gray-200); }
+
+.emp-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.emp-process-col {
+  padding: 0 44px;
+}
+
+.emp-process-col:first-child { padding-left: 0; }
+.emp-process-col:last-child { padding-right: 0; }
+
+.emp-process-col + .emp-process-col {
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.emp-process-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 5.6rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(201, 162, 39, 0.55);
+  margin-bottom: -20px;
+}
+
+.emp-process-col h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--white);
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.emp-process-col p {
+  color: var(--gray-200);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 /* ---------- Mini timeline (home teaser) ---------- */
 .mini-timeline {
   display: grid;
@@ -1696,6 +1960,7 @@ button[disabled] {
 
 :root {
   --verde-500: #4f9d69;
+  --verde-300: #a9d9b9;
   --verde-100: #e3f1e7;
   --gold-800: #7a5f0d;
   --gold-100: #f6efd6;
@@ -1710,6 +1975,11 @@ button[disabled] {
   --mar-300: #5fb4d6;
   --arena-300: #e8d3a2;
   --arena-500: #c9ad72;
+  /* Colores de empresa (página Empresas): uno por empresa, para diferenciarlas */
+  --azul-500: #4f8fe0;
+  --azul-300: #a9c9f2;
+  --naranja-500: #e0863f;
+  --naranja-300: #f2c192;
 }
 
 .pq-title {
@@ -2289,11 +2559,18 @@ button[disabled] {
   .pq-km { margin: 0; font-size: 2rem; }
 
   .bento { grid-template-columns: repeat(2, 1fr); }
+  .emp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 760px) {
   .pq-open { padding: 56px 0 40px; }
   .pq-open-foto { aspect-ratio: 4 / 3; }
+  .emp-hero { padding: 64px 0 56px; }
+  .emp-process { padding: 72px 0; }
+  .emp-process-grid { grid-template-columns: 1fr; gap: 40px; }
+  .emp-process-col { padding: 0; }
+  .emp-process-col + .emp-process-col { border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 32px; }
+  .emp-process-num { font-size: 4.4rem; }
   .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
   .pq-ubicacion { padding: 24px 0 40px; }
