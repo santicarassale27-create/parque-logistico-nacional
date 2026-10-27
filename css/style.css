@@ -1471,7 +1471,6 @@ button[disabled] {
 }
 
 .foto--grande { aspect-ratio: 16 / 9; margin: 36px 0 8px; }
-.foto--retrato { aspect-ratio: 4 / 5; }
 
 /* La foto se "revela": una cortina del color del fondo se corre hacia arriba */
 .foto.reveal {
@@ -1835,50 +1834,6 @@ button[disabled] {
   pointer-events: none;
 }
 
-/* ---------- La voz de la familia ---------- */
-.hist-quote {
-  --fondo-seccion: var(--gray-50);
-  padding: 110px 0;
-  background: var(--gray-50);
-}
-
-.hist-quote-inner {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 72px;
-  align-items: center;
-}
-
-.hist-quote blockquote p {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: var(--navy-950);
-}
-
-.hist-quote blockquote::before {
-  content: "“";
-  display: block;
-  font-size: 5rem;
-  line-height: 0.6;
-  color: var(--gold-500);
-  margin-bottom: 18px;
-}
-
-.hist-quote blockquote footer {
-  margin-top: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.hist-quote blockquote footer span {
-  color: var(--gray-600);
-  font-size: 0.92rem;
-}
-
 /* Texto pendiente de confirmar con la empresa: subrayado punteado */
 .pendiente {
   text-decoration: underline dotted var(--gold-500);
@@ -1998,8 +1953,6 @@ button[disabled] {
   .hist-open-grid { grid-template-columns: 1fr; gap: 48px; }
   .hist-collage { height: 440px; }
 
-  .hist-quote-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hist-quote .foto--retrato { max-width: 320px; }
 
   .hist-sellos-list { grid-template-columns: 1fr; gap: 56px; }
 }
@@ -2020,7 +1973,7 @@ button[disabled] {
   .hist-chapter { padding-bottom: 80px; }
   .hist-hitos li { grid-template-columns: 1fr; gap: 6px; }
   .antes-despues { aspect-ratio: 4 / 3; }
-  .hist-quote, .hist-sellos { padding: 72px 0; }
+  .hist-sellos { padding: 72px 0; }
 }
 
 /* =========================================================
@@ -2039,6 +1992,13 @@ button[disabled] {
   --navy-100: #e7edf5;
   --navy-200: #c9d6e8;
   --navy-300: #9fb3cf;
+  /* Mar y arena del mapa 3D: colores propios para que se entienda qué son */
+  --mar-900: #0e3352;
+  --mar-700: #165a85;
+  --mar-500: #2380b0;
+  --mar-300: #5fb4d6;
+  --arena-300: #e8d3a2;
+  --arena-500: #c9ad72;
   /* Colores de empresa (página Empresas): uno por empresa, para diferenciarlas */
   --azul-500: #4f8fe0;
   --azul-300: #a9c9f2;
@@ -2122,69 +2082,187 @@ button[disabled] {
 
 .pq-mapa-svg { display: block; width: 100%; height: auto; }
 
-.stop-agua-1 { stop-color: var(--navy-900); }
-.stop-agua-2 { stop-color: var(--navy-950); }
+.stop-agua-1 { stop-color: var(--mar-500); }
+.stop-agua-2 { stop-color: var(--mar-700); }
 .stop-halo-1 { stop-color: var(--gold-500); stop-opacity: 0.35; }
 .stop-halo-2 { stop-color: var(--gold-500); stop-opacity: 0; }
 
-.mapa-tierra { fill: var(--navy-800); }
-.mapa-trama-linea { fill: none; stroke: var(--white); stroke-opacity: 0.05; stroke-width: 1; }
-.mapa-costa { fill: none; stroke: var(--gold-300); stroke-opacity: 0.6; stroke-width: 1.5; stroke-linejoin: round; }
-.mapa-costa-brillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.12; stroke-width: 9; stroke-linejoin: round; }
-.mapa-anillos circle { fill: none; stroke: var(--gold-300); stroke-opacity: 0.18; stroke-width: 1; stroke-dasharray: 4 6; }
-.pin-km { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--gold-400); }
+/* Mapa 3D (lo genera herramientas/generar-mapa.py) */
+.m3-tablero-lado { fill: var(--mar-900); stroke: var(--mar-700); stroke-width: 1; }
+.m3-agua { stroke: var(--mar-300); stroke-opacity: 0.5; stroke-width: 1; }
+.m3-tierra-lado { fill: var(--navy-700); stroke: var(--navy-700); stroke-width: 0.6; }
+.m3-tierra { fill: var(--navy-800); }
+.m3-avenida { fill: none; stroke: var(--white); stroke-opacity: 0.16; stroke-width: 2.5; stroke-linecap: round; }
+.m3-costa { fill: none; stroke: var(--gold-300); stroke-opacity: 0.7; stroke-width: 1.5; stroke-linejoin: round; }
+.m3-costa-brillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.14; stroke-width: 10; stroke-linejoin: round; }
+.m3-anillo { fill: none; stroke: var(--gold-300); stroke-opacity: 0.22; stroke-width: 1; stroke-dasharray: 4 6; }
+.m3-edif-lado { fill: var(--navy-700); stroke: var(--navy-800); stroke-width: 0.5; }
+.m3-edif-techo { fill: var(--navy-600); }
+.m3-edif--claro .m3-edif-techo { fill: var(--navy-300); fill-opacity: 0.55; }
+.m3-edif--luz .m3-edif-techo { fill: var(--gold-300); fill-opacity: 0.85; }
 
-.mapa-calle { fill: none; stroke: var(--white); stroke-opacity: 0.12; stroke-width: 3; stroke-linecap: round; }
-.mapa-calle--fina { stroke-width: 1.5; }
+/* Detalles: parques, hipódromo, rambla, aeropuerto, puerto y barcos */
+.m3-parque { fill: var(--verde-500); fill-opacity: 0.42; stroke: var(--verde-500); stroke-opacity: 0.7; stroke-width: 1; }
+.m3-sendero { fill: none; stroke: var(--gold-100); stroke-opacity: 0.45; stroke-width: 1.5; stroke-linecap: round; }
+.m3-arbol-sombra { fill: var(--navy-950); fill-opacity: 0.35; }
+.m3-arbol-tronco { stroke: var(--gold-800); stroke-width: 1.4; }
+.m3-arbol-copa { fill: var(--verde-500); }
+.m3-arbol-brillo { fill: var(--verde-100); fill-opacity: 0.45; }
+.m3-parque--bosque { fill-opacity: 0.55; }
+.m3-arbol-copa.m3-arbol--pino { fill: var(--verde-500); filter: brightness(0.8); }
+.m3-rambla { fill: none; stroke: var(--white); stroke-opacity: 0.22; stroke-width: 2; stroke-linejoin: round; }
+.m3-pista { fill: var(--gray-600); fill-opacity: 0.9; }
+.m3-campo { fill: var(--navy-800); }
+.m3-manzana { fill: var(--navy-700); fill-opacity: 0.55; }
+.m3-lote { fill: none; stroke: var(--navy-800); stroke-width: 0.6; }
 
-.mapa-barrio {
+/* El Parque y su cartel llevan a Google Maps */
+.m3-pln-link { cursor: pointer; }
+.m3-pln-link:hover .m3-pln-terreno,
+.m3-pln-link:focus-visible .m3-pln-terreno { fill-opacity: 0.7; stroke-width: 2.5; }
+.m3-pln-link:hover .pin-link { text-decoration: underline; }
+.m3-pln-link:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 4px; }
+.pin-link {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--gold-400);
+  paint-order: stroke;
+  stroke: var(--navy-950);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.m3-plataforma { fill: var(--gray-600); fill-opacity: 0.6; }
+.m3-rodaje { fill: none; stroke: var(--gray-400); stroke-width: 3; }
+.m3-avion { fill: var(--white); stroke: var(--gray-400); stroke-width: 0.5; }
+.m3-avion-sombra { fill: var(--navy-950); fill-opacity: 0.4; }
+.m3-terminal-techo { fill: var(--navy-200); }
+.m3-terminal-lado { fill: var(--navy-600); stroke: var(--navy-300); stroke-width: 0.5; }
+.m3-torre-techo, .m3-torre-cabina-lado { fill: var(--navy-200); }
+.m3-torre-lado { fill: var(--navy-600); }
+.m3-torre-cabina-techo { fill: var(--gold-300); }
+.m3-pista-linea { fill: none; stroke: var(--white); stroke-opacity: 0.8; stroke-width: 1; stroke-dasharray: 5 5; }
+.m3-muelle { fill: var(--gray-400); }
+.m3-muelle-lado { fill: var(--gray-600); }
+.m3-cont-dorado-techo { fill: var(--gold-300); }
+.m3-cont-dorado-lado { fill: var(--gold-500); }
+.m3-cont-blanco-techo { fill: var(--white); }
+.m3-cont-blanco-lado { fill: var(--gray-200); }
+.m3-cont-azul-techo { fill: var(--navy-300); }
+.m3-cont-azul-lado { fill: var(--navy-600); }
+.m3-barco { fill: var(--gray-200); }
+.m3-barco-lado { fill: var(--navy-700); }
+.m3-barco-puente { fill: var(--white); }
+.m3-barco-puente-lado { fill: var(--gray-400); }
+.m3-estela { fill: none; stroke: var(--white); stroke-opacity: 0.25; stroke-width: 1.5; }
+.m3-barrio {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  text-anchor: middle;
   fill: var(--white);
-  fill-opacity: 0.35;
+  fill-opacity: 0.4;
 }
-
-.mapa-agua-txt {
+.m3-agua-txt {
   font-family: var(--font-display);
   font-size: 20px;
   font-style: italic;
+  text-anchor: middle;
   fill: var(--white);
-  fill-opacity: 0.2;
+  fill-opacity: 0.55;
 }
 
-.mapa-agua-txt--chica { font-size: 14px; }
+.m3-pin-base { fill: var(--white); fill-opacity: 0.18; stroke: var(--white); stroke-opacity: 0.5; }
+.m3-pin-tallo { stroke: var(--white); stroke-width: 2; }
+.m3-pin-cabeza { fill: var(--white); stroke: var(--navy-950); stroke-width: 2; }
+.m3-pin-ojo { fill: var(--navy-950); }
 
-/* Rutas y cartelitos de km: se dibujan cuando el mapa aparece en pantalla */
+/* El Parque en miniatura: terreno dorado, depósitos y un pin que flota */
+.m3-pln-terreno { fill: var(--gold-500); fill-opacity: 0.35; stroke: var(--gold-400); stroke-width: 1.2; }
+.m3-pln-terreno-lado { fill: var(--gold-800); }
+.m3-pln-dep-techo { fill: var(--white); }
+.m3-pln-dep-lado { fill: var(--gold-300); stroke: var(--gold-400); stroke-width: 0.5; }
+.m3-pln-claraboya { fill: none; stroke: var(--gold-300); stroke-width: 1.2; }
+.m3-pln-porton { fill: var(--navy-800); }
+.m3-pln-camion-techo { fill: var(--white); }
+.m3-pln-camion-lado { fill: var(--navy-600); }
+/* Zona Franca (Zonamerica): campus con oficinas de vidrio y naves logísticas */
+.m3-zf-cesped { fill: var(--verde-500); fill-opacity: 0.3; }
+.m3-zf-anillo { fill: none; stroke: var(--gray-200); stroke-opacity: 0.55; stroke-width: 2.5; }
+.m3-zf-estac { fill: var(--gray-600); fill-opacity: 0.7; }
+.m3-zf-cerco { fill: none; stroke: var(--gold-300); stroke-opacity: 0.5; stroke-width: 1; stroke-dasharray: 3 3; }
+.m3-vidrio-techo { fill: var(--navy-100); }
+.m3-vidrio-lado { fill: var(--navy-300); stroke: var(--navy-200); stroke-width: 0.5; }
+.m3-vidrio-piso { fill: none; stroke: var(--white); stroke-opacity: 0.55; stroke-width: 0.8; }
+.m3-nave-techo { fill: var(--gray-100); }
+.m3-nave-lado { fill: var(--gray-400); }
+
+/* Costa: agua clara, arena, espuma, rocas y Puerto del Buceo */
+.m3-agua-baja { fill: var(--mar-300); fill-opacity: 0.35; }
+.m3-arena { fill: var(--arena-300); }
+.m3-arena-mojada { fill: none; stroke: var(--arena-500); stroke-width: 2; stroke-linecap: round; }
+.m3-espuma {
+  fill: none;
+  stroke: var(--white);
+  stroke-opacity: 0.55;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 10 7;
+  animation: m3-olas 6s linear infinite;
+}
+.m3-espuma--2 { stroke-opacity: 0.25; stroke-dasharray: 6 12; animation-duration: 9s; }
+
+@keyframes m3-olas {
+  to { stroke-dashoffset: -68; }
+}
+
+.m3-roca { fill: var(--gray-400); }
+.m3-roca-lado { fill: var(--gray-600); }
+/* Ondas tipo radar que salen del Parque y recorren todo el mapa */
+.m3-onda {
+  fill: none;
+  stroke: var(--gold-400);
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: m3-onda 7.5s cubic-bezier(0.25, 0.6, 0.4, 1) infinite;
+}
+
+.m3-onda--2 { animation-delay: 2.5s; }
+.m3-onda--3 { animation-delay: 5s; }
+
+@keyframes m3-onda {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  70% { opacity: 0.25; }
+  100% { transform: scale(17); opacity: 0; }
+}
+
+/* Arcos en el aire desde el Parque: se dibujan cuando el mapa aparece */
 .mapa-ruta { fill: none; stroke: var(--gold-400); stroke-width: 2.5; stroke-linecap: round; }
-
 .pq-mapa.reveal .mapa-ruta { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s ease 0.3s; }
 .pq-mapa.reveal.visible .mapa-ruta { stroke-dashoffset: 0; }
-
-.pin path { stroke: var(--navy-950); stroke-width: 2; }
-.pin--punto path { fill: var(--white); }
-.pin--punto circle { fill: var(--navy-950); }
-.pin--parque path { fill: var(--gold-500); }
-.pin--parque > circle:not(.pin-onda) { fill: var(--white); }
 
 .pin-txt { font-size: 15px; font-weight: 700; fill: var(--white); }
 .pin-txt--grande { font-size: 19px; }
 .pin-sub { font-size: 13px; fill: var(--white); fill-opacity: 0.6; }
+.pin-km { font-family: var(--font-display); font-size: 16px; font-weight: 600; fill: var(--gold-400); }
 
-/* Onda que "late" alrededor del Parque */
-.pin-onda {
-  fill: var(--gold-500);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pin-onda 2.4s ease-out infinite;
+/* Contorno oscuro detrás de los textos del mapa: se leen aunque pasen sobre edificios o grúas */
+.pin-txt, .pin-km, .pin-sub, .m3-barrio {
+  paint-order: stroke;
+  stroke: var(--navy-950);
+  stroke-width: 5px;
+  stroke-linejoin: round;
 }
 
-@keyframes pin-onda {
-  from { transform: scale(0.6); opacity: 0.5; }
-  to { transform: scale(2.6); opacity: 0; }
-}
+.m3-barrio { stroke-width: 3px; stroke-opacity: 0.8; }
 
+@media (prefers-reduced-motion: reduce) {
+  .m3-onda { animation: none; opacity: 0; }
+  .m3-espuma { animation: none; }
+}
 
 .pq-distancias {
   list-style: none;
@@ -2488,7 +2566,6 @@ button[disabled] {
 
 
 @media (prefers-reduced-motion: reduce) {
-  .pin-onda { animation: none; opacity: 0; }
   .lote, .lote polygon { transition: none; }
 }
 
