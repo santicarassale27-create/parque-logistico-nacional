@@ -735,8 +735,11 @@ section {
   font-size: 4.8rem;
   line-height: 0.9;
   letter-spacing: -0.04em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--gold-500);
+  /* Contorno limpio: el número se rellena con el color del fondo y el borde se pinta por debajo
+     (paint-order). Así se tapan las líneas internas donde se superponen las piezas de la letra. */
+  color: var(--navy-950);
+  -webkit-text-stroke: 3px var(--gold-500);
+  paint-order: stroke fill;
   transition: color 0.35s ease, text-shadow 0.35s ease, -webkit-text-stroke-color 0.35s ease;
 }
 
