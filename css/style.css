@@ -3005,7 +3005,31 @@ button[disabled] {
   font-size: 0.95rem;
 }
 
-.rse-convenios .card { border-top: 3px solid var(--gold-500); }
+/* ---------- Convenios y donaciones: listas abiertas, sin tarjetas ----------
+   Nada de dos cajas con borde: dos columnas de texto separadas por
+   una línea fina (mismo recurso que Escuela de Conducción), para que
+   la información respire en vez de quedar encuadrada. */
+.rse-convenios-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 40px;
+}
+
+.rse-convenios-col { padding: 0 48px; }
+.rse-convenios-col:first-child { padding-left: 0; }
+
+.rse-convenios-col:last-child {
+  padding-right: 0;
+  border-left: 1px solid var(--gray-200);
+}
+
+.rse-convenios-col h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--navy-950);
+}
+
+.rse-convenios-col .check-list li:last-child { margin-bottom: 0; }
 
 /* ---------- Galería tipo collage (Escuela de Conducción) ----------
    6 fotos: una grande, cuatro chicas al lado y una tira ancha abajo.
@@ -3152,4 +3176,13 @@ button[disabled] {
   }
   .rse-escuela-ed:last-child { padding-top: 32px; border-top: 1px solid var(--gray-200); }
   .rse-escuela-year { font-size: 2.6rem; }
+
+  .rse-convenios-split { grid-template-columns: 1fr; gap: 32px; }
+  .rse-convenios-col,
+  .rse-convenios-col:first-child,
+  .rse-convenios-col:last-child {
+    padding: 0;
+    border-left: none;
+  }
+  .rse-convenios-col:last-child { padding-top: 28px; border-top: 1px solid var(--gray-200); }
 }
