@@ -2794,17 +2794,28 @@ button[disabled] {
 /* Collage: 4 fotos en grilla pareja, sin inclinar — prolijo, no un
    corcho de fotos. La variedad la da el fondo (anillos), no las fotos. */
 .rse-collage {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 20px;
-  height: 500px;
+  position: relative;
+  height: 520px;
 }
 
 .rse-collage .foto {
-  height: 100%;
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
+}
+
+.rse-collage-main {
+  position: absolute;
+  inset: 0 64px 64px 0;
+}
+
+.rse-collage-accent {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 56%;
+  aspect-ratio: 4 / 3;
+  border: 6px solid var(--navy-950);
+  z-index: 1;
 }
 
 /* ---------- Cifras: siguen dentro de .rse-open, mismo fondo ----------
@@ -2857,7 +2868,9 @@ button[disabled] {
 
 @media (max-width: 960px) {
   .rse-open-grid { grid-template-columns: 1fr; gap: 48px; }
-  .rse-collage { height: 420px; }
+  .rse-collage { height: 380px; }
+  .rse-collage-main { inset: 0 48px 48px 0; }
+  .rse-collage-accent { width: 52%; }
   .rse-open-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .rse-open-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
 
@@ -2869,14 +2882,21 @@ button[disabled] {
 @media (max-width: 760px) {
   .rse-open { padding: 56px 0 0; }
 
-  /* En celular las 4 fotos pasan a una sola columna, en orden. */
+  /* En celular las dos fotos pasan a una sola columna, en orden. */
   .rse-collage {
     display: flex;
     flex-direction: column;
+    gap: 16px;
     height: auto;
   }
 
   .rse-collage .foto { aspect-ratio: 4 / 3; }
+  .rse-collage-main,
+  .rse-collage-accent {
+    position: static;
+    width: 100%;
+    border: none;
+  }
 
   .rse-open-cifras { margin-top: 48px; padding: 32px 0 40px; }
 
