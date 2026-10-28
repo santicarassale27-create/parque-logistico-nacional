@@ -2815,9 +2815,35 @@ button[disabled] {
 .rse-polaroid--4 { width: 36%; bottom: 0; right: 6%; transform: rotate(-5deg); z-index: 1; }
 .rse-polaroid--5 { width: 32%; top: 36%; left: 36%; transform: rotate(-2deg); z-index: 4; }
 
+/* ---------- Cifras (reutiliza .hist-cifras, 4 columnas) ---------- */
+.rse-cifras .hist-cifras-list { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- Galería tipo collage (Concurso de dibujo) ----------
+   6 fotos: una grande, cuatro chicas al lado y una tira ancha abajo.
+   Mismo mosaico irregular que el resto del sitio, pero acá es solo
+   fotos (sin texto adentro), para que sea una galería de verdad. */
+.rse-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 160px;
+  gap: 16px;
+}
+
+.rse-gallery .foto {
+  height: 100%;
+  border-radius: 16px;
+}
+
+.rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
+.rse-gallery-item--ancho { grid-column: span 4; }
+
 @media (max-width: 960px) {
   .rse-open-grid { grid-template-columns: 1fr; gap: 48px; }
   .rse-collage { height: 440px; }
+
+  .rse-gallery { grid-template-columns: repeat(2, 1fr); }
+  .rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
+  .rse-gallery-item--ancho { grid-column: span 2; }
 }
 
 @media (max-width: 760px) {
@@ -2839,5 +2865,16 @@ button[disabled] {
     flex: 0 0 auto;
     width: 220px !important;
     transform: none !important;
+  }
+
+  .rse-gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+
+  .rse-gallery-item--grande,
+  .rse-gallery-item--ancho {
+    grid-column: auto;
+    grid-row: auto;
   }
 }
