@@ -108,8 +108,8 @@ img/                        Fotos (cuando las haya)
 ## Página Empresas
 
 - Sin textos chicos arriba de los títulos (decisión del equipo, igual que el resto).
-- "Por qué funciona" (`.emp-process`): los pasos 01–03 van en círculos dorados unidos por una línea
-  que se dibuja al aparecer (en celular, la línea baja entre los pasos). Sin números gigantes en contorno.
+- "Por qué funciona" (`.emp-process`): números 01–03 grandes solo en contorno dorado, arriba del título
+  (sin pisarlo) y que se iluminan en dorado al pasar el mouse. Sin círculos (decisión del equipo).
 
 ## Página Proyecto Itapeby
 

@@ -701,8 +701,8 @@ section {
 }
 
 /* ---------- "Por qué funciona": franja oscura con los 3 pasos ----------
-   Cada paso tiene su número en un círculo dorado y una línea que lo une con el
-   siguiente (la mercadería entra, se guarda y sale). La línea se dibuja al aparecer. */
+   3 columnas separadas por líneas finas. Cada una tiene un número grande solo en contorno dorado,
+   arriba del título (sin pisarlo). Al pasar el mouse el número se ilumina: se llena de dorado y brilla. */
 .emp-process {
   background: var(--navy-950);
   color: var(--white);
@@ -720,53 +720,32 @@ section {
 .emp-process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
 }
 
-.emp-process-col { position: relative; }
+.emp-process-col { padding: 0 44px; }
+.emp-process-col:first-child { padding-left: 0; }
+.emp-process-col:last-child { padding-right: 0; }
+.emp-process-col + .emp-process-col { border-left: 1px solid color-mix(in srgb, var(--white) 14%, transparent); }
 
 .emp-process-num {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  margin-bottom: 28px;
-  border: 1.5px solid var(--gold-500);
-  border-radius: 50%;
-  background: var(--navy-950);
+  display: block;
+  margin-bottom: 22px;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
-  color: var(--gold-300);
-  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 4.8rem;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--gold-500);
+  transition: color 0.35s ease, text-shadow 0.35s ease, -webkit-text-stroke-color 0.35s ease;
 }
 
+/* Se ilumina al pasar el mouse por la columna */
 .emp-process-col:hover .emp-process-num {
-  background: var(--gold-500);
-  color: var(--navy-950);
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold-500) 18%, transparent);
+  color: var(--gold-500);
+  -webkit-text-stroke-color: var(--gold-300);
+  text-shadow: 0 0 28px color-mix(in srgb, var(--gold-500) 55%, transparent);
 }
-
-/* Línea que une cada círculo con el del paso siguiente (el último no tiene) */
-.emp-process-col:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 28px;
-  left: 68px;
-  right: -36px;
-  height: 1.5px;
-  background: linear-gradient(90deg, var(--gold-500), color-mix(in srgb, var(--gold-500) 25%, transparent));
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.4s;
-}
-
-.emp-process-col.visible::after,
-.emp-process-col:not(.reveal)::after { transform: scaleX(1); }
 
 .emp-process-col h3 {
   font-family: var(--font-display);
@@ -2722,18 +2701,10 @@ button[disabled] {
   .pq-open-foto { aspect-ratio: 4 / 3; }
   .emp-hero { padding: 64px 0 56px; }
   .emp-process { padding: 72px 0; }
-  /* En celular los pasos van uno debajo del otro: círculo a la izquierda y la línea baja hasta el siguiente */
   .emp-process-grid { grid-template-columns: 1fr; gap: 40px; }
-  .emp-process-col { padding-left: 76px; }
-  .emp-process-num { position: absolute; left: 0; top: 0; margin: 0; }
-  .emp-process-col:not(:last-child)::after {
-    top: 68px; bottom: -28px; left: 28px; right: auto;
-    width: 1.5px; height: auto;
-    background: linear-gradient(180deg, var(--gold-500), color-mix(in srgb, var(--gold-500) 25%, transparent));
-    transform-origin: top; transform: scaleY(0);
-  }
-  .emp-process-col.visible::after,
-  .emp-process-col:not(.reveal)::after { transform: scaleY(1); }
+  .emp-process-col { padding: 0; }
+  .emp-process-col + .emp-process-col { border-left: none; border-top: 1px solid color-mix(in srgb, var(--white) 14%, transparent); padding-top: 32px; }
+  .emp-process-num { font-size: 3.8rem; margin-bottom: 16px; }
   .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
   .pq-ubicacion { padding: 24px 0 40px; }
