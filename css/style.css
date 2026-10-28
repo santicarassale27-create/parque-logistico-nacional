@@ -2731,10 +2731,7 @@ button[disabled] {
    .foto, .hist-anim y .hist-open-scroll.
    ========================================================= */
 
-/* ---------- Apertura: azul noche + collage de fotos tipo "corcho" ----------
-   A diferencia de la cuadrícula de Historia y el mosaico de Empresas,
-   acá las fotos van desparramadas y giradas, como un corcho de
-   fotos — va bien con el tema (personas, comunidad, barrio). */
+/* ---------- Apertura: azul noche con fondo de anillos (como Proyecto Itapeby) ---------- */
 .rse-open {
   position: relative;
   padding: 100px 0 0;
@@ -2786,13 +2783,44 @@ button[disabled] {
   color: var(--navy-300);
 }
 
+/* Botón con forma de píldora, para que se note que baja a la próxima
+   sección (no es un link de texto suelto como en Historia/El Parque). */
 .rse-open .hist-open-scroll {
   margin-top: 32px;
+  padding: 14px 24px 14px 26px;
   color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--white) 8%, transparent);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
-/* Collage: 4 fotos en grilla pareja, sin inclinar — prolijo, no un
-   corcho de fotos. La variedad la da el fondo (anillos), no las fotos. */
+.rse-open .hist-open-scroll span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  color: var(--navy-950);
+  font-size: 0.85rem;
+}
+
+.rse-open .hist-open-scroll:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-950);
+}
+
+.rse-open .hist-open-scroll:hover span {
+  background: var(--navy-950);
+  color: var(--gold-500);
+}
+
+/* Collage: dos fotos superpuestas, sin inclinar — look editorial, no
+   la grilla pareja de Historia ni el mosaico de Empresas. */
 .rse-collage {
   position: relative;
   height: 520px;
