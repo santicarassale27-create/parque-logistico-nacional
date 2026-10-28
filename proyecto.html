@@ -110,15 +110,20 @@
       </div>
     </div>
 
-    <!-- Los seis locales y su estado (mismos estados que el plano de El Parque) -->
-    <div class="pi-locales hist-anim">
-      <ul class="pi-locales-grid">
-        <li class="pi-local pi-local--operando"><span class="pi-local-num">01</span><strong>Fármaco Uruguayo S.A.</strong><span class="pi-local-estado">Operando</span></li>
-        <li class="pi-local pi-local--operando"><span class="pi-local-num">02</span><strong>Laboratorio Gador</strong><span class="pi-local-estado">Operando</span></li>
-        <li class="pi-local pi-local--confirmada"><span class="pi-local-num">03</span><strong>Droguería Uruguay S.A.</strong><span class="pi-local-estado">Confirmada</span></li>
-        <li class="pi-local pi-local--negociacion"><span class="pi-local-num">04</span><strong>Laboratorio</strong><span class="pi-local-estado">En negociación</span></li>
-        <li class="pi-local pi-local--libre"><span class="pi-local-num">05</span><strong>Local disponible</strong><span class="pi-local-estado">A definir</span></li>
-        <li class="pi-local pi-local--libre"><span class="pi-local-num">06</span><strong>Local disponible</strong><span class="pi-local-estado">A definir</span></li>
+    <!-- Ocupación de los seis locales: barra + lista. Los estados tienen que coincidir con el plano de El Parque -->
+    <div class="pi-ocupacion hist-anim">
+      <p class="pi-ocupacion-titulo"><strong>2 de 6</strong> locales ya operando</p>
+      <div class="pi-barra" aria-hidden="true">
+        <span class="pi-barra--operando"></span><span class="pi-barra--operando"></span>
+        <span class="pi-barra--confirmada"></span><span class="pi-barra--negociacion"></span>
+        <span class="pi-barra--libre"></span><span class="pi-barra--libre"></span>
+      </div>
+      <ul class="pi-empresas">
+        <li class="pi-empresa--operando"><span class="pi-empresa-nombre">Fármaco Uruguayo S.A.</span><span class="pi-empresa-estado">Operando</span></li>
+        <li class="pi-empresa--operando"><span class="pi-empresa-nombre">Laboratorio Gador</span><span class="pi-empresa-estado">Operando</span></li>
+        <li class="pi-empresa--confirmada"><span class="pi-empresa-nombre">Droguería Uruguay S.A.</span><span class="pi-empresa-estado">Confirmada</span></li>
+        <li class="pi-empresa--negociacion"><span class="pi-empresa-nombre">Un laboratorio</span><span class="pi-empresa-estado">En negociación</span></li>
+        <li class="pi-empresa--libre"><span class="pi-empresa-nombre">Dos locales</span><span class="pi-empresa-estado">A definir</span></li>
       </ul>
       <p class="pi-locales-nota">Cada local lo opera directamente su arrendatario. <a href="parque.html" class="pi-sin-corte">Ver el plano en El Parque →</a></p>
     </div>

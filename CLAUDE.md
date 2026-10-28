@@ -109,9 +109,9 @@ img/                        Fotos (cuando las haya)
 
 - Rediseño pedido por el equipo (Alfonso, con su sesión de Claude). Estilos con prefijo `pi-` en `css/style.css`,
   colgados de `<body class="pagina-proyecto">`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-open-scroll` y `.hist-next`.
-- Orden: apertura (azul noche con curvas de nivel + sello dorado que gira "Proyecto de Interés Municipal · 2025"),
+- Orden: apertura (fondo blanco + sello dorado que gira "Proyecto de Interés Municipal · 2025"),
   cifras (700 m de muro, 6 locales, ~200 puestos previstos, 2025), transformación en 3 pasos (2016, 2022, Hoy),
-  los seis locales con su estado, mejoras para el barrio (mosaico de fotos), franja dorada de Interés Municipal
+  ocupación de los seis locales (barra de 6 + lista simple de empresas; no repetir el estilo del plano de El Parque), mejoras para el barrio (mosaico de fotos), franja dorada de Interés Municipal
   y "Conocé nuestro trabajo con la comunidad".
 - Sin textos chicos arriba de los títulos, sin íconos y sin nombres ni frases de la familia (mismas decisiones que el resto).
 - Los estados de los seis locales tienen que coincidir con el plano de El Parque (`DEPOSITOS` en `generar-plano.py`).
