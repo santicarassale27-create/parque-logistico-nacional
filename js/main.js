@@ -20,8 +20,7 @@ var FORM_KEYS = {
   geligold: "",  // geligold@pln.com.uy
   talfir: "",    // operativa@talfir.com.uy
   lamarel: "",   // lamarel@lamarel.com
-  repremar: "",  // logistics@repremar.com
-  rse: ""        // geligold@pln.com.uy
+  repremar: ""   // logistics@repremar.com
 };
 
 var FORM_SUBJECTS = {
@@ -29,8 +28,7 @@ var FORM_SUBJECTS = {
   geligold: "Consulta para Geligold — Depósito nacional",
   talfir: "Consulta para Talfir — Depósito aduanero",
   lamarel: "Consulta para Lamarel — Flete terrestre",
-  repremar: "Consulta para Repremar — Fletes aéreos y marítimos",
-  rse: "Consulta sobre Responsabilidad Social"
+  repremar: "Consulta para Repremar — Fletes aéreos y marítimos"
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -41,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
   initContactForm();
   initHistoria();
   initPlano();
+  initRelato();
+  initEspacios();
+  initSelects();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -310,6 +311,179 @@ function initPlano() {
     el.addEventListener("click", function () { resaltar(el.dataset.lote); });
   });
   plano.addEventListener("mouseleave", function () { resaltar(null); });
+}
+
+/* ---------- 8. Relato al bajar (página Proyecto Itapeby) ----------
+   El paso que está en el medio de la pantalla queda "activo" y la sección
+   recibe su número en data-paso. El CSS usa ese número para pintar el anillo. */
+function initRelato() {
+  var seccion = document.querySelector(".pi-relato");
+  if (!seccion || !("IntersectionObserver" in window)) return;
+  var pasos = seccion.querySelectorAll(".pi-relato-paso");
+  seccion.classList.add("js-relato");
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      pasos.forEach(function (paso) { paso.classList.toggle("activo", paso === entry.target); });
+      seccion.dataset.paso = entry.target.dataset.paso;
+    });
+  }, { rootMargin: "-45% 0px -45% 0px" }); // una franja finita en el medio de la pantalla
+
+  pasos.forEach(function (paso) { observer.observe(paso); });
+}
+
+/* ---------- 9. Espacios para el barrio (página Proyecto Itapeby) ----------
+   Al tocar un espacio de la lista se muestra su foto y su descripción.
+   Mientras la sección está en pantalla y nadie toca, pasa sola al siguiente cada 6 segundos.
+   Con "reducir movimiento" activado no cambia sola. */
+function initEspacios() {
+  var bloque = document.querySelector(".pi-espacios");
+  if (!bloque) return;
+  var botones = bloque.querySelectorAll(".pi-espacio");
+  var capas = bloque.querySelectorAll(".pi-espacios-capa");
+  var actual = 0;
+  var timer = null;
+
+  function mostrar(n) {
+    actual = n;
+    botones.forEach(function (b, k) {
+      b.classList.toggle("activo", k === n);
+      b.setAttribute("aria-pressed", k === n ? "true" : "false");
+    });
+    capas.forEach(function (c, k) { c.classList.toggle("activo", k === n); });
+  }
+
+  function arrancar() {
+    if (timer || prefersReducedMotion()) return;
+    bloque.classList.add("auto");
+    timer = setInterval(function () { mostrar((actual + 1) % botones.length); }, 6000);
+  }
+
+  function frenar() {
+    clearInterval(timer);
+    timer = null;
+    bloque.classList.remove("auto");
+  }
+
+  botones.forEach(function (b, k) {
+    b.addEventListener("click", function () {
+      frenar();
+      mostrar(k);
+      arrancar(); // vuelve a contar 6 segundos desde el que tocaron
+    });
+  });
+
+  // Solo cambia sola cuando la sección se está viendo
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) arrancar(); else frenar(); });
+    }, { threshold: 0.3 }).observe(bloque);
+  }
+}
+
+/* ---------- 10. Listas desplegables con el estilo de la web (página Contacto) ----------
+   Toma cada <select class="ct-select"> y arma al lado un botón + una lista redondeada con
+   logo, nombre y detalle (data-logo y data-detalle de cada <option>). El <select> queda
+   oculto y sigue siendo el que se envía en el formulario. Se maneja con mouse, dedo o teclado
+   (flechas, Enter, Escape). Si el JavaScript falla, se ve el <select> normal. */
+function initSelects() {
+  document.querySelectorAll("select.ct-select").forEach(function (select, n) {
+    var caja = document.createElement("div");
+    caja.className = "ct-desplegable";
+    select.parentNode.insertBefore(caja, select);
+    caja.appendChild(select);
+    select.tabIndex = -1;
+
+    var idPanel = "desplegable-" + n;
+    var boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "ct-desp-boton";
+    boton.setAttribute("aria-haspopup", "listbox");
+    boton.setAttribute("aria-expanded", "false");
+    boton.setAttribute("aria-controls", idPanel);
+    var etiqueta = document.querySelector('label[for="' + select.id + '"]');
+    if (etiqueta) {
+      etiqueta.id = etiqueta.id || select.id + "-etiqueta";
+      boton.setAttribute("aria-labelledby", etiqueta.id);
+      etiqueta.addEventListener("click", function (e) { e.preventDefault(); boton.focus(); });
+    }
+
+    var panel = document.createElement("ul");
+    panel.className = "ct-desp-panel";
+    panel.id = idPanel;
+    panel.setAttribute("role", "listbox");
+
+    // Lo que se ve de cada opción: logo (o sello PLN), nombre y detalle
+    function contenido(opcion) {
+      var logo = opcion.dataset.logo
+        ? '<span class="ct-desp-logo"><img src="' + opcion.dataset.logo + '" alt=""></span>'
+        : '<span class="ct-desp-logo ct-desp-logo--general">PLN</span>';
+      return logo + '<span class="ct-desp-textos"><strong>' + opcion.textContent + "</strong><span>" +
+        (opcion.dataset.detalle || "") + "</span></span>";
+    }
+
+    var items = Array.prototype.map.call(select.options, function (opcion, k) {
+      var li = document.createElement("li");
+      li.setAttribute("role", "presentation");
+      var op = document.createElement("button");
+      op.type = "button";
+      op.className = "ct-desp-op";
+      op.setAttribute("role", "option");
+      op.tabIndex = -1;
+      op.innerHTML = contenido(opcion);
+      op.addEventListener("click", function () { elegir(k); cerrar(true); });
+      li.appendChild(op);
+      panel.appendChild(li);
+      return op;
+    });
+
+    caja.appendChild(boton);
+    caja.appendChild(panel);
+
+    var enfocada = 0;
+    function mostrarElegida() {
+      boton.innerHTML = contenido(select.options[select.selectedIndex]) + '<span class="ct-desp-flecha" aria-hidden="true"></span>';
+      items.forEach(function (op, k) { op.setAttribute("aria-selected", k === select.selectedIndex ? "true" : "false"); });
+    }
+    function elegir(k) { select.selectedIndex = k; mostrarElegida(); }
+    function enfocar(k) {
+      enfocada = (k + items.length) % items.length;
+      items.forEach(function (op, i) { op.classList.toggle("enfocada", i === enfocada); });
+      items[enfocada].focus();
+    }
+    function abrir() {
+      caja.classList.add("abierto");
+      boton.setAttribute("aria-expanded", "true");
+      enfocar(select.selectedIndex);
+    }
+    function cerrar(volverAlBoton) {
+      caja.classList.remove("abierto");
+      boton.setAttribute("aria-expanded", "false");
+      if (volverAlBoton) boton.focus();
+    }
+
+    boton.addEventListener("click", function () {
+      if (caja.classList.contains("abierto")) cerrar(false); else abrir();
+    });
+    boton.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); abrir(); }
+    });
+    panel.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); enfocar(enfocada + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); enfocar(enfocada - 1); }
+      else if (e.key === "Escape") { e.preventDefault(); cerrar(true); }
+      else if (e.key === "Tab") { cerrar(false); }
+    });
+    // Tocar fuera de la lista la cierra
+    document.addEventListener("click", function (e) {
+      if (!caja.contains(e.target)) cerrar(false);
+    });
+    // Si el formulario se limpia después de enviar, volver a mostrar la primera opción
+    if (select.form) select.form.addEventListener("reset", function () { setTimeout(mostrarElegida, 0); });
+
+    mostrarElegida();
+  });
 }
 
 /* En celular, el mapa y el plano se deslizan dentro de su recuadro:

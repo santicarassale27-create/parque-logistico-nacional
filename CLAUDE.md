@@ -105,6 +105,38 @@ img/                        Fotos (cuando las haya)
   Acá queda solo una fila sobre el depósito del Parque.
 - Fotos de la página: FOTO 01 vista aérea, 02 pasillos del depósito, 03 oficinas, 04 showroom.
 
+## Página Empresas
+
+- Sin textos chicos arriba de los títulos (decisión del equipo, igual que el resto).
+- "Por qué funciona" (`.emp-process`): números 01–03 grandes solo en contorno dorado, arriba del título
+  (sin pisarlo) y que se iluminan en dorado al pasar el mouse. Sin círculos (decisión del equipo).
+
+## Página Proyecto Itapeby
+
+- Rediseño pedido por el equipo (Alfonso, con su sesión de Claude). Estilos con prefijo `pi-` en `css/style.css`,
+  colgados de `<body class="pagina-proyecto">`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-open-scroll` y `.hist-next`.
+- Orden: apertura (fondo blanco + sello dorado que gira "Proyecto de Interés Municipal · 2025"),
+  cifras (700 m de muro, 6 locales, ~200 puestos previstos, 2025), transformación en 3 pasos (2016, 2022, Hoy),
+  "relato al bajar" de los seis locales (anillo fijo que se completa en 4 pasos; lo maneja `initRelato()` en `main.js`;
+  no repetir el estilo del plano de El Parque), mejoras para el barrio (lista de los 4 espacios + foto grande que cambia al tocar
+  y sola cada 6 segundos, `initEspacios()` en `main.js`; nunca texto encima de las fotos), franja dorada de Interés Municipal
+  y "Conocé nuestro trabajo con la comunidad".
+- Sin textos chicos arriba de los títulos, sin íconos y sin nombres ni frases de la familia (mismas decisiones que el resto).
+- Los estados de los seis locales tienen que coincidir con el plano de El Parque (`DEPOSITOS` en `generar-plano.py`).
+- Fotos: FOTO 01 vista aérea, 02 antes, 03 limpieza y muro, 04 locales, 05 cancha, 06 plaza, 07 pasajes, 08 cañada.
+
+## Página Contacto
+
+- Rediseño inspirado en costaoriental.com/contacto. Estilos con prefijo `ct-`, colgados de `<body class="pagina-contacto">`.
+- Orden: título grande "Contactanos", dos columnas (datos: dirección, las 4 empresas con su logo chico, "Trabajá con nosotros";
+  formulario con campos redondeados) y al final el mapa de Google Maps a todo el ancho, en colores reales, con cartel
+  "Cómo llegar" que abre Google Maps.
+- "Consulta dirigida a": solo consulta general y las 4 empresas (sin Responsabilidad Social: no es una empresa).
+  Se ve como una lista desplegable propia (redondeada, con el logo de cada empresa) que arma `initSelects()` en `main.js`
+  a partir del `<select class="ct-select">`; para cambiar opciones se edita el `<select>` (con `data-logo` y `data-detalle`).
+- El formulario mantiene los mismos `id` y `name` (los usa `main.js`). Sin textos chicos arriba de los títulos.
+- Pendiente de la empresa: mail para currículums (marcado como `pendiente`) y redes sociales (no se muestran hasta tenerlas).
+
 ## Comportamientos automáticos de `js/main.js` (no hace falta tocar el HTML)
 
 - **Animaciones al hacer scroll:** se aplican solas a títulos, tarjetas, grillas, `.feature`, línea de tiempo, etc.
