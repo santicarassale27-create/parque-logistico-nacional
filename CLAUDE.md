@@ -125,6 +125,14 @@ img/                        Fotos (cuando las haya)
 - Los estados de los seis locales tienen que coincidir con el plano de El Parque (`DEPOSITOS` en `generar-plano.py`).
 - Fotos: FOTO 01 vista aérea, 02 antes, 03 limpieza y muro, 04 locales, 05 cancha, 06 plaza, 07 pasajes, 08 cañada.
 
+## Página Contacto
+
+- Rediseño inspirado en costaoriental.com/contacto. Estilos con prefijo `ct-`, colgados de `<body class="pagina-contacto">`.
+- Orden: mapa de Google Maps a todo el ancho (en grises, con cartel "Cómo llegar" que abre Google Maps), título grande
+  "Contactanos", y dos columnas: datos (dirección, las 4 empresas, "Trabajá con nosotros") y formulario con campos redondeados.
+- El formulario mantiene los mismos `id` y `name` (los usa `main.js`). Sin textos chicos arriba de los títulos.
+- Pendiente de la empresa: mail para currículums (marcado como `pendiente`) y redes sociales (no se muestran hasta tenerlas).
+
 ## Comportamientos automáticos de `js/main.js` (no hace falta tocar el HTML)
 
 - **Animaciones al hacer scroll:** se aplican solas a títulos, tarjetas, grillas, `.feature`, línea de tiempo, etc.

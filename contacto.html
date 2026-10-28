@@ -7,7 +7,7 @@
 <meta name="description" content="Contactate con el Parque Logístico Nacional y sus empresas: Geligold, Talfir, Lamarel y Repremar Logistics.">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="pagina-contacto">
 
 <header class="site-header">
   <div class="container nav-wrap">
@@ -34,96 +34,100 @@
   </div>
 </header>
 
-<section class="page-header">
-  <div class="container">
-    <div class="breadcrumb">Inicio / Contacto</div>
-    <h1>Contactanos</h1>
-    <p>¿Tenés una consulta sobre el Parque Logístico Nacional, alguna de nuestras empresas o nuestras iniciativas de responsabilidad social? Escribinos.</p>
-  </div>
+<!-- ============ MAPA (ancho completo, arriba de todo) ============
+     Mapa de Google Maps con la dirección del Parque. El cartel "Cómo llegar" abre Google Maps en una pestaña nueva. -->
+<section class="ct-mapa">
+  <iframe class="ct-mapa-iframe" title="Mapa: Parque Logístico Nacional, Dr. Pantaleón Pérez 4881, Montevideo"
+    src="https://maps.google.com/maps?q=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <a class="ct-mapa-cartel" href="https://www.google.com/maps/search/?api=1&amp;query=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay" target="_blank" rel="noopener">
+    <strong>Parque Logístico Nacional</strong>
+    <span>Dr. Pantaleón Pérez 4881 · Cómo llegar ↗</span>
+  </a>
 </section>
 
-<section>
+<!-- ============ CONTACTANOS: datos a la izquierda, formulario a la derecha ============ -->
+<section class="ct-main">
   <div class="container">
-    <div class="contact-grid">
-      <div>
-        <h2 class="section-title" style="font-size:1.5rem;">Enviá tu consulta</h2>
-        <form id="contact-form">
+    <h1 class="ct-title hist-anim">Contactanos</h1>
+    <p class="ct-lead hist-anim">Hablemos de cómo el Parque puede acompañar tu operación logística.</p>
+
+    <div class="ct-grid">
+      <div class="ct-datos hist-anim">
+        <address class="ct-principal">
+          <p>Dr. Pantaleón Pérez 4881<br>Montevideo – Uruguay</p>
+          <p><a href="tel:+59825258782">(+598) 2525 8782</a><br><a href="mailto:geligold@pln.com.uy">geligold@pln.com.uy</a></p>
+        </address>
+
+        <h2 class="ct-subtitulo">Cada empresa del Parque</h2>
+        <ul class="ct-empresas">
+          <li>
+            <strong>Geligold S.A.</strong><span class="ct-emp-rubro">Depósito nacional</span>
+            <span>Dr. Pantaleón Pérez 4881</span>
+            <span><a href="tel:+59825258782">2525 87 82</a> · <a href="mailto:geligold@pln.com.uy">geligold@pln.com.uy</a></span>
+          </li>
+          <li>
+            <strong>Talfir S.A.</strong><span class="ct-emp-rubro">Depósito aduanero</span>
+            <span>Veracierto 2990</span>
+            <span><a href="tel:+59825046182">2504 61 82</a> · <a href="mailto:operativa@talfir.com.uy">operativa@talfir.com.uy</a></span>
+          </li>
+          <li>
+            <strong>Lamarel</strong><span class="ct-emp-rubro">Flete terrestre</span>
+            <span>Dr. Pantaleón Pérez 4881</span>
+            <span><a href="tel:+59825259960">2525 99 60</a> · <a href="mailto:lamarel@lamarel.com">lamarel@lamarel.com</a></span>
+          </li>
+          <li>
+            <strong>Repremar Logistics</strong><span class="ct-emp-rubro">Fletes aéreos y marítimos</span>
+            <span>Misiones 1372, 6.º piso</span>
+            <span><a href="tel:+59829169416">2916 94 16</a> · <a href="mailto:logistics@repremar.com">logistics@repremar.com</a></span>
+          </li>
+        </ul>
+
+        <h2 class="ct-subtitulo">Trabajá con nosotros</h2>
+        <p class="ct-texto">¿Querés formar parte del equipo del Parque? Nos encantaría conocerte. Enviá tu currículum a <span class="pendiente">mail para currículums a confirmar con la empresa</span>.</p>
+      </div>
+
+      <form id="contact-form" class="ct-form hist-anim">
+        <div class="form-field">
+          <label for="nombre">Nombre y apellido <span class="ct-req" aria-hidden="true">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+        </div>
+        <div class="ct-form-fila">
           <div class="form-field">
-            <label for="nombre">Nombre y apellido</label>
-            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-          </div>
-          <div class="form-field">
-            <label for="empresa">Empresa (opcional)</label>
-            <input type="text" id="empresa" name="empresa" autocomplete="organization">
-          </div>
-          <div class="form-field">
-            <label for="email">Correo electrónico</label>
+            <label for="email">Email <span class="ct-req" aria-hidden="true">*</span></label>
             <input type="email" id="email" name="email" autocomplete="email" required>
           </div>
           <div class="form-field">
-            <label for="telefono">Teléfono (opcional)</label>
+            <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" name="telefono" autocomplete="tel">
           </div>
-          <div class="form-field">
-            <label for="area">Consulta dirigida a</label>
-            <select id="area" name="area">
-              <option value="general">Consulta general — Parque Logístico Nacional</option>
-              <option value="geligold">Geligold S.A. — Depósito nacional</option>
-              <option value="talfir">Talfir S.A. — Depósito aduanero</option>
-              <option value="lamarel">Lamarel — Flete terrestre</option>
-              <option value="repremar">Repremar Logistics — Fletes aéreos y marítimos</option>
-              <option value="rse">Responsabilidad social</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" required></textarea>
-          </div>
-          <div class="form-field form-field--check">
-            <input type="checkbox" id="consentimiento" name="consentimiento" value="Acepta" required>
-            <label for="consentimiento">Acepto que mis datos se usen solo para responder esta consulta (Ley N.º 18.331 de Protección de Datos Personales).</label>
-          </div>
-          <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-          <p id="form-status" class="form-status" role="status" aria-live="polite" hidden></p>
-        </form>
-      </div>
-
-      <div>
-        <h2 class="section-title" style="font-size:1.5rem;">Datos de contacto</h2>
-        <div class="grid" style="gap:16px;">
-          <div class="card">
-            <h3>Geligold S.A. — Depósito nacional</h3>
-            <p>Dr. Pantaleón Pérez 4881, Montevideo</p>
-            <p>Tel. <a href="tel:+59825258782">2525 87 82</a> — <a href="mailto:geligold@pln.com.uy">geligold@pln.com.uy</a></p>
-          </div>
-          <div class="card">
-            <h3>Talfir S.A. — Depósito aduanero</h3>
-            <p>Veracierto 2990, Montevideo</p>
-            <p>Tel. <a href="tel:+59825046182">2504 61 82</a> — <a href="mailto:operativa@talfir.com.uy">operativa@talfir.com.uy</a></p>
-          </div>
-          <div class="card">
-            <h3>Lamarel — Flete terrestre</h3>
-            <p>Dr. Pantaleón Pérez 4881, Montevideo</p>
-            <p>Tel. <a href="tel:+59825259960">2525 99 60</a> — <a href="mailto:lamarel@lamarel.com">lamarel@lamarel.com</a></p>
-          </div>
-          <div class="card">
-            <h3>Repremar Logistics — Fletes aéreos y marítimos</h3>
-            <p>Misiones 1372, 6.º piso, Montevideo</p>
-            <p>Tel. <a href="tel:+59829169416">2916 94 16</a> — <a href="mailto:logistics@repremar.com">logistics@repremar.com</a></p>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section-alt">
-  <div class="container">
-    <div class="eyebrow">Cómo llegar</div>
-    <h2 class="section-title" style="font-size:1.6rem;">Ubicación</h2>
-    <div class="media-placeholder" style="min-height:280px;">
-      Mapa / ubicación de Dr. Pantaleón Pérez 4881, Montevideo<br>(a integrar con Google Maps)
+        <div class="form-field">
+          <label for="empresa">Empresa</label>
+          <input type="text" id="empresa" name="empresa" autocomplete="organization">
+        </div>
+        <div class="form-field">
+          <label for="area">Consulta dirigida a</label>
+          <select id="area" name="area">
+            <option value="general">Consulta general — Parque Logístico Nacional</option>
+            <option value="geligold">Geligold S.A. — Depósito nacional</option>
+            <option value="talfir">Talfir S.A. — Depósito aduanero</option>
+            <option value="lamarel">Lamarel — Flete terrestre</option>
+            <option value="repremar">Repremar Logistics — Fletes aéreos y marítimos</option>
+            <option value="rse">Responsabilidad social</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="mensaje">Dejanos tu mensaje <span class="ct-req" aria-hidden="true">*</span></label>
+          <textarea id="mensaje" name="mensaje" required></textarea>
+        </div>
+        <div class="form-field form-field--check">
+          <input type="checkbox" id="consentimiento" name="consentimiento" value="Acepta" required>
+          <label for="consentimiento">Acepto que mis datos se usen solo para responder esta consulta (Ley N.º 18.331 de Protección de Datos Personales).</label>
+        </div>
+        <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn btn-primary ct-enviar">Enviar</button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite" hidden></p>
+      </form>
     </div>
   </div>
 </section>
