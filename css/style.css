@@ -2585,6 +2585,9 @@ button[disabled] {
   border-radius: 24px;
 }
 
+/* Los links a parque.html#plano caen justo en el plano, sin quedar tapados por el encabezado */
+.pq-plano-grid { scroll-margin-top: 130px; }
+
 .pq-plano-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .pq-iso { display: block; width: 100%; height: auto; }
 
