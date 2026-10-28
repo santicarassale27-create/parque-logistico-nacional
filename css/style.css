@@ -2873,111 +2873,59 @@ button[disabled] {
 .rse-open-cifras .hist-cifras-list dd strong { color: var(--white); }
 
 /* ---------- Convenios y donaciones: tarjetas con acento dorado arriba ---------- */
-/* ---------- Aula Ceibal: línea de tiempo con foto a un lado ----------
-   Mismo espíritu que .timeline (rail con puntos dorados), pero cada
-   etapa trae su propia foto chica al lado del texto corto. Así se
-   lee en partes cortas, no como un bloque de texto grande. */
-.rse-aula-timeline {
-  position: relative;
-  margin-top: 48px;
-  padding-left: 32px;
-  border-left: 2px solid var(--gray-200);
-}
+/* ---------- Aula Ceibal: bloques alternados, entran desde el costado ----------
+   Sin línea de tiempo ni rail: 3 bloques tipo .feature/.feature.reverse,
+   cada uno con su foto, alternando el lado. Al hacer scroll, cada mitad
+   entra "saltando" desde su costado (texto y foto se acercan al centro). */
+.rse-aula-blocks { margin-top: 48px; }
+.rse-aula-block + .rse-aula-block { margin-top: 80px; }
 
-.rse-aula-row {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 240px;
-  gap: 40px;
-  align-items: center;
-  padding-bottom: 64px;
-}
-
-.rse-aula-row:last-child { padding-bottom: 0; }
-
-/* Entrada tipo "salto": el texto sube con un rebote y la foto lo
-   sigue un poco después, en vez del fade parejo del resto del sitio. */
-.rse-aula-row.reveal {
-  opacity: 0;
-  transform: translateY(56px) scale(0.97);
-  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.rse-aula-row.reveal.visible {
-  opacity: 1;
-  transform: none;
-}
-
-.rse-aula-row-photo {
-  transition: opacity 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s;
-}
-
-.rse-aula-row.reveal .rse-aula-row-photo {
-  opacity: 0;
-  transform: translateY(30px) scale(0.9);
-}
-
-.rse-aula-row.reveal.visible .rse-aula-row-photo {
-  opacity: 1;
-  transform: none;
-}
-
-.rse-aula-row::before {
-  transition: transform 0.4s ease 0.3s;
-}
-
-.rse-aula-row.reveal::before { transform: scale(0); }
-.rse-aula-row.reveal.visible::before { transform: none; }
-
-@media (prefers-reduced-motion: reduce) {
-  .rse-aula-row.reveal,
-  .rse-aula-row.reveal .rse-aula-row-photo,
-  .rse-aula-row.reveal::before {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-.rse-aula-row::before {
-  content: "";
-  position: absolute;
-  left: -41px;
-  top: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--gold-500);
-  border: 3px solid var(--white);
-  box-shadow: 0 0 0 2px var(--gold-500);
-}
-
-.rse-aula-row-tag {
+.rse-aula-tag {
   display: inline-block;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--gold-500);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.rse-aula-row-text h3 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
+.rse-aula-block h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
   color: var(--navy-950);
 }
 
-.rse-aula-row-text p {
-  color: var(--gray-600);
-  max-width: 540px;
+.rse-aula-block p { color: var(--gray-600); }
+.rse-aula-block p strong { color: var(--navy-900); }
+
+.rse-aula-block .foto--grande { margin: 0; }
+
+/* Entrada "de costado": el lado de la foto entra desde donde está
+   (izquierda o derecha) y el texto entra desde el lado contrario,
+   con un pequeño rebote al llegar — nada de fade parejo ni rail. */
+.rse-aula-block .feature-media.reveal {
+  transform: translateX(-70px) scale(0.95);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.rse-aula-row-text p strong { color: var(--navy-900); }
+.rse-aula-block.reverse .feature-media.reveal {
+  transform: translateX(70px) scale(0.95);
+}
 
-.rse-aula-row-photo .foto {
-  aspect-ratio: 1 / 1;
-  border-radius: 18px;
-  box-shadow: var(--shadow-lg);
+.rse-aula-block > div:not(.feature-media).reveal {
+  transform: translateX(70px) scale(0.97);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.14s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.14s;
+}
+
+.rse-aula-block.reverse > div:not(.feature-media).reveal {
+  transform: translateX(-70px) scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rse-aula-block .feature-media.reveal,
+  .rse-aula-block > div:not(.feature-media).reveal {
+    transform: none;
+  }
 }
 
 .rse-convenios .card { border-top: 3px solid var(--gold-500); }
@@ -3012,8 +2960,6 @@ button[disabled] {
   .rse-gallery { grid-template-columns: repeat(2, 1fr); }
   .rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
   .rse-gallery-item--ancho { grid-column: span 2; }
-
-  .rse-aula-row { grid-template-columns: 1fr 160px; gap: 24px; }
 }
 
 @media (max-width: 760px) {
@@ -3048,12 +2994,12 @@ button[disabled] {
     grid-row: auto;
   }
 
-  .rse-aula-timeline { padding-left: 20px; }
-  .rse-aula-row {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding-bottom: 48px;
+  /* En celular no hay lados: la entrada pasa a ser vertical, como el resto del sitio. */
+  .rse-aula-block + .rse-aula-block { margin-top: 56px; }
+  .rse-aula-block .feature-media.reveal,
+  .rse-aula-block.reverse .feature-media.reveal,
+  .rse-aula-block > div:not(.feature-media).reveal,
+  .rse-aula-block.reverse > div:not(.feature-media).reveal {
+    transform: translateY(32px);
   }
-  .rse-aula-row::before { left: -29px; }
-  .rse-aula-row-photo .foto { aspect-ratio: 4 / 3; }
 }
