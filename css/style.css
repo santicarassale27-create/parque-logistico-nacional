@@ -3032,7 +3032,8 @@ button[disabled] {
    fotos están duplicadas una vez para que el loop no se note. Se
    para al pasar el mouse, para poder leer el cartel de cada foto. */
 .rse-concurso-marquee {
-  margin-top: 48px;
+  margin-top: 32px;
+  padding: 24px 0;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
@@ -3048,15 +3049,17 @@ button[disabled] {
 .rse-concurso-marquee:hover .rse-concurso-track { animation-play-state: paused; }
 
 .rse-concurso-card {
+  position: relative;
   flex: none;
   width: 320px;
   aspect-ratio: 4 / 3;
   border-radius: 18px;
-  transition: transform 0.35s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .rse-concurso-card:hover {
-  transform: scale(1.08);
+  transform: scale(1.18);
+  box-shadow: var(--shadow-lg);
   z-index: 1;
 }
 
