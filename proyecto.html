@@ -7,7 +7,7 @@
 <meta name="description" content="Proyecto Itapeby 3170: seis locales para la industria farmacéutica, plaza pública y cancha de fútbol para el barrio. Declarado Proyecto de Interés Municipal en 2025.">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="pagina-proyecto">
 
 <header class="site-header">
   <div class="container nav-wrap">
@@ -34,104 +34,195 @@
   </div>
 </header>
 
-<section class="page-header">
-  <div class="container">
-    <div class="breadcrumb">Inicio / Proyecto Itapeby</div>
-    <div class="badge" style="margin-bottom:16px;">Declarado Proyecto de Interés Municipal · Marzo 2025</div>
-    <h1>Proyecto Itapeby 3170</h1>
-    <p>Un desarrollo inmobiliario orientado a la industria farmacéutica que transformó un predio con un asentamiento irregular en un polo de empleo y mejoras urbanas para el barrio.</p>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="eyebrow">Antecedentes</div>
-    <h2 class="section-title">De un asentamiento irregular a un proyecto de interés municipal</h2>
-    <p class="section-lead">En 2016 comenzó a formarse un asentamiento irregular en el predio lindero a nuestras instalaciones (Padrón 62089 – Itapeby N.º 3170), generando preocupación creciente por seguridad, salubridad y convivencia en la zona. Pese a los intentos de la Intendencia y el entonces dueño del predio, no se logró evitar su expansión ni concretar el cerramiento solicitado.</p>
-    <div class="feature">
-      <div>
-        <h3>Limpieza y cerramiento perimetral</h3>
-        <p style="color:var(--gray-600); margin:14px 0;">En 2022, Gianfranco Carassale adquirió el predio y asumió de inmediato el compromiso de cumplir con lo solicitado por la Intendencia: una limpieza integral del predio, retirando residuos, escombros y restos de antiguas ocupaciones, y finalizando con el cerramiento total mediante un muro de 700 metros lineales e iluminación, evitando así la expansión de asentamientos y contribuyendo a la seguridad del barrio.</p>
-      </div>
-      <div class="feature-media">
-        <div class="media-placeholder">Foto antes/después del predio<br>(placeholder)</div>
+<!-- ============ APERTURA ============ -->
+<section class="pi-open">
+  <div class="container pi-open-grid">
+    <div class="pi-open-text">
+      <h1>Proyecto Itapeby 3170</h1>
+      <p class="pi-open-lead">Un predio abandonado convertido en un polo de empleo para la industria farmacéutica, con espacios nuevos para el barrio.</p>
+      <p class="pi-open-sub">Seis locales de última generación, una calle de acceso propia y mejoras urbanas pensadas junto al Municipio F de Montevideo.</p>
+      <a href="#transformacion" class="hist-open-scroll">Ver la transformación <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="pi-open-media">
+      <div class="foto pi-open-foto hist-anim"><span class="foto-label">FOTO 01 · Vista aérea del predio hoy</span></div>
+      <!-- Sello que gira: el texto va sobre un círculo (textPath) -->
+      <div class="pi-sello" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs><path id="pi-sello-circulo" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+          <circle class="pi-sello-fondo" cx="100" cy="100" r="96"/>
+          <circle class="pi-sello-borde" cx="100" cy="100" r="56"/>
+          <g class="pi-sello-giro"><text class="pi-sello-texto"><textPath href="#pi-sello-circulo">PROYECTO DE INTERÉS MUNICIPAL · MUNICIPIO F ·</textPath></text></g>
+          <text class="pi-sello-anio" x="100" y="108">2025</text>
+        </svg>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section-alt">
+<!-- ============ CIFRAS ============ -->
+<section class="pi-cifras">
   <div class="container">
-    <div class="eyebrow">El desarrollo</div>
-    <h2 class="section-title">Seis locales de última generación para la industria farmacéutica</h2>
-    <p class="section-lead">Surgió así la idea de desarrollar un negocio inmobiliario apuntando a clientes de la industria farmacéutica, que en otras zonas de Montevideo enfrentaban intimaciones de retiro por las molestias que generaba su operativa en la vía pública, tanto en el tránsito como con los vecinos.</p>
-    <div class="grid grid-2">
-      <div class="card">
-        <div class="card-icon">🏭</div>
-        <h3>Empresas instaladas</h3>
-        <p>Fármaco Uruguayo S.A. y Laboratorio Gador ya están instalados y operativos. Droguería Uruguay S.A. es otro interesado confirmado. Cada local es operado directamente por su arrendatario.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">👷</div>
-        <h3>Impacto en el empleo</h3>
-        <p>Se prevé un incremento de fuentes laborales del entorno de 200 personas, tanto en la operativa de las empresas como en el ingreso de funcionarios afectados a las mismas.</p>
-      </div>
-    </div>
-    <p style="margin-top:28px; color:var(--gray-600); max-width:720px;">Tanto la operativa como el ingreso de funcionarios de estas empresas se realiza únicamente a través de la calle Itapeby N.º 3170, para lo cual se construyó una calle que permite el ingreso de forma directa, evitando así impactos de tránsito en otras vías del barrio.</p>
+    <dl class="pi-cifras-list">
+      <div class="hist-anim"><dt><span data-counter>700</span> m</dt><dd>de muro perimetral con iluminación</dd></div>
+      <div class="hist-anim"><dt data-counter>6</dt><dd>locales para la industria farmacéutica</dd></div>
+      <div class="hist-anim"><dt><span data-counter>200</span></dt><dd>nuevos puestos de trabajo previstos, aproximadamente</dd></div>
+      <div class="hist-anim"><dt>2025</dt><dd>declarado Proyecto de Interés Municipal</dd></div>
+    </dl>
   </div>
 </section>
 
-<section>
+<!-- ============ TRANSFORMACIÓN ============ -->
+<section class="pi-trans" id="transformacion">
   <div class="container">
-    <div class="eyebrow">Mejoras urbanas</div>
-    <h2 class="section-title">Más allá de los locales: espacio público para el barrio</h2>
-    <p class="section-lead">El proyecto sigue los lineamientos de nuestro compromiso social con el barrio, incorporando mejoras concretas para el entorno además de los locales industriales.</p>
-    <div class="grid grid-4">
-      <div class="card">
-        <div class="card-icon">🚶</div>
-        <h3>Pasajes peatonales</h3>
-        <p>Recuperación de pasajes peatonales existentes en la zona.</p>
+    <h2 class="pi-title hist-anim">Del abandono a un proyecto para el barrio</h2>
+    <ol class="pi-pasos">
+      <li class="pi-paso hist-anim">
+        <div class="foto pi-paso-foto foto--fondo"><span class="foto-label">FOTO 02 · El predio antes (2016–2021)</span></div>
+        <span class="pi-paso-anio">2016</span>
+        <h3>Un predio que preocupaba al barrio</h3>
+        <p>En el predio lindero al Parque (Padrón 62089 – Itapeby N.º 3170) comenzó a formarse un asentamiento irregular. Pese a los intentos de la Intendencia y del entonces dueño, no se logró evitar su expansión ni concretar el cerramiento.</p>
+      </li>
+      <li class="pi-paso hist-anim">
+        <div class="foto pi-paso-foto"><span class="foto-label">FOTO 03 · Limpieza y muro perimetral (2022)</span></div>
+        <span class="pi-paso-anio">2022</span>
+        <h3>Limpieza integral y muro de 700 m</h3>
+        <p>Con el predio adquirido, se cumplió lo que pedía la Intendencia: se retiraron residuos, escombros y restos de antiguas ocupaciones, y se cerró todo el perímetro con un muro de 700 metros lineales e iluminación.</p>
+      </li>
+      <li class="pi-paso hist-anim">
+        <div class="foto pi-paso-foto"><span class="foto-label">FOTO 04 · Los locales en funcionamiento</span></div>
+        <span class="pi-paso-anio">Hoy</span>
+        <h3>Un polo de empleo farmacéutico</h3>
+        <p>El predio recuperado es hoy un desarrollo de seis locales para la industria farmacéutica, con empresas ya instaladas y operando.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ EL DESARROLLO: relato al bajar ============
+     El anillo de la izquierda queda fijo y cambia según el paso que se está leyendo
+     (lo maneja initRelato() en js/main.js con el atributo data-paso).
+     Cada parte del anillo es un local, en el mismo orden que el plano de El Parque. -->
+<section class="pi-relato" data-paso="1">
+  <div class="container pi-relato-grid">
+    <div class="pi-relato-lado">
+      <div class="pi-relato-fijo">
+        <div class="pi-relato-anillo">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="pi-relato-pista" cx="100" cy="100" r="80"/>
+            <path class="pi-relato-seg pi-relato-seg--op" style="--i:0" d="M104.5,20.1 A80,80 0 0 1 166.9,56.2"/>
+            <path class="pi-relato-seg pi-relato-seg--op" style="--i:1" d="M171.4,63.9 A80,80 0 0 1 171.4,136.1"/>
+            <path class="pi-relato-seg pi-relato-seg--conf" style="--i:2" d="M166.9,143.8 A80,80 0 0 1 104.5,179.9"/>
+            <path class="pi-relato-seg pi-relato-seg--neg" style="--i:3" d="M95.5,179.9 A80,80 0 0 1 33.1,143.8"/>
+            <path class="pi-relato-seg pi-relato-seg--lib" style="--i:4" d="M28.6,136.1 A80,80 0 0 1 28.6,63.9"/>
+            <path class="pi-relato-seg pi-relato-seg--lib" style="--i:5" d="M33.1,56.2 A80,80 0 0 1 95.5,20.1"/>
+          </svg>
+          <p class="pi-relato-centro" data-paso="1"><strong>6</strong><span>locales de última generación</span></p>
+          <p class="pi-relato-centro" data-paso="2"><strong>2</strong><span>locales operando</span></p>
+          <p class="pi-relato-centro" data-paso="3"><strong>+2</strong><span>en camino</span></p>
+          <p class="pi-relato-centro" data-paso="4"><strong>2</strong><span>locales por definir</span></p>
+        </div>
+        <ol class="pi-relato-puntos" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
       </div>
-      <div class="card">
-        <div class="card-icon">🌳</div>
-        <h3>Plaza pública</h3>
-        <p>Acondicionamiento de un área destinada a la instalación de una plaza pública para los vecinos.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">⚽</div>
-        <h3>Cancha de fútbol</h3>
-        <p>Construcción de una cancha de fútbol cerrada con muro perimetral, pensada para los niños del barrio.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🌊</div>
-        <h3>Mantenimiento de cañada</h3>
-        <p>Limpieza y acondicionamiento de una franja paralela a la cañada, acordado con el Municipio F, para que pueda ingresar la maquinaria de la Intendencia a realizar su mantenimiento.</p>
+    </div>
+
+    <div class="pi-relato-texto">
+      <h2 class="pi-title">Un polo farmacéutico con acceso propio</h2>
+      <article class="pi-relato-paso" data-paso="1">
+        <span class="pi-relato-n">01</span>
+        <h3>Un problema real, una solución a medida</h3>
+        <p>Itapeby 3170 nació para resolver un problema real: laboratorios y droguerías de otras zonas de Montevideo recibían intimaciones de retiro por el impacto de su operativa en la vía pública. Acá encuentran seis locales de última generación, con un acceso exclusivo y sin molestias para los vecinos.</p>
+      </article>
+      <article class="pi-relato-paso" data-paso="2">
+        <span class="pi-relato-n">02</span>
+        <h3>Ya operan</h3>
+        <p>Fármaco Uruguayo S.A. y Laboratorio Gador ya están instalados y trabajando en sus locales. Cada local lo opera directamente su arrendatario.</p>
+      </article>
+      <article class="pi-relato-paso" data-paso="3">
+        <span class="pi-relato-n">03</span>
+        <h3>Se suman</h3>
+        <p>Droguería Uruguay S.A. está confirmada y un laboratorio más está en negociación.</p>
+      </article>
+      <article class="pi-relato-paso" data-paso="4">
+        <span class="pi-relato-n">04</span>
+        <h3>Acceso exclusivo, sin molestias</h3>
+        <p>Toda la operativa y el ingreso de funcionarios se hacen por Itapeby N.º 3170, por una calle construida para eso. Así se evita el impacto de tránsito en otras calles de la zona. Quedan dos locales por definir.</p>
+        <div class="pi-relato-acciones">
+          <a href="contacto.html" class="btn btn-primary">Consultá por un local</a>
+          <a href="parque.html#plano" class="pi-plano-link pi-sin-corte">Ver el plano en El Parque →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEJORAS PARA EL BARRIO ============
+     Lista de los 4 espacios + foto grande. Al tocar uno se muestra su foto y su descripción;
+     si nadie toca, cambia solo cada 6 segundos (initEspacios() en js/main.js).
+     Sin texto encima de las fotos (decisión del equipo). La foto N de la derecha va con el botón N de la lista. -->
+<section class="pi-barrio">
+  <div class="container">
+    <div class="pi-barrio-head">
+      <h2 class="pi-title hist-anim">Más que locales: espacio público para el barrio</h2>
+      <p class="pi-lead hist-anim">El proyecto sigue el compromiso del Parque con su entorno e incorpora mejoras concretas para los vecinos.</p>
+    </div>
+    <div class="pi-espacios hist-anim">
+      <ol class="pi-espacios-lista">
+        <li><button type="button" class="pi-espacio activo" aria-pressed="true">
+          <span class="pi-espacio-n">01</span>
+          <span class="pi-espacio-t">Cancha de fútbol</span>
+          <span class="pi-espacio-d">Una cancha cerrada con muro perimetral, pensada para los niños del barrio.</span>
+        </button></li>
+        <li><button type="button" class="pi-espacio" aria-pressed="false">
+          <span class="pi-espacio-n">02</span>
+          <span class="pi-espacio-t">Plaza pública</span>
+          <span class="pi-espacio-d">Un área acondicionada para instalar una plaza para los vecinos.</span>
+        </button></li>
+        <li><button type="button" class="pi-espacio" aria-pressed="false">
+          <span class="pi-espacio-n">03</span>
+          <span class="pi-espacio-t">Pasajes peatonales</span>
+          <span class="pi-espacio-d">Recuperación de los pasajes peatonales existentes en la zona.</span>
+        </button></li>
+        <li><button type="button" class="pi-espacio" aria-pressed="false">
+          <span class="pi-espacio-n">04</span>
+          <span class="pi-espacio-t">Mantenimiento de la cañada</span>
+          <span class="pi-espacio-d">Limpieza y acondicionamiento de una franja paralela a la cañada, acordado con el Municipio F, para que la maquinaria de la Intendencia pueda entrar a hacer el mantenimiento.</span>
+        </button></li>
+      </ol>
+      <div class="pi-espacios-fotos">
+        <div class="pi-espacios-capa activo"><div class="foto foto--fondo"><span class="foto-label">FOTO 05 · Cancha de fútbol</span></div></div>
+        <div class="pi-espacios-capa"><div class="foto foto--fondo"><span class="foto-label">FOTO 06 · Plaza pública</span></div></div>
+        <div class="pi-espacios-capa"><div class="foto foto--fondo"><span class="foto-label">FOTO 07 · Pasajes peatonales</span></div></div>
+        <div class="pi-espacios-capa"><div class="foto foto--fondo"><span class="foto-label">FOTO 08 · Mantenimiento de la cañada</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section-dark">
-  <div class="container">
-    <div class="eyebrow">Reconocimiento oficial</div>
-    <h2 class="section-title">Proyecto de Interés Municipal</h2>
-    <p style="color:var(--gray-200); max-width:680px; margin-bottom:24px;">En marzo de 2025 presentamos ante las autoridades del Municipio F una nota con el detalle del desarrollo de nuestro nuevo proyecto en el predio de la calle Itapeby N.º 3170. La propuesta fue muy bien recibida, siendo declarada formalmente como Proyecto de Interés Municipal por las autoridades de dicho Municipio.</p>
-    <div class="quote">
-      "Cuando se junta el sector privado y el sector público se consiguen grandes beneficios para la parte social, y considero que este es un gran ejemplo de eso."
-      <cite>Gianfranco Carassale — Geligold S.A.</cite>
+<!-- ============ RECONOCIMIENTO ============ -->
+<section class="pi-interes">
+  <div class="container pi-interes-grid">
+    <div class="pi-interes-sello hist-anim" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs><path id="pi-sello-circulo-2" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle class="pi-sello-fondo" cx="100" cy="100" r="96"/>
+        <circle class="pi-sello-borde" cx="100" cy="100" r="56"/>
+        <g class="pi-sello-giro"><text class="pi-sello-texto"><textPath href="#pi-sello-circulo-2">PROYECTO DE INTERÉS MUNICIPAL · MUNICIPIO F ·</textPath></text></g>
+        <text class="pi-sello-anio" x="100" y="108">2025</text>
+      </svg>
+    </div>
+    <div>
+      <h2 class="pi-title hist-anim">Proyecto de Interés Municipal</h2>
+      <p class="pi-lead hist-anim">En marzo de 2025 presentamos ante las autoridades del Municipio F una nota con el detalle del desarrollo en Itapeby N.º 3170. La propuesta fue muy bien recibida y el Municipio la declaró formalmente Proyecto de Interés Municipal.</p>
     </div>
   </div>
 </section>
 
-<section>
+<!-- ============ SIGUIENTE ============ -->
+<section class="hist-next">
   <div class="container">
-    <div class="cta-band">
-      <div>
-        <h2>Conocé también nuestro trabajo con la comunidad</h2>
-        <p>Aula Ceibal, escuelas de formación laboral y donaciones sostenidas en el tiempo.</p>
-      </div>
-      <a href="responsabilidad-social.html" class="btn btn-primary">Responsabilidad Social</a>
-    </div>
+    <a href="responsabilidad-social.html" class="hist-next-link">
+      <span class="hist-next-title">Conocé nuestro trabajo con la <span class="pi-sin-corte">comunidad <span aria-hidden="true">→</span></span></span>
+    </a>
   </div>
 </section>
 

@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
   initContactForm();
   initHistoria();
   initPlano();
+  initRelato();
+  initEspacios();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -310,6 +312,75 @@ function initPlano() {
     el.addEventListener("click", function () { resaltar(el.dataset.lote); });
   });
   plano.addEventListener("mouseleave", function () { resaltar(null); });
+}
+
+/* ---------- 8. Relato al bajar (página Proyecto Itapeby) ----------
+   El paso que está en el medio de la pantalla queda "activo" y la sección
+   recibe su número en data-paso. El CSS usa ese número para pintar el anillo. */
+function initRelato() {
+  var seccion = document.querySelector(".pi-relato");
+  if (!seccion || !("IntersectionObserver" in window)) return;
+  var pasos = seccion.querySelectorAll(".pi-relato-paso");
+  seccion.classList.add("js-relato");
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      pasos.forEach(function (paso) { paso.classList.toggle("activo", paso === entry.target); });
+      seccion.dataset.paso = entry.target.dataset.paso;
+    });
+  }, { rootMargin: "-45% 0px -45% 0px" }); // una franja finita en el medio de la pantalla
+
+  pasos.forEach(function (paso) { observer.observe(paso); });
+}
+
+/* ---------- 9. Espacios para el barrio (página Proyecto Itapeby) ----------
+   Al tocar un espacio de la lista se muestra su foto y su descripción.
+   Mientras la sección está en pantalla y nadie toca, pasa sola al siguiente cada 6 segundos.
+   Con "reducir movimiento" activado no cambia sola. */
+function initEspacios() {
+  var bloque = document.querySelector(".pi-espacios");
+  if (!bloque) return;
+  var botones = bloque.querySelectorAll(".pi-espacio");
+  var capas = bloque.querySelectorAll(".pi-espacios-capa");
+  var actual = 0;
+  var timer = null;
+
+  function mostrar(n) {
+    actual = n;
+    botones.forEach(function (b, k) {
+      b.classList.toggle("activo", k === n);
+      b.setAttribute("aria-pressed", k === n ? "true" : "false");
+    });
+    capas.forEach(function (c, k) { c.classList.toggle("activo", k === n); });
+  }
+
+  function arrancar() {
+    if (timer || prefersReducedMotion()) return;
+    bloque.classList.add("auto");
+    timer = setInterval(function () { mostrar((actual + 1) % botones.length); }, 6000);
+  }
+
+  function frenar() {
+    clearInterval(timer);
+    timer = null;
+    bloque.classList.remove("auto");
+  }
+
+  botones.forEach(function (b, k) {
+    b.addEventListener("click", function () {
+      frenar();
+      mostrar(k);
+      arrancar(); // vuelve a contar 6 segundos desde el que tocaron
+    });
+  });
+
+  // Solo cambia sola cuando la sección se está viendo
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) arrancar(); else frenar(); });
+    }, { threshold: 0.3 }).observe(bloque);
+  }
 }
 
 /* En celular, el mapa y el plano se deslizan dentro de su recuadro:

@@ -2585,6 +2585,9 @@ button[disabled] {
   border-radius: 24px;
 }
 
+/* Los links a parque.html#plano caen justo en el plano, sin quedar tapados por el encabezado */
+.pq-plano-grid { scroll-margin-top: 130px; }
+
 .pq-plano-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .pq-iso { display: block; width: 100%; height: auto; }
 
@@ -2723,4 +2726,459 @@ button[disabled] {
 
   .pq-plano { padding: 72px 0 24px; }
   .pq-plano-grid { padding: 16px; border-radius: 18px; }
+}
+
+/* =========================================================
+   Página Proyecto Itapeby (rediseño)
+   Todo empieza con "pi-" y cuelga de <body class="pagina-proyecto">.
+   Reutiliza de Historia: .foto, .hist-anim, .hist-open-scroll y .hist-next.
+   Ritmo de fondos: blanco (apertura y cifras) →
+   gris punteado (transformación) → blanco (relato al bajar) → azul noche (barrio) →
+   franja dorada (Interés Municipal) → blanco (siguiente) → pie.
+   ========================================================= */
+
+.pi-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--navy-950);
+  max-width: 640px;
+}
+
+.pi-lead {
+  margin-top: 18px;
+  max-width: 620px;
+  font-size: 1.08rem;
+  color: var(--gray-600);
+}
+
+/* ---------- Apertura: fondo blanco (decisión del equipo) ---------- */
+.pi-open { padding: 96px 0 112px; }
+
+.pi-open-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.pi-open h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--navy-950);
+}
+
+.pi-open h1::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 28px;
+  background: var(--gold-500);
+  border-radius: 2px;
+}
+
+.pi-open-lead {
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--navy-900);
+}
+
+.pi-open-sub { margin-top: 16px; color: var(--gray-600); }
+
+.pi-open-media { position: relative; }
+.pi-open-foto { aspect-ratio: 5 / 4; box-shadow: var(--shadow-lg); align-items: flex-start; justify-content: flex-end; }
+.pi-sin-corte { white-space: nowrap; }
+
+/* Sello dorado que gira (solo gira el texto; el año queda quieto) */
+.pi-sello {
+  position: absolute;
+  left: -64px;
+  bottom: -56px;
+  width: 172px;
+  filter: drop-shadow(0 12px 24px color-mix(in srgb, var(--navy-950) 45%, transparent));
+}
+
+.pi-sello svg,
+.pi-interes-sello svg { display: block; width: 100%; height: auto; }
+
+.pi-sello-fondo { fill: var(--gold-500); }
+.pi-sello-borde { fill: none; stroke: var(--navy-950); stroke-width: 1.5; }
+.pi-sello-texto { font-size: 13.5px; font-weight: 700; letter-spacing: 0.12em; fill: var(--navy-950); }
+.pi-sello-anio { font-family: var(--font-display); font-size: 34px; font-weight: 700; text-anchor: middle; fill: var(--navy-950); }
+
+.pi-sello-giro {
+  transform-origin: 100px 100px;
+  animation: pi-giro 22s linear infinite;
+}
+
+@keyframes pi-giro { to { transform: rotate(360deg); } }
+
+/* ---------- Cifras: blanco, cada dato con una raya dorada arriba ---------- */
+.pi-cifras { padding: 88px 0 24px; }
+
+.pi-cifras-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.pi-cifras-list > div { padding-top: 22px; border-top: 2px solid var(--gold-500); }
+
+.pi-cifras-list dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 4.6vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--navy-950);
+}
+
+.pi-cifras-list dd { margin-top: 12px; color: var(--gray-600); font-size: 0.98rem; max-width: 220px; }
+
+/* ---------- Transformación: tres pasos en gris punteado ---------- */
+.pi-trans {
+  --fondo-seccion: var(--gray-50);
+  margin-top: 64px;
+  padding: 104px 0;
+  background:
+    radial-gradient(var(--gray-200) 1.2px, transparent 1.7px) 0 0 / 24px 24px,
+    var(--gray-50);
+}
+
+.pi-pasos {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 56px;
+}
+
+.pi-paso-foto { aspect-ratio: 4 / 3; margin-bottom: 26px; }
+
+/* Año con una línea dorada que se desvanece hacia el paso siguiente */
+.pi-paso-anio {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  color: var(--gold-500);
+}
+
+.pi-paso-anio::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-500), transparent);
+}
+
+.pi-paso h3 {
+  margin: 12px 0 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--navy-950);
+}
+
+.pi-paso p { color: var(--gray-600); font-size: 0.97rem; }
+
+/* ---------- El desarrollo: relato al bajar ----------
+   El anillo queda fijo mientras el texto baja en 4 pasos. La sección tiene data-paso="1…4"
+   (lo pone initRelato() en main.js) y según ese número se pintan las partes del anillo. */
+.pi-relato { padding: 112px 0 40px; }
+
+.pi-relato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.pi-relato-fijo {
+  position: sticky;
+  top: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.pi-relato-anillo { position: relative; width: min(380px, 100%); }
+.pi-relato-anillo svg { display: block; width: 100%; height: auto; }
+
+.pi-relato-pista { fill: none; stroke: var(--gray-100); stroke-width: 20; }
+
+.pi-relato-seg {
+  fill: none;
+  stroke: var(--gray-200);
+  stroke-width: 20;
+  transition: stroke 0.6s ease calc(var(--i) * 0.08s), stroke-width 0.4s ease;
+}
+
+/* Paso 2: se pintan las que operan · Paso 3: se suman la confirmada y la que está en negociación ·
+   Paso 4: se marcan las dos por definir. La parte que "entra" en cada paso se ve un poco más gruesa. */
+.pi-relato[data-paso="2"] .pi-relato-seg--op,
+.pi-relato[data-paso="3"] .pi-relato-seg--op,
+.pi-relato[data-paso="4"] .pi-relato-seg--op { stroke: var(--gold-500); }
+.pi-relato[data-paso="3"] .pi-relato-seg--conf,
+.pi-relato[data-paso="4"] .pi-relato-seg--conf { stroke: var(--navy-950); }
+.pi-relato[data-paso="3"] .pi-relato-seg--neg,
+.pi-relato[data-paso="4"] .pi-relato-seg--neg { stroke: var(--navy-300); }
+.pi-relato[data-paso="4"] .pi-relato-seg--lib { stroke: var(--gray-400); }
+.pi-relato[data-paso="2"] .pi-relato-seg--op,
+.pi-relato[data-paso="3"] .pi-relato-seg--conf,
+.pi-relato[data-paso="3"] .pi-relato-seg--neg,
+.pi-relato[data-paso="4"] .pi-relato-seg--lib { stroke-width: 26; }
+
+/* Número del centro: hay uno por paso y se muestra el que corresponde */
+.pi-relato-centro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.pi-relato-centro strong {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 4.4rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--navy-950);
+}
+
+.pi-relato-centro span { margin-top: 8px; max-width: 160px; color: var(--gray-600); }
+
+.pi-relato[data-paso="1"] .pi-relato-centro[data-paso="1"],
+.pi-relato[data-paso="2"] .pi-relato-centro[data-paso="2"],
+.pi-relato[data-paso="3"] .pi-relato-centro[data-paso="3"],
+.pi-relato[data-paso="4"] .pi-relato-centro[data-paso="4"] { opacity: 1; transform: none; }
+
+/* Rayitas que indican en qué paso estás */
+.pi-relato-puntos { list-style: none; display: flex; gap: 8px; }
+.pi-relato-puntos li { width: 28px; height: 4px; border-radius: 2px; background: var(--gray-200); transition: background 0.4s ease, width 0.4s ease; }
+.pi-relato[data-paso="1"] .pi-relato-puntos li:nth-child(1),
+.pi-relato[data-paso="2"] .pi-relato-puntos li:nth-child(2),
+.pi-relato[data-paso="3"] .pi-relato-puntos li:nth-child(3),
+.pi-relato[data-paso="4"] .pi-relato-puntos li:nth-child(4) { width: 48px; background: var(--gold-500); }
+
+.pi-relato-paso {
+  min-height: 62vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  transition: opacity 0.5s ease;
+}
+
+.pi-relato-paso:first-of-type { min-height: 50vh; }
+
+/* Solo si el JavaScript está andando, los pasos que no se están leyendo quedan tenues */
+.pi-relato.js-relato .pi-relato-paso { opacity: 0.25; }
+.pi-relato.js-relato .pi-relato-paso.activo { opacity: 1; }
+
+.pi-relato-n { font-family: var(--font-display); font-weight: 600; color: var(--gold-500); }
+
+.pi-relato-paso h3 {
+  margin: 10px 0 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  letter-spacing: -0.02em;
+  color: var(--navy-950);
+}
+
+.pi-relato-paso p { max-width: 520px; font-size: 1.08rem; color: var(--gray-600); }
+
+.pi-relato-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
+.pi-plano-link { font-weight: 600; color: var(--navy-950); border-bottom: 2px solid var(--gold-500); }
+
+/* ---------- Mejoras para el barrio: azul noche, lista + foto grande que cambia ---------- */
+.pi-barrio {
+  --fondo-seccion: var(--navy-950);
+  padding: 112px 0;
+  background: linear-gradient(170deg, var(--navy-950), var(--navy-900));
+}
+
+.pi-barrio .pi-title { color: var(--white); }
+.pi-barrio .pi-lead { color: var(--navy-300); }
+.pi-barrio-head { margin-bottom: 48px; }
+
+/* Lista de espacios (izquierda) + foto grande (derecha) que cambia según el elegido */
+.pi-espacios {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.pi-espacios-lista { list-style: none; border-top: 1px solid var(--navy-800); }
+
+.pi-espacio {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  width: 100%;
+  padding: 22px 0;
+  border: none;
+  border-bottom: 1px solid var(--navy-800);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pi-espacio-n {
+  grid-row: span 2;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--navy-600);
+  transition: color 0.3s ease;
+}
+
+.pi-espacio-t {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--navy-300);
+  transition: color 0.3s ease;
+}
+
+/* La descripción solo se abre en el espacio elegido */
+.pi-espacio-d {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 0.98rem;
+  color: var(--navy-300);
+  transition: max-height 0.45s ease, margin 0.45s ease, opacity 0.45s ease;
+}
+
+.pi-espacio.activo .pi-espacio-d { max-height: 200px; margin-top: 10px; opacity: 1; }
+.pi-espacio.activo .pi-espacio-t,
+.pi-espacio:hover .pi-espacio-t { color: var(--white); }
+.pi-espacio.activo .pi-espacio-n,
+.pi-espacio:hover .pi-espacio-n { color: var(--gold-500); }
+.pi-espacio:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 4px; }
+
+/* Línea dorada que se llena debajo del elegido: marca cuánto falta para que cambie solo */
+.pi-espacio::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 0;
+  background: var(--gold-500);
+}
+
+.pi-espacios.auto .pi-espacio.activo::after { width: 100%; transition: width 6s linear; }
+.pi-espacios:not(.auto) .pi-espacio.activo::after { width: 100%; }
+
+/* Fotos apiladas: se ve solo la del espacio elegido, con un fundido suave */
+.pi-espacios-fotos {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px color-mix(in srgb, var(--navy-950) 55%, transparent);
+}
+
+.pi-espacios-capa {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.7s ease, transform 1.2s ease;
+}
+
+.pi-espacios-capa.activo { opacity: 1; transform: none; }
+.pi-espacios-capa .foto { height: 100%; border-radius: 0; }
+
+/* ---------- Interés Municipal: franja dorada con el sello grande ---------- */
+.pi-interes {
+  padding: 96px 0;
+  background:
+    repeating-linear-gradient(135deg, color-mix(in srgb, var(--white) 14%, transparent) 0 1px, transparent 1px 14px),
+    linear-gradient(120deg, var(--gold-400), var(--gold-500));
+}
+
+.pi-interes-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.pi-interes .pi-sello-fondo { fill: var(--navy-950); }
+.pi-interes .pi-sello-borde { stroke: var(--gold-500); }
+.pi-interes .pi-sello-texto { fill: var(--gold-300); }
+.pi-interes .pi-sello-anio { fill: var(--white); }
+.pi-interes .pi-lead { color: var(--navy-800); }
+
+/* ---------- Proyecto: tablet y celular ---------- */
+@media (max-width: 960px) {
+  .pi-open-grid { grid-template-columns: 1fr; gap: 56px; }
+  .pi-espacios { grid-template-columns: 1fr; gap: 28px; }
+  .pi-espacios-fotos { order: -1; }
+
+  /* Relato: el anillo queda chico arriba, pegado debajo del menú, y el texto baja por debajo */
+  .pi-relato-grid { grid-template-columns: 1fr; gap: 0; }
+  .pi-relato-lado {
+    position: sticky;
+    top: 76px;
+    z-index: 3;
+    margin: 0 -24px;
+    padding: 12px 24px;
+    background: color-mix(in srgb, var(--white) 94%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .pi-relato-fijo { position: static; flex-direction: row; justify-content: flex-start; gap: 18px; }
+  .pi-relato-anillo { width: 92px; flex-shrink: 0; }
+  .pi-relato-centro strong { font-size: 1.6rem; }
+  .pi-relato-centro span { display: none; }
+  .pi-relato-texto .pi-title { margin-top: 36px; }
+  .pi-relato-paso { min-height: 55vh; }
+  .pi-sello { left: 16px; bottom: -44px; width: 128px; }
+  .pi-cifras-list { grid-template-columns: repeat(2, 1fr); }
+  .pi-pasos { grid-template-columns: 1fr; gap: 56px; }
+  .pi-interes-grid { grid-template-columns: 160px 1fr; gap: 36px; }
+}
+
+@media (max-width: 760px) {
+  .pi-open { padding: 56px 0 88px; }
+  .pi-cifras { padding: 64px 0 8px; }
+  .pi-cifras-list { gap: 32px 20px; }
+  .pi-cifras-list dt { font-size: 2.4rem; }
+  .pi-cifras-list dd { font-size: 0.88rem; }
+  .pi-trans { margin-top: 48px; padding: 72px 0; }
+  .pi-relato { padding: 0 0 24px; }
+  .pi-barrio { padding: 72px 0; }
+  .pi-espacio-t { font-size: 1.12rem; }
+  .pi-interes { padding: 72px 0; }
+  .pi-interes-grid { grid-template-columns: 1fr; gap: 28px; }
+  .pi-interes-sello { width: 150px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pi-sello-giro { animation: none; }
+  .pi-relato-seg, .pi-relato-centro, .pi-relato-paso { transition: none; }
+  .pi-espacio-d, .pi-espacios-capa { transition: none; }
 }
