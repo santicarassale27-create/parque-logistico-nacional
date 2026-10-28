@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initPlano();
   initRelato();
   initEspacios();
+  initSelects();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -379,6 +380,110 @@ function initEspacios() {
       entries.forEach(function (e) { if (e.isIntersecting) arrancar(); else frenar(); });
     }, { threshold: 0.3 }).observe(bloque);
   }
+}
+
+/* ---------- 10. Listas desplegables con el estilo de la web (página Contacto) ----------
+   Toma cada <select class="ct-select"> y arma al lado un botón + una lista redondeada con
+   logo, nombre y detalle (data-logo y data-detalle de cada <option>). El <select> queda
+   oculto y sigue siendo el que se envía en el formulario. Se maneja con mouse, dedo o teclado
+   (flechas, Enter, Escape). Si el JavaScript falla, se ve el <select> normal. */
+function initSelects() {
+  document.querySelectorAll("select.ct-select").forEach(function (select, n) {
+    var caja = document.createElement("div");
+    caja.className = "ct-desplegable";
+    select.parentNode.insertBefore(caja, select);
+    caja.appendChild(select);
+    select.tabIndex = -1;
+
+    var idPanel = "desplegable-" + n;
+    var boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "ct-desp-boton";
+    boton.setAttribute("aria-haspopup", "listbox");
+    boton.setAttribute("aria-expanded", "false");
+    boton.setAttribute("aria-controls", idPanel);
+    var etiqueta = document.querySelector('label[for="' + select.id + '"]');
+    if (etiqueta) {
+      etiqueta.id = etiqueta.id || select.id + "-etiqueta";
+      boton.setAttribute("aria-labelledby", etiqueta.id);
+      etiqueta.addEventListener("click", function (e) { e.preventDefault(); boton.focus(); });
+    }
+
+    var panel = document.createElement("ul");
+    panel.className = "ct-desp-panel";
+    panel.id = idPanel;
+    panel.setAttribute("role", "listbox");
+
+    // Lo que se ve de cada opción: logo (o sello PLN), nombre y detalle
+    function contenido(opcion) {
+      var logo = opcion.dataset.logo
+        ? '<span class="ct-desp-logo"><img src="' + opcion.dataset.logo + '" alt=""></span>'
+        : '<span class="ct-desp-logo ct-desp-logo--general">PLN</span>';
+      return logo + '<span class="ct-desp-textos"><strong>' + opcion.textContent + "</strong><span>" +
+        (opcion.dataset.detalle || "") + "</span></span>";
+    }
+
+    var items = Array.prototype.map.call(select.options, function (opcion, k) {
+      var li = document.createElement("li");
+      li.setAttribute("role", "presentation");
+      var op = document.createElement("button");
+      op.type = "button";
+      op.className = "ct-desp-op";
+      op.setAttribute("role", "option");
+      op.tabIndex = -1;
+      op.innerHTML = contenido(opcion);
+      op.addEventListener("click", function () { elegir(k); cerrar(true); });
+      li.appendChild(op);
+      panel.appendChild(li);
+      return op;
+    });
+
+    caja.appendChild(boton);
+    caja.appendChild(panel);
+
+    var enfocada = 0;
+    function mostrarElegida() {
+      boton.innerHTML = contenido(select.options[select.selectedIndex]) + '<span class="ct-desp-flecha" aria-hidden="true"></span>';
+      items.forEach(function (op, k) { op.setAttribute("aria-selected", k === select.selectedIndex ? "true" : "false"); });
+    }
+    function elegir(k) { select.selectedIndex = k; mostrarElegida(); }
+    function enfocar(k) {
+      enfocada = (k + items.length) % items.length;
+      items.forEach(function (op, i) { op.classList.toggle("enfocada", i === enfocada); });
+      items[enfocada].focus();
+    }
+    function abrir() {
+      caja.classList.add("abierto");
+      boton.setAttribute("aria-expanded", "true");
+      enfocar(select.selectedIndex);
+    }
+    function cerrar(volverAlBoton) {
+      caja.classList.remove("abierto");
+      boton.setAttribute("aria-expanded", "false");
+      if (volverAlBoton) boton.focus();
+    }
+
+    boton.addEventListener("click", function () {
+      if (caja.classList.contains("abierto")) cerrar(false); else abrir();
+    });
+    boton.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); abrir(); }
+    });
+    panel.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") { e.preventDefault(); enfocar(enfocada + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); enfocar(enfocada - 1); }
+      else if (e.key === "Escape") { e.preventDefault(); cerrar(true); }
+      else if (e.key === "Tab") { cerrar(false); }
+    });
+    // Tocar fuera de la lista la cierra
+    document.addEventListener("click", function (e) {
+      if (!caja.contains(e.target)) cerrar(false);
+    });
+    // Si el formulario se limpia después de enviar, volver a mostrar la primera opción
+    if (select.form) select.form.addEventListener("reset", function () { setTimeout(mostrarElegida, 0); });
+
+    mostrarElegida();
+  });
 }
 
 /* En celular, el mapa y el plano se deslizan dentro de su recuadro:

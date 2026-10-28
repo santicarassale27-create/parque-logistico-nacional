@@ -3357,3 +3357,147 @@ button[disabled] {
   .ct-grid { margin-top: 40px; }
   .ct-form-fila { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* ---------- Lista desplegable propia ("Consulta dirigida a") ----------
+   La arma initSelects() en main.js. El <select> original queda oculto y es el que se envía. */
+.ct-desplegable { position: relative; }
+
+.ct-desplegable select {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ct-desp-boton,
+.ct-desp-op {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  color: var(--navy-950);
+  cursor: pointer;
+}
+
+.ct-desp-boton {
+  height: 62px;
+  padding: 0 22px 0 10px;
+  border: 1px solid var(--gray-400);
+  border-radius: 999px;
+  background: var(--white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ct-desp-boton:focus-visible,
+.ct-desplegable.abierto .ct-desp-boton {
+  outline: none;
+  border-color: var(--gold-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold-500) 18%, transparent);
+}
+
+/* Flecha que gira al abrir */
+.ct-desp-flecha {
+  margin-left: auto;
+  width: 10px;
+  height: 10px;
+  border-right: 1.8px solid var(--navy-950);
+  border-bottom: 1.8px solid var(--navy-950);
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+.ct-desplegable.abierto .ct-desp-flecha { transform: translateY(2px) rotate(-135deg); }
+
+/* Logo chico de cada opción (la consulta general lleva el sello PLN) */
+.ct-desp-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 42px;
+  padding: 5px 7px;
+  border: 1px solid var(--gray-100);
+  border-radius: 999px;
+  background: var(--white);
+}
+
+.ct-desp-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.ct-desp-logo--general {
+  border: none;
+  background: var(--gold-500);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--navy-950);
+}
+
+.ct-desp-textos { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.ct-desp-textos strong { font-weight: 600; font-size: 1rem; }
+.ct-desp-textos span { font-size: 0.82rem; color: var(--gray-600); }
+
+/* Panel que se abre: redondeado, con sombra y una pequeña animación */
+.ct-desp-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border: 1px solid var(--gray-100);
+  border-radius: 26px;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+/* Al abrir se hace visible al instante (para poder enfocar las opciones con el teclado);
+   al cerrar espera a que termine el fundido */
+.ct-desplegable.abierto .ct-desp-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
+}
+
+.ct-desp-op {
+  padding: 8px 16px 8px 8px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  transition: background 0.15s ease;
+}
+
+.ct-desp-op:hover,
+.ct-desp-op.enfocada { background: var(--gray-50); }
+.ct-desp-op[aria-selected="true"] { background: color-mix(in srgb, var(--gold-500) 12%, transparent); }
+
+/* Tilde dorado en la opción elegida */
+.ct-desp-op[aria-selected="true"]::after {
+  content: "";
+  margin-left: auto;
+  width: 6px;
+  height: 11px;
+  border-right: 2px solid var(--gold-500);
+  border-bottom: 2px solid var(--gold-500);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+@media (max-width: 760px) {
+  .ct-desp-logo { width: 52px; height: 36px; }
+  .ct-desp-textos span { font-size: 0.78rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ct-desp-panel, .ct-desp-flecha { transition: none; }
+}

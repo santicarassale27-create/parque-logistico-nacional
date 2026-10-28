@@ -38,7 +38,7 @@
 <section class="ct-main">
   <div class="container">
     <h1 class="ct-title hist-anim">Contactanos</h1>
-    <p class="ct-lead hist-anim">Hablemos de cómo el Parque puede acompañar tu operación logística.</p>
+    <p class="ct-lead hist-anim">Contanos qué necesitás y te ponemos en contacto con la empresa del Parque indicada para tu consulta.</p>
 
     <div class="ct-grid">
       <div class="ct-datos hist-anim">
@@ -108,12 +108,14 @@
         </div>
         <div class="form-field">
           <label for="area">Consulta dirigida a</label>
-          <select id="area" name="area">
-            <option value="general">Consulta general — Parque Logístico Nacional</option>
-            <option value="geligold">Geligold S.A. — Depósito nacional</option>
-            <option value="talfir">Talfir S.A. — Depósito aduanero</option>
-            <option value="lamarel">Lamarel — Flete terrestre</option>
-            <option value="repremar">Repremar Logistics — Fletes aéreos y marítimos</option>
+          <!-- Lista desplegable con el estilo de la web: main.js (initSelects) arma el desplegable a partir
+               de este <select>, que queda oculto y es el que se envía. data-logo y data-detalle son lo que se muestra. -->
+          <select id="area" name="area" class="ct-select">
+            <option value="general" data-detalle="Parque Logístico Nacional">Consulta general</option>
+            <option value="geligold" data-logo="img/logos/pln.png" data-detalle="Depósito nacional">Geligold S.A.</option>
+            <option value="talfir" data-logo="img/logos/talfir.png" data-detalle="Depósito aduanero">Talfir S.A.</option>
+            <option value="lamarel" data-logo="img/logos/lamarel.png" data-detalle="Flete terrestre">Lamarel</option>
+            <option value="repremar" data-logo="img/logos/repremar.png" data-detalle="Fletes aéreos y marítimos">Repremar Logistics</option>
           </select>
         </div>
         <div class="form-field">
