@@ -2818,6 +2818,9 @@ button[disabled] {
 /* ---------- Cifras (reutiliza .hist-cifras, 4 columnas) ---------- */
 .rse-cifras .hist-cifras-list { grid-template-columns: repeat(4, 1fr); }
 
+/* ---------- Convenios y donaciones: tarjetas con acento dorado arriba ---------- */
+.rse-convenios .card { border-top: 3px solid var(--gold-500); }
+
 /* ---------- Galería tipo collage (Concurso de dibujo) ----------
    6 fotos: una grande, cuatro chicas al lado y una tira ancha abajo.
    Mismo mosaico irregular que el resto del sitio, pero acá es solo
