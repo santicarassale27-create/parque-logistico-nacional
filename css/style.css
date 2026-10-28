@@ -2724,3 +2724,120 @@ button[disabled] {
   .pq-plano { padding: 72px 0 24px; }
   .pq-plano-grid { padding: 16px; border-radius: 18px; }
 }
+
+/* =========================================================
+   Página Responsabilidad Social (rediseño)
+   Todo lo de esta página empieza con "rse-". Reutiliza de Historia:
+   .foto, .hist-anim y .hist-open-scroll.
+   ========================================================= */
+
+/* ---------- Apertura: azul noche + collage de fotos tipo "corcho" ----------
+   A diferencia de la cuadrícula de Historia y el mosaico de Empresas,
+   acá las fotos van desparramadas y giradas, como un corcho de
+   fotos — va bien con el tema (personas, comunidad, barrio). */
+.rse-open {
+  position: relative;
+  padding: 100px 0 110px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--gold-500) 18%, transparent), transparent 55%),
+    var(--navy-950);
+}
+
+.rse-open-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.rse-open h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.rse-open h1::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 28px;
+  background: var(--gold-500);
+  border-radius: 2px;
+}
+
+.rse-open-lead {
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--navy-100);
+}
+
+.rse-open-sub {
+  margin-top: 16px;
+  color: var(--navy-300);
+}
+
+.rse-open .hist-open-scroll {
+  margin-top: 32px;
+  color: var(--white);
+}
+
+/* Collage: 5 fotos tipo polaroid, desparramadas y giradas */
+.rse-collage {
+  position: relative;
+  height: 560px;
+}
+
+.rse-polaroid {
+  position: absolute;
+  background: var(--white);
+  padding: 10px 10px 34px;
+  border-radius: 6px;
+  box-shadow: var(--shadow-lg);
+}
+
+.rse-polaroid .foto {
+  border-radius: 2px;
+  aspect-ratio: 4 / 3;
+}
+
+.rse-polaroid--1 { width: 46%; top: 0; left: 2%; transform: rotate(-6deg); z-index: 2; }
+.rse-polaroid--2 { width: 38%; top: 4%; right: 0; transform: rotate(5deg); z-index: 1; }
+.rse-polaroid--3 { width: 40%; bottom: 10%; left: 16%; transform: rotate(3deg); z-index: 3; }
+.rse-polaroid--4 { width: 36%; bottom: 0; right: 6%; transform: rotate(-5deg); z-index: 1; }
+.rse-polaroid--5 { width: 32%; top: 36%; left: 36%; transform: rotate(-2deg); z-index: 4; }
+
+@media (max-width: 960px) {
+  .rse-open-grid { grid-template-columns: 1fr; gap: 48px; }
+  .rse-collage { height: 440px; }
+}
+
+@media (max-width: 760px) {
+  .rse-open { padding: 56px 0 48px; }
+
+  /* En celular el corcho se vuelve una tira horizontal con scroll,
+     sin posiciones absolutas (más simple y sin riesgo de desborde). */
+  .rse-collage {
+    height: auto;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 8px 4px 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .rse-polaroid {
+    position: static;
+    flex: 0 0 auto;
+    width: 220px !important;
+    transform: none !important;
+  }
+}
