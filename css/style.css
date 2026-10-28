@@ -3024,16 +3024,30 @@ button[disabled] {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 56px 40px;
+  align-items: start;   /* cada tarjeta mide lo que su contenido, sin estirarse */
 }
 
 .pi-bento-item:nth-child(even) { margin-top: 96px; }
 
-.pi-bento-foto {
-  aspect-ratio: 16 / 10;
+/* Cada espacio es una sola tarjeta: foto arriba y texto abajo, sobre un fondo apenas más claro */
+.pi-bento-item {
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 24px 48px color-mix(in srgb, var(--navy-950) 50%, transparent);
+  background: color-mix(in srgb, var(--white) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--white) 9%, transparent);
+  box-shadow: 0 24px 48px color-mix(in srgb, var(--navy-950) 45%, transparent);
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
 }
+
+.pi-bento-item:hover {
+  transform: translateY(-6px);
+  background: color-mix(in srgb, var(--white) 8%, transparent);
+  border-color: color-mix(in srgb, var(--white) 16%, transparent);
+}
+
+.pi-bento-foto { aspect-ratio: 16 / 10; overflow: hidden; }
 
 .pi-bento-foto .foto {
   height: 100%;
@@ -3043,11 +3057,7 @@ button[disabled] {
 
 .pi-bento-item:hover .pi-bento-foto .foto { transform: scale(1.04); }
 
-.pi-bento-texto {
-  margin-top: 22px;
-  padding-left: 18px;
-  border-left: 2px solid var(--gold-500);
-}
+.pi-bento-texto { padding: 24px 28px 28px; }
 
 .pi-bento-texto h3 {
   font-family: var(--font-display);
@@ -3056,7 +3066,7 @@ button[disabled] {
   color: var(--white);
 }
 
-.pi-bento-texto p { margin-top: 6px; max-width: 460px; font-size: 0.95rem; color: var(--navy-300); }
+.pi-bento-texto p { margin-top: 8px; max-width: 460px; font-size: 0.95rem; color: var(--navy-300); }
 
 /* ---------- Interés Municipal: franja dorada con el sello grande ---------- */
 .pi-interes {
@@ -3126,5 +3136,5 @@ button[disabled] {
 @media (prefers-reduced-motion: reduce) {
   .pi-sello-giro { animation: none; }
   .pi-relato-seg, .pi-relato-centro, .pi-relato-paso { transition: none; }
-  .pi-bento-foto .foto { transition: none; }
+  .pi-bento-foto .foto, .pi-bento-item { transition: none; }
 }

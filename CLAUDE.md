@@ -112,7 +112,8 @@ img/                        Fotos (cuando las haya)
 - Orden: apertura (fondo blanco + sello dorado que gira "Proyecto de Interés Municipal · 2025"),
   cifras (700 m de muro, 6 locales, ~200 puestos previstos, 2025), transformación en 3 pasos (2016, 2022, Hoy),
   "relato al bajar" de los seis locales (anillo fijo que se completa en 4 pasos; lo maneja `initRelato()` en `main.js`;
-  no repetir el estilo del plano de El Parque), mejoras para el barrio (fotos en dos columnas desfasadas, texto abajo de cada foto, nunca encima), franja dorada de Interés Municipal
+  no repetir el estilo del plano de El Parque), mejoras para el barrio (tarjetas en dos columnas desfasadas: foto arriba y texto abajo dentro de la tarjeta;
+  nunca texto encima de la foto ni raya dorada al costado), franja dorada de Interés Municipal
   y "Conocé nuestro trabajo con la comunidad".
 - Sin textos chicos arriba de los títulos, sin íconos y sin nombres ni frases de la familia (mismas decisiones que el resto).
 - Los estados de los seis locales tienen que coincidir con el plano de El Parque (`DEPOSITOS` en `generar-plano.py`).
