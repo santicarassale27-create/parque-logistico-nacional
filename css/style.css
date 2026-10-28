@@ -2954,6 +2954,57 @@ button[disabled] {
   }
 }
 
+/* ---------- Escuela de Conducción: dos ediciones lado a lado ----------
+   Nada de tarjetas con ícono: dos columnas separadas por una línea
+   fina, cada una con su año grande de fondo y un dato clave resaltado
+   en un recuadro, en vez de las citas que había antes. */
+.rse-escuela-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 48px;
+}
+
+.rse-escuela-ed {
+  position: relative;
+  padding: 0 48px;
+}
+
+.rse-escuela-ed:first-child { padding-left: 0; }
+
+.rse-escuela-ed:last-child {
+  padding-right: 0;
+  border-left: 1px solid var(--gray-200);
+}
+
+.rse-escuela-year {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--gold-300);
+  margin-bottom: 4px;
+}
+
+.rse-escuela-ed h3 {
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+  color: var(--navy-950);
+}
+
+.rse-escuela-ed p { color: var(--gray-600); }
+.rse-escuela-ed p strong { color: var(--navy-900); }
+
+.rse-escuela-highlight {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--gold-500);
+  background: var(--gold-50);
+  color: var(--navy-800);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
 .rse-convenios .card { border-top: 3px solid var(--gold-500); }
 
 /* ---------- Galería tipo collage (Concurso de dibujo) ----------
@@ -3038,4 +3089,14 @@ button[disabled] {
   .rse-aula-card--right.reveal {
     transform: translateY(-32px) scale(0.95);
   }
+
+  .rse-escuela-split { grid-template-columns: 1fr; gap: 40px; }
+  .rse-escuela-ed,
+  .rse-escuela-ed:first-child,
+  .rse-escuela-ed:last-child {
+    padding: 0;
+    border-left: none;
+  }
+  .rse-escuela-ed:last-child { padding-top: 32px; border-top: 1px solid var(--gray-200); }
+  .rse-escuela-year { font-size: 2.6rem; }
 }
