@@ -2737,10 +2737,11 @@ button[disabled] {
    fotos — va bien con el tema (personas, comunidad, barrio). */
 .rse-open {
   position: relative;
-  padding: 100px 0 110px;
+  padding: 100px 0 0;
   overflow: hidden;
   background:
-    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--gold-500) 18%, transparent), transparent 55%),
+    repeating-radial-gradient(circle at 15% 115%, transparent 0 46px, color-mix(in srgb, var(--navy-700) 65%, transparent) 46px 47px),
+    radial-gradient(circle at 82% 20%, color-mix(in srgb, var(--gold-500) 22%, transparent), transparent 55%),
     var(--navy-950);
 }
 
@@ -2790,33 +2791,47 @@ button[disabled] {
   color: var(--white);
 }
 
-/* Collage: 5 fotos tipo polaroid, desparramadas y giradas */
+/* Collage: 4 fotos en grilla pareja, sin inclinar — prolijo, no un
+   corcho de fotos. La variedad la da el fondo (anillos), no las fotos. */
 .rse-collage {
-  position: relative;
-  height: 560px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  height: 500px;
 }
 
-.rse-polaroid {
-  position: absolute;
-  background: var(--white);
-  padding: 10px 10px 34px;
-  border-radius: 6px;
+.rse-collage .foto {
+  height: 100%;
+  border-radius: 20px;
   box-shadow: var(--shadow-lg);
 }
 
-.rse-polaroid .foto {
-  border-radius: 2px;
-  aspect-ratio: 4 / 3;
+/* ---------- Cifras: siguen dentro de .rse-open, mismo fondo ----------
+   Antes eran una caja gris flotando aparte; ahora es la base de la
+   misma sección, separada solo por una línea fina. */
+.rse-open-cifras {
+  position: relative;
+  z-index: 1;
+  margin-top: 72px;
+  padding: 44px 0 56px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.rse-polaroid--1 { width: 46%; top: 0; left: 2%; transform: rotate(-6deg); z-index: 2; }
-.rse-polaroid--2 { width: 38%; top: 4%; right: 0; transform: rotate(5deg); z-index: 1; }
-.rse-polaroid--3 { width: 40%; bottom: 10%; left: 16%; transform: rotate(3deg); z-index: 3; }
-.rse-polaroid--4 { width: 36%; bottom: 0; right: 6%; transform: rotate(-5deg); z-index: 1; }
-.rse-polaroid--5 { width: 32%; top: 36%; left: 36%; transform: rotate(-2deg); z-index: 4; }
+.rse-open-cifras .hist-cifras-list {
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
 
-/* ---------- Cifras (reutiliza .hist-cifras, 4 columnas) ---------- */
-.rse-cifras .hist-cifras-list { grid-template-columns: repeat(4, 1fr); }
+.rse-open-cifras .hist-cifras-list > div + div {
+  border-left-color: rgba(255, 255, 255, 0.14);
+}
+
+.rse-open-cifras .hist-cifras-list dt { color: var(--gold-400); }
+.rse-open-cifras .hist-cifras-list dd { color: var(--navy-200); }
+.rse-open-cifras .hist-cifras-list dd strong { color: var(--white); }
 
 /* ---------- Convenios y donaciones: tarjetas con acento dorado arriba ---------- */
 .rse-convenios .card { border-top: 3px solid var(--gold-500); }
@@ -2842,7 +2857,9 @@ button[disabled] {
 
 @media (max-width: 960px) {
   .rse-open-grid { grid-template-columns: 1fr; gap: 48px; }
-  .rse-collage { height: 440px; }
+  .rse-collage { height: 420px; }
+  .rse-open-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+  .rse-open-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
 
   .rse-gallery { grid-template-columns: repeat(2, 1fr); }
   .rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
@@ -2850,25 +2867,18 @@ button[disabled] {
 }
 
 @media (max-width: 760px) {
-  .rse-open { padding: 56px 0 48px; }
+  .rse-open { padding: 56px 0 0; }
 
-  /* En celular el corcho se vuelve una tira horizontal con scroll,
-     sin posiciones absolutas (más simple y sin riesgo de desborde). */
+  /* En celular las 4 fotos pasan a una sola columna, en orden. */
   .rse-collage {
-    height: auto;
     display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding: 8px 4px 16px;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    height: auto;
   }
 
-  .rse-polaroid {
-    position: static;
-    flex: 0 0 auto;
-    width: 220px !important;
-    transform: none !important;
-  }
+  .rse-collage .foto { aspect-ratio: 4 / 3; }
+
+  .rse-open-cifras { margin-top: 48px; padding: 32px 0 40px; }
 
   .rse-gallery {
     grid-template-columns: 1fr;
