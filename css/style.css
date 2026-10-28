@@ -3026,44 +3026,42 @@ button[disabled] {
 .rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
 .rse-gallery-item--ancho { grid-column: span 4; }
 
-/* ---------- Galería del Concurso de dibujo: asimétrica, con cascada ----------
-   4 fotos de tamaños distintos (no el mosaico parejo de arriba) que
-   van "saltando" una después de la otra al entrar en pantalla, como
-   si cayeran en cascada en vez de aparecer todas juntas. Funciona
-   bien aunque después se sume o saque alguna foto. */
-.rse-concurso-gallery {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 200px);
-  gap: 20px;
+/* ---------- Concurso de dibujo: cinta de fotos en movimiento continuo ----------
+   Nada de grilla: una cinta horizontal que se desliza sola todo el
+   tiempo (como una vitrina), no algo que aparece y queda quieto. Las
+   fotos están duplicadas una vez para que el loop no se note. Se
+   para al pasar el mouse, para poder leer el cartel de cada foto. */
+.rse-concurso-marquee {
   margin-top: 48px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
 
-.rse-concurso-item { border-radius: 18px; }
-
-.rse-concurso-item--1 { grid-column: 1 / 4; grid-row: 1 / 3; }
-.rse-concurso-item--2 { grid-column: 4 / 7; grid-row: 1 / 2; }
-.rse-concurso-item--3 { grid-column: 4 / 5; grid-row: 2 / 3; }
-.rse-concurso-item--4 { grid-column: 5 / 7; grid-row: 2 / 3; }
-
-.rse-concurso-item.reveal {
-  opacity: 0;
-  transform: scale(0.82) translateY(36px);
-  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+.rse-concurso-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: rse-concurso-desliza 24s linear infinite;
 }
 
-.rse-concurso-item.reveal.visible {
-  opacity: 1;
-  transform: none;
+.rse-concurso-marquee:hover .rse-concurso-track { animation-play-state: paused; }
+
+.rse-concurso-card {
+  flex: none;
+  width: 320px;
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
 }
 
-.rse-concurso-item--1.reveal { transition-delay: 0s; }
-.rse-concurso-item--2.reveal { transition-delay: 0.12s; }
-.rse-concurso-item--3.reveal { transition-delay: 0.24s; }
-.rse-concurso-item--4.reveal { transition-delay: 0.36s; }
+@keyframes rse-concurso-desliza {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .rse-concurso-item.reveal { transform: none; transition-delay: 0s; }
+  .rse-concurso-track { animation: none; }
+  .rse-concurso-marquee { overflow-x: auto; }
 }
 
 @media (max-width: 960px) {
@@ -3100,20 +3098,7 @@ button[disabled] {
 
   .rse-open-cifras { margin-top: 48px; padding: 32px 0 40px; }
 
-  .rse-concurso-gallery {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
-    gap: 16px;
-  }
-
-  .rse-concurso-item--1,
-  .rse-concurso-item--2,
-  .rse-concurso-item--3,
-  .rse-concurso-item--4 {
-    grid-column: auto;
-    grid-row: auto;
-    aspect-ratio: 4 / 3;
-  }
+  .rse-concurso-card { width: 220px; }
 
   .rse-gallery {
     grid-template-columns: 1fr;
