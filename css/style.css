@@ -1956,7 +1956,7 @@ button[disabled] {
    Solo afecta a historia.html (<body class="pagina-historia">), así El Parque y
    Empresas, que reutilizan .hist-cifras y .hist-next, quedan como están.
    Ritmo: azul noche con cuadrícula de plano (apertura) → franja dorada (cifras) →
-   etapas en blanco y gris punteado, con el número de etapa gigante en contorno dorado →
+   etapas en blanco y gris punteado →
    azul noche con cuadrícula (reconocimientos) → franja dorada (siguiente) → pie. */
 
 /* Texturas reutilizables */
@@ -2006,7 +2006,7 @@ button[disabled] {
 .pagina-historia .hist-cifras-list dd strong { color: var(--navy-950); }
 
 /* Etapas: bandas blancas y gris claro punteado (como papel de plano), de borde a borde.
-   Las bandas y el año gigante van detrás de todo (z-index negativo), así la línea
+   Las bandas van detrás de todo (z-index negativo), así la línea
    dorada, los puntos y los textos quedan siempre por encima. */
 .pagina-historia .hist-chapters {
   padding: 0;
@@ -2031,23 +2031,6 @@ button[disabled] {
   background:
     radial-gradient(var(--gray-200) 1.2px, transparent 1.7px) 0 0 / 24px 24px,
     var(--gray-50);
-}
-
-/* Número gigante de cada etapa (01, 02…), solo el contorno en dorado */
-.hist-chapter-marca {
-  position: absolute;
-  top: 36px;
-  right: 0;
-  z-index: -1;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(5rem, 13vw, 12rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--gold-300);
-  pointer-events: none;
-  user-select: none;
 }
 
 /* Reconocimientos: azul noche con la misma cuadrícula de la apertura */
@@ -2088,7 +2071,6 @@ button[disabled] {
   .pagina-historia .hist-chapter,
   .pagina-historia .hist-chapter:last-child { padding: 72px 0; }
   .pagina-historia .hist-chapter::before { top: 82px; }
-  .hist-chapter-marca { top: 24px; font-size: 4.6rem; -webkit-text-stroke-width: 1px; }
 }
 
 /* =========================================================

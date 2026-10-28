@@ -61,7 +61,7 @@ img/                        Fotos (cuando las haya)
 - Sin foto ni frase del fundador: la familia prefiere no aparecer en la web (decisión confirmada).
 - Fondos por sección (para que la página no sea toda blanca): apertura en azul noche con cuadrícula de plano,
   cifras en franja dorada con rayado fino, etapas alternando blanco y gris punteado (`hist-chapter--tono` en la 2 y la 4)
-  con el número de etapa gigante en contorno dorado (`hist-chapter-marca`: 01–04), reconocimientos en azul noche con
+  sin números de etapa grandes detrás de los títulos (decisión del equipo), reconocimientos en azul noche con
   cuadrícula y "Conocé más" en franja dorada. Sin fondos crema ni brillos dorados apagados (decisión del equipo).
   Los estilos van con `.pagina-historia` (clase del `<body>`), así no cambian El Parque ni Empresas,
   que reutilizan `.hist-cifras` y `.hist-next`.
