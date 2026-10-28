@@ -2731,6 +2731,51 @@ button[disabled] {
 }
 
 /* =========================================================
+   Página Responsabilidad Social (rediseño)
+   Todo lo de esta página empieza con "rse-". Reutiliza de Historia:
+   .foto, .hist-anim y .hist-open-scroll.
+   ========================================================= */
+
+/* ---------- Apertura: azul noche con fondo de anillos (como Proyecto Itapeby) ---------- */
+.rse-open {
+  position: relative;
+  padding: 100px 0 0;
+  overflow: hidden;
+  background:
+    repeating-radial-gradient(circle at 15% 115%, transparent 0 46px, color-mix(in srgb, var(--navy-700) 65%, transparent) 46px 47px),
+    radial-gradient(circle at 82% 20%, color-mix(in srgb, var(--gold-500) 22%, transparent), transparent 55%),
+    var(--navy-950);
+}
+
+.rse-open-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.rse-open h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.rse-open h1::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 28px;
+  background: var(--gold-500);
+  border-radius: 2px;
+}
+
+/* =========================================================
    Página Proyecto Itapeby (rediseño)
    Todo empieza con "pi-" y cuelga de <body class="pagina-proyecto">.
    Reutiliza de Historia: .foto, .hist-anim, .hist-open-scroll y .hist-next.
@@ -2783,6 +2828,433 @@ button[disabled] {
   margin-top: 28px;
   background: var(--gold-500);
   border-radius: 2px;
+}
+
+.rse-open-lead {
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--navy-100);
+}
+
+.rse-open-sub {
+  margin-top: 16px;
+  color: var(--navy-300);
+}
+
+/* Botón con forma de píldora, para que se note que baja a la próxima
+   sección (no es un link de texto suelto como en Historia/El Parque). */
+.rse-open .hist-open-scroll {
+  margin-top: 32px;
+  padding: 14px 24px 14px 26px;
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--white) 8%, transparent);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.rse-open .hist-open-scroll span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  color: var(--navy-950);
+  font-size: 0.85rem;
+}
+
+.rse-open .hist-open-scroll:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-950);
+}
+
+.rse-open .hist-open-scroll:hover span {
+  background: var(--navy-950);
+  color: var(--gold-500);
+}
+
+/* Collage: dos fotos superpuestas, sin inclinar — look editorial, no
+   la grilla pareja de Historia ni el mosaico de Empresas. */
+.rse-collage {
+  position: relative;
+  height: 520px;
+}
+
+.rse-collage .foto {
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+}
+
+.rse-collage-main {
+  position: absolute;
+  inset: 0 64px 64px 0;
+}
+
+.rse-collage-accent {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 56%;
+  aspect-ratio: 4 / 3;
+  border: 6px solid var(--navy-950);
+  z-index: 1;
+}
+
+/* ---------- Cifras: siguen dentro de .rse-open, mismo fondo ----------
+   Antes eran una caja gris flotando aparte; ahora es la base de la
+   misma sección, separada solo por una línea fina. */
+.rse-open-cifras {
+  position: relative;
+  z-index: 1;
+  margin-top: 72px;
+  padding: 44px 0 56px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.rse-open-cifras .hist-cifras-list {
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+
+.rse-open-cifras .hist-cifras-list > div + div {
+  border-left-color: rgba(255, 255, 255, 0.14);
+}
+
+.rse-open-cifras .hist-cifras-list dt { color: var(--gold-400); }
+.rse-open-cifras .hist-cifras-list dd { color: var(--navy-200); }
+.rse-open-cifras .hist-cifras-list dd strong { color: var(--white); }
+
+/* ---------- Convenios y donaciones: tarjetas con acento dorado arriba ---------- */
+/* ---------- Aula Ceibal: tarjetas en zigzag, caen desde el costado ----------
+   Ni línea de tiempo ni grilla a dos columnas: una sola columna de
+   tarjetas (foto + texto juntos), alternando si cuelgan a la
+   izquierda o a la derecha. Cada una "cae" desde su costado con un
+   rebote al hacer scroll. */
+.rse-aula-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 48px;
+}
+
+.rse-aula-card {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  max-width: 820px;
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+}
+
+.rse-aula-card--left { margin-right: auto; }
+
+.rse-aula-card--right {
+  margin-left: auto;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.rse-aula-card-photo {
+  flex-shrink: 0;
+  width: 280px;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+}
+
+.rse-aula-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--gold-500);
+  margin-bottom: 8px;
+}
+
+.rse-aula-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: var(--navy-950);
+}
+
+.rse-aula-card p { color: var(--gray-600); font-size: 0.95rem; }
+.rse-aula-card p strong { color: var(--navy-900); }
+
+/* Entrada "de costado, cayendo": la tarjeta aparece corrida hacia su
+   lado y un poco más arriba, y cae con un rebote hasta su lugar. */
+.rse-aula-card.reveal {
+  opacity: 0;
+  transform: translate(-60px, -36px) scale(0.93);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rse-aula-card--right.reveal {
+  transform: translate(60px, -36px) scale(0.93);
+}
+
+.rse-aula-card.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rse-aula-card.reveal,
+  .rse-aula-card--right.reveal {
+    transform: none;
+  }
+}
+
+/* ---------- Escuela de Conducción: dos ediciones lado a lado ----------
+   Nada de tarjetas con ícono: dos columnas separadas por una línea
+   fina, cada una con su año grande de fondo y un dato clave resaltado
+   en un recuadro, en vez de las citas que había antes. */
+.rse-escuela-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 48px;
+}
+
+.rse-escuela-ed {
+  position: relative;
+  padding: 0 48px;
+}
+
+.rse-escuela-ed:first-child { padding-left: 0; }
+
+.rse-escuela-ed:last-child {
+  padding-right: 0;
+  border-left: 1px solid var(--gray-200);
+}
+
+.rse-escuela-year {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--gold-300);
+  margin-bottom: 4px;
+}
+
+.rse-escuela-ed h3 {
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+  color: var(--navy-950);
+}
+
+.rse-escuela-ed p { color: var(--gray-600); }
+.rse-escuela-ed p strong { color: var(--navy-900); }
+
+.rse-escuela-highlight {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--gold-500);
+  background: var(--gold-50);
+  color: var(--navy-800);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ---------- Convenios y donaciones: listas abiertas, sin tarjetas ----------
+   Nada de dos cajas con borde: dos columnas de texto separadas por
+   una línea fina (mismo recurso que Escuela de Conducción), para que
+   la información respire en vez de quedar encuadrada. */
+.rse-convenios-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 40px;
+}
+
+.rse-convenios-col { padding: 0 48px; }
+.rse-convenios-col:first-child { padding-left: 0; }
+
+.rse-convenios-col:last-child {
+  padding-right: 0;
+  border-left: 1px solid var(--gray-200);
+}
+
+.rse-convenios-col h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--navy-950);
+}
+
+.rse-convenios-col .check-list li {
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.rse-convenios-col .check-list li:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+/* ---------- Galería tipo collage (Escuela de Conducción) ----------
+   6 fotos: una grande, cuatro chicas al lado y una tira ancha abajo.
+   Mismo mosaico irregular que el resto del sitio, pero acá es solo
+   fotos (sin texto adentro), para que sea una galería de verdad. */
+.rse-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 160px;
+  gap: 16px;
+}
+
+.rse-gallery .foto {
+  height: 100%;
+  border-radius: 16px;
+}
+
+.rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
+.rse-gallery-item--ancho { grid-column: span 4; }
+
+/* ---------- Concurso de dibujo: cinta de fotos en movimiento continuo ----------
+   Nada de grilla: una cinta horizontal que se desliza sola todo el
+   tiempo (como una vitrina), no algo que aparece y queda quieto. Las
+   fotos están duplicadas una vez para que el loop no se note. Se
+   para al pasar el mouse, para poder leer el cartel de cada foto. */
+.rse-concurso-marquee {
+  margin-top: 16px;
+  padding: 40px 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.rse-concurso-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: rse-concurso-desliza 24s linear infinite;
+}
+
+.rse-concurso-marquee:hover .rse-concurso-track { animation-play-state: paused; }
+
+.rse-concurso-card {
+  position: relative;
+  flex: none;
+  width: 320px;
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rse-concurso-card:hover {
+  transform: scale(1.3);
+  box-shadow: var(--shadow-lg);
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rse-concurso-card:hover { transform: none; }
+}
+
+@keyframes rse-concurso-desliza {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rse-concurso-track { animation: none; }
+  .rse-concurso-marquee { overflow-x: auto; }
+}
+
+@media (max-width: 960px) {
+  .rse-open-grid { grid-template-columns: 1fr; gap: 48px; }
+  .rse-collage { height: 380px; }
+  .rse-collage-main { inset: 0 48px 48px 0; }
+  .rse-collage-accent { width: 52%; }
+  .rse-open-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+  .rse-open-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
+
+  .rse-gallery { grid-template-columns: repeat(2, 1fr); }
+  .rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
+  .rse-gallery-item--ancho { grid-column: span 2; }
+}
+
+@media (max-width: 760px) {
+  .rse-open { padding: 56px 0 0; }
+
+  /* En celular las dos fotos pasan a una sola columna, en orden. */
+  .rse-collage {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+  }
+
+  .rse-collage .foto { aspect-ratio: 4 / 3; }
+  .rse-collage-main,
+  .rse-collage-accent {
+    position: static;
+    width: 100%;
+    border: none;
+  }
+
+  .rse-open-cifras { margin-top: 48px; padding: 32px 0 40px; }
+
+  .rse-concurso-card { width: 220px; }
+
+  .rse-gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+  }
+
+  .rse-gallery-item--grande,
+  .rse-gallery-item--ancho {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  /* En celular las tarjetas ocupan todo el ancho, foto arriba y texto
+     abajo, y la entrada pasa a ser una caída simple (sin costado). */
+  .rse-aula-card,
+  .rse-aula-card--right {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: none;
+    margin: 0;
+    text-align: left;
+    gap: 18px;
+  }
+
+  .rse-aula-card-photo { width: 100%; aspect-ratio: 4 / 3; }
+
+  .rse-aula-card.reveal,
+  .rse-aula-card--right.reveal {
+    transform: translateY(-32px) scale(0.95);
+  }
+
+  .rse-escuela-split { grid-template-columns: 1fr; gap: 40px; }
+  .rse-escuela-ed,
+  .rse-escuela-ed:first-child,
+  .rse-escuela-ed:last-child {
+    padding: 0;
+    border-left: none;
+  }
+  .rse-escuela-ed:last-child { padding-top: 32px; border-top: 1px solid var(--gray-200); }
+  .rse-escuela-year { font-size: 2.6rem; }
+
+  .rse-convenios-split { grid-template-columns: 1fr; gap: 32px; }
+  .rse-convenios-col,
+  .rse-convenios-col:first-child,
+  .rse-convenios-col:last-child {
+    padding: 0;
+    border-left: none;
+  }
+  .rse-convenios-col:last-child { padding-top: 28px; border-top: 1px solid var(--gray-200); }
 }
 
 .pi-open-lead {
