@@ -105,6 +105,12 @@ img/                        Fotos (cuando las haya)
   Acá queda solo una fila sobre el depósito del Parque.
 - Fotos de la página: FOTO 01 vista aérea, 02 pasillos del depósito, 03 oficinas, 04 showroom.
 
+## Página Empresas
+
+- Sin textos chicos arriba de los títulos (decisión del equipo, igual que el resto).
+- "Por qué funciona" (`.emp-process`): los pasos 01–03 van en círculos dorados unidos por una línea
+  que se dibuja al aparecer (en celular, la línea baja entre los pasos). Sin números gigantes en contorno.
+
 ## Página Proyecto Itapeby
 
 - Rediseño pedido por el equipo (Alfonso, con su sesión de Claude). Estilos con prefijo `pi-` en `css/style.css`,

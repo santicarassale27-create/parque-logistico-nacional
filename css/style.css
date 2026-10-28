@@ -700,10 +700,9 @@ section {
   color: var(--navy-950);
 }
 
-/* ---------- "Por qué funciona": franja editorial oscura ----------
-   Banda oscura de ancho completo, 3 columnas separadas por líneas,
-   cada una con un número gigante "fantasma" (solo contorno) detrás
-   del título, estilo editorial. Sin íconos, un único acento (dorado). */
+/* ---------- "Por qué funciona": franja oscura con los 3 pasos ----------
+   Cada paso tiene su número en un círculo dorado y una línea que lo une con el
+   siguiente (la mercadería entra, se guarda y sale). La línea se dibuja al aparecer. */
 .emp-process {
   background: var(--navy-950);
   color: var(--white);
@@ -715,45 +714,66 @@ section {
   margin-bottom: 64px;
 }
 
-.emp-process-head .eyebrow { color: var(--gold-400); }
-.emp-process-head .eyebrow::before { background: var(--gold-400); }
 .emp-process-head .section-title { color: var(--white); }
 .emp-process-head .section-lead { color: var(--gray-200); }
 
 .emp-process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
 }
 
-.emp-process-col {
-  padding: 0 44px;
-}
-
-.emp-process-col:first-child { padding-left: 0; }
-.emp-process-col:last-child { padding-right: 0; }
-
-.emp-process-col + .emp-process-col {
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
-}
+.emp-process-col { position: relative; }
 
 .emp-process-num {
-  display: block;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 28px;
+  border: 1.5px solid var(--gold-500);
+  border-radius: 50%;
+  background: var(--navy-950);
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 5.6rem;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(201, 162, 39, 0.55);
-  margin-bottom: -20px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--gold-300);
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.emp-process-col:hover .emp-process-num {
+  background: var(--gold-500);
+  color: var(--navy-950);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold-500) 18%, transparent);
+}
+
+/* Línea que une cada círculo con el del paso siguiente (el último no tiene) */
+.emp-process-col:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 68px;
+  right: -36px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--gold-500), color-mix(in srgb, var(--gold-500) 25%, transparent));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.4s;
+}
+
+.emp-process-col.visible::after,
+.emp-process-col:not(.reveal)::after { transform: scaleX(1); }
 
 .emp-process-col h3 {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.35rem;
   color: var(--white);
-  position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .emp-process-col p {
@@ -2702,10 +2722,18 @@ button[disabled] {
   .pq-open-foto { aspect-ratio: 4 / 3; }
   .emp-hero { padding: 64px 0 56px; }
   .emp-process { padding: 72px 0; }
+  /* En celular los pasos van uno debajo del otro: círculo a la izquierda y la línea baja hasta el siguiente */
   .emp-process-grid { grid-template-columns: 1fr; gap: 40px; }
-  .emp-process-col { padding: 0; }
-  .emp-process-col + .emp-process-col { border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: 32px; }
-  .emp-process-num { font-size: 4.4rem; }
+  .emp-process-col { padding-left: 76px; }
+  .emp-process-num { position: absolute; left: 0; top: 0; margin: 0; }
+  .emp-process-col:not(:last-child)::after {
+    top: 68px; bottom: -28px; left: 28px; right: auto;
+    width: 1.5px; height: auto;
+    background: linear-gradient(180deg, var(--gold-500), color-mix(in srgb, var(--gold-500) 25%, transparent));
+    transform-origin: top; transform: scaleY(0);
+  }
+  .emp-process-col.visible::after,
+  .emp-process-col:not(.reveal)::after { transform: scaleY(1); }
   .pq-cifras .hist-cifras-list { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .pq-cifras .hist-cifras-list > div:nth-child(3) { border-left: none; }
   .pq-ubicacion { padding: 24px 0 40px; }
