@@ -2873,21 +2873,68 @@ button[disabled] {
 .rse-open-cifras .hist-cifras-list dd strong { color: var(--white); }
 
 /* ---------- Convenios y donaciones: tarjetas con acento dorado arriba ---------- */
-/* ---------- Aula Ceibal: texto y fotos alternados ----------
-   3 bloques tipo .feature, uno por idea, cada uno con su propia foto
-   y alternando el lado (texto/foto, foto/texto). Así la información
-   no queda toda junta: se va cortando con las imágenes. */
-.rse-aula-feature + .rse-aula-feature { margin-top: 72px; }
+/* ---------- Aula Ceibal: línea de tiempo con foto a un lado ----------
+   Mismo espíritu que .timeline (rail con puntos dorados), pero cada
+   etapa trae su propia foto chica al lado del texto corto. Así se
+   lee en partes cortas, no como un bloque de texto grande. */
+.rse-aula-timeline {
+  position: relative;
+  margin-top: 48px;
+  padding-left: 32px;
+  border-left: 2px solid var(--gray-200);
+}
 
-.rse-aula-feature h3 {
+.rse-aula-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 40px;
+  align-items: center;
+  padding-bottom: 64px;
+}
+
+.rse-aula-row:last-child { padding-bottom: 0; }
+
+.rse-aula-row::before {
+  content: "";
+  position: absolute;
+  left: -41px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--gold-500);
+}
+
+.rse-aula-row-tag {
+  display: inline-block;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.4rem;
-  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--gold-500);
+  margin-bottom: 8px;
+}
+
+.rse-aula-row-text h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
   color: var(--navy-950);
 }
 
-.rse-aula-feature p { color: var(--gray-600); }
+.rse-aula-row-text p {
+  color: var(--gray-600);
+  max-width: 540px;
+}
+
+.rse-aula-row-text p strong { color: var(--navy-900); }
+
+.rse-aula-row-photo .foto {
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+}
 
 .rse-convenios .card { border-top: 3px solid var(--gold-500); }
 
@@ -2921,6 +2968,8 @@ button[disabled] {
   .rse-gallery { grid-template-columns: repeat(2, 1fr); }
   .rse-gallery-item--grande { grid-column: span 2; grid-row: span 2; }
   .rse-gallery-item--ancho { grid-column: span 2; }
+
+  .rse-aula-row { grid-template-columns: 1fr 160px; gap: 24px; }
 }
 
 @media (max-width: 760px) {
@@ -2954,4 +3003,13 @@ button[disabled] {
     grid-column: auto;
     grid-row: auto;
   }
+
+  .rse-aula-timeline { padding-left: 20px; }
+  .rse-aula-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-bottom: 48px;
+  }
+  .rse-aula-row::before { left: -29px; }
+  .rse-aula-row-photo .foto { aspect-ratio: 4 / 3; }
 }
