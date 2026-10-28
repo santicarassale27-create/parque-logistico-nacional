@@ -3008,7 +3008,7 @@ button[disabled] {
 .pi-relato-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
 .pi-plano-link { font-weight: 600; color: var(--navy-950); border-bottom: 2px solid var(--gold-500); }
 
-/* ---------- Mejoras para el barrio: azul noche, fotos con el texto abajo ---------- */
+/* ---------- Mejoras para el barrio: azul noche, lista + foto grande que cambia ---------- */
 .pi-barrio {
   --fondo-seccion: var(--navy-950);
   padding: 112px 0;
@@ -3019,54 +3019,97 @@ button[disabled] {
 .pi-barrio .pi-lead { color: var(--navy-300); }
 .pi-barrio-head { margin-bottom: 48px; }
 
-/* Dos columnas desfasadas: foto arriba (se ve entera, sin texto encima) y el texto abajo */
-.pi-bento {
+/* Lista de espacios (izquierda) + foto grande (derecha) que cambia según el elegido */
+.pi-espacios {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 56px 40px;
-  align-items: start;   /* cada tarjeta mide lo que su contenido, sin estirarse */
+  grid-template-columns: 1fr 1.3fr;
+  gap: 56px;
+  align-items: start;
 }
 
-.pi-bento-item:nth-child(even) { margin-top: 96px; }
+.pi-espacios-lista { list-style: none; border-top: 1px solid var(--navy-800); }
 
-/* Cada espacio es una sola tarjeta: foto arriba y texto abajo, sobre un fondo apenas más claro */
-.pi-bento-item {
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--white) 5%, transparent);
-  border: 1px solid color-mix(in srgb, var(--white) 9%, transparent);
-  box-shadow: 0 24px 48px color-mix(in srgb, var(--navy-950) 45%, transparent);
-  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+.pi-espacio {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  width: 100%;
+  padding: 22px 0;
+  border: none;
+  border-bottom: 1px solid var(--navy-800);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
-.pi-bento-item:hover {
-  transform: translateY(-6px);
-  background: color-mix(in srgb, var(--white) 8%, transparent);
-  border-color: color-mix(in srgb, var(--white) 16%, transparent);
-}
-
-.pi-bento-foto { aspect-ratio: 16 / 10; overflow: hidden; }
-
-.pi-bento-foto .foto {
-  height: 100%;
-  border-radius: 0;
-  transition: transform 0.6s ease;
-}
-
-.pi-bento-item:hover .pi-bento-foto .foto { transform: scale(1.04); }
-
-.pi-bento-texto { padding: 24px 28px 28px; }
-
-.pi-bento-texto h3 {
+.pi-espacio-n {
+  grid-row: span 2;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.3rem;
-  color: var(--white);
+  color: var(--navy-600);
+  transition: color 0.3s ease;
 }
 
-.pi-bento-texto p { margin-top: 8px; max-width: 460px; font-size: 0.95rem; color: var(--navy-300); }
+.pi-espacio-t {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--navy-300);
+  transition: color 0.3s ease;
+}
+
+/* La descripción solo se abre en el espacio elegido */
+.pi-espacio-d {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 0.98rem;
+  color: var(--navy-300);
+  transition: max-height 0.45s ease, margin 0.45s ease, opacity 0.45s ease;
+}
+
+.pi-espacio.activo .pi-espacio-d { max-height: 200px; margin-top: 10px; opacity: 1; }
+.pi-espacio.activo .pi-espacio-t,
+.pi-espacio:hover .pi-espacio-t { color: var(--white); }
+.pi-espacio.activo .pi-espacio-n,
+.pi-espacio:hover .pi-espacio-n { color: var(--gold-500); }
+.pi-espacio:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 4px; }
+
+/* Línea dorada que se llena debajo del elegido: marca cuánto falta para que cambie solo */
+.pi-espacio::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 0;
+  background: var(--gold-500);
+}
+
+.pi-espacios.auto .pi-espacio.activo::after { width: 100%; transition: width 6s linear; }
+.pi-espacios:not(.auto) .pi-espacio.activo::after { width: 100%; }
+
+/* Fotos apiladas: se ve solo la del espacio elegido, con un fundido suave */
+.pi-espacios-fotos {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px color-mix(in srgb, var(--navy-950) 55%, transparent);
+}
+
+.pi-espacios-capa {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.7s ease, transform 1.2s ease;
+}
+
+.pi-espacios-capa.activo { opacity: 1; transform: none; }
+.pi-espacios-capa .foto { height: 100%; border-radius: 0; }
 
 /* ---------- Interés Municipal: franja dorada con el sello grande ---------- */
 .pi-interes {
@@ -3092,6 +3135,8 @@ button[disabled] {
 /* ---------- Proyecto: tablet y celular ---------- */
 @media (max-width: 960px) {
   .pi-open-grid { grid-template-columns: 1fr; gap: 56px; }
+  .pi-espacios { grid-template-columns: 1fr; gap: 28px; }
+  .pi-espacios-fotos { order: -1; }
 
   /* Relato: el anillo queda chico arriba, pegado debajo del menú, y el texto baja por debajo */
   .pi-relato-grid { grid-template-columns: 1fr; gap: 0; }
@@ -3126,8 +3171,7 @@ button[disabled] {
   .pi-trans { margin-top: 48px; padding: 72px 0; }
   .pi-relato { padding: 0 0 24px; }
   .pi-barrio { padding: 72px 0; }
-  .pi-bento { grid-template-columns: 1fr; gap: 44px; }
-  .pi-bento-item:nth-child(even) { margin-top: 0; }
+  .pi-espacio-t { font-size: 1.12rem; }
   .pi-interes { padding: 72px 0; }
   .pi-interes-grid { grid-template-columns: 1fr; gap: 28px; }
   .pi-interes-sello { width: 150px; }
@@ -3136,5 +3180,5 @@ button[disabled] {
 @media (prefers-reduced-motion: reduce) {
   .pi-sello-giro { animation: none; }
   .pi-relato-seg, .pi-relato-centro, .pi-relato-paso { transition: none; }
-  .pi-bento-foto .foto, .pi-bento-item { transition: none; }
+  .pi-espacio-d, .pi-espacios-capa { transition: none; }
 }
