@@ -2895,6 +2895,50 @@ button[disabled] {
 
 .rse-aula-row:last-child { padding-bottom: 0; }
 
+/* Entrada tipo "salto": el texto sube con un rebote y la foto lo
+   sigue un poco después, en vez del fade parejo del resto del sitio. */
+.rse-aula-row.reveal {
+  opacity: 0;
+  transform: translateY(56px) scale(0.97);
+  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rse-aula-row.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.rse-aula-row-photo {
+  transition: opacity 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.18s;
+}
+
+.rse-aula-row.reveal .rse-aula-row-photo {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.rse-aula-row.reveal.visible .rse-aula-row-photo {
+  opacity: 1;
+  transform: none;
+}
+
+.rse-aula-row::before {
+  transition: transform 0.4s ease 0.3s;
+}
+
+.rse-aula-row.reveal::before { transform: scale(0); }
+.rse-aula-row.reveal.visible::before { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rse-aula-row.reveal,
+  .rse-aula-row.reveal .rse-aula-row-photo,
+  .rse-aula-row.reveal::before {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .rse-aula-row::before {
   content: "";
   position: absolute;
