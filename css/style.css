@@ -2873,12 +2873,44 @@ button[disabled] {
 .rse-open-cifras .hist-cifras-list dd strong { color: var(--white); }
 
 /* ---------- Convenios y donaciones: tarjetas con acento dorado arriba ---------- */
-/* ---------- Aula Ceibal: bloques alternados, entran desde el costado ----------
-   Sin línea de tiempo ni rail: 3 bloques tipo .feature/.feature.reverse,
-   cada uno con su foto, alternando el lado. Al hacer scroll, cada mitad
-   entra "saltando" desde su costado (texto y foto se acercan al centro). */
-.rse-aula-blocks { margin-top: 48px; }
-.rse-aula-block + .rse-aula-block { margin-top: 80px; }
+/* ---------- Aula Ceibal: tarjetas en zigzag, caen desde el costado ----------
+   Ni línea de tiempo ni grilla a dos columnas: una sola columna de
+   tarjetas (foto + texto juntos), alternando si cuelgan a la
+   izquierda o a la derecha. Cada una "cae" desde su costado con un
+   rebote al hacer scroll. */
+.rse-aula-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.rse-aula-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  max-width: 720px;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+}
+
+.rse-aula-card--left { margin-right: auto; }
+
+.rse-aula-card--right {
+  margin-left: auto;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.rse-aula-card-photo {
+  flex-shrink: 0;
+  width: 190px;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+}
 
 .rse-aula-tag {
   display: inline-block;
@@ -2886,44 +2918,38 @@ button[disabled] {
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--gold-500);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.rse-aula-block h3 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
+.rse-aula-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
   color: var(--navy-950);
 }
 
-.rse-aula-block p { color: var(--gray-600); }
-.rse-aula-block p strong { color: var(--navy-900); }
+.rse-aula-card p { color: var(--gray-600); font-size: 0.95rem; }
+.rse-aula-card p strong { color: var(--navy-900); }
 
-.rse-aula-block .foto--grande { margin: 0; }
-
-/* Entrada "de costado": el lado de la foto entra desde donde está
-   (izquierda o derecha) y el texto entra desde el lado contrario,
-   con un pequeño rebote al llegar — nada de fade parejo ni rail. */
-.rse-aula-block .feature-media.reveal {
-  transform: translateX(-70px) scale(0.95);
+/* Entrada "de costado, cayendo": la tarjeta aparece corrida hacia su
+   lado y un poco más arriba, y cae con un rebote hasta su lugar. */
+.rse-aula-card.reveal {
+  opacity: 0;
+  transform: translate(-60px, -36px) scale(0.93);
   transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.rse-aula-block.reverse .feature-media.reveal {
-  transform: translateX(70px) scale(0.95);
+.rse-aula-card--right.reveal {
+  transform: translate(60px, -36px) scale(0.93);
 }
 
-.rse-aula-block > div:not(.feature-media).reveal {
-  transform: translateX(70px) scale(0.97);
-  transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.14s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.14s;
-}
-
-.rse-aula-block.reverse > div:not(.feature-media).reveal {
-  transform: translateX(-70px) scale(0.97);
+.rse-aula-card.reveal.visible {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rse-aula-block .feature-media.reveal,
-  .rse-aula-block > div:not(.feature-media).reveal {
+  .rse-aula-card.reveal,
+  .rse-aula-card--right.reveal {
     transform: none;
   }
 }
@@ -2994,12 +3020,22 @@ button[disabled] {
     grid-row: auto;
   }
 
-  /* En celular no hay lados: la entrada pasa a ser vertical, como el resto del sitio. */
-  .rse-aula-block + .rse-aula-block { margin-top: 56px; }
-  .rse-aula-block .feature-media.reveal,
-  .rse-aula-block.reverse .feature-media.reveal,
-  .rse-aula-block > div:not(.feature-media).reveal,
-  .rse-aula-block.reverse > div:not(.feature-media).reveal {
-    transform: translateY(32px);
+  /* En celular las tarjetas ocupan todo el ancho, foto arriba y texto
+     abajo, y la entrada pasa a ser una caída simple (sin costado). */
+  .rse-aula-card,
+  .rse-aula-card--right {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: none;
+    margin: 0;
+    text-align: left;
+    gap: 18px;
+  }
+
+  .rse-aula-card-photo { width: 100%; aspect-ratio: 4 / 3; }
+
+  .rse-aula-card.reveal,
+  .rse-aula-card--right.reveal {
+    transform: translateY(-32px) scale(0.95);
   }
 }
