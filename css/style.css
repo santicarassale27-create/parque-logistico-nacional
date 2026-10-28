@@ -3008,7 +3008,7 @@ button[disabled] {
 .pi-relato-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
 .pi-plano-link { font-weight: 600; color: var(--navy-950); border-bottom: 2px solid var(--gold-500); }
 
-/* ---------- Mejoras para el barrio: azul noche con mosaico de fotos ---------- */
+/* ---------- Mejoras para el barrio: azul noche, fotos con el texto abajo ---------- */
 .pi-barrio {
   --fondo-seccion: var(--navy-950);
   padding: 112px 0;
@@ -3019,39 +3019,34 @@ button[disabled] {
 .pi-barrio .pi-lead { color: var(--navy-300); }
 .pi-barrio-head { margin-bottom: 48px; }
 
+/* Dos columnas desfasadas: foto arriba (se ve entera, sin texto encima) y el texto abajo */
 .pi-bento {
   display: grid;
-  grid-template-columns: 1.25fr 1fr 1fr;
-  grid-auto-rows: 250px;
-  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px 40px;
 }
 
-.pi-bento-item {
-  position: relative;
+.pi-bento-item:nth-child(even) { margin-top: 96px; }
+
+.pi-bento-foto {
+  aspect-ratio: 16 / 10;
   border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 24px 48px color-mix(in srgb, var(--navy-950) 50%, transparent);
 }
 
-.pi-bento-item--grande { grid-row: span 2; }
-.pi-bento-item--ancho { grid-column: span 2; }
-
-.pi-bento-item .foto {
-  position: absolute;
-  inset: 0;
+.pi-bento-foto .foto {
+  height: 100%;
   border-radius: 0;
-  align-items: flex-start;
   transition: transform 0.6s ease;
 }
 
-.pi-bento-item:hover .foto { transform: scale(1.04); }
+.pi-bento-item:hover .pi-bento-foto .foto { transform: scale(1.04); }
 
 .pi-bento-texto {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 48px 24px 22px;
-  background: linear-gradient(transparent, color-mix(in srgb, var(--navy-950) 90%, transparent));
+  margin-top: 22px;
+  padding-left: 18px;
+  border-left: 2px solid var(--gold-500);
 }
 
 .pi-bento-texto h3 {
@@ -3061,7 +3056,7 @@ button[disabled] {
   color: var(--white);
 }
 
-.pi-bento-texto p { margin-top: 6px; max-width: 460px; font-size: 0.93rem; color: var(--navy-200); }
+.pi-bento-texto p { margin-top: 6px; max-width: 460px; font-size: 0.95rem; color: var(--navy-300); }
 
 /* ---------- Interés Municipal: franja dorada con el sello grande ---------- */
 .pi-interes {
@@ -3109,8 +3104,6 @@ button[disabled] {
   .pi-sello { left: 16px; bottom: -44px; width: 128px; }
   .pi-cifras-list { grid-template-columns: repeat(2, 1fr); }
   .pi-pasos { grid-template-columns: 1fr; gap: 56px; }
-  .pi-bento { grid-template-columns: 1fr 1fr; }
-  .pi-bento-item--grande { grid-column: span 2; grid-row: span 1; }
   .pi-interes-grid { grid-template-columns: 160px 1fr; gap: 36px; }
 }
 
@@ -3123,9 +3116,8 @@ button[disabled] {
   .pi-trans { margin-top: 48px; padding: 72px 0; }
   .pi-relato { padding: 0 0 24px; }
   .pi-barrio { padding: 72px 0; }
-  .pi-bento { grid-template-columns: 1fr; grid-auto-rows: 240px; }
-  .pi-bento-item--grande,
-  .pi-bento-item--ancho { grid-column: auto; }
+  .pi-bento { grid-template-columns: 1fr; gap: 44px; }
+  .pi-bento-item:nth-child(even) { margin-top: 0; }
   .pi-interes { padding: 72px 0; }
   .pi-interes-grid { grid-template-columns: 1fr; gap: 28px; }
   .pi-interes-sello { width: 150px; }
@@ -3134,5 +3126,5 @@ button[disabled] {
 @media (prefers-reduced-motion: reduce) {
   .pi-sello-giro { animation: none; }
   .pi-relato-seg, .pi-relato-centro, .pi-relato-paso { transition: none; }
-  .pi-bento-item .foto { transition: none; }
+  .pi-bento-foto .foto { transition: none; }
 }
