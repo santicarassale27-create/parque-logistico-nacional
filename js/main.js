@@ -20,8 +20,7 @@ var FORM_KEYS = {
   geligold: "",  // geligold@pln.com.uy
   talfir: "",    // operativa@talfir.com.uy
   lamarel: "",   // lamarel@lamarel.com
-  repremar: "",  // logistics@repremar.com
-  rse: ""        // geligold@pln.com.uy
+  repremar: ""   // logistics@repremar.com
 };
 
 var FORM_SUBJECTS = {
@@ -29,8 +28,7 @@ var FORM_SUBJECTS = {
   geligold: "Consulta para Geligold — Depósito nacional",
   talfir: "Consulta para Talfir — Depósito aduanero",
   lamarel: "Consulta para Lamarel — Flete terrestre",
-  repremar: "Consulta para Repremar — Fletes aéreos y marítimos",
-  rse: "Consulta sobre Responsabilidad Social"
+  repremar: "Consulta para Repremar — Fletes aéreos y marítimos"
 };
 
 document.addEventListener("DOMContentLoaded", function () {

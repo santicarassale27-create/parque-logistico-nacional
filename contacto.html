@@ -34,17 +34,6 @@
   </div>
 </header>
 
-<!-- ============ MAPA (ancho completo, arriba de todo) ============
-     Mapa de Google Maps con la dirección del Parque. El cartel "Cómo llegar" abre Google Maps en una pestaña nueva. -->
-<section class="ct-mapa">
-  <iframe class="ct-mapa-iframe" title="Mapa: Parque Logístico Nacional, Dr. Pantaleón Pérez 4881, Montevideo"
-    src="https://maps.google.com/maps?q=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  <a class="ct-mapa-cartel" href="https://www.google.com/maps/search/?api=1&amp;query=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay" target="_blank" rel="noopener">
-    <strong>Parque Logístico Nacional</strong>
-    <span>Dr. Pantaleón Pérez 4881 · Cómo llegar ↗</span>
-  </a>
-</section>
-
 <!-- ============ CONTACTANOS: datos a la izquierda, formulario a la derecha ============ -->
 <section class="ct-main">
   <div class="container">
@@ -61,24 +50,36 @@
         <h2 class="ct-subtitulo">Cada empresa del Parque</h2>
         <ul class="ct-empresas">
           <li>
-            <strong>Geligold S.A.</strong><span class="ct-emp-rubro">Depósito nacional</span>
-            <span>Dr. Pantaleón Pérez 4881</span>
-            <span><a href="tel:+59825258782">2525 87 82</a> · <a href="mailto:geligold@pln.com.uy">geligold@pln.com.uy</a></span>
+            <span class="ct-emp-logo"><img src="img/logos/pln.png" alt="Parque Logístico Nacional – Geligold" loading="lazy"></span>
+            <div class="ct-emp-info">
+              <strong>Geligold S.A.</strong><span class="ct-emp-rubro">Depósito nacional</span>
+              <span>Dr. Pantaleón Pérez 4881</span>
+              <span><a href="tel:+59825258782">2525 87 82</a> · <a href="mailto:geligold@pln.com.uy">geligold@pln.com.uy</a></span>
+            </div>
           </li>
           <li>
-            <strong>Talfir S.A.</strong><span class="ct-emp-rubro">Depósito aduanero</span>
-            <span>Veracierto 2990</span>
-            <span><a href="tel:+59825046182">2504 61 82</a> · <a href="mailto:operativa@talfir.com.uy">operativa@talfir.com.uy</a></span>
+            <span class="ct-emp-logo"><img src="img/logos/talfir.png" alt="Talfir" loading="lazy"></span>
+            <div class="ct-emp-info">
+              <strong>Talfir S.A.</strong><span class="ct-emp-rubro">Depósito aduanero</span>
+              <span>Veracierto 2990</span>
+              <span><a href="tel:+59825046182">2504 61 82</a> · <a href="mailto:operativa@talfir.com.uy">operativa@talfir.com.uy</a></span>
+            </div>
           </li>
           <li>
-            <strong>Lamarel</strong><span class="ct-emp-rubro">Flete terrestre</span>
-            <span>Dr. Pantaleón Pérez 4881</span>
-            <span><a href="tel:+59825259960">2525 99 60</a> · <a href="mailto:lamarel@lamarel.com">lamarel@lamarel.com</a></span>
+            <span class="ct-emp-logo"><img src="img/logos/lamarel.png" alt="Lamarel" loading="lazy"></span>
+            <div class="ct-emp-info">
+              <strong>Lamarel</strong><span class="ct-emp-rubro">Flete terrestre</span>
+              <span>Dr. Pantaleón Pérez 4881</span>
+              <span><a href="tel:+59825259960">2525 99 60</a> · <a href="mailto:lamarel@lamarel.com">lamarel@lamarel.com</a></span>
+            </div>
           </li>
           <li>
-            <strong>Repremar Logistics</strong><span class="ct-emp-rubro">Fletes aéreos y marítimos</span>
-            <span>Misiones 1372, 6.º piso</span>
-            <span><a href="tel:+59829169416">2916 94 16</a> · <a href="mailto:logistics@repremar.com">logistics@repremar.com</a></span>
+            <span class="ct-emp-logo"><img src="img/logos/repremar.png" alt="Repremar Logistics" loading="lazy"></span>
+            <div class="ct-emp-info">
+              <strong>Repremar Logistics</strong><span class="ct-emp-rubro">Fletes aéreos y marítimos</span>
+              <span>Misiones 1372, 6.º piso</span>
+              <span><a href="tel:+59829169416">2916 94 16</a> · <a href="mailto:logistics@repremar.com">logistics@repremar.com</a></span>
+            </div>
           </li>
         </ul>
 
@@ -113,7 +114,6 @@
             <option value="talfir">Talfir S.A. — Depósito aduanero</option>
             <option value="lamarel">Lamarel — Flete terrestre</option>
             <option value="repremar">Repremar Logistics — Fletes aéreos y marítimos</option>
-            <option value="rse">Responsabilidad social</option>
           </select>
         </div>
         <div class="form-field">
@@ -130,6 +130,17 @@
       </form>
     </div>
   </div>
+</section>
+
+<!-- ============ MAPA (ancho completo, al final de la página) ============
+     Mapa de Google Maps con la dirección del Parque. El cartel "Cómo llegar" abre Google Maps en una pestaña nueva. -->
+<section class="ct-mapa">
+  <iframe class="ct-mapa-iframe" title="Mapa: Parque Logístico Nacional, Dr. Pantaleón Pérez 4881, Montevideo"
+    src="https://maps.google.com/maps?q=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay&amp;z=14&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <a class="ct-mapa-cartel" href="https://www.google.com/maps/search/?api=1&amp;query=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay" target="_blank" rel="noopener">
+    <strong>Parque Logístico Nacional</strong>
+    <span>Dr. Pantaleón Pérez 4881 · Cómo llegar ↗</span>
+  </a>
 </section>
 
 <footer class="site-footer">

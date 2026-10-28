@@ -3199,13 +3199,11 @@ button[disabled] {
   background: var(--gray-100);
 }
 
-/* Mapa en tonos suaves para que combine con la web */
 .ct-mapa-iframe {
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
-  filter: grayscale(0.85) contrast(1.05);
 }
 
 /* Cartel flotante con la dirección: abre Google Maps */
@@ -3229,7 +3227,7 @@ button[disabled] {
 .ct-mapa-cartel span { font-size: 0.88rem; color: var(--gold-300); }
 
 /* ---------- Título y columnas ---------- */
-.ct-main { padding: 88px 0 112px; }
+.ct-main { padding: 96px 0 112px; }
 
 .ct-title {
   font-family: var(--font-display);
@@ -3273,15 +3271,32 @@ button[disabled] {
 
 .ct-empresas li {
   display: flex;
-  flex-wrap: wrap;
-  column-gap: 10px;
-  padding: 14px 0;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 0;
   border-bottom: 1px solid var(--gray-200);
   font-size: 0.92rem;
   color: var(--gray-600);
 }
 
-.ct-empresas li > span:not(.ct-emp-rubro) { flex-basis: 100%; }
+/* Logo de cada empresa en un recuadro blanco chico, a la izquierda de sus datos */
+.ct-emp-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 124px;
+  height: 72px;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.ct-emp-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.ct-emp-info { display: flex; flex-wrap: wrap; column-gap: 10px; }
+.ct-emp-info > span:not(.ct-emp-rubro) { flex-basis: 100%; }
 .ct-empresas strong { color: var(--navy-950); }
 .ct-emp-rubro { color: var(--gold-800); font-weight: 600; font-size: 0.85rem; }
 
@@ -3336,6 +3351,7 @@ button[disabled] {
 
 @media (max-width: 760px) {
   .ct-mapa { height: 340px; }
+  .ct-emp-logo { width: 92px; height: 56px; padding: 8px; }
   .ct-mapa-cartel { left: 16px; right: 16px; bottom: 16px; }
   .ct-main { padding: 56px 0 72px; }
   .ct-grid { margin-top: 40px; }
