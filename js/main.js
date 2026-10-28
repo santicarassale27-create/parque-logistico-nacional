@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initContactForm();
   initHistoria();
   initPlano();
+  initRelato();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -310,6 +311,26 @@ function initPlano() {
     el.addEventListener("click", function () { resaltar(el.dataset.lote); });
   });
   plano.addEventListener("mouseleave", function () { resaltar(null); });
+}
+
+/* ---------- 8. Relato al bajar (página Proyecto Itapeby) ----------
+   El paso que está en el medio de la pantalla queda "activo" y la sección
+   recibe su número en data-paso. El CSS usa ese número para pintar el anillo. */
+function initRelato() {
+  var seccion = document.querySelector(".pi-relato");
+  if (!seccion || !("IntersectionObserver" in window)) return;
+  var pasos = seccion.querySelectorAll(".pi-relato-paso");
+  seccion.classList.add("js-relato");
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      pasos.forEach(function (paso) { paso.classList.toggle("activo", paso === entry.target); });
+      seccion.dataset.paso = entry.target.dataset.paso;
+    });
+  }, { rootMargin: "-45% 0px -45% 0px" }); // una franja finita en el medio de la pantalla
+
+  pasos.forEach(function (paso) { observer.observe(paso); });
 }
 
 /* En celular, el mapa y el plano se deslizan dentro de su recuadro:

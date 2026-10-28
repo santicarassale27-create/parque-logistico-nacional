@@ -2733,7 +2733,7 @@ button[disabled] {
    Todo empieza con "pi-" y cuelga de <body class="pagina-proyecto">.
    Reutiliza de Historia: .foto, .hist-anim, .hist-open-scroll y .hist-next.
    Ritmo de fondos: blanco (apertura y cifras) →
-   gris punteado (transformación) → blanco (desarrollo) → azul noche (barrio) →
+   gris punteado (transformación) → blanco (relato al bajar) → azul noche (barrio) →
    franja dorada (Interés Municipal) → blanco (siguiente) → pie.
    ========================================================= */
 
@@ -2892,96 +2892,121 @@ button[disabled] {
 
 .pi-paso p { color: var(--gray-600); font-size: 0.97rem; }
 
-/* ---------- El desarrollo: texto + maqueta de los seis locales ---------- */
-.pi-desarrollo { padding: 112px 0; }
+/* ---------- El desarrollo: relato al bajar ----------
+   El anillo queda fijo mientras el texto baja en 4 pasos. La sección tiene data-paso="1…4"
+   (lo pone initRelato() en main.js) y según ese número se pintan las partes del anillo. */
+.pi-relato { padding: 112px 0 40px; }
 
-.pi-desarrollo-grid {
+.pi-relato-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 72px;
+  gap: 80px;
+}
+
+.pi-relato-fijo {
+  position: sticky;
+  top: 130px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 28px;
 }
 
-.pi-calle {
-  margin-top: 32px;
-  padding: 4px 0 4px 22px;
-  border-left: 3px solid var(--gold-500);
+.pi-relato-anillo { position: relative; width: min(380px, 100%); }
+.pi-relato-anillo svg { display: block; width: 100%; height: auto; }
+
+.pi-relato-pista { fill: none; stroke: var(--gray-100); stroke-width: 20; }
+
+.pi-relato-seg {
+  fill: none;
+  stroke: var(--gray-200);
+  stroke-width: 20;
+  transition: stroke 0.6s ease calc(var(--i) * 0.08s), stroke-width 0.4s ease;
 }
 
-.pi-calle strong { display: block; margin-bottom: 6px; color: var(--navy-950); font-size: 1.05rem; }
-.pi-calle p { color: var(--gray-600); }
+/* Paso 2: se pintan las que operan · Paso 3: se suman la confirmada y la que está en negociación ·
+   Paso 4: se marcan las dos por definir. La parte que "entra" en cada paso se ve un poco más gruesa. */
+.pi-relato[data-paso="2"] .pi-relato-seg--op,
+.pi-relato[data-paso="3"] .pi-relato-seg--op,
+.pi-relato[data-paso="4"] .pi-relato-seg--op { stroke: var(--gold-500); }
+.pi-relato[data-paso="3"] .pi-relato-seg--conf,
+.pi-relato[data-paso="4"] .pi-relato-seg--conf { stroke: var(--navy-950); }
+.pi-relato[data-paso="3"] .pi-relato-seg--neg,
+.pi-relato[data-paso="4"] .pi-relato-seg--neg { stroke: var(--navy-300); }
+.pi-relato[data-paso="4"] .pi-relato-seg--lib { stroke: var(--gray-400); }
+.pi-relato[data-paso="2"] .pi-relato-seg--op,
+.pi-relato[data-paso="3"] .pi-relato-seg--conf,
+.pi-relato[data-paso="3"] .pi-relato-seg--neg,
+.pi-relato[data-paso="4"] .pi-relato-seg--lib { stroke-width: 26; }
 
-/* Ocupación: número grande, barra de 6 segmentos y lista simple de empresas */
-.pi-ocupacion-titulo { font-size: 1.05rem; color: var(--gray-600); }
+/* Número del centro: hay uno por paso y se muestra el que corresponde */
+.pi-relato-centro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
 
-.pi-ocupacion-titulo strong {
-  display: block;
+.pi-relato-centro strong {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(3rem, 5vw, 4.2rem);
+  font-size: 4.4rem;
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--navy-950);
 }
 
-.pi-barra {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 6px;
-  margin: 24px 0 8px;
-}
+.pi-relato-centro span { margin-top: 8px; max-width: 160px; color: var(--gray-600); }
 
-.pi-barra span { height: 14px; border-radius: 4px; }
-.pi-barra--operando { background: var(--gold-500); }
-.pi-barra--confirmada { background: var(--navy-950); }
-.pi-barra--negociacion { background: var(--navy-300); }
-.pi-barra--libre { background: var(--gray-100); box-shadow: inset 0 0 0 1px var(--gray-200); }
+.pi-relato[data-paso="1"] .pi-relato-centro[data-paso="1"],
+.pi-relato[data-paso="2"] .pi-relato-centro[data-paso="2"],
+.pi-relato[data-paso="3"] .pi-relato-centro[data-paso="3"],
+.pi-relato[data-paso="4"] .pi-relato-centro[data-paso="4"] { opacity: 1; transform: none; }
 
-.pi-empresas { list-style: none; }
+/* Rayitas que indican en qué paso estás */
+.pi-relato-puntos { list-style: none; display: flex; gap: 8px; }
+.pi-relato-puntos li { width: 28px; height: 4px; border-radius: 2px; background: var(--gray-200); transition: background 0.4s ease, width 0.4s ease; }
+.pi-relato[data-paso="1"] .pi-relato-puntos li:nth-child(1),
+.pi-relato[data-paso="2"] .pi-relato-puntos li:nth-child(2),
+.pi-relato[data-paso="3"] .pi-relato-puntos li:nth-child(3),
+.pi-relato[data-paso="4"] .pi-relato-puntos li:nth-child(4) { width: 48px; background: var(--gold-500); }
 
-.pi-empresas li {
+.pi-relato-paso {
+  min-height: 62vh;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--gray-200);
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  transition: opacity 0.5s ease;
 }
 
-.pi-empresa-nombre {
+.pi-relato-paso:first-of-type { min-height: 50vh; }
+
+/* Solo si el JavaScript está andando, los pasos que no se están leyendo quedan tenues */
+.pi-relato.js-relato .pi-relato-paso { opacity: 0.25; }
+.pi-relato.js-relato .pi-relato-paso.activo { opacity: 1; }
+
+.pi-relato-n { font-family: var(--font-display); font-weight: 600; color: var(--gold-500); }
+
+.pi-relato-paso h3 {
+  margin: 10px 0 14px;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.12rem;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  letter-spacing: -0.02em;
   color: var(--navy-950);
 }
 
-/* Estado con un puntito del mismo color que su parte de la barra */
-.pi-empresa-estado {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--gray-600);
-}
+.pi-relato-paso p { max-width: 520px; font-size: 1.08rem; color: var(--gray-600); }
 
-.pi-empresa-estado::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-}
-
-.pi-empresa--operando .pi-empresa-estado::before { background: var(--gold-500); }
-.pi-empresa--confirmada .pi-empresa-estado::before { background: var(--navy-950); }
-.pi-empresa--negociacion .pi-empresa-estado::before { background: var(--navy-300); }
-.pi-empresa--libre .pi-empresa-estado::before { background: var(--gray-100); box-shadow: inset 0 0 0 1px var(--gray-400); }
-.pi-empresa--negociacion .pi-empresa-nombre,
-.pi-empresa--libre .pi-empresa-nombre { color: var(--gray-600); font-weight: 500; }
-
-.pi-locales-nota { margin-top: 16px; font-size: 0.92rem; color: var(--gray-600); }
-.pi-locales-nota a { color: var(--navy-950); font-weight: 600; border-bottom: 2px solid var(--gold-500); }
+.pi-relato-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
+.pi-plano-link { font-weight: 600; color: var(--navy-950); border-bottom: 2px solid var(--gold-500); }
 
 /* ---------- Mejoras para el barrio: azul noche con mosaico de fotos ---------- */
 .pi-barrio {
@@ -3061,8 +3086,26 @@ button[disabled] {
 
 /* ---------- Proyecto: tablet y celular ---------- */
 @media (max-width: 960px) {
-  .pi-open-grid,
-  .pi-desarrollo-grid { grid-template-columns: 1fr; gap: 56px; }
+  .pi-open-grid { grid-template-columns: 1fr; gap: 56px; }
+
+  /* Relato: el anillo queda chico arriba, pegado debajo del menú, y el texto baja por debajo */
+  .pi-relato-grid { grid-template-columns: 1fr; gap: 0; }
+  .pi-relato-lado {
+    position: sticky;
+    top: 76px;
+    z-index: 3;
+    margin: 0 -24px;
+    padding: 12px 24px;
+    background: color-mix(in srgb, var(--white) 94%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .pi-relato-fijo { position: static; flex-direction: row; justify-content: flex-start; gap: 18px; }
+  .pi-relato-anillo { width: 92px; flex-shrink: 0; }
+  .pi-relato-centro strong { font-size: 1.6rem; }
+  .pi-relato-centro span { display: none; }
+  .pi-relato-texto .pi-title { margin-top: 36px; }
+  .pi-relato-paso { min-height: 55vh; }
   .pi-sello { left: 16px; bottom: -44px; width: 128px; }
   .pi-cifras-list { grid-template-columns: repeat(2, 1fr); }
   .pi-pasos { grid-template-columns: 1fr; gap: 56px; }
@@ -3078,7 +3121,8 @@ button[disabled] {
   .pi-cifras-list dt { font-size: 2.4rem; }
   .pi-cifras-list dd { font-size: 0.88rem; }
   .pi-trans { margin-top: 48px; padding: 72px 0; }
-  .pi-desarrollo, .pi-barrio { padding: 72px 0; }
+  .pi-relato { padding: 0 0 24px; }
+  .pi-barrio { padding: 72px 0; }
   .pi-bento { grid-template-columns: 1fr; grid-auto-rows: 240px; }
   .pi-bento-item--grande,
   .pi-bento-item--ancho { grid-column: auto; }
@@ -3089,5 +3133,6 @@ button[disabled] {
 
 @media (prefers-reduced-motion: reduce) {
   .pi-sello-giro { animation: none; }
+  .pi-relato-seg, .pi-relato-centro, .pi-relato-paso { transition: none; }
   .pi-bento-item .foto { transition: none; }
 }

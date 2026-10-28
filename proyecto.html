@@ -98,34 +98,59 @@
   </div>
 </section>
 
-<!-- ============ EL DESARROLLO ============ -->
-<section class="pi-desarrollo">
-  <div class="container pi-desarrollo-grid">
-    <div class="pi-desarrollo-texto">
-      <h2 class="pi-title hist-anim">Seis locales para la industria farmacéutica</h2>
-      <p class="pi-lead hist-anim">La idea surgió de una necesidad concreta: empresas farmacéuticas de otras zonas de Montevideo enfrentaban intimaciones de retiro por las molestias que generaba su operativa en la vía pública, tanto en el tránsito como con los vecinos.</p>
-      <div class="pi-calle hist-anim">
-        <strong>Una calle propia, sin tránsito en el barrio</strong>
-        <p>La operativa y el ingreso de funcionarios se hacen únicamente por Itapeby N.º 3170, a través de una calle construida para eso. Así se evita el impacto de tránsito en otras calles de la zona.</p>
+<!-- ============ EL DESARROLLO: relato al bajar ============
+     El anillo de la izquierda queda fijo y cambia según el paso que se está leyendo
+     (lo maneja initRelato() en js/main.js con el atributo data-paso).
+     Cada parte del anillo es un local, en el mismo orden que el plano de El Parque. -->
+<section class="pi-relato" data-paso="1">
+  <div class="container pi-relato-grid">
+    <div class="pi-relato-lado">
+      <div class="pi-relato-fijo">
+        <div class="pi-relato-anillo">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="pi-relato-pista" cx="100" cy="100" r="80"/>
+            <path class="pi-relato-seg pi-relato-seg--op" style="--i:0" d="M104.5,20.1 A80,80 0 0 1 166.9,56.2"/>
+            <path class="pi-relato-seg pi-relato-seg--op" style="--i:1" d="M171.4,63.9 A80,80 0 0 1 171.4,136.1"/>
+            <path class="pi-relato-seg pi-relato-seg--conf" style="--i:2" d="M166.9,143.8 A80,80 0 0 1 104.5,179.9"/>
+            <path class="pi-relato-seg pi-relato-seg--neg" style="--i:3" d="M95.5,179.9 A80,80 0 0 1 33.1,143.8"/>
+            <path class="pi-relato-seg pi-relato-seg--lib" style="--i:4" d="M28.6,136.1 A80,80 0 0 1 28.6,63.9"/>
+            <path class="pi-relato-seg pi-relato-seg--lib" style="--i:5" d="M33.1,56.2 A80,80 0 0 1 95.5,20.1"/>
+          </svg>
+          <p class="pi-relato-centro" data-paso="1"><strong>6</strong><span>locales de última generación</span></p>
+          <p class="pi-relato-centro" data-paso="2"><strong>2</strong><span>locales operando</span></p>
+          <p class="pi-relato-centro" data-paso="3"><strong>+2</strong><span>en camino</span></p>
+          <p class="pi-relato-centro" data-paso="4"><strong>2</strong><span>locales por definir</span></p>
+        </div>
+        <ol class="pi-relato-puntos" aria-hidden="true"><li></li><li></li><li></li><li></li></ol>
       </div>
     </div>
 
-    <!-- Ocupación de los seis locales: barra + lista. Los estados tienen que coincidir con el plano de El Parque -->
-    <div class="pi-ocupacion hist-anim">
-      <p class="pi-ocupacion-titulo"><strong>2 de 6</strong> locales ya operando</p>
-      <div class="pi-barra" aria-hidden="true">
-        <span class="pi-barra--operando"></span><span class="pi-barra--operando"></span>
-        <span class="pi-barra--confirmada"></span><span class="pi-barra--negociacion"></span>
-        <span class="pi-barra--libre"></span><span class="pi-barra--libre"></span>
-      </div>
-      <ul class="pi-empresas">
-        <li class="pi-empresa--operando"><span class="pi-empresa-nombre">Fármaco Uruguayo S.A.</span><span class="pi-empresa-estado">Operando</span></li>
-        <li class="pi-empresa--operando"><span class="pi-empresa-nombre">Laboratorio Gador</span><span class="pi-empresa-estado">Operando</span></li>
-        <li class="pi-empresa--confirmada"><span class="pi-empresa-nombre">Droguería Uruguay S.A.</span><span class="pi-empresa-estado">Confirmada</span></li>
-        <li class="pi-empresa--negociacion"><span class="pi-empresa-nombre">Un laboratorio</span><span class="pi-empresa-estado">En negociación</span></li>
-        <li class="pi-empresa--libre"><span class="pi-empresa-nombre">Dos locales</span><span class="pi-empresa-estado">A definir</span></li>
-      </ul>
-      <p class="pi-locales-nota">Cada local lo opera directamente su arrendatario. <a href="parque.html#plano" class="pi-sin-corte">Ver el plano en El Parque →</a></p>
+    <div class="pi-relato-texto">
+      <h2 class="pi-title">Un polo farmacéutico con acceso propio</h2>
+      <article class="pi-relato-paso" data-paso="1">
+        <span class="pi-relato-n">01</span>
+        <h3>Un problema real, una solución a medida</h3>
+        <p>Itapeby 3170 nació para resolver un problema real: laboratorios y droguerías de otras zonas de Montevideo recibían intimaciones de retiro por el impacto de su operativa en la vía pública. Acá encuentran seis locales de última generación, con un acceso exclusivo y sin molestias para los vecinos.</p>
+      </article>
+      <article class="pi-relato-paso" data-paso="2">
+        <span class="pi-relato-n">02</span>
+        <h3>Ya operan</h3>
+        <p>Fármaco Uruguayo S.A. y Laboratorio Gador ya están instalados y trabajando en sus locales. Cada local lo opera directamente su arrendatario.</p>
+      </article>
+      <article class="pi-relato-paso" data-paso="3">
+        <span class="pi-relato-n">03</span>
+        <h3>Se suman</h3>
+        <p>Droguería Uruguay S.A. está confirmada y un laboratorio más está en negociación.</p>
+      </article>
+      <article class="pi-relato-paso" data-paso="4">
+        <span class="pi-relato-n">04</span>
+        <h3>Acceso exclusivo, sin molestias</h3>
+        <p>Toda la operativa y el ingreso de funcionarios se hacen por Itapeby N.º 3170, por una calle construida para eso. Así se evita el impacto de tránsito en otras calles de la zona. Quedan dos locales por definir.</p>
+        <div class="pi-relato-acciones">
+          <a href="contacto.html" class="btn btn-primary">Consultá por un local</a>
+          <a href="parque.html#plano" class="pi-plano-link pi-sin-corte">Ver el plano en El Parque →</a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
