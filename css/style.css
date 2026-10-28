@@ -1975,7 +1975,7 @@ button[disabled] {
    Empresas, que reutilizan .hist-cifras y .hist-next, quedan como están.
    Ritmo: azul noche con cuadrícula de plano (apertura) → franja dorada (cifras) →
    etapas en blanco y gris punteado →
-   azul noche con cuadrícula (reconocimientos) → franja dorada (siguiente) → pie. */
+   azul noche con cuadrícula (reconocimientos) → blanco (siguiente) → pie. */
 
 /* Texturas reutilizables */
 .pagina-historia {
@@ -2072,13 +2072,6 @@ button[disabled] {
 .pagina-historia .hist-sellos-list h3 { color: var(--white); }
 .pagina-historia .hist-sellos-list p { color: var(--navy-300); }
 .pagina-historia .sello-logo { border: none; box-shadow: var(--shadow-lg); }
-
-/* Siguiente: franja dorada igual a la de cifras, cierra la página antes del pie */
-.pagina-historia .hist-next {
-  background: var(--rayado), linear-gradient(120deg, var(--gold-400), var(--gold-500));
-}
-
-.pagina-historia .hist-next-link:hover .hist-next-title { color: var(--white); }
 
 @media (max-width: 960px) {
   .pagina-historia .hist-rail { padding-top: 12px; margin-bottom: 0; }
