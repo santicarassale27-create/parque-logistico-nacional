@@ -2873,43 +2873,21 @@ button[disabled] {
 .rse-open-cifras .hist-cifras-list dd strong { color: var(--white); }
 
 /* ---------- Convenios y donaciones: tarjetas con acento dorado arriba ---------- */
-/* ---------- Aula Ceibal: texto partido en puntos numerados ----------
-   En vez de un bloque largo de 3 párrafos, cada idea tiene su número,
-   su título corto y su texto — más fácil de escanear. */
-.rse-puntos {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
+/* ---------- Aula Ceibal: texto y fotos alternados ----------
+   3 bloques tipo .feature, uno por idea, cada uno con su propia foto
+   y alternando el lado (texto/foto, foto/texto). Así la información
+   no queda toda junta: se va cortando con las imágenes. */
+.rse-aula-feature + .rse-aula-feature { margin-top: 72px; }
 
-.rse-punto {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-}
-
-.rse-punto-num {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid var(--gold-500);
-  border-radius: 50%;
+.rse-aula-feature h3 {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--gold-800);
-}
-
-.rse-punto h3 {
-  font-size: 1.05rem;
-  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
   color: var(--navy-950);
 }
 
-.rse-punto p { color: var(--gray-600); }
+.rse-aula-feature p { color: var(--gray-600); }
 
 .rse-convenios .card { border-top: 3px solid var(--gold-500); }
 
