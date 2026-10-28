@@ -3029,7 +3029,17 @@ button[disabled] {
   color: var(--navy-950);
 }
 
-.rse-convenios-col .check-list li:last-child { margin-bottom: 0; }
+.rse-convenios-col .check-list li {
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.rse-convenios-col .check-list li:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
 
 /* ---------- Galería tipo collage (Escuela de Conducción) ----------
    6 fotos: una grande, cuatro chicas al lado y una tira ancha abajo.
