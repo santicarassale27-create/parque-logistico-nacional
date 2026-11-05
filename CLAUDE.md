@@ -55,17 +55,21 @@ img/                        Fotos (cuando las haya)
 
 ## Página Inicio
 
-- Es un **resumen largo de todas las secciones**, con un estilo propio (distinto al de cada página, pero alineado a la web:
-  blanco, azul noche y dorado). Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`.
-- Estilo de la landing: tarjetas grandes y redondeadas, barra de chips fija que marca en qué bloque estás
-  (`initInicio()` en `main.js`) y cabecera de cada bloque con título a la izquierda y texto + botón a la derecha.
-- Orden: portada oscura (título, botones, lugar para la foto o el video del dron con las cifras flotando, distancias),
-  barra de chips, y un bloque por sección con su botón: Historia (línea de tiempo + cifras + ISO 45001), El Parque
-  (foto, datos en baldosas, ruta de distancias), Empresas (4 tarjetas con logo + recorrido de la mercadería),
-  Proyecto Itapeby (fondo oscuro, 6 locales con su estado + hechos + mejoras para el barrio), Responsabilidad Social
-  (3 iniciativas con foto + cifras) y tarjeta dorada de contacto.
+- Es un **resumen largo de todas las secciones**, con estilo propio (distinto al de cada página, pero alineado a la web).
+  Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`. Referencia de calidad: una landing prolija,
+  con imágenes grandes, una paleta contenida y mucho aire (sin copiar a nadie).
+- Reglas del estilo: todas las secciones usan la misma cabecera (`.in-cab`: título a la izquierda, texto y botón a la derecha);
+  en cada título, una frase va en dorado (`.in-oro`); fondos que alternan oscuro / claro / gris; tarjetas redondeadas del mismo
+  radio; números grandes separados por líneas finas.
+- Orden: portada oscura (título, botones, collage de 3 fotos con tarjeta de cristal "10 ha") → Historia (números apilados +
+  línea de tiempo) → El Parque (oscura: 6 tarjetas con ícono + distancias 12/10/11 km) → Empresas (4 tarjetas con logo + recorrido
+  de la mercadería; el bloque que más les gustó) → Proyecto Itapeby (4 cifras + plano 3D) → Responsabilidad Social (collage +
+  lista de dos columnas + cifras) → tarjeta oscura de contacto.
+- El **plano 3D** de Proyecto lo genera `herramientas/generar-plano.py`, que ahora escribe en `parque.html` **y** `index.html`
+  (entre los comentarios `PLANO-3D`). No editarlo a mano.
 - Los datos salen de las otras páginas: si cambian allá (hitos, estados de los locales, iniciativas, cifras), actualizar también acá.
-- Sin textos chicos arriba de los títulos. La foto o el video del dron va en `.in-hero-media`.
+- Sin textos chicos arriba de los títulos. Los lugares de foto (`FOTO 01…`) se reemplazan con `style="background-image:url(img/...)"`;
+  la foto 01 del collage de la portada puede ser el video del dron.
 
 ## Página Historia
 
@@ -85,7 +89,7 @@ img/                        Fotos (cuando las haya)
 - Estilos con prefijo `pq-` en `css/style.css`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-cifras` y `.hist-next`.
 - Sin textos chicos arriba de los títulos (decisión del equipo; solo se usan en la línea de tiempo de Historia).
 - Sin íconos arriba de los títulos del mosaico de seguridad (decisión del equipo).
-- **Plano 3D de Itapeby 3170:** lo genera `herramientas/generar-plano.py` (no editar el SVG a mano).
+- **Plano 3D de Itapeby 3170:** lo genera `herramientas/generar-plano.py` (no editar el SVG a mano; también se escribe en la página de Inicio).
   Para cambiar depósitos, empresas o estados: editar la lista `DEPOSITOS` del script y correr
   `python3 herramientas/generar-plano.py`. Estados: `operando`, `confirmada`, `negociacion`, `libre`.
   Cada depósito tiene `camiones` (cuántos camiones dibujar en sus portones). Los portones, ventanas,

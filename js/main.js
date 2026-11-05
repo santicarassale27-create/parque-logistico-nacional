@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
   initRelato();
   initEspacios();
   initSelects();
-  initInicio();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -485,46 +484,6 @@ function initSelects() {
 
     mostrarElegida();
   });
-}
-
-/* ---------- 11. Barra de secciones (página Inicio) ----------
-   Los chips de arriba llevan a cada bloque y, al bajar, el chip del bloque que estás viendo
-   se marca solo. Cada chip es un link normal (#historia, #parque…), así que funciona aunque
-   falle el JavaScript. */
-function initInicio() {
-  var chips = document.querySelectorAll(".in-nav a");
-  if (!chips.length || !("IntersectionObserver" in window)) return;
-
-  var bloques = [];
-  chips.forEach(function (chip) {
-    var bloque = document.querySelector(chip.getAttribute("href"));
-    if (bloque) bloques.push({ chip: chip, bloque: bloque });
-  });
-
-  function marcar(chipElegido) {
-    chips.forEach(function (c) { c.classList.toggle("activo", c === chipElegido); });
-    // En celular la barra se desliza: acercar el chip marcado
-    if (chipElegido && chipElegido.parentElement.scrollWidth > chipElegido.parentElement.clientWidth) {
-      var lista = chipElegido.parentElement;
-      lista.scrollTo({ left: chipElegido.offsetLeft - 24, behavior: "smooth" });
-    }
-  }
-
-  // Un bloque cuenta como "el que estás viendo" cuando cruza una franja a un tercio de la pantalla
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var par = bloques.filter(function (b) { return b.bloque === entry.target; })[0];
-      if (par) marcar(par.chip);
-    });
-  }, { rootMargin: "-35% 0px -60% 0px" });
-
-  bloques.forEach(function (b) { observer.observe(b.bloque); });
-
-  // Arriba de todo (en la portada) no hay ninguno marcado
-  window.addEventListener("scroll", function () {
-    if (window.scrollY < 300) marcar(null);
-  }, { passive: true });
 }
 
 /* En celular, el mapa y el plano se deslizan dentro de su recuadro:
