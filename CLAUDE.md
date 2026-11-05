@@ -53,6 +53,18 @@ img/                        Fotos (cuando las haya)
   `.feature`, `.section-title`, `.section-lead`, `.eyebrow`, `.stats-strip`, `.cta-band`, `.timeline`.
 - Todo tiene que verse bien en celular (390px de ancho) sin que la página se mueva para los costados.
 
+## Página Inicio
+
+- Rediseño pedido por Alfonso: un resumen visual de todas las secciones, cada una con su botón para ir a la página.
+  Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`.
+- Orden: portada (fondo dibujado azul noche con cuadrícula y luz dorada, título "Logística integral, en un mismo predio.",
+  botones y barra con las distancias), cifras (10 ha, 27.000 m², 4 empresas, 310 personas) y bloques 01 Historia,
+  02 El Parque, 03 Empresas (logos), 04 Proyecto Itapeby (anillo de los 6 locales), 05 Responsabilidad social y
+  franja dorada de contacto.
+- Los números 01–05 van grandes en contorno dorado (como en Empresas) y se iluminan al pasar el mouse por el bloque.
+- Sin la foto genérica de antes (no representaba al Parque). Cuando haya foto o video real, va en `.in-hero-foto`.
+- Si cambian datos en otra página (estados de los locales, hitos, iniciativas), actualizar también su resumen acá.
+
 ## Página Historia
 
 - Estilos con prefijo `hist-` al final de `css/style.css`; títulos con la tipografía Sora (`--font-display`).
