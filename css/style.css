@@ -503,6 +503,15 @@ section {
   overflow: hidden;
 }
 
+/* "Conocé cada empresa": mismo hover dorado que el resto de los
+   botones con flecha de la web, en vez del fondo blanco translúcido
+   genérico de .btn-outline. */
+.emp-hero .btn-outline:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-950);
+}
+
 .emp-hero::before {
   content: "";
   position: absolute;
