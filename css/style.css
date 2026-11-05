@@ -8,9 +8,9 @@
   --navy-800: #16304f;
   --navy-700: #1e3f66;
   --navy-600: #2a5280;
-  --gold-500: #c9a227;
-  --gold-400: #dab93f;
-  --gold-300: #e8cf7a;
+  --gold-500: #ad1218;
+  --gold-400: #ca2127;
+  --gold-300: #d3696d;
   --gray-50: #f7f8fa;
   --gray-100: #eef0f3;
   --gray-200: #dfe3e8;
@@ -504,7 +504,7 @@ section {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(680px circle at 10% 15%, rgba(201, 162, 39, 0.46), transparent 65%),
+    radial-gradient(680px circle at 10% 15%, rgba(173, 18, 24, 0.46), transparent 65%),
     radial-gradient(640px circle at 95% 10%, rgba(79, 143, 224, 0.44), transparent 65%),
     radial-gradient(640px circle at 15% 95%, rgba(224, 134, 63, 0.4), transparent 65%),
     radial-gradient(680px circle at 90% 90%, rgba(79, 157, 105, 0.44), transparent 65%);
@@ -1039,9 +1039,9 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(201, 162, 39, 0.12);
+  background: rgba(173, 18, 24, 0.12);
   color: var(--gold-500);
-  border: 1px solid rgba(201, 162, 39, 0.35);
+  border: 1px solid rgba(173, 18, 24, 0.35);
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 0.82rem;
@@ -1114,7 +1114,7 @@ section {
 .form-field textarea:focus {
   outline: none;
   border-color: var(--gold-500);
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
+  box-shadow: 0 0 0 3px rgba(173, 18, 24, 0.18);
 }
 
 .form-note {
@@ -1156,7 +1156,7 @@ section {
 }
 
 .form-status--ok {
-  background: rgba(201, 162, 39, 0.12);
+  background: rgba(173, 18, 24, 0.12);
   color: var(--navy-900);
   border: 1px solid var(--gold-500);
 }
@@ -2096,9 +2096,9 @@ button[disabled] {
   --verde-500: #4f9d69;
   --verde-300: #a9d9b9;
   --verde-100: #e3f1e7;
-  --gold-800: #7a5f0d;
-  --gold-100: #f6efd6;
-  --gold-50: #fdf6df;
+  --gold-800: #570a0d;
+  --gold-100: #f4d7d9;
+  --gold-50: #faebeb;
   --navy-100: #e7edf5;
   --navy-200: #c9d6e8;
   --navy-300: #9fb3cf;
