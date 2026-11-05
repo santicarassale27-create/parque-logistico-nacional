@@ -3,11 +3,11 @@
    ============================================ */
 
 :root {
-  --navy-950: #201811;
-  --navy-900: #2e2219;
-  --navy-800: #423023;
-  --navy-700: #563f2e;
-  --navy-600: #6e513b;
+  --navy-950: #1c1916;
+  --navy-900: #28231f;
+  --navy-800: #39322c;
+  --navy-700: #4a423a;
+  --navy-600: #5f554b;
   --gold-500: #ad1218;
   --gold-400: #ca2127;
   --gold-300: #d3696d;
@@ -2099,9 +2099,9 @@ button[disabled] {
   --gold-800: #570a0d;
   --gold-100: #f4d7d9;
   --gold-50: #faebeb;
-  --navy-100: #f2edea;
-  --navy-200: #e2d7cf;
-  --navy-300: #c9b4a5;
+  --navy-100: #f0eeec;
+  --navy-200: #dcd8d5;
+  --navy-300: #beb7b0;
   /* Mar y arena del mapa 3D: colores propios para que se entienda qué son */
   --mar-900: #0e3352;
   --mar-700: #165a85;
