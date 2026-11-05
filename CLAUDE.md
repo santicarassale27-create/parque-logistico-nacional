@@ -53,6 +53,33 @@ img/                        Fotos (cuando las haya)
   `.feature`, `.section-title`, `.section-lead`, `.eyebrow`, `.stats-strip`, `.cta-band`, `.timeline`.
 - Todo tiene que verse bien en celular (390px de ancho) sin que la página se mueva para los costados.
 
+## Página Inicio
+
+- Es un **resumen largo de todas las secciones**, con estilo propio (distinto al de cada página, pero alineado a la web).
+  Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`. Referencia de calidad: una landing prolija,
+  con imágenes grandes, una paleta contenida y mucho aire (sin copiar a nadie).
+- **Portada:** una sola foto o video de fondo a pantalla completa (`.in-hero-fondo`), con el título, los botones y una barra
+  de cifras (10 ha, 27.000 m², 4 servicios, 310 personas). Mientras no haya material se ve un fondo dibujado y un cartelito
+  ("FOTO o VIDEO de fondo"). Foto: `style="background-image:url(img/...)"` en `.in-hero-fondo`; video: `<video autoplay muted loop playsinline>`
+  adentro (las instrucciones están en un comentario del HTML); después se borra `.in-hero-nota`.
+- Reglas del estilo: todas las secciones usan la misma cabecera (`.in-cab`: título a la izquierda, texto y botón a la derecha);
+  en cada título, una frase va en dorado (`.in-oro`); fondos que alternan oscuro / claro / gris; tarjetas redondeadas del mismo
+  radio; números grandes separados por líneas finas.
+- Orden: portada → Historia (números apilados + línea de tiempo) → El Parque (oscura: 6 tarjetas con ícono + distancias 12/10/11 km)
+  → Servicios (4 tarjetas + recorrido de la mercadería; el bloque que más les gustó) → Proyecto Itapeby (4 cifras + 4 tarjetas
+  de espacio público para el barrio) → Responsabilidad Social (collage + lista de dos columnas + cifras) → tarjeta oscura de contacto.
+- **Íconos** (`.in-ic`, dibujados a mano en una grilla de 64): dos tonos (línea clara + acento dorado) sobre una baldosa azul,
+  tanto en El Parque como en Proyecto Itapeby (cancha, plaza, pasajes y cañada, dibujados como escenas). Clases del dibujo: `l` línea, `m` línea tenue, `a` acento, `af` acento con relleno, `fa` relleno,
+  `w` rueda. Mismo estilo para todos los íconos nuevos.
+- **"Servicios", no "empresas"** (pedido del papá de Santi): en la landing los cuatro (Depósito nacional, Depósito aduanero,
+  Flete terrestre, Fletes aéreos y marítimos) se presentan como servicios; la marca va en chico debajo. Pendiente definir si el
+  resto del sitio (menú, página Empresas, pie, contacto) también cambia.
+- **Se llama "parque farmacéutico"**, no "polo farmacéutico" (decisión del equipo; ya cambiado en Inicio, El Parque y Proyecto).
+- El plano 3D **no** va en la landing por ahora (queda solo en El Parque).
+- En Servicios, los pasos del recorrido de la mercadería se unen con un círculo dorado grande con una flecha (celular: hacia abajo).
+- Los datos salen de las otras páginas: si cambian allá (hitos, iniciativas, cifras), actualizar también acá.
+- Sin textos chicos arriba de los títulos.
+
 ## Página Historia
 
 - Estilos con prefijo `hist-` al final de `css/style.css`; títulos con la tipografía Sora (`--font-display`).
