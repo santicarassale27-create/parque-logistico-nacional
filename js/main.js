@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initRelato();
   initEspacios();
   initSelects();
-  initPaneles();
+  initInicio();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -487,32 +487,44 @@ function initSelects() {
   });
 }
 
-/* ---------- 11. Paneles de las secciones (página Inicio) ----------
-   Un panel abierto a la vez. Se abre al pasar el mouse (en computadora), al tocarlo
-   (en celular) o al llegar con Tab y apretar Enter. */
-function initPaneles() {
-  var paneles = document.querySelectorAll(".in-panel");
-  if (!paneles.length) return;
-  var conMouse = window.matchMedia && window.matchMedia("(hover: hover)").matches;
+/* ---------- 11. Barra de secciones (página Inicio) ----------
+   Los chips de arriba llevan a cada bloque y, al bajar, el chip del bloque que estás viendo
+   se marca solo. Cada chip es un link normal (#historia, #parque…), así que funciona aunque
+   falle el JavaScript. */
+function initInicio() {
+  var chips = document.querySelectorAll(".in-nav a");
+  if (!chips.length || !("IntersectionObserver" in window)) return;
 
-  function abrir(panel) {
-    paneles.forEach(function (p) {
-      var es = p === panel;
-      p.classList.toggle("activo", es);
-      p.setAttribute("aria-expanded", es ? "true" : "false");
-    });
+  var bloques = [];
+  chips.forEach(function (chip) {
+    var bloque = document.querySelector(chip.getAttribute("href"));
+    if (bloque) bloques.push({ chip: chip, bloque: bloque });
+  });
+
+  function marcar(chipElegido) {
+    chips.forEach(function (c) { c.classList.toggle("activo", c === chipElegido); });
+    // En celular la barra se desliza: acercar el chip marcado
+    if (chipElegido && chipElegido.parentElement.scrollWidth > chipElegido.parentElement.clientWidth) {
+      var lista = chipElegido.parentElement;
+      lista.scrollTo({ left: chipElegido.offsetLeft - 24, behavior: "smooth" });
+    }
   }
 
-  paneles.forEach(function (panel) {
-    if (conMouse) panel.addEventListener("mouseenter", function () { abrir(panel); });
-    panel.addEventListener("click", function () { abrir(panel); });
-    panel.addEventListener("focus", function () { abrir(panel); });
-    panel.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
-        if (e.target === panel) { e.preventDefault(); abrir(panel); }
-      }
+  // Un bloque cuenta como "el que estás viendo" cuando cruza una franja a un tercio de la pantalla
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var par = bloques.filter(function (b) { return b.bloque === entry.target; })[0];
+      if (par) marcar(par.chip);
     });
-  });
+  }, { rootMargin: "-35% 0px -60% 0px" });
+
+  bloques.forEach(function (b) { observer.observe(b.bloque); });
+
+  // Arriba de todo (en la portada) no hay ninguno marcado
+  window.addEventListener("scroll", function () {
+    if (window.scrollY < 300) marcar(null);
+  }, { passive: true });
 }
 
 /* En celular, el mapa y el plano se deslizan dentro de su recuadro:

@@ -55,14 +55,17 @@ img/                        Fotos (cuando las haya)
 
 ## Página Inicio
 
-- Resumen de todas las secciones con **diseño propio**: no repite recursos de las otras páginas (decisión del equipo:
-  cada sección tiene su diseño y la portada también). Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`.
-- Orden: portada clara con título gigante a todo el ancho, lugar grande redondeado para la foto o el video del dron
-  (`.in-hero-media`) y cápsulas con las distancias; cinta dorada en movimiento con los servicios; cifras en una tarjeta
-  oscura (10 ha, 27.000 m², 4 empresas, 310 personas); paneles-acordeón de las 5 secciones (`initPaneles()` en `main.js`,
-  cada uno con su color, resumen, datos y botón); cierre tipográfico "Hablemos." que lleva a Contacto.
-- No usar acá los números en contorno de Empresas, la cuadrícula de Historia ni el anillo de Proyecto.
-- Si cambian datos en otra página (hitos, estados de los locales, iniciativas), actualizar también su panel acá.
+- Es un **resumen largo de todas las secciones**, con un estilo propio (distinto al de cada página, pero alineado a la web:
+  blanco, azul noche y dorado). Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`.
+- Estilo de la landing: tarjetas grandes y redondeadas, barra de chips fija que marca en qué bloque estás
+  (`initInicio()` en `main.js`) y cabecera de cada bloque con título a la izquierda y texto + botón a la derecha.
+- Orden: portada oscura (título, botones, lugar para la foto o el video del dron con las cifras flotando, distancias),
+  barra de chips, y un bloque por sección con su botón: Historia (línea de tiempo + cifras + ISO 45001), El Parque
+  (foto, datos en baldosas, ruta de distancias), Empresas (4 tarjetas con logo + recorrido de la mercadería),
+  Proyecto Itapeby (fondo oscuro, 6 locales con su estado + hechos + mejoras para el barrio), Responsabilidad Social
+  (3 iniciativas con foto + cifras) y tarjeta dorada de contacto.
+- Los datos salen de las otras páginas: si cambian allá (hitos, estados de los locales, iniciativas, cifras), actualizar también acá.
+- Sin textos chicos arriba de los títulos. La foto o el video del dron va en `.in-hero-media`.
 
 ## Página Historia
 
