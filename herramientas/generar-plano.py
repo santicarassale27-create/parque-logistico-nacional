@@ -1,11 +1,11 @@
 """
-Genera el plano 3D (isométrico) del predio de Itapeby 3170 para parque.html y index.html.
+Genera el plano 3D (isométrico) del predio de Itapeby 3170 para parque.html.
 
 NO es parte de la web: es una herramienta para cuando cambien los depósitos.
 Cómo se usa:
   1. Editar la lista DEPOSITOS (y ESPACIOS si hace falta) de abajo.
   2. Correr:  python3 herramientas/generar-plano.py
-  3. El programa reemplaza el plano dentro de parque.html y de index.html (entre los
+  3. El programa reemplaza el plano dentro de parque.html (entre los
      comentarios <!-- PLANO-3D:INICIO --> y <!-- PLANO-3D:FIN -->).
 
 Coordenadas: el predio mide 1000 (largo, x) por 260 (ancho, y) "unidades".
@@ -221,14 +221,10 @@ def generar():
 
 
 if __name__ == "__main__":
-    # El mismo plano se escribe en El Parque y en la página de Inicio (cada una tiene sus comentarios PLANO-3D)
-    raiz = Path(__file__).resolve().parent.parent
-    plano = generar()
-    for nombre in ("parque.html", "index.html"):
-        archivo = raiz / nombre
-        html = archivo.read_text(encoding="utf-8")
-        nuevo, n = re.subn(r"<!-- PLANO-3D:INICIO.*?<!-- PLANO-3D:FIN -->", lambda _: plano, html, flags=re.S)
-        if n != 1:
-            raise SystemExit(f"No encontré los comentarios PLANO-3D en {nombre}")
-        archivo.write_text(nuevo, encoding="utf-8")
-        print(f"Plano actualizado en {nombre}")
+    archivo = Path(__file__).resolve().parent.parent / "parque.html"
+    html = archivo.read_text(encoding="utf-8")
+    nuevo, n = re.subn(r"<!-- PLANO-3D:INICIO.*?<!-- PLANO-3D:FIN -->", generar(), html, flags=re.S)
+    if n != 1:
+        raise SystemExit("No encontré los comentarios PLANO-3D en parque.html")
+    archivo.write_text(nuevo, encoding="utf-8")
+    print("Plano actualizado en parque.html")

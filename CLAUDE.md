@@ -58,18 +58,26 @@ img/                        Fotos (cuando las haya)
 - Es un **resumen largo de todas las secciones**, con estilo propio (distinto al de cada página, pero alineado a la web).
   Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`. Referencia de calidad: una landing prolija,
   con imágenes grandes, una paleta contenida y mucho aire (sin copiar a nadie).
+- **Portada:** una sola foto o video de fondo a pantalla completa (`.in-hero-fondo`), con el título, los botones y una barra
+  de cifras (10 ha, 27.000 m², 4 servicios, 310 personas). Mientras no haya material se ve un fondo dibujado y un cartelito
+  ("FOTO o VIDEO de fondo"). Foto: `style="background-image:url(img/...)"` en `.in-hero-fondo`; video: `<video autoplay muted loop playsinline>`
+  adentro (las instrucciones están en un comentario del HTML); después se borra `.in-hero-nota`.
 - Reglas del estilo: todas las secciones usan la misma cabecera (`.in-cab`: título a la izquierda, texto y botón a la derecha);
   en cada título, una frase va en dorado (`.in-oro`); fondos que alternan oscuro / claro / gris; tarjetas redondeadas del mismo
   radio; números grandes separados por líneas finas.
-- Orden: portada oscura (título, botones, collage de 3 fotos con tarjeta de cristal "10 ha") → Historia (números apilados +
-  línea de tiempo) → El Parque (oscura: 6 tarjetas con ícono + distancias 12/10/11 km) → Empresas (4 tarjetas con logo + recorrido
-  de la mercadería; el bloque que más les gustó) → Proyecto Itapeby (4 cifras + plano 3D) → Responsabilidad Social (collage +
-  lista de dos columnas + cifras) → tarjeta oscura de contacto.
-- El **plano 3D** de Proyecto lo genera `herramientas/generar-plano.py`, que ahora escribe en `parque.html` **y** `index.html`
-  (entre los comentarios `PLANO-3D`). No editarlo a mano.
-- Los datos salen de las otras páginas: si cambian allá (hitos, estados de los locales, iniciativas, cifras), actualizar también acá.
-- Sin textos chicos arriba de los títulos. Los lugares de foto (`FOTO 01…`) se reemplazan con `style="background-image:url(img/...)"`;
-  la foto 01 del collage de la portada puede ser el video del dron.
+- Orden: portada → Historia (números apilados + línea de tiempo) → El Parque (oscura: 6 tarjetas con ícono + distancias 12/10/11 km)
+  → Servicios (4 tarjetas + recorrido de la mercadería; el bloque que más les gustó) → Proyecto Itapeby (4 cifras + 4 tarjetas
+  de espacio público para el barrio) → Responsabilidad Social (collage + lista de dos columnas + cifras) → tarjeta oscura de contacto.
+- **Íconos** (`.in-ic`, dibujados a mano en una grilla de 64): dos tonos (línea clara + acento dorado) sobre una baldosa azul
+  (en fondo claro, baldosa blanca). Clases del dibujo: `l` línea, `m` línea tenue, `a` acento, `af` acento con relleno, `fa` relleno,
+  `w` rueda. Mismo estilo para todos los íconos nuevos.
+- **"Servicios", no "empresas"** (pedido del papá de Santi): en la landing los cuatro (Depósito nacional, Depósito aduanero,
+  Flete terrestre, Fletes aéreos y marítimos) se presentan como servicios; la marca va en chico debajo. Pendiente definir si el
+  resto del sitio (menú, página Empresas, pie, contacto) también cambia.
+- **Se llama "parque farmacéutico"**, no "polo farmacéutico" (decisión del equipo; ya cambiado en Inicio, El Parque y Proyecto).
+- El plano 3D **no** va en la landing por ahora (queda solo en El Parque).
+- Los datos salen de las otras páginas: si cambian allá (hitos, iniciativas, cifras), actualizar también acá.
+- Sin textos chicos arriba de los títulos.
 
 ## Página Historia
 
@@ -89,7 +97,7 @@ img/                        Fotos (cuando las haya)
 - Estilos con prefijo `pq-` en `css/style.css`; reutiliza de Historia `.foto`, `.hist-anim`, `.hist-cifras` y `.hist-next`.
 - Sin textos chicos arriba de los títulos (decisión del equipo; solo se usan en la línea de tiempo de Historia).
 - Sin íconos arriba de los títulos del mosaico de seguridad (decisión del equipo).
-- **Plano 3D de Itapeby 3170:** lo genera `herramientas/generar-plano.py` (no editar el SVG a mano; también se escribe en la página de Inicio).
+- **Plano 3D de Itapeby 3170:** lo genera `herramientas/generar-plano.py` (no editar el SVG a mano).
   Para cambiar depósitos, empresas o estados: editar la lista `DEPOSITOS` del script y correr
   `python3 herramientas/generar-plano.py`. Estados: `operando`, `confirmada`, `negociacion`, `libre`.
   Cada depósito tiene `camiones` (cuántos camiones dibujar en sus portones). Los portones, ventanas,

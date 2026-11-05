@@ -41,28 +41,29 @@
      El plano 3D de Proyecto lo genera herramientas/generar-plano.py (no editar a mano).
      ========================================================= -->
 
-<!-- ============ PORTADA ============ -->
+<!-- ============ PORTADA: foto o video de fondo a pantalla completa ============ -->
 <section class="in-hero">
-  <span class="in-orbita" aria-hidden="true"></span>
-  <div class="container in-hero-grid">
-    <div class="in-hero-texto">
-      <h1>Toda la cadena logística, en <span>un solo predio.</span></h1>
-      <p>Depósito nacional y aduanero, transporte terrestre y comercio exterior: cuatro empresas que trabajan juntas en diez hectáreas de Montevideo.</p>
-      <div class="in-hero-botones">
-        <a href="parque.html" class="btn btn-primary">Conocé el Parque</a>
-        <a href="contacto.html" class="in-hero-link">Contactanos <span aria-hidden="true">→</span></a>
-      </div>
+  <!-- FONDO. Cuando lleguen la foto o el video del dron:
+       · Foto: ponerle a este div style="background-image:url(img/portada.jpg)".
+       · Video: pegar adentro  <video autoplay muted loop playsinline poster="img/portada.jpg"><source src="img/portada.mp4" type="video/mp4"></video>
+       y borrar el cartelito .in-hero-nota. Mientras tanto se ve un fondo dibujado. -->
+  <div class="in-hero-fondo" aria-hidden="true"><span class="in-orbita"></span></div>
+  <span class="in-hero-nota">FOTO o VIDEO de fondo · vista aérea del Parque (dron)</span>
+  <div class="container in-hero-contenido">
+    <h1>Toda la cadena logística, en <span>un solo predio.</span></h1>
+    <p>Depósito nacional y aduanero, transporte terrestre y comercio exterior: cuatro servicios integrados en diez hectáreas de Montevideo.</p>
+    <div class="in-hero-botones">
+      <a href="parque.html" class="btn btn-primary">Conocé el Parque</a>
+      <a href="contacto.html" class="in-hero-link">Contactanos <span aria-hidden="true">→</span></a>
     </div>
-    <!-- Collage de fotos: se reemplazan por fotos reales (o la grande por el video del dron) con style="background-image:url(img/...)" -->
-    <div class="in-collage">
-      <div class="foto foto--fondo in-c1"><span class="foto-label">FOTO 01 · Vista aérea del Parque (dron o video)</span></div>
-      <div class="foto foto--fondo in-c2"><span class="foto-label">FOTO 02 · El depósito</span></div>
-      <div class="foto foto--fondo in-c3"><span class="foto-label">FOTO 03 · La flota</span></div>
-      <div class="in-cristal">
-        <strong>10 ha</strong><span>de predio en Montevideo</span>
-        <p>4 empresas · 310 personas</p>
-      </div>
-    </div>
+  </div>
+  <div class="in-hero-barra">
+    <dl class="container in-hero-barra-grid">
+      <div><dt data-counter>10 ha</dt><dd>de predio en Montevideo</dd></div>
+      <div><dt data-counter>27.000 m²</dt><dd>cubiertos</dd></div>
+      <div><dt data-counter>4</dt><dd>servicios integrados</dd></div>
+      <div><dt data-counter>310</dt><dd>personas en el Parque</dd></div>
+    </dl>
   </div>
 </section>
 
@@ -80,7 +81,7 @@
       <dl class="in-pila hist-anim">
         <div><dt data-counter>32</dt><dd>años de trayectoria familiar</dd></div>
         <div><dt data-counter>310</dt><dd>personas trabajando en el Parque</dd></div>
-        <div><dt data-counter>4</dt><dd>empresas operando en conjunto</dd></div>
+        <div><dt data-counter>4</dt><dd>servicios integrados en un mismo predio</dd></div>
       </dl>
       <ol class="in-hitos hist-anim">
           <li><span class="in-hito-anio">1994</span><div><strong>Los inicios</strong><p>Un Depósito Fiscal Aduanero en Parque Guaraní.</p></div></li>
@@ -104,12 +105,41 @@
       </div>
     </div>
     <div class="in-infra-grid">
-        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3v18M20 3v18M4 8.5h16M4 15h16"/><rect x="6.5" y="4.4" width="4" height="3" rx=".5"/><rect x="13" y="4.4" width="4" height="3" rx=".5"/><rect x="8" y="11" width="5" height="3" rx=".5"/><rect x="14.5" y="17.4" width="3.5" height="3" rx=".5"/></svg></span><h3>Almacenamiento en altura</h3><p>Estanterías selectivas y drive-in, con hasta 11 m de altura de almacenaje.</p></article>
-        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h10.5V16H2.5zM13 9.5h4l3.5 3.5V16H13"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg></span><h3>Flota propia</h3><p>20 camiones con base en el mismo predio, habilitados para cargas peligrosas.</p></article>
-        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.2c0 4.6-3.1 8-7.5 9.8-4.4-1.8-7.5-5.2-7.5-9.8V6z"/><path d="M8.8 12l2.2 2.2 4.2-4.4"/></svg></span><h3>Vigilancia las 24 horas</h3><p>Control permanente del predio, la mercadería y los activos de cada cliente.</p></article>
-        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c3.2 4 6 6.6 6 10.2a6 6 0 0 1-12 0C6 9.600 8.800 7 12 3z"/><path d="M12 19.200a2.800 2.800 0 0 1-2.800-2.800c0-1.800 1.400-2.700 2.800-4.400 1.400 1.700 2.800 2.600 2.800 4.400a2.800 2.800 0 0 1-2.800 2.800z"/></svg></span><h3>Protección contra incendios</h3><p>Detección y extinción avanzadas, con rociadores sprinkler en cada depósito.</p></article>
-        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9.500" r="5.800"/><path d="M9.400 9.500l1.900 1.900 3.400-3.600M8.600 14.200L7.500 21l4.500-2.200 4.500 2.200-1.100-6.800"/></svg></span><h3>Habilitación bromatológica</h3><p>Depósitos habilitados que cumplen rigurosos estándares de seguridad y sanidad.</p></article>
-        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V7l8-4 8 4v14M9.500 21v-4.500h5V21M8 10h2M14 10h2M8 13.500h2M14 13.500h2"/></svg></span><h3>Oficinas y showrooms</h3><p>Salas de reuniones, sala de capacitaciones y espacios para exhibir productos.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="l" d="M8 6v52M32 6v52M56 6v52M8 24h48M8 42h48M4 58h56"/>
+<rect class="af" x="12" y="12" width="16" height="12" rx="1.5"/>
+<rect class="l" x="36" y="14" width="9" height="10" rx="1.5"/><rect class="af" x="45.500" y="10" width="8" height="14" rx="1.5"/>
+<rect class="l" x="12" y="29" width="10" height="13" rx="1.5"/><rect class="l" x="23" y="33" width="7" height="9" rx="1.5"/>
+<rect class="af" x="36" y="28" width="16" height="14" rx="1.5"/>
+<rect class="l" x="12" y="46" width="16" height="12" rx="1.5"/><rect class="l" x="36" y="48" width="16" height="10" rx="1.5"/>
+<path class="m" d="M12 18h16M36 35h16"/></svg></span><h3>Almacenamiento en altura</h3><p>Estanterías selectivas y drive-in, con hasta 11 m de altura de almacenaje.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="af" x="4" y="14" width="35" height="28" rx="3"/>
+<path class="m" d="M4 24h35M16 14v10M27 14v10"/>
+<path class="l" d="M39 22h10.500l9.500 10.500V42H39z"/>
+<path class="a" d="M44 26.500h4.500l5.500 6H44z"/>
+<path class="m" d="M2 52h60"/>
+<circle class="w" cx="14" cy="46" r="5.500"/><circle class="w" cx="28" cy="46" r="5.500"/><circle class="w" cx="50" cy="46" r="5.500"/>
+<circle class="fa" cx="14" cy="46" r="1.800"/><circle class="fa" cx="28" cy="46" r="1.800"/><circle class="fa" cx="50" cy="46" r="1.800"/></svg></span><h3>Flota propia</h3><p>20 camiones con base en el mismo predio, habilitados para cargas peligrosas.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="af" d="M32 5l21 7.500V30c0 14-9 23.500-21 29C20 53.500 11 44 11 30V12.500z"/>
+<circle class="l" cx="32" cy="31" r="12"/>
+<path class="a" d="M32 23v8.500l5.500 3.500"/>
+<path class="m" d="M32 20.500v1.800M32 39.700v1.800M20.500 31h1.800M41.700 31h1.800"/></svg></span><h3>Vigilancia las 24 horas</h3><p>Control permanente del predio, la mercadería y los activos de cada cliente.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="l" d="M6 7h52M32 7v12"/>
+<rect class="l" x="27" y="19" width="10" height="6" rx="1.500"/>
+<path class="l" d="M29 25v7M35 25v7M21 32h22"/>
+<path class="af" d="M23 32h18l-3 4.500H26z"/>
+<path class="a" d="M24 42l-8 9M32 42v11M40 42l8 9M17 36l-9 4M47 36l9 4"/>
+<circle class="fa" cx="15" cy="53" r="2"/><circle class="fa" cx="32" cy="56" r="2"/><circle class="fa" cx="49" cy="53" r="2"/><circle class="fa" cx="7" cy="42" r="1.700"/><circle class="fa" cx="57" cy="42" r="1.700"/></svg></span><h3>Protección contra incendios</h3><p>Detección y extinción avanzadas, con rociadores sprinkler en cada depósito.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="af" d="M13 6h24l10 10v34H13z"/>
+<path class="l" d="M37 6v10h10"/>
+<path class="m" d="M19 22h16M19 29h22M19 36h14"/>
+<circle class="w" cx="44" cy="44" r="11"/><circle class="af" cx="44" cy="44" r="11"/>
+<path class="a" d="M38.500 44l4 4 7.500-8"/>
+<path class="l" d="M38 54l-3.500 7.500 7-2.500M50 54l3.500 7.500-7-2.500"/></svg></span><h3>Habilitación bromatológica</h3><p>Depósitos habilitados que cumplen rigurosos estándares de seguridad y sanidad.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="af" d="M13 8h26v48H13z"/>
+<path class="l" d="M39 26h13v30H39zM4 56h56"/>
+<path class="fa" d="M18 14h5v5h-5zM29 14h5v5h-5zM18 24h5v5h-5zM29 24h5v5h-5zM18 34h5v5h-5zM29 34h5v5h-5z"/>
+<path class="l" d="M22.500 56V46h8v10"/>
+<path class="m" d="M43 32h5M43 39h5M43 46h5"/></svg></span><h3>Oficinas y showrooms</h3><p>Salas de reuniones, sala de capacitaciones y espacios para exhibir productos.</p></article>
     </div>
     <ul class="in-ubic hist-anim">
       <li><strong>12 km</strong><span>Puerto de Montevideo</span><em>Logística marítima y manejo de cargas.</em></li>
@@ -119,39 +149,39 @@
   </div>
 </section>
 
-<!-- ============ EMPRESAS (el bloque que les gustó, con título nuevo) ============ -->
-<section class="in-sec in-sec--gris" id="empresas">
+<!-- ============ SERVICIOS (el bloque que les gustó; se llaman "servicios", no "empresas") ============ -->
+<section class="in-sec in-sec--gris" id="servicios">
   <div class="container">
     <div class="in-cab">
       <h2 class="hist-anim">Del depósito al mundo, <span class="in-oro">sin salir del Parque.</span></h2>
       <div class="in-cab-der hist-anim">
-        <p>Cuatro empresas especializadas trabajan coordinadas en el mismo predio: la mercadería entra, se guarda y sale rumbo a cualquier destino.</p>
-        <a href="empresas.html" class="in-boton">Conocer las empresas <span aria-hidden="true">→</span></a>
+        <p>Cuatro servicios especializados trabajan coordinados en el mismo predio: la mercadería entra, se guarda y sale rumbo a cualquier destino.</p>
+        <a href="empresas.html" class="in-boton">Conocer los servicios <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
     <div class="in-emp-grid">
       <a href="empresas.html#geligold" class="in-emp hist-anim">
         <span class="in-emp-logo"><img src="img/logos/pln.png" alt="Geligold S.A." loading="lazy"></span>
-        <h3>Geligold S.A.</h3><span class="in-emp-rubro">Depósito nacional</span>
+        <h3>Depósito nacional</h3><span class="in-emp-marca">Geligold S.A.</span>
         <p>Cabecera del Parque Logístico Nacional.</p>
         <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
       </a>
       <a href="empresas.html#talfir" class="in-emp hist-anim">
         <span class="in-emp-logo"><img src="img/logos/talfir.png" alt="Talfir S.A." loading="lazy"></span>
-        <h3>Talfir S.A.</h3><span class="in-emp-rubro">Depósito aduanero</span>
+        <h3>Depósito aduanero</h3><span class="in-emp-marca">Talfir S.A.</span>
         <p>23.000 m², con playa de contenedores e ISO tank.</p>
         <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
       </a>
       <a href="empresas.html#lamarel" class="in-emp hist-anim">
         <span class="in-emp-logo"><img src="img/logos/lamarel.png" alt="Lamarel" loading="lazy"></span>
-        <h3>Lamarel</h3><span class="in-emp-rubro">Flete terrestre</span>
+        <h3>Flete terrestre</h3><span class="in-emp-marca">Lamarel</span>
         <p>20 camiones propios y transporte de cargas peligrosas.</p>
         <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
       </a>
       <a href="empresas.html#repremar" class="in-emp hist-anim">
         <span class="in-emp-logo"><img src="img/logos/repremar.png" alt="Repremar Logistics" loading="lazy"></span>
-        <h3>Repremar Logistics</h3><span class="in-emp-rubro">Fletes aéreos y marítimos</span>
+        <h3>Fletes aéreos y marítimos</h3><span class="in-emp-marca">Repremar Logistics</span>
         <p>Embarques FCL y LCL hacia cualquier destino.</p>
         <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
       </a>
@@ -168,13 +198,14 @@
   </div>
 </section>
 
-<!-- ============ PROYECTO ITAPEBY: cifras + plano 3D (el mismo de El Parque) ============ -->
+<!-- ============ PROYECTO ITAPEBY: cifras + lo que se hace para el barrio ============
+     (El plano 3D está en El Parque; acá no se muestra por ahora.) -->
 <section class="in-sec">
   <div class="container">
     <div class="in-cab">
-      <h2 class="hist-anim">Un predio recuperado, <span class="in-oro">un polo farmacéutico.</span></h2>
+      <h2 class="hist-anim">Un predio recuperado, <span class="in-oro">un parque farmacéutico.</span></h2>
       <div class="in-cab-der hist-anim">
-        <p>Itapeby 3170 pasó de ser un problema para el barrio a un desarrollo con acceso propio y espacios nuevos para los vecinos. Fue declarado Proyecto de Interés Municipal en 2025.</p>
+        <p>Itapeby 3170 pasó de ser un problema para el barrio a un parque farmacéutico con acceso propio y espacios nuevos para los vecinos. Fue declarado Proyecto de Interés Municipal en 2025.</p>
         <a href="proyecto.html" class="in-boton">Conocer el proyecto <span aria-hidden="true">→</span></a>
       </div>
     </div>
@@ -184,139 +215,27 @@
       <div><dt>~200</dt><dd>puestos de trabajo previstos</dd></div>
       <div><dt>2025</dt><dd>declarado Proyecto de Interés Municipal</dd></div>
     </dl>
-    <div class="pq-plano-grid in-plano hist-anim">
-      <div class="pq-plano-scroll" data-centro="0.55">
-      <!-- PLANO-3D:INICIO (generado por herramientas/generar-plano.py: no editar a mano) -->
-      <svg class="pq-iso" viewBox="0 0 1260 770" role="img" aria-labelledby="plano-titulo">
-        <title id="plano-titulo">Plano en 3D del predio de Itapeby 3170 con las empresas de cada depósito</title>
-        <polygon class="iso-base-lado" points="267.6,573.8 1027.2,233.6 1027.2,247.6 267.6,587.8"/>
-        <polygon class="iso-base-lado2" points="120.0,500.0 267.6,573.8 267.6,587.8 120.0,514.0"/>
-        <polygon class="iso-base" points="120.0,500.0 840.0,140.0 1027.2,233.6 267.6,573.8"/>
-        <polygon class="iso-verde" points="120.0,500.0 206.4,456.8 358.8,533.0 267.6,573.8"/>
-        <polygon class="iso-cancha" points="153.1,503.6 215.0,472.6 328.1,529.2 266.2,560.1"/>
-        <polyline class="iso-cancha-linea" points="209.3,531.7 271.2,500.7"/>
-        <polygon class="iso-cancha-linea" points="153.1,503.6 215.0,472.6 328.1,529.2 266.2,560.1"/>
-        <polygon class="iso-cancha-linea" points="170.4,495.0 197.8,481.3 212.2,488.5 184.8,502.2"/>
-        <polygon class="iso-cancha-linea" points="269.0,544.3 296.4,530.6 310.8,537.8 283.4,551.5"/>
-        <polygon class="iso-calle" points="212.2,453.9 228.0,446.0 381.5,522.8 364.8,530.3"/>
-        <polyline class="iso-calle-linea" points="223.0,451.4 370.3,525.1"/>
-        <polygon class="iso-patio" points="464.2,333.7 845.8,142.9 1027.2,233.6 624.6,413.9"/>
-        <polygon class="iso-patio" points="328.1,485.2 536.9,380.8 559.9,392.4 351.1,496.8"/>
-        <polyline class="iso-estac" points="334.6,484.9 350.4,492.8"/>
-        <polyline class="iso-estac" points="349.3,477.5 365.2,485.4"/>
-        <polyline class="iso-estac" points="364.1,470.1 379.9,478.0"/>
-        <polyline class="iso-estac" points="378.8,462.7 394.7,470.7"/>
-        <polyline class="iso-estac" points="393.6,455.4 409.4,463.3"/>
-        <polyline class="iso-estac" points="408.4,448.0 424.2,455.9"/>
-        <polyline class="iso-estac" points="423.1,440.6 439.0,448.5"/>
-        <polyline class="iso-estac" points="437.9,433.2 453.7,441.1"/>
-        <polyline class="iso-estac" points="452.6,425.8 468.5,433.8"/>
-        <polyline class="iso-estac" points="467.4,418.5 483.2,426.4"/>
-        <polyline class="iso-estac" points="482.2,411.1 498.0,419.0"/>
-        <polyline class="iso-estac" points="496.9,403.7 512.8,411.6"/>
-        <polyline class="iso-estac" points="511.7,396.3 527.5,404.2"/>
-        <polyline class="iso-estac" points="526.4,388.9 542.3,396.9"/>
-        <g class="lote lote--operando" data-lote="1" tabindex="0" aria-label="1. Fármaco Uruguayo S.A."><polygon class="cara-lado" points="735.6,206.6 858.0,267.8 858.0,205.8 735.6,144.6"/><polygon class="cara-frente" points="858.0,267.8 930.0,231.8 930.0,169.8 858.0,205.8"/><polygon class="cara-techo" points="735.6,144.6 807.6,108.6 930.0,169.8 858.0,205.8"/><polygon class="porton" points="865.3,264.1 874.7,259.5 874.7,237.5 865.3,242.1"/><polygon class="porton" points="889.3,252.1 898.7,247.5 898.7,225.5 889.3,230.1"/><polygon class="porton" points="913.3,240.1 922.7,235.5 922.7,213.5 913.3,218.1"/><polygon class="ventanas" points="742.8,163.2 850.8,217.2 850.8,210.2 742.8,156.2"/><polygon class="claraboya" points="763.0,139.6 768.7,136.7 873.8,189.2 868.1,192.1"/><polygon class="claraboya" points="791.8,125.2 797.5,122.3 902.6,174.8 896.9,177.7"/></g>
-        <ellipse class="iso-arbol-sombra" cx="1005.6" cy="240.8" rx="10" ry="4.5"/><circle class="iso-arbol" cx="999.6" cy="229.8" r="9"/><circle class="iso-arbol-luz" cx="996.45" cy="227.10000000000002" r="3.15"/>
-        <ellipse class="iso-arbol-sombra" cx="975.2" cy="254.4" rx="10" ry="4.5"/><circle class="iso-arbol" cx="969.2" cy="243.4" r="9"/><circle class="iso-arbol-luz" cx="966.0500000000001" cy="240.70000000000002" r="3.15"/>
-        <g class="camion"><polygon class="sombra" points="889.0,254.5 904.1,246.9 937.9,263.8 922.8,271.4"/><g class="camion-caja"><polygon class="c-lado" points="890.0,250.2 914.5,262.5 914.5,246.5 890.0,234.2"/><polygon class="c-frente" points="914.5,262.5 925.3,257.1 925.3,241.1 914.5,246.5"/><polygon class="c-techo" points="890.0,234.2 900.8,228.8 925.3,241.1 914.5,246.5"/></g><g class="camion-cabina"><polygon class="c-lado" points="915.2,264.8 923.2,268.8 923.2,253.8 915.2,249.8"/><polygon class="c-frente" points="923.2,268.8 934.0,263.4 934.0,248.4 923.2,253.8"/><polygon class="c-techo" points="915.2,249.8 926.0,244.4 934.0,248.4 923.2,253.8"/></g><polygon class="camion-vidrio" points="924.2,260.2 932.9,255.9 932.9,250.9 924.2,255.2"/></g>
-        <g class="lote lote--negociacion" data-lote="4" tabindex="0" aria-label="4. Laboratorio farmacéutico"><polygon class="cara-lado" points="656.4,246.2 764.4,300.2 764.4,250.2 656.4,196.2"/><polygon class="cara-frente" points="764.4,300.2 822.0,271.4 822.0,221.4 764.4,250.2"/><polygon class="cara-techo" points="656.4,196.2 714.0,167.4 822.0,221.4 764.4,250.2"/><polygon class="porton" points="769.3,297.7 778.7,293.1 778.7,271.1 769.3,275.7"/><polygon class="porton" points="788.5,288.1 797.9,283.5 797.9,261.5 788.5,266.1"/><polygon class="porton" points="807.7,278.5 817.1,273.9 817.1,251.9 807.7,256.5"/><polygon class="ventanas" points="663.6,214.8 757.2,261.6 757.2,254.6 663.6,207.8"/><polygon class="claraboya" points="679.4,193.3 685.2,190.4 775.9,235.8 770.2,238.7"/><polygon class="claraboya" points="702.5,181.8 708.2,178.9 799.0,224.3 793.2,227.2"/></g>
-        <ellipse class="iso-arbol-sombra" cx="944.8" cy="268.0" rx="10" ry="4.5"/><circle class="iso-arbol" cx="938.8" cy="257.0" r="9"/><circle class="iso-arbol-luz" cx="935.65" cy="254.3" r="3.15"/>
-        <g class="camion"><polygon class="sombra" points="865.0,266.5 880.1,258.9 913.9,275.8 898.8,283.4"/><g class="camion-caja"><polygon class="c-lado" points="866.0,262.2 890.5,274.5 890.5,258.5 866.0,246.2"/><polygon class="c-frente" points="890.5,274.5 901.3,269.1 901.3,253.1 890.5,258.5"/><polygon class="c-techo" points="866.0,246.2 876.8,240.8 901.3,253.1 890.5,258.5"/></g><g class="camion-cabina"><polygon class="c-lado" points="891.2,276.8 899.2,280.8 899.2,265.8 891.2,261.8"/><polygon class="c-frente" points="899.2,280.8 910.0,275.4 910.0,260.4 899.2,265.8"/><polygon class="c-techo" points="891.2,261.8 902.0,256.4 910.0,260.4 899.2,265.8"/></g><polygon class="camion-vidrio" points="900.2,272.2 908.9,267.9 908.9,262.9 900.2,267.2"/></g>
-        <g class="lote lote--operando" data-lote="2" tabindex="0" aria-label="2. Laboratorio Gador S.A."><polygon class="cara-lado" points="577.2,285.8 663.6,329.0 663.6,273.0 577.2,229.8"/><polygon class="cara-frente" points="663.6,329.0 721.2,300.2 721.2,244.2 663.6,273.0"/><polygon class="cara-techo" points="577.2,229.8 634.8,201.0 721.2,244.2 663.6,273.0"/><polygon class="porton" points="668.5,326.5 677.9,321.9 677.9,299.9 668.5,304.5"/><polygon class="porton" points="687.7,316.9 697.1,312.3 697.1,290.3 687.7,294.9"/><polygon class="porton" points="706.9,307.3 716.3,302.7 716.3,280.7 706.9,285.3"/><polygon class="ventanas" points="584.4,248.4 656.4,284.4 656.4,277.4 584.4,241.4"/><polygon class="claraboya" points="600.2,226.9 606.0,224.0 675.1,258.6 669.4,261.5"/><polygon class="claraboya" points="623.3,215.4 629.0,212.5 698.2,247.1 692.4,250.0"/></g>
-        <g class="camion"><polygon class="sombra" points="668.2,328.9 683.3,321.3 717.1,338.2 702.0,345.8"/><g class="camion-caja"><polygon class="c-lado" points="669.2,324.6 693.7,336.9 693.7,320.9 669.2,308.6"/><polygon class="c-frente" points="693.7,336.9 704.5,331.5 704.5,315.5 693.7,320.9"/><polygon class="c-techo" points="669.2,308.6 680.0,303.2 704.5,315.5 693.7,320.9"/></g><g class="camion-cabina"><polygon class="c-lado" points="694.4,339.2 702.4,343.2 702.4,328.2 694.4,324.2"/><polygon class="c-frente" points="702.4,343.2 713.2,337.8 713.2,322.8 702.4,328.2"/><polygon class="c-techo" points="694.4,324.2 705.2,318.8 713.2,322.8 702.4,328.2"/></g><polygon class="camion-vidrio" points="703.4,334.6 712.1,330.3 712.1,325.3 703.4,329.6"/></g>
-        <g class="lote lote--confirmada" data-lote="3" tabindex="0" aria-label="3. Droguería Uruguay S.A."><polygon class="cara-lado" points="483.6,332.6 602.4,392.0 602.4,336.0 483.6,276.6"/><polygon class="cara-frente" points="602.4,392.0 667.2,359.6 667.2,303.6 602.4,336.0"/><polygon class="cara-techo" points="483.6,276.6 548.4,244.2 667.2,303.6 602.4,336.0"/><polygon class="porton" points="608.5,388.9 617.9,384.3 617.9,362.3 608.5,366.9"/><polygon class="porton" points="630.1,378.1 639.5,373.5 639.5,351.5 630.1,356.1"/><polygon class="porton" points="651.7,367.3 661.1,362.7 661.1,340.7 651.7,345.3"/><polygon class="ventanas" points="490.8,295.2 595.2,347.4 595.2,340.4 490.8,288.2"/><polygon class="claraboya" points="508.8,272.6 514.6,269.8 616.1,320.5 610.3,323.4"/><polygon class="claraboya" points="534.7,259.7 540.5,256.8 642.0,307.6 636.2,310.4"/></g>
-        <g class="camion"><polygon class="sombra" points="629.8,380.5 644.9,372.9 678.7,389.8 663.6,397.4"/><g class="camion-caja"><polygon class="c-lado" points="630.8,376.2 655.3,388.5 655.3,372.5 630.8,360.2"/><polygon class="c-frente" points="655.3,388.5 666.1,383.1 666.1,367.1 655.3,372.5"/><polygon class="c-techo" points="630.8,360.2 641.6,354.8 666.1,367.1 655.3,372.5"/></g><g class="camion-cabina"><polygon class="c-lado" points="656.0,390.8 664.0,394.8 664.0,379.8 656.0,375.8"/><polygon class="c-frente" points="664.0,394.8 674.8,389.4 674.8,374.4 664.0,379.8"/><polygon class="c-techo" points="656.0,375.8 666.8,370.4 674.8,374.4 664.0,379.8"/></g><polygon class="camion-vidrio" points="665.0,386.2 673.7,381.9 673.7,376.9 665.0,381.2"/></g>
-        <g class="lote lote--libre" data-lote="6" tabindex="0" aria-label="6. Local disponible"><polygon class="cara-lado" points="379.2,395.6 440.4,426.2 440.4,392.2 379.2,361.6"/><polygon class="cara-frente" points="440.4,426.2 526.8,383.0 526.8,349.0 440.4,392.2"/><polygon class="cara-techo" points="379.2,361.6 465.6,318.4 526.8,349.0 440.4,392.2"/></g>
-        <g class="camion"><polygon class="sombra" points="608.2,391.3 623.3,383.7 657.1,400.6 642.0,408.2"/><g class="camion-caja"><polygon class="c-lado" points="609.2,387.0 633.7,399.3 633.7,383.3 609.2,371.0"/><polygon class="c-frente" points="633.7,399.3 644.5,393.9 644.5,377.9 633.7,383.3"/><polygon class="c-techo" points="609.2,371.0 620.0,365.6 644.5,377.9 633.7,383.3"/></g><g class="camion-cabina"><polygon class="c-lado" points="634.4,401.6 642.4,405.6 642.4,390.6 634.4,386.6"/><polygon class="c-frente" points="642.4,405.6 653.2,400.2 653.2,385.2 642.4,390.6"/><polygon class="c-techo" points="634.4,386.6 645.2,381.2 653.2,385.2 642.4,390.6"/></g><polygon class="camion-vidrio" points="643.4,397.0 652.1,392.7 652.1,387.7 643.4,392.0"/></g>
-        <ellipse class="iso-arbol-sombra" cx="606.9" cy="418.0" rx="11" ry="5.0"/><circle class="iso-arbol" cx="600.9" cy="406.0" r="10"/><circle class="iso-arbol-luz" cx="597.4" cy="403.0" r="3.5"/>
-        <g class="auto auto--blanco"><g class="auto-cuerpo"><polygon class="c-lado" points="471.7,417.7 486.1,424.9 486.1,418.9 471.7,411.7"/><polygon class="c-frente" points="486.1,424.9 494.8,420.6 494.8,414.6 486.1,418.9"/><polygon class="c-techo" points="471.7,411.7 480.4,407.4 494.8,414.6 486.1,418.9"/></g><g class="auto-techo"><polygon class="c-lado" points="476.4,413.0 483.6,416.6 483.6,411.6 476.4,408.0"/><polygon class="c-frente" points="483.6,416.6 490.1,413.4 490.1,408.4 483.6,411.6"/><polygon class="c-techo" points="476.4,408.0 482.9,404.8 490.1,408.4 483.6,411.6"/></g></g>
-        <g class="auto auto--azul"><g class="auto-cuerpo"><polygon class="c-lado" points="457.0,425.1 471.4,432.3 471.4,426.3 457.0,419.1"/><polygon class="c-frente" points="471.4,432.3 480.0,428.0 480.0,422.0 471.4,426.3"/><polygon class="c-techo" points="457.0,419.1 465.6,414.8 480.0,422.0 471.4,426.3"/></g><g class="auto-techo"><polygon class="c-lado" points="461.6,420.4 468.8,424.0 468.8,419.0 461.6,415.4"/><polygon class="c-frente" points="468.8,424.0 475.3,420.7 475.3,415.7 468.8,419.0"/><polygon class="c-techo" points="461.6,415.4 468.1,412.1 475.3,415.7 468.8,419.0"/></g></g>
-        <ellipse class="iso-arbol-sombra" cx="576.5" cy="431.6" rx="11" ry="5.0"/><circle class="iso-arbol" cx="570.5" cy="419.6" r="10"/><circle class="iso-arbol-luz" cx="567.0" cy="416.6" r="3.5"/>
-        <g class="auto auto--blanco"><g class="auto-cuerpo"><polygon class="c-lado" points="427.4,439.9 441.8,447.1 441.8,441.1 427.4,433.9"/><polygon class="c-frente" points="441.8,447.1 450.5,442.8 450.5,436.8 441.8,441.1"/><polygon class="c-techo" points="427.4,433.9 436.1,429.6 450.5,436.8 441.8,441.1"/></g><g class="auto-techo"><polygon class="c-lado" points="432.1,435.1 439.3,438.7 439.3,433.7 432.1,430.1"/><polygon class="c-frente" points="439.3,438.7 445.8,435.5 445.8,430.5 439.3,433.7"/><polygon class="c-techo" points="432.1,430.1 438.6,426.9 445.8,430.5 439.3,433.7"/></g></g>
-        <ellipse class="iso-arbol-sombra" cx="546.1" cy="445.2" rx="11" ry="5.0"/><circle class="iso-arbol" cx="540.1" cy="433.2" r="10"/><circle class="iso-arbol-luz" cx="536.6" cy="430.2" r="3.5"/>
-        <g class="lote lote--libre" data-lote="5" tabindex="0" aria-label="5. Local disponible"><polygon class="cara-lado" points="271.2,449.6 332.4,480.2 332.4,446.2 271.2,415.6"/><polygon class="cara-frente" points="332.4,480.2 418.8,437.0 418.8,403.0 332.4,446.2"/><polygon class="cara-techo" points="271.2,415.6 357.6,372.4 418.8,403.0 332.4,446.2"/></g>
-        <ellipse class="iso-arbol-sombra" cx="515.7" cy="458.8" rx="11" ry="5.0"/><circle class="iso-arbol" cx="509.7" cy="446.8" r="10"/><circle class="iso-arbol-luz" cx="506.2" cy="443.8" r="3.5"/>
-        <g class="auto auto--dorado"><g class="auto-cuerpo"><polygon class="c-lado" points="397.9,454.6 412.3,461.8 412.3,455.8 397.9,448.6"/><polygon class="c-frente" points="412.3,461.8 421.0,457.5 421.0,451.5 412.3,455.8"/><polygon class="c-techo" points="397.9,448.6 406.6,444.3 421.0,451.5 412.3,455.8"/></g><g class="auto-techo"><polygon class="c-lado" points="402.6,449.9 409.8,453.5 409.8,448.5 402.6,444.9"/><polygon class="c-frente" points="409.8,453.5 416.3,450.3 416.3,445.3 409.8,448.5"/><polygon class="c-techo" points="402.6,444.9 409.1,441.7 416.3,445.3 409.8,448.5"/></g></g>
-        <g class="auto auto--gris"><g class="auto-cuerpo"><polygon class="c-lado" points="383.2,462.0 397.6,469.2 397.6,463.2 383.2,456.0"/><polygon class="c-frente" points="397.6,469.2 406.2,464.9 406.2,458.9 397.6,463.2"/><polygon class="c-techo" points="383.2,456.0 391.8,451.7 406.2,458.9 397.6,463.2"/></g><g class="auto-techo"><polygon class="c-lado" points="387.8,457.3 395.0,460.9 395.0,455.9 387.8,452.3"/><polygon class="c-frente" points="395.0,460.9 401.5,457.6 401.5,452.6 395.0,455.9"/><polygon class="c-techo" points="387.8,452.3 394.3,449.0 401.5,452.6 395.0,455.9"/></g></g>
-        <ellipse class="iso-arbol-sombra" cx="230.4" cy="472.4" rx="9" ry="4.0"/><circle class="iso-arbol" cx="224.4" cy="462.4" r="8"/><circle class="iso-arbol-luz" cx="221.6" cy="460.0" r="2.8"/>
-        <ellipse class="iso-arbol-sombra" cx="485.3" cy="472.4" rx="11" ry="5.0"/><circle class="iso-arbol" cx="479.3" cy="460.4" r="10"/><circle class="iso-arbol-luz" cx="475.8" cy="457.4" r="3.5"/>
-        <g class="auto auto--azul"><g class="auto-cuerpo"><polygon class="c-lado" points="353.6,476.8 368.0,484.0 368.0,478.0 353.6,470.8"/><polygon class="c-frente" points="368.0,484.0 376.7,479.7 376.7,473.7 368.0,478.0"/><polygon class="c-techo" points="353.6,470.8 362.3,466.5 376.7,473.7 368.0,478.0"/></g><g class="auto-techo"><polygon class="c-lado" points="358.3,472.0 365.5,475.6 365.5,470.6 358.3,467.0"/><polygon class="c-frente" points="365.5,475.6 372.0,472.4 372.0,467.4 365.5,470.6"/><polygon class="c-techo" points="358.3,467.0 364.8,463.8 372.0,467.4 365.5,470.6"/></g></g>
-        <ellipse class="iso-arbol-sombra" cx="454.9" cy="486.0" rx="11" ry="5.0"/><circle class="iso-arbol" cx="448.9" cy="474.0" r="10"/><circle class="iso-arbol-luz" cx="445.4" cy="471.0" r="3.5"/>
-        <g class="auto auto--blanco"><g class="auto-cuerpo"><polygon class="c-lado" points="338.9,484.2 353.3,491.4 353.3,485.4 338.9,478.2"/><polygon class="c-frente" points="353.3,491.4 361.9,487.0 361.9,481.0 353.3,485.4"/><polygon class="c-techo" points="338.9,478.2 347.5,473.8 361.9,481.0 353.3,485.4"/></g><g class="auto-techo"><polygon class="c-lado" points="343.6,479.4 350.8,483.0 350.8,478.0 343.6,474.4"/><polygon class="c-frente" points="350.8,483.0 357.2,479.8 357.2,474.8 350.8,478.0"/><polygon class="c-techo" points="343.6,474.4 350.0,471.2 357.2,474.8 350.8,478.0"/></g></g>
-        <ellipse class="iso-arbol-sombra" cx="266.4" cy="490.4" rx="9" ry="4.0"/><circle class="iso-arbol" cx="260.4" cy="480.4" r="8"/><circle class="iso-arbol-luz" cx="257.59999999999997" cy="478.0" r="2.8"/>
-        <ellipse class="iso-arbol-sombra" cx="424.6" cy="499.6" rx="11" ry="5.0"/><circle class="iso-arbol" cx="418.6" cy="487.6" r="10"/><circle class="iso-arbol-luz" cx="415.1" cy="484.6" r="3.5"/>
-        <ellipse class="iso-arbol-sombra" cx="302.4" cy="508.4" rx="9" ry="4.0"/><circle class="iso-arbol" cx="296.4" cy="498.4" r="8"/><circle class="iso-arbol-luz" cx="293.59999999999997" cy="496.0" r="2.8"/>
-        <ellipse class="iso-arbol-sombra" cx="394.2" cy="513.2" rx="11" ry="5.0"/><circle class="iso-arbol" cx="388.2" cy="501.2" r="10"/><circle class="iso-arbol-luz" cx="384.7" cy="498.2" r="3.5"/>
-        <polygon class="iso-cerco" points="267.6,573.8 1027.2,233.6 1027.2,227.6 267.6,567.8"/>
-        
-      <g class="cartel" data-lote="5" tabindex="0">
-        <polyline class="cartel-linea" points="345.0,409.3 345.0,660 353,660" pathLength="1"/>
-        <circle class="cartel-punto" cx="345.0" cy="409.3" r="5"/>
-        <circle class="cartel-foto" cx="385" cy="660" r="30"/>
-        <text class="cartel-num" x="385" y="667">5</text>
-        <text class="cartel-titulo" x="427" y="656">Local disponible</text>
-        <text class="cartel-sub estado-txt--libre" x="427" y="676">A definir</text>
-      </g>
-        
-      <g class="cartel" data-lote="6" tabindex="0">
-        <polyline class="cartel-linea" points="453.0,355.3 453.0,605 458,605" pathLength="1"/>
-        <circle class="cartel-punto" cx="453.0" cy="355.3" r="5"/>
-        <circle class="cartel-foto" cx="490" cy="605" r="30"/>
-        <text class="cartel-num" x="490" y="612">6</text>
-        <text class="cartel-titulo" x="532" y="601">Local disponible</text>
-        <text class="cartel-sub estado-txt--libre" x="532" y="621">A definir</text>
-      </g>
-        
-      <g class="cartel" data-lote="3" tabindex="0">
-        <polyline class="cartel-linea" points="575.4,290.1 575.4,550 588,550" pathLength="1"/>
-        <circle class="cartel-punto" cx="575.4" cy="290.1" r="5"/>
-        <circle class="cartel-foto" cx="620" cy="550" r="30"/>
-        <text class="cartel-num" x="620" y="557">3</text>
-        <text class="cartel-titulo" x="662" y="546">Droguería Uruguay S.A.</text>
-        <text class="cartel-sub estado-txt--confirmada" x="662" y="566">Confirmada</text>
-      </g>
-        
-      <g class="cartel" data-lote="2" tabindex="0">
-        <polyline class="cartel-linea" points="649.2,237.0 649.2,34 648,34" pathLength="1"/>
-        <circle class="cartel-punto" cx="649.2" cy="237.0" r="5"/>
-        <circle class="cartel-foto" cx="680" cy="34" r="30"/>
-        <text class="cartel-num" x="680" y="41">2</text>
-        <text class="cartel-titulo" x="722" y="30">Laboratorio Gador S.A.</text>
-        <text class="cartel-sub estado-txt--operando" x="722" y="50">Operando</text>
-      </g>
-        
-      <g class="cartel" data-lote="4" tabindex="0">
-        <polyline class="cartel-linea" points="739.2,208.8 739.2,86 748,86" pathLength="1"/>
-        <circle class="cartel-punto" cx="739.2" cy="208.8" r="5"/>
-        <circle class="cartel-foto" cx="780" cy="86" r="30"/>
-        <text class="cartel-num" x="780" y="93">4</text>
-        <text class="cartel-titulo" x="822" y="82">Laboratorio farmacéutico</text>
-        <text class="cartel-sub estado-txt--negociacion" x="822" y="102">En negociación</text>
-      </g>
-        
-      <g class="cartel" data-lote="1" tabindex="0">
-        <polyline class="cartel-linea" points="832.8,157.2 832.8,150 968,150" pathLength="1"/>
-        <circle class="cartel-punto" cx="832.8" cy="157.2" r="5"/>
-        <circle class="cartel-foto" cx="1000" cy="150" r="30"/>
-        <text class="cartel-num" x="1000" y="157">1</text>
-        <text class="cartel-titulo" x="1042" y="146">Fármaco Uruguayo S.A.</text>
-        <text class="cartel-sub estado-txt--operando" x="1042" y="166">Operando</text>
-      </g>
-        
-      <g class="cartel" data-lote="cancha" tabindex="0">
-        <polyline class="cartel-linea" points="242.4,518.0 242.4,715 248,715" pathLength="1"/>
-        <circle class="cartel-punto" cx="242.4" cy="518.0" r="5"/>
-        <circle class="cartel-foto" cx="280" cy="715" r="30"/>
-        <text class="cartel-num" x="280" y="722">●</text>
-        <text class="cartel-titulo" x="322" y="711">Cancha de fútbol</text>
-        <text class="cartel-sub estado-txt--verde" x="322" y="731">Para los niños del barrio</text>
-      </g>
-      </svg>
-      <!-- PLANO-3D:FIN -->
-      </div>
+    <h3 class="in-subtitulo hist-anim">Y también espacio público para el barrio</h3>
+    <div class="in-barrio-grid">
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><rect class="af" x="5" y="12" width="54" height="40" rx="3"/>
+<path class="l" d="M32 12v40"/><circle class="l" cx="32" cy="32" r="8"/><circle class="fa" cx="32" cy="32" r="1.900"/>
+<rect class="l" x="5" y="22" width="11" height="20"/><rect class="m" x="5" y="27.500" width="5" height="9"/>
+<rect class="l" x="48" y="22" width="11" height="20"/><rect class="m" x="54" y="27.500" width="5" height="9"/></svg></span><h3>Cancha de fútbol</h3><p>Una cancha cerrada con muro perimetral, pensada para los niños del barrio.</p></article>
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="af" d="M20 32a9 9 0 0 1 3-17 11 11 0 0 1 18 0 9 9 0 0 1 3 17z"/>
+<path class="l" d="M32 32v13M32 38l-6-5.500M32 40l6-5.500"/>
+<path class="l" d="M14 51h36M17 51v7M47 51v7"/>
+<path class="a" d="M16 46h32"/>
+<path class="m" d="M6 58h52"/></svg></span><h3>Plaza pública</h3><p>Un área acondicionada para instalar una plaza para los vecinos.</p></article>
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><circle class="af" cx="33" cy="11" r="5.500"/>
+<path class="l" d="M32 19.500l-3.500 15.500M31 23.500l-9 7M31.500 23l8.500 5.500 5-2"/>
+<path class="l" d="M28.500 35l8.500 8.500-2 10.500M28.500 35l-7 12-6 3.500"/>
+<circle class="af" cx="51" cy="30" r="7.500"/><path class="l" d="M51 37.500V54"/>
+<rect class="af" x="5" y="54" width="54" height="4" rx="2"/></svg></span><h3>Pasajes peatonales</h3><p>Recuperación de los pasajes peatonales existentes en la zona.</p></article>
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ic" viewBox="0 0 64 64" aria-hidden="true"><path class="f" d="M4 22Q18 14 32 22T60 22V42Q46 50 32 42Q18 34 4 42Z"/>
+<path class="l" d="M4 22Q18 14 32 22T60 22M4 42Q18 34 32 42T60 42"/>
+<path class="a" d="M10 32q4-4 8 0t8 0 8 0 8 0 8 0 8 0"/>
+<path class="m" d="M11 15V9M17 13V7M45 24v-6M52 21v-6M12 50v5M20 52v4M44 51v5M52 49v6"/></svg></span><h3>Mantenimiento de la cañada</h3><p>Franja acondicionada, acordada con el Municipio F, para que entre la maquinaria de la Intendencia.</p></article>
     </div>
-    <p class="in-plano-pista" aria-hidden="true">← Deslizá para ver el plano completo →</p>
   </div>
 </section>
 
@@ -357,7 +276,7 @@
     <div class="in-contacto hist-anim">
       <div class="in-contacto-texto">
         <h2>Hablemos <span class="in-oro">de tu operación.</span></h2>
-        <p>Contanos qué necesitás y te ponemos en contacto con la empresa del Parque indicada para tu consulta.</p>
+        <p>Contanos qué necesitás y te ponemos en contacto con el servicio del Parque indicado para tu consulta.</p>
         <div class="in-contacto-botones">
           <a href="contacto.html" class="btn btn-primary">Contactanos</a>
           <a href="https://www.google.com/maps/search/?api=1&amp;query=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay" class="in-contacto-link" target="_blank" rel="noopener">Cómo llegar ↗</a>
