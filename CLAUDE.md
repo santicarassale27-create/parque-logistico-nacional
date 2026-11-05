@@ -55,15 +55,14 @@ img/                        Fotos (cuando las haya)
 
 ## Página Inicio
 
-- Rediseño pedido por Alfonso: un resumen visual de todas las secciones, cada una con su botón para ir a la página.
-  Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`.
-- Orden: portada (fondo dibujado azul noche con cuadrícula y luz dorada, título "Logística integral, en un mismo predio.",
-  botones y barra con las distancias), cifras (10 ha, 27.000 m², 4 empresas, 310 personas) y bloques 01 Historia,
-  02 El Parque, 03 Empresas (logos), 04 Proyecto Itapeby (anillo de los 6 locales), 05 Responsabilidad social y
-  franja dorada de contacto.
-- Los números 01–05 van grandes en contorno dorado (como en Empresas) y se iluminan al pasar el mouse por el bloque.
-- Sin la foto genérica de antes (no representaba al Parque). Cuando haya foto o video real, va en `.in-hero-foto`.
-- Si cambian datos en otra página (estados de los locales, hitos, iniciativas), actualizar también su resumen acá.
+- Resumen de todas las secciones con **diseño propio**: no repite recursos de las otras páginas (decisión del equipo:
+  cada sección tiene su diseño y la portada también). Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`.
+- Orden: portada clara con título gigante a todo el ancho, lugar grande redondeado para la foto o el video del dron
+  (`.in-hero-media`) y cápsulas con las distancias; cinta dorada en movimiento con los servicios; cifras en una tarjeta
+  oscura (10 ha, 27.000 m², 4 empresas, 310 personas); paneles-acordeón de las 5 secciones (`initPaneles()` en `main.js`,
+  cada uno con su color, resumen, datos y botón); cierre tipográfico "Hablemos." que lleva a Contacto.
+- No usar acá los números en contorno de Empresas, la cuadrícula de Historia ni el anillo de Proyecto.
+- Si cambian datos en otra página (hitos, estados de los locales, iniciativas), actualizar también su panel acá.
 
 ## Página Historia
 

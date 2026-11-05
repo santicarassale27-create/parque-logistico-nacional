@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initRelato();
   initEspacios();
   initSelects();
+  initPaneles();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -483,6 +484,34 @@ function initSelects() {
     if (select.form) select.form.addEventListener("reset", function () { setTimeout(mostrarElegida, 0); });
 
     mostrarElegida();
+  });
+}
+
+/* ---------- 11. Paneles de las secciones (página Inicio) ----------
+   Un panel abierto a la vez. Se abre al pasar el mouse (en computadora), al tocarlo
+   (en celular) o al llegar con Tab y apretar Enter. */
+function initPaneles() {
+  var paneles = document.querySelectorAll(".in-panel");
+  if (!paneles.length) return;
+  var conMouse = window.matchMedia && window.matchMedia("(hover: hover)").matches;
+
+  function abrir(panel) {
+    paneles.forEach(function (p) {
+      var es = p === panel;
+      p.classList.toggle("activo", es);
+      p.setAttribute("aria-expanded", es ? "true" : "false");
+    });
+  }
+
+  paneles.forEach(function (panel) {
+    if (conMouse) panel.addEventListener("mouseenter", function () { abrir(panel); });
+    panel.addEventListener("click", function () { abrir(panel); });
+    panel.addEventListener("focus", function () { abrir(panel); });
+    panel.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        if (e.target === panel) { e.preventDefault(); abrir(panel); }
+      }
+    });
   });
 }
 
