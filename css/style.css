@@ -169,7 +169,7 @@ section {
   z-index: 100;
   background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(6px);
-  box-shadow: 0 4px 16px rgba(10, 22, 40, 0.1);
+  box-shadow: 0 6px 20px rgba(10, 22, 40, 0.16);
 }
 
 .nav-wrap {
