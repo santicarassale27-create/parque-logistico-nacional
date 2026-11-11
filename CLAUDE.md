@@ -193,7 +193,7 @@ img/                        Fotos (cuando las haya)
 
 ## Pie de página
 
-- Es **idéntico en las 7 páginas** (marca + menú, dirección y contacto, copyright).
+- Es **idéntico en las 7 páginas** (marca + menú, dirección y contacto, logos de las empresas, copyright).
   Si se cambia, se cambia en todas: copiar el `<footer>` completo de una página a las demás.
-- Sin el bloque "Empresas del Parque" con logos (decisión del equipo). Los logos siguen en `img/logos/` (sacados del PDF institucional)
-  y se usan en otras partes de la web.
+- Los logos de las empresas van en el pie **sin título** (sin el texto "Empresas del Parque": decisión del equipo). Los logos están en
+  `img/logos/` (sacados del PDF institucional).
