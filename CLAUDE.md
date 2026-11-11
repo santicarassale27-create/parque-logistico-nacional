@@ -47,11 +47,42 @@ img/                        Fotos (cuando las haya)
 
 ## Diseño
 
-- Base: fondo blanco, textos oscuros y detalles en dorado. Barra superior, portada y pie usan los tonos oscuros.
+- Base: fondo blanco, textos oscuros y detalles en **bordó** (el color del logo de Geligold) con negro cálido para lo oscuro. Barra superior, portada y pie usan los tonos oscuros.
+  Por compatibilidad, las variables conservan su nombre viejo: `--gold-*` es el bordó y `--navy-*` es el negro cálido. Sobre bordó, el texto va en blanco (nunca oscuro).
 - Usá SIEMPRE las variables de `:root` en `css/style.css` (`--gold-500`, `--gray-600`, etc.). Nunca colores sueltos.
 - Componentes existentes que hay que reutilizar antes de crear nuevos: `.btn`, `.card`, `.grid-2/3/4`,
   `.feature`, `.section-title`, `.section-lead`, `.eyebrow`, `.stats-strip`, `.cta-band`, `.timeline`.
 - Todo tiene que verse bien en celular (390px de ancho) sin que la página se mueva para los costados.
+
+## Página Inicio
+
+- Es un **resumen largo de todas las secciones**, con estilo propio (distinto al de cada página, pero alineado a la web).
+  Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`. Referencia de calidad: una landing prolija,
+  con imágenes grandes, una paleta contenida y mucho aire (sin copiar a nadie).
+- **Portada:** una sola foto o video de fondo a pantalla completa (`.in-hero-fondo`), con el título, los botones y la invitación
+  "Bajá para conocer más" con solo una flecha, sin círculo (sin barra de datos: decisión del equipo). Mientras no haya material se ve un fondo dibujado y un cartelito
+  ("FOTO o VIDEO de fondo"). Foto: `style="background-image:url(img/...)"` en `.in-hero-fondo`; video: `<video autoplay muted loop playsinline>`
+  adentro (las instrucciones están en un comentario del HTML); después se borra `.in-hero-nota`.
+- Reglas del estilo: todas las secciones usan la misma cabecera (`.in-cab`: título a la izquierda, texto y botón a la derecha);
+  en cada título, una frase va en el color de acento (bordó, clase `.in-oro`); fondos que alternan oscuro / claro / gris; tarjetas redondeadas del mismo
+  radio; números grandes separados por líneas finas.
+- Orden: portada → Historia (números apilados + línea de tiempo) → El Parque (oscura: 6 tarjetas con ícono + distancias 12/10/11 km)
+  → Servicios (4 tarjetas + recorrido de la mercadería; el bloque que más les gustó) → Proyecto Itapeby (4 cifras + 4 tarjetas
+  de espacio público para el barrio) → Responsabilidad Social (collage + lista de dos columnas + cifras) → tarjeta oscura de contacto.
+- **Íconos** (`.in-ph`): de la librería **Phosphor Icons**, estilo "light" (licencia MIT), en blanco sobre una baldosa azul, sin borde
+  y quietos al pasar el mouse (decisión del equipo; las tarjetas de Proyecto tampoco se mueven). Los 10 son: galpón, camión con acoplado,
+  escudo con tilde, matafuego, sello de aprobado y edificio (El Parque) y pelota, árbol, sendero y olas (Proyecto). El dibujo va copiado
+  dentro del HTML (sin instalar nada). Para uno nuevo: buscarlo en phosphoricons.com, copiar el contenido del `<svg>` del archivo "light" y
+  ponerlo dentro de `<svg class="in-ph" viewBox="0 0 256 256">`. No dibujar íconos a mano (decisión del equipo).
+- **"Servicios", no "empresas"** (pedido del papá de Santi): en la landing los cuatro (Depósito nacional, Depósito aduanero,
+  Flete terrestre, Fletes aéreos y marítimos) se presentan como servicios; la marca va en chico debajo. Pendiente definir si el
+  resto del sitio (menú, página Empresas, pie, contacto) también cambia.
+- **Se llama "parque farmacéutico"**, no "polo farmacéutico" (decisión del equipo; ya cambiado en Inicio, El Parque y Proyecto).
+- El plano 3D **no** va en la landing por ahora (queda solo en El Parque).
+- En Servicios no usar la frase "del depósito al mundo" ni "sale al mundo" (decisión del equipo): el título es "Todo el recorrido de tu mercadería, en un solo lugar" y el último paso es "Llega a destino".
+- En Servicios, los pasos del recorrido de la mercadería se unen con un círculo de acento (bordó) grande con una flecha blanca (celular: hacia abajo).
+- Los datos salen de las otras páginas: si cambian allá (hitos, iniciativas, cifras), actualizar también acá.
+- Sin textos chicos arriba de los títulos.
 
 ## Página Historia
 

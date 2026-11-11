@@ -7,7 +7,7 @@
 <meta name="description" content="Parque Logístico Nacional (PLN): 10 hectáreas en Montevideo con depósito aduanero, playa de contenedores, flota propia y fletes aéreos y marítimos. Historia, empresas y compromiso social.">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="pagina-inicio">
 
 <header class="site-header">
   <div class="container nav-wrap">
@@ -34,175 +34,215 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-photo-note">Foto genérica — a reemplazar por foto real del Parque</div>
-  <div class="container hero-inner">
-    <div class="eyebrow">Desde 1994 · Montevideo, Uruguay</div>
-    <h1>El <span>hub logístico</span> más completo del Parque Guaraní</h1>
-    <p>El Parque Logístico Nacional reúne depósito aduanero, playa de contenedores, flota propia y fletes aéreos y marítimos en un predio de 10 hectáreas, con más de 30 años de trayectoria familiar y un fuerte compromiso con la comunidad del Municipio F.</p>
-    <div class="hero-actions">
-      <a href="parque.html" class="btn btn-primary">Conocer el Parque</a>
-      <a href="historia.html" class="btn btn-outline">Nuestra Historia</a>
+<!-- =========================================================
+     INICIO: resumen de todas las secciones (estilo propio, prefijo "in-", cuelga de <body class="pagina-inicio">).
+     Todas las secciones usan la misma cabecera (.in-cab: título a la izquierda; texto y botón a la derecha)
+     y alternan fondo oscuro / claro. Los datos salen de las otras páginas: si cambian allá, se actualizan acá.
+     El plano 3D de Proyecto lo genera herramientas/generar-plano.py (no editar a mano).
+     ========================================================= -->
+
+<!-- ============ PORTADA: foto o video de fondo a pantalla completa ============ -->
+<section class="in-hero">
+  <!-- FONDO. Cuando lleguen la foto o el video del dron:
+       · Foto: ponerle a este div style="background-image:url(img/portada.jpg)".
+       · Video: pegar adentro  <video autoplay muted loop playsinline poster="img/portada.jpg"><source src="img/portada.mp4" type="video/mp4"></video>
+       y borrar el cartelito .in-hero-nota. Mientras tanto se ve un fondo dibujado. -->
+  <div class="in-hero-fondo" aria-hidden="true"><span class="in-orbita"></span></div>
+  <span class="in-hero-nota">FOTO o VIDEO de fondo · vista aérea del Parque (dron)</span>
+  <div class="container in-hero-contenido">
+    <h1>Toda la cadena logística, en <span>un solo predio.</span></h1>
+    <p>Depósito nacional y aduanero, transporte terrestre y comercio exterior: cuatro servicios integrados en diez hectáreas de Montevideo.</p>
+    <div class="in-hero-botones">
+      <a href="parque.html" class="btn btn-primary">Conocé el Parque</a>
+      <a href="contacto.html" class="in-hero-link">Contactanos <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <!-- Invitación a bajar: lleva a la primera sección -->
+  <div class="in-hero-pie">
+    <div class="container">
+      <a href="#historia" class="in-hero-bajar"><span class="in-hero-bajar-flecha" aria-hidden="true"></span>Bajá para conocer más</a>
     </div>
   </div>
 </section>
 
-<section class="stats-strip">
+<!-- ============ HISTORIA ============ -->
+<section class="in-sec" id="historia">
   <div class="container">
-    <div class="grid grid-4">
-      <div><strong>27.000 m²</strong><span>Cubiertos, hasta 11 m de altura</span></div>
-      <div><strong>23.000 m²</strong><span>Depósito aduanero habilitado</span></div>
-      <div><strong>20</strong><span>Camiones de flota propia</span></div>
-      <div><strong>12 km</strong><span>Al Puerto de Montevideo</span></div>
+    <div class="in-cab">
+      <h2 class="hist-anim">Tres décadas <span class="in-oro">construyendo el Parque.</span></h2>
+      <div class="in-cab-der hist-anim">
+        <p>Una empresa familiar que empezó con un depósito, sumó un predio propio, se volvió un parque completo y hoy impulsa un proyecto que transforma el barrio.</p>
+        <a href="historia.html" class="in-boton">Recorrer la historia <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="in-historia">
+      <dl class="in-pila hist-anim">
+        <div><dt data-counter>32</dt><dd>años de trayectoria familiar</dd></div>
+        <div><dt data-counter>310</dt><dd>personas trabajando en el Parque</dd></div>
+        <div><dt data-counter>4</dt><dd>servicios integrados en un mismo predio</dd></div>
+      </dl>
+      <ol class="in-hitos hist-anim">
+          <li><span class="in-hito-anio">1994</span><div><strong>Los inicios</strong><p>Un Depósito Fiscal Aduanero en Parque Guaraní.</p></div></li>
+          <li><span class="in-hito-anio">1996</span><div><strong>El predio propio</strong><p>Se adquiere el predio de Dr. Pantaleón Pérez, la casa del Parque hasta hoy.</p></div></li>
+          <li><span class="in-hito-anio">2010</span><div><strong>El primer local</strong><p>Se construye y se profesionalizan los servicios logísticos.</p></div></li>
+          <li><span class="in-hito-anio">2022</span><div><strong>Itapeby recuperado</strong><p>Limpieza integral y muro de 700 m en el predio lindero.</p></div></li>
+          <li><span class="in-hito-anio">2025</span><div><strong>Interés Municipal</strong><p>El proyecto de Itapeby 3170 es declarado Proyecto de Interés Municipal.</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
 
-<section>
+<!-- Íconos de las tarjetas: Phosphor Icons, estilo "light" (licencia MIT). El dibujo está copiado acá adentro: no hace falta instalar nada. -->
+<!-- ============ EL PARQUE (fondo oscuro) ============ -->
+<section class="in-sec in-sec--oscura">
   <div class="container">
-    <div class="eyebrow">Nuestra historia</div>
-    <h2 class="section-title">Más de tres décadas construyendo el Parque</h2>
-    <p class="section-lead">Desde un depósito fiscal aduanero en 1994 hasta ser declarados Proyecto de Interés Municipal en 2025.</p>
+    <div class="in-cab">
+      <h2 class="hist-anim">Diez hectáreas <span class="in-oro">pensadas para operar.</span></h2>
+      <div class="in-cab-der hist-anim">
+        <p>27.000 m² cubiertos, con almacenamiento en altura, flota propia y todo lo necesario para el día a día de una operación logística.</p>
+        <a href="parque.html" class="in-boton in-boton--dorado">Conocer el Parque <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="in-infra-grid">
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M240,186H230V56.28l11.26-2.41a6,6,0,1,0-2.52-11.74l-224,48a6,6,0,0,0,2.52,11.74L26,100v86H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM38,97.42,218,58.85V186H190V128a6,6,0,0,0-6-6H72a6,6,0,0,0-6,6v58H38ZM178,154H78V134H178ZM78,166H178v20H78Z"/></svg></span><h3>Almacenamiento en altura</h3><p>Estanterías selectivas y drive-in, con hasta 11 m de altura de almacenaje.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M222,98.47V96a54.06,54.06,0,0,0-54-54h-8a14,14,0,0,0-14,14V178H126V72a6,6,0,0,0-6-6H16A14,14,0,0,0,2,80V184a30,30,0,0,0,54,18,30,30,0,0,0,53.4-12h85.2a30,30,0,0,0,59.4-6V136A38.07,38.07,0,0,0,222,98.47ZM158,56a2,2,0,0,1,2-2h8a42,42,0,0,1,42,42v8a6,6,0,0,0,6,6,26,26,0,0,1,26,26v24a30,30,0,0,0-47.4,18H158ZM16,78h98V178h-4.6A30,30,0,0,0,56,166a30,30,0,0,0-42-6V80A2,2,0,0,1,16,78ZM32,202a18,18,0,1,1,18-18A18,18,0,0,1,32,202Zm48,0a18,18,0,1,1,18-18A18,18,0,0,1,80,202Zm144,0a18,18,0,1,1,18-18A18,18,0,0,1,224,202Z"/></svg></span><h3>Flota propia</h3><p>20 camiones con base en el mismo predio, habilitados para cargas peligrosas.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,42H48A14,14,0,0,0,34,56v56c0,51.94,25.12,83.4,46.2,100.64,22.73,18.6,45.27,24.89,46.22,25.15a6,6,0,0,0,3.16,0c.95-.26,23.49-6.55,46.22-25.15C196.88,195.4,222,163.94,222,112V56A14,14,0,0,0,208,42Zm2,70c0,37.76-13.94,68.39-41.44,91.06A131.17,131.17,0,0,1,128,225.72a130.94,130.94,0,0,1-40.56-22.66C59.94,180.39,46,149.76,46,112V56a2,2,0,0,1,2-2H208a2,2,0,0,1,2,2ZM172.24,99.76a6,6,0,0,1,0,8.48l-56,56a6,6,0,0,1-8.48,0l-24-24a6,6,0,0,1,8.48-8.48L112,151.51l51.76-51.75A6,6,0,0,1,172.24,99.76Z"/></svg></span><h3>Vigilancia las 24 horas</h3><p>Control permanente del predio, la mercadería y los activos de cada cliente.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M217.72,50.25,152.21,30.6l34.47-17.23a6,6,0,1,0-5.36-10.74L134.51,26A78.07,78.07,0,0,0,58,104V208a6,6,0,0,0,12,0V174H90v58a14,14,0,0,0,14,14h64a14,14,0,0,0,14-14V104a46.07,46.07,0,0,0-40-45.6V40.07l72.27,21.68A6.14,6.14,0,0,0,216,62a6,6,0,0,0,1.72-11.75ZM70,162V104a66.07,66.07,0,0,1,60-65.71V58.4A46.07,46.07,0,0,0,90,104v58Zm98,72H104a2,2,0,0,1-2-2V174h68v58A2,2,0,0,1,168,234Zm2-130v58H102V104a34,34,0,0,1,68,0Z"/></svg></span><h3>Protección contra incendios</h3><p>Detección y extinción avanzadas, con rociadores sprinkler en cada depósito.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M224.42,104.2c-3.9-4.07-7.93-8.27-9.55-12.18-1.5-3.63-1.58-9-1.67-14.68-.14-9.38-.3-20-7.42-27.12S188,42.94,178.66,42.8c-5.68-.09-11-.17-14.68-1.67-3.91-1.62-8.11-5.65-12.18-9.55C145.16,25.22,137.64,18,128,18s-17.16,7.22-23.8,13.58c-4.07,3.9-8.27,7.93-12.18,9.55-3.63,1.5-9,1.58-14.68,1.67-9.38.14-20,.3-27.12,7.42S42.94,68,42.8,77.34c-.09,5.68-.17,11-1.67,14.68-1.62,3.91-5.65,8.11-9.55,12.18C25.22,110.84,18,118.36,18,128s7.22,17.16,13.58,23.8c3.9,4.07,7.93,8.27,9.55,12.18,1.5,3.63,1.58,9,1.67,14.68.14,9.38.3,20,7.42,27.12S68,213.06,77.34,213.2c5.68.09,11,.17,14.68,1.67,3.91,1.62,8.11,5.65,12.18,9.55C110.84,230.78,118.36,238,128,238s17.16-7.22,23.8-13.58c4.07-3.9,8.27-7.93,12.18-9.55,3.63-1.5,9-1.58,14.68-1.67,9.38-.14,20-.3,27.12-7.42s7.28-17.74,7.42-27.12c.09-5.68.17-11,1.67-14.68,1.62-3.91,5.65-8.11,9.55-12.18C230.78,145.16,238,137.64,238,128S230.78,110.84,224.42,104.2Zm-8.66,39.3c-4.67,4.86-9.5,9.9-12,15.9-2.38,5.74-2.48,12.52-2.58,19.08-.11,7.44-.23,15.14-3.9,18.82s-11.38,3.79-18.82,3.9c-6.56.1-13.34.2-19.08,2.58-6,2.48-11,7.31-15.91,12-5.25,5-10.68,10.24-15.49,10.24s-10.24-5.21-15.5-10.24c-4.86-4.67-9.9-9.5-15.9-12-5.74-2.38-12.52-2.48-19.08-2.58-7.44-.11-15.14-.23-18.82-3.9s-3.79-11.38-3.9-18.82c-.1-6.56-.2-13.34-2.58-19.08-2.48-6-7.31-11-12-15.91C35.21,138.24,30,132.81,30,128s5.21-10.24,10.24-15.5c4.67-4.86,9.5-9.9,12-15.9,2.38-5.74,2.48-12.52,2.58-19.08.11-7.44.23-15.14,3.9-18.82s11.38-3.79,18.82-3.9c6.56-.1,13.34-.2,19.08-2.58,6-2.48,11-7.31,15.91-12C117.76,35.21,123.19,30,128,30s10.24,5.21,15.5,10.24c4.86,4.67,9.9,9.5,15.9,12,5.74,2.38,12.52,2.48,19.08,2.58,7.44.11,15.14.23,18.82,3.9s3.79,11.38,3.9,18.82c.1,6.56.2,13.34,2.58,19.08,2.48,6,7.31,11,12,15.91,5,5.25,10.24,10.68,10.24,15.49S220.79,138.24,215.76,143.5ZM172.24,99.76a6,6,0,0,1,0,8.48l-56,56a6,6,0,0,1-8.48,0l-24-24a6,6,0,0,1,8.48-8.48L112,151.51l51.76-51.75A6,6,0,0,1,172.24,99.76Z"/></svg></span><h3>Habilitación bromatológica</h3><p>Depósitos habilitados que cumplen rigurosos estándares de seguridad y sanidad.</p></article>
+        <article class="in-infra hist-anim"><span class="in-infra-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M240,210H222V96a14,14,0,0,0-14-14H142V32a14,14,0,0,0-21.77-11.64l-80,53.33A14,14,0,0,0,34,85.34V210H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM208,94a2,2,0,0,1,2,2V210H142V94ZM46,85.34a2,2,0,0,1,.89-1.66l80-53.34A2,2,0,0,1,130,32V210H46ZM110,112v16a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm-32,0v16a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm0,56v16a6,6,0,0,1-12,0V168a6,6,0,0,1,12,0Zm32,0v16a6,6,0,0,1-12,0V168a6,6,0,0,1,12,0Z"/></svg></span><h3>Oficinas y showrooms</h3><p>Salas de reuniones, sala de capacitaciones y espacios para exhibir productos.</p></article>
+    </div>
+    <ul class="in-ubic hist-anim">
+      <li><strong>12 km</strong><span>Puerto de Montevideo</span><em>Logística marítima y manejo de cargas.</em></li>
+      <li><strong>10 km</strong><span>Aeropuerto de Carrasco</span><em>Movilización rápida de cargas aéreas.</em></li>
+      <li><strong>11 km</strong><span>Zona Franca Montevideo</span><em>Integración con comercio y almacenamiento fiscal.</em></li>
+    </ul>
+  </div>
+</section>
 
-    <div class="mini-timeline">
-      <div class="mini-timeline-item">
-        <span class="mini-timeline-year">1994</span>
-        <p>Inicios en Parque Guaraní con un depósito fiscal aduanero.</p>
-      </div>
-      <div class="mini-timeline-item">
-        <span class="mini-timeline-year">2010</span>
-        <p>Construcción del primer local y profesionalización logística.</p>
-      </div>
-      <div class="mini-timeline-item">
-        <span class="mini-timeline-year">2022</span>
-        <p>Adquisición y limpieza integral del predio de Itapeby 3170.</p>
-      </div>
-      <div class="mini-timeline-item">
-        <span class="mini-timeline-year">2025</span>
-        <p>Declarado Proyecto de Interés Municipal por el Municipio F.</p>
+<!-- ============ SERVICIOS (el bloque que les gustó; se llaman "servicios", no "empresas") ============ -->
+<section class="in-sec in-sec--gris" id="servicios">
+  <div class="container">
+    <div class="in-cab">
+      <h2 class="hist-anim">Todo el recorrido de tu mercadería, <span class="in-oro">en un solo lugar.</span></h2>
+      <div class="in-cab-der hist-anim">
+        <p>Cuatro servicios especializados trabajan coordinados en el mismo predio: la mercadería entra, se guarda y sale rumbo a cualquier destino.</p>
+        <a href="empresas.html" class="in-boton">Conocer los servicios <span aria-hidden="true">→</span></a>
       </div>
     </div>
 
-    <div style="text-align:center; margin-top:36px;">
-      <a href="historia.html" class="btn btn-outline-dark">Ver toda la historia</a>
+    <div class="in-emp-grid">
+      <a href="empresas.html#geligold" class="in-emp hist-anim">
+        <span class="in-emp-logo"><img src="img/logos/pln.png" alt="Geligold S.A." loading="lazy"></span>
+        <h3>Depósito nacional</h3><span class="in-emp-marca">Geligold S.A.</span>
+        <p>Cabecera del Parque Logístico Nacional.</p>
+        <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="empresas.html#talfir" class="in-emp hist-anim">
+        <span class="in-emp-logo"><img src="img/logos/talfir.png" alt="Talfir S.A." loading="lazy"></span>
+        <h3>Depósito aduanero</h3><span class="in-emp-marca">Talfir S.A.</span>
+        <p>23.000 m², con playa de contenedores e ISO tank.</p>
+        <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="empresas.html#lamarel" class="in-emp hist-anim">
+        <span class="in-emp-logo"><img src="img/logos/lamarel.png" alt="Lamarel" loading="lazy"></span>
+        <h3>Flete terrestre</h3><span class="in-emp-marca">Lamarel</span>
+        <p>20 camiones propios y transporte de cargas peligrosas.</p>
+        <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
+      </a>
+      <a href="empresas.html#repremar" class="in-emp hist-anim">
+        <span class="in-emp-logo"><img src="img/logos/repremar.png" alt="Repremar Logistics" loading="lazy"></span>
+        <h3>Fletes aéreos y marítimos</h3><span class="in-emp-marca">Repremar Logistics</span>
+        <p>Embarques FCL y LCL hacia cualquier destino.</p>
+        <span class="in-emp-mas">Conocer <span aria-hidden="true">→</span></span>
+      </a>
+    </div>
+
+    <div class="in-flujo hist-anim">
+      <p class="in-flujo-tit">La mercadería puede pasar por las tres etapas sin salir nunca del Parque.</p>
+      <ol>
+        <li><strong>Entra y se guarda</strong><span>Depósito nacional y aduanero</span></li>
+        <li><strong>Se distribuye</strong><span>Transporte terrestre con flota propia</span></li>
+        <li><strong>Llega a destino</strong><span>Fletes aéreos y marítimos</span></li>
+      </ol>
     </div>
   </div>
 </section>
 
-<section>
+<!-- ============ PROYECTO ITAPEBY: cifras + lo que se hace para el barrio ============
+     (El plano 3D está en El Parque; acá no se muestra por ahora.) -->
+<section class="in-sec">
   <div class="container">
-    <div class="eyebrow">Quiénes somos</div>
-    <h2 class="section-title">Infraestructura de última generación</h2>
-    <p class="section-lead">Hoy el Parque Logístico Nacional es un parque integral: infraestructura de última generación, servicios de depósito, transporte y comercio exterior, y un compromiso social sostenido con el barrio y el Municipio F.</p>
-
-    <div class="feature">
-      <div>
-        <h3>Capacidad, seguridad y servicios</h3>
-        <p style="color:var(--gray-600); margin: 14px 0;">27.000 m² cubiertos, estanterías selectivas y drive-in, habilitación bromatológica, sistemas de seguridad y extinción de incendios las 24 horas, oficinas, salas de capacitación y showrooms.</p>
-        <ul class="check-list" style="margin-top:18px;">
-          <li>Depósito aduanero fiscal de 23.000 m²</li>
-          <li>Playa de contenedores con máquina containera propia</li>
-          <li>Flota propia de 20 camiones y fletes aéreos/marítimos</li>
-        </ul>
-        <a href="parque.html" class="btn btn-outline-dark" style="margin-top:24px;">Ver infraestructura completa</a>
+    <div class="in-cab">
+      <h2 class="hist-anim">Un predio recuperado, <span class="in-oro">un parque farmacéutico.</span></h2>
+      <div class="in-cab-der hist-anim">
+        <p>Itapeby 3170 pasó de ser un problema para el barrio a un parque farmacéutico con acceso propio y espacios nuevos para los vecinos. Fue declarado Proyecto de Interés Municipal en 2025.</p>
+        <a href="proyecto.html" class="in-boton">Conocer el proyecto <span aria-hidden="true">→</span></a>
       </div>
-      <div class="feature-media">
-        <div class="media-placeholder">Foto de instalaciones / depósito<br>(placeholder)</div>
-      </div>
+    </div>
+    <dl class="in-fila-cifras hist-anim">
+      <div><dt data-counter>6</dt><dd>locales de última generación para la industria farmacéutica</dd></div>
+      <div><dt data-counter>700 m</dt><dd>de muro perimetral con iluminación</dd></div>
+      <div><dt>~200</dt><dd>puestos de trabajo previstos</dd></div>
+      <div><dt>2025</dt><dd>declarado Proyecto de Interés Municipal</dd></div>
+    </dl>
+    <h3 class="in-subtitulo hist-anim">Y también espacio público para el barrio</h3>
+    <div class="in-barrio-grid">
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm77.67,147.42H169.89L159.41,159l13.29-38.72,17-5.51,27.94,21.43A89.38,89.38,0,0,1,205.67,173.42Zm-119.56,0H50.33A89.38,89.38,0,0,1,38.38,136.2l27.94-21.43,17,5.51L96.59,159ZM51,81.42l7.24,24.41-20,15.34A89.47,89.47,0,0,1,51,81.42ZM107.56,154,95.15,117.86,128,95.28l32.85,22.58L148.44,154Zm90.19-48.17L205,81.42a89.47,89.47,0,0,1,12.75,39.75Zm-1.66-36.62L186,103.35l-17,5.53-35-24V67.16l30.9-21.24A90.3,90.3,0,0,1,196.09,69.21ZM150.92,41,128,56.72,105.08,41a90.22,90.22,0,0,1,45.84,0ZM91.11,45.91,122,67.16V84.84l-35,24-17-5.53L59.91,69.21A90.4,90.4,0,0,1,91.11,45.91ZM58.75,185.42H84.93l9.19,26A90.37,90.37,0,0,1,58.75,185.42Zm49.68,30.43L95.88,180.39,106.34,166h43.32l10.46,14.39-12.55,35.46a90.14,90.14,0,0,1-39.14,0Zm53.45-4.48,9.19-26h26.18A90.37,90.37,0,0,1,161.88,211.37Z"/></svg></span><h3>Cancha de fútbol</h3><p>Una cancha cerrada con muro perimetral, pensada para los niños del barrio.</p></article>
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M196.55,64.09a74,74,0,0,0-137.1,0A69.71,69.71,0,0,0,18,127.8C17.9,164.91,49.13,197,86.19,198A70.32,70.32,0,0,0,122,189.16V232a6,6,0,0,0,12,0V189.16A70.1,70.1,0,0,0,168,198l1.77,0C206.87,197,238.1,164.9,238,127.8A69.71,69.71,0,0,0,196.55,64.09ZM169.5,186A57.88,57.88,0,0,1,134,175V131.71l44.68-22.34a6,6,0,1,0-5.36-10.74L134,118.29V88a6,6,0,0,0-12,0v54.29L82.68,122.63a6,6,0,0,0-5.36,10.74L122,155.71V175a58.09,58.09,0,0,1-35.5,11c-30.71-.77-56.58-27.4-56.5-58.14A57.78,57.78,0,0,1,66.37,74.19a6,6,0,0,0,3.39-3.51,62,62,0,0,1,116.48,0,6,6,0,0,0,3.39,3.51A57.77,57.77,0,0,1,226,127.83C226.08,158.58,200.21,185.2,169.5,186Z"/></svg></span><h3>Plaza pública</h3><p>Un área acondicionada para instalar una plaza para los vecinos.</p></article>
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M200,170a30.05,30.05,0,0,0-29.4,24H72a34,34,0,0,1,0-68h96a38,38,0,0,0,0-76H72a6,6,0,0,0,0,12h96a26,26,0,0,1,0,52H72a46,46,0,0,0,0,92h98.6A30,30,0,1,0,200,170Zm0,48a18,18,0,1,1,18-18A18,18,0,0,1,200,218Z"/></svg></span><h3>Pasajes peatonales</h3><p>Recuperación de los pasajes peatonales existentes en la zona.</p></article>
+      <article class="in-barrio hist-anim"><span class="in-barrio-ico"><svg class="in-ph" viewBox="0 0 256 256" aria-hidden="true"><path d="M220.62,178.58a6,6,0,0,1-.79,8.45c-16.87,14-32,19-45.75,19-18.19,0-34.13-8.66-48.94-16.7-26-14.12-48.44-26.31-81.31,1A6,6,0,0,1,36.17,181c39.13-32.45,68.65-16.41,94.69-2.26s48.44,26.31,81.31-1A6,6,0,0,1,220.62,178.58Zm-8.45-56.81c-32.87,27.27-55.32,15.07-81.31,1S75.3,92.54,36.17,125a6,6,0,0,0,7.66,9.25c32.87-27.27,55.32-15.08,81.31-1,14.81,8,30.75,16.71,48.94,16.71,13.79,0,28.88-5,45.75-19a6,6,0,0,0-7.66-9.24ZM43.83,78.21c32.87-27.27,55.32-15.07,81.31-1C140,85.3,155.89,94,174.08,94c13.79,0,28.88-5,45.75-19a6,6,0,1,0-7.66-9.24c-32.87,27.27-55.32,15.07-81.31,1S75.3,36.52,36.17,69a6,6,0,1,0,7.66,9.24Z"/></svg></span><h3>Mantenimiento de la cañada</h3><p>Franja acondicionada, acordada con el Municipio F, para que entre la maquinaria de la Intendencia.</p></article>
     </div>
   </div>
 </section>
 
-<section class="section-alt">
-  <div class="container">
-    <div class="eyebrow">Ecosistema</div>
-    <h2 class="section-title">Empresas que operan dentro del Parque</h2>
-    <p class="section-lead">Geligold S.A. lidera el proyecto, junto a otras empresas especializadas que operan de forma coordinada dentro del mismo predio, cubriendo depósito aduanero, flete terrestre y fletes aéreos y marítimos.</p>
-    <div class="grid grid-4">
-      <div class="card">
-        <div class="card-icon">G</div>
-        <h3>Geligold S.A.</h3>
-        <p>Depósito aduanero y cabecera del Parque Logístico Nacional.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">T</div>
-        <h3>Talfir S.A.</h3>
-        <p>Depósito fiscal aduanero, almacenamiento sin pago de tributos.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">L</div>
-        <h3>Lamarel</h3>
-        <p>Flete terrestre con flota propia y unidades especializadas.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">R</div>
-        <h3>Repremar Logistics</h3>
-        <p>Fletes aéreos y marítimos, embarques FCL y LCL.</p>
-      </div>
+<!-- ============ RESPONSABILIDAD SOCIAL ============ -->
+<section class="in-sec in-sec--gris">
+  <div class="container in-rse">
+    <div class="in-rse-collage hist-anim">
+      <div class="foto foto--fondo in-r1"><span class="foto-label">FOTO · Aula Ceibal</span></div>
+      <div class="foto foto--fondo in-r2"><span class="foto-label">FOTO · Escuela de Conducción</span></div>
+      <div class="foto foto--fondo in-r3"><span class="foto-label">FOTO · Concurso de dibujo</span></div>
     </div>
-    <div style="text-align:center; margin-top:36px;">
-      <a href="empresas.html" class="btn btn-outline-dark">Conocer las empresas en detalle</a>
+    <div class="in-rse-texto">
+      <h2 class="hist-anim">Crecer <span class="in-oro">junto al barrio.</span></h2>
+      <p class="hist-anim">Educación, formación laboral y apoyo sostenido a los vecinos del Municipio F: así entendemos nuestro lugar en la comunidad.</p>
+      <ul class="in-lista hist-anim">
+          <li>Aula Ceibal <em>2011 – 2017</em></li>
+          <li>Clases para adultos <em>desde 2015</em></li>
+          <li>Centro de Flasheo de Ceibalitas</li>
+          <li>Escuela de Conducción de Autoelevadores <em>2025 – 2026</em></li>
+          <li>Acuerdos con el Municipio F</li>
+          <li>Donaciones a merenderos y clubes de barrio</li>
+          <li>Material escolar para centros educativos</li>
+          <li>Concurso de dibujo “Trabajo Seguro, Familia Feliz”</li>
+      </ul>
+      <dl class="in-trio hist-anim">
+        <div><dt data-counter>80</dt><dd>alumnos por semestre en el Aula Ceibal</dd></div>
+        <div><dt data-counter>2</dt><dd>ediciones de la Escuela de Conducción</dd></div>
+        <div><dt data-counter>9</dt><dd>convenios y donaciones</dd></div>
+      </dl>
+      <a href="responsabilidad-social.html" class="in-boton hist-anim">Ver todas las iniciativas <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
-<section>
+<!-- ============ CONTACTO ============ -->
+<section class="in-sec in-sec--final">
   <div class="container">
-    <div class="feature reverse">
-      <div class="feature-media">
-        <div class="media-placeholder">Render / foto del Proyecto Itapeby<br>(placeholder)</div>
+    <div class="in-contacto hist-anim">
+      <div class="in-contacto-texto">
+        <h2>Hablemos <span class="in-oro">de tu operación.</span></h2>
+        <p>Contanos qué necesitás y te ponemos en contacto con el servicio del Parque indicado para tu consulta.</p>
+        <div class="in-contacto-botones">
+          <a href="contacto.html" class="btn btn-primary">Contactanos</a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Dr.%20Pantale%C3%B3n%20P%C3%A9rez%204881%2C%20Montevideo%2C%20Uruguay" class="in-contacto-link" target="_blank" rel="noopener">Cómo llegar ↗</a>
+        </div>
       </div>
-      <div>
-        <div class="badge">Proyecto de Interés Municipal · 2025</div>
-        <h2 class="section-title" style="margin-top:18px;">Proyecto Itapeby 3170</h2>
-        <p style="color:var(--gray-600); margin-bottom:18px;">Seis locales de última generación orientados a la industria farmacéutica, más mejoras urbanas: plaza pública, cancha de fútbol para los niños del barrio y recuperación de pasajes peatonales. Declarado Proyecto de Interés Municipal por el Municipio F en marzo de 2025.</p>
-        <ul class="check-list">
-          <li>+200 nuevas fuentes de trabajo estimadas para la zona</li>
-          <li>Fármaco Uruguayo S.A. y Laboratorio Gador ya instalados</li>
-          <li>Plaza pública y cancha de fútbol cerrada para el barrio</li>
-        </ul>
-        <a href="proyecto.html" class="btn btn-outline-dark" style="margin-top:24px;">Conocer el proyecto</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section-alt">
-  <div class="container">
-    <div class="eyebrow">Responsabilidad social</div>
-    <h2 class="section-title">Compromiso con el barrio y el Municipio F</h2>
-    <p class="section-lead">Más allá de la actividad logística, trabajamos junto a la comunidad: educación, formación laboral y donaciones sostenidas en el tiempo.</p>
-    <div class="grid grid-3">
-      <div class="card">
-        <div class="card-icon">A</div>
-        <h3>Aula Ceibal</h3>
-        <p>Cursos gratuitos para niños y adultos del barrio entre 2011 y 2017, con merienda y entrega de diplomas.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">E</div>
-        <h3>Escuela de Conducción de Autoelevadores</h3>
-        <p>Capacitación 2025-2026 junto al Municipio F para jóvenes del Centro Público de Empleo y personas en proceso de inserción laboral.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">D</div>
-        <h3>Donaciones y convenios</h3>
-        <p>Apoyo sostenido a centros merenderos, clubes de barrio, escuelas y al Centro Cultural El Hornero.</p>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top:36px;">
-      <a href="responsabilidad-social.html" class="btn btn-outline-dark">Ver todas las iniciativas</a>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="cta-band">
-      <div>
-        <h2>¿Querés conocer más sobre el Parque Logístico Nacional?</h2>
-        <p>Escribinos y te contamos todo sobre nuestra historia, infraestructura y proyectos en curso.</p>
-      </div>
-      <a href="contacto.html" class="btn btn-primary">Contactanos</a>
+      <ul class="in-contacto-datos">
+        <li><span>Dirección</span><strong>Dr. Pantaleón Pérez 4881<br>Montevideo – Uruguay</strong></li>
+        <li><span>Teléfono</span><a href="tel:+59825258782">(+598) 2525 8782</a></li>
+        <li><span>Mail</span><a href="mailto:geligold@pln.com.uy">geligold@pln.com.uy</a></li>
+      </ul>
     </div>
   </div>
 </section>
