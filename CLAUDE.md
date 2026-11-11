@@ -59,7 +59,7 @@ img/                        Fotos (cuando las haya)
   Estilos con prefijo `in-`, colgados de `<body class="pagina-inicio">`. Referencia de calidad: una landing prolija,
   con imágenes grandes, una paleta contenida y mucho aire (sin copiar a nadie).
 - **Portada:** una sola foto o video de fondo a pantalla completa (`.in-hero-fondo`), con el título, los botones y la invitación
-  "Bajá para conocer más" (sin barra de datos: decisión del equipo). Mientras no haya material se ve un fondo dibujado y un cartelito
+  "Bajá para conocer más" con solo una flecha, sin círculo (sin barra de datos: decisión del equipo). Mientras no haya material se ve un fondo dibujado y un cartelito
   ("FOTO o VIDEO de fondo"). Foto: `style="background-image:url(img/...)"` en `.in-hero-fondo`; video: `<video autoplay muted loop playsinline>`
   adentro (las instrucciones están en un comentario del HTML); después se borra `.in-hero-nota`.
 - Reglas del estilo: todas las secciones usan la misma cabecera (`.in-cab`: título a la izquierda, texto y botón a la derecha);
@@ -77,6 +77,7 @@ img/                        Fotos (cuando las haya)
   resto del sitio (menú, página Empresas, pie, contacto) también cambia.
 - **Se llama "parque farmacéutico"**, no "polo farmacéutico" (decisión del equipo; ya cambiado en Inicio, El Parque y Proyecto).
 - El plano 3D **no** va en la landing por ahora (queda solo en El Parque).
+- En Servicios no usar la frase "del depósito al mundo" ni "sale al mundo" (decisión del equipo): el título es "Todo el recorrido de tu mercadería, en un solo lugar" y el último paso es "Llega a destino".
 - En Servicios, los pasos del recorrido de la mercadería se unen con un círculo dorado grande con una flecha (celular: hacia abajo).
 - Los datos salen de las otras páginas: si cambian allá (hitos, iniciativas, cifras), actualizar también acá.
 - Sin textos chicos arriba de los títulos.

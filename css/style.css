@@ -4085,15 +4085,13 @@ button[disabled] {
 /* Invitación a bajar, al pie de la portada */
 .in-hero-pie { position: relative; z-index: 2; padding-bottom: 36px; animation: in-sube 0.9s ease 0.4s both; }
 
-.in-hero-bajar { display: inline-flex; align-items: center; gap: 16px; font-size: 0.95rem; font-weight: 600; color: var(--white); }
+.in-hero-bajar { display: inline-flex; align-items: center; gap: 12px; transition: color 0.25s ease; font-size: 0.95rem; font-weight: 600; color: var(--white); }
 
+/* Solo la flecha (sin círculo): una "V" que rebota suavemente */
 .in-hero-bajar-flecha {
   position: relative;
-  width: 52px;
-  height: 52px;
-  border: 1px solid color-mix(in srgb, var(--white) 40%, transparent);
-  border-radius: 50%;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  width: 24px;
+  height: 28px;
 }
 
 .in-hero-bajar-flecha::after {
@@ -4101,18 +4099,18 @@ button[disabled] {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 11px;
-  height: 11px;
-  margin: -8px 0 0 -6px;
-  border-right: 2px solid var(--white);
-  border-bottom: 2px solid var(--white);
+  width: 13px;
+  height: 13px;
+  margin: -10px 0 0 -7px;
+  border-right: 2.5px solid var(--white);
+  border-bottom: 2.5px solid var(--white);
   transform: rotate(45deg);
   animation: in-rebota 1.8s ease-in-out infinite;
 }
 
 @keyframes in-rebota { 50% { transform: translateY(5px) rotate(45deg); } }
-.in-hero-bajar:hover .in-hero-bajar-flecha { background: var(--gold-500); border-color: var(--gold-500); }
-.in-hero-bajar:hover .in-hero-bajar-flecha::after { border-color: var(--navy-950); }
+.in-hero-bajar:hover { color: var(--gold-300); }
+.in-hero-bajar:hover .in-hero-bajar-flecha::after { border-color: var(--gold-300); }
 
 /* ---------- Secciones: lo que comparten ---------- */
 .in-sec { padding: 120px 0; }
