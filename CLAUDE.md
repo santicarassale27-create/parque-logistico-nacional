@@ -47,7 +47,8 @@ img/                        Fotos (cuando las haya)
 
 ## Diseño
 
-- Base: fondo blanco, textos oscuros y detalles en dorado. Barra superior, portada y pie usan los tonos oscuros.
+- Base: fondo blanco, textos oscuros y detalles en **bordó** (el color del logo de Geligold) con negro cálido para lo oscuro. Barra superior, portada y pie usan los tonos oscuros.
+  Por compatibilidad, las variables conservan su nombre viejo: `--gold-*` es el bordó y `--navy-*` es el negro cálido. Sobre bordó, el texto va en blanco (nunca oscuro).
 - Usá SIEMPRE las variables de `:root` en `css/style.css` (`--gold-500`, `--gray-600`, etc.). Nunca colores sueltos.
 - Componentes existentes que hay que reutilizar antes de crear nuevos: `.btn`, `.card`, `.grid-2/3/4`,
   `.feature`, `.section-title`, `.section-lead`, `.eyebrow`, `.stats-strip`, `.cta-band`, `.timeline`.
@@ -63,7 +64,7 @@ img/                        Fotos (cuando las haya)
   ("FOTO o VIDEO de fondo"). Foto: `style="background-image:url(img/...)"` en `.in-hero-fondo`; video: `<video autoplay muted loop playsinline>`
   adentro (las instrucciones están en un comentario del HTML); después se borra `.in-hero-nota`.
 - Reglas del estilo: todas las secciones usan la misma cabecera (`.in-cab`: título a la izquierda, texto y botón a la derecha);
-  en cada título, una frase va en dorado (`.in-oro`); fondos que alternan oscuro / claro / gris; tarjetas redondeadas del mismo
+  en cada título, una frase va en el color de acento (bordó, clase `.in-oro`); fondos que alternan oscuro / claro / gris; tarjetas redondeadas del mismo
   radio; números grandes separados por líneas finas.
 - Orden: portada → Historia (números apilados + línea de tiempo) → El Parque (oscura: 6 tarjetas con ícono + distancias 12/10/11 km)
   → Servicios (4 tarjetas + recorrido de la mercadería; el bloque que más les gustó) → Proyecto Itapeby (4 cifras + 4 tarjetas
@@ -79,7 +80,7 @@ img/                        Fotos (cuando las haya)
 - **Se llama "parque farmacéutico"**, no "polo farmacéutico" (decisión del equipo; ya cambiado en Inicio, El Parque y Proyecto).
 - El plano 3D **no** va en la landing por ahora (queda solo en El Parque).
 - En Servicios no usar la frase "del depósito al mundo" ni "sale al mundo" (decisión del equipo): el título es "Todo el recorrido de tu mercadería, en un solo lugar" y el último paso es "Llega a destino".
-- En Servicios, los pasos del recorrido de la mercadería se unen con un círculo dorado grande con una flecha (celular: hacia abajo).
+- En Servicios, los pasos del recorrido de la mercadería se unen con un círculo de acento (bordó) grande con una flecha blanca (celular: hacia abajo).
 - Los datos salen de las otras páginas: si cambian allá (hitos, iniciativas, cifras), actualizar también acá.
 - Sin textos chicos arriba de los títulos.
 

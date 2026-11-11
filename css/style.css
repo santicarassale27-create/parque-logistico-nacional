@@ -135,7 +135,7 @@ section {
 
 .btn-primary {
   background: var(--gold-500);
-  color: var(--navy-950);
+  color: var(--white);
 }
 
 .btn-primary:hover {
@@ -195,7 +195,7 @@ section {
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  color: var(--navy-950);
+  color: var(--white);
   font-size: 1.1rem;
   flex-shrink: 0;
 }
@@ -509,7 +509,7 @@ section {
 .emp-hero .btn-outline:hover {
   background: var(--gold-500);
   border-color: var(--gold-500);
-  color: var(--navy-950);
+  color: var(--white);
 }
 
 .emp-hero::before {
@@ -994,7 +994,7 @@ section {
   height: 20px;
   border-radius: 50%;
   background: var(--gold-500);
-  color: var(--navy-950);
+  color: var(--white);
   font-size: 0.75rem;
   font-weight: 800;
   display: flex;
@@ -1572,7 +1572,7 @@ button[disabled] {
   height: 26px;
   border-radius: 50%;
   background: var(--gold-500);
-  color: var(--navy-950);
+  color: var(--white);
   font-size: 0.85rem;
   transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
@@ -2060,7 +2060,7 @@ button[disabled] {
 .pagina-historia .hist-open-scroll:hover {
   background: var(--gold-500);
   border-color: var(--gold-500);
-  color: var(--navy-950);
+  color: var(--white);
 }
 .pagina-historia .hist-collage .foto { box-shadow: var(--shadow-lg); }
 
@@ -2907,7 +2907,7 @@ button[disabled] {
 .rse-open .hist-open-scroll:hover {
   background: var(--gold-500);
   border-color: var(--gold-500);
-  color: var(--navy-950);
+  color: var(--white);
 }
 
 /* Collage: dos fotos superpuestas, sin inclinar — look editorial, no
@@ -3936,7 +3936,7 @@ button[disabled] {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.85rem;
-  color: var(--navy-950);
+  color: var(--white);
 }
 
 .ct-desp-textos { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
@@ -4190,10 +4190,10 @@ button[disabled] {
 }
 
 .in-boton span { transition: transform 0.25s ease; }
-.in-boton:hover { background: var(--gold-500); border-color: var(--gold-500); color: var(--navy-950); }
+.in-boton:hover { background: var(--gold-500); border-color: var(--gold-500); color: var(--white); }
 .in-boton:hover span { transform: translateX(5px); }
-.in-boton--dorado { background: var(--gold-500); border-color: var(--gold-500); color: var(--navy-950); }
-.in-boton--dorado:hover { background: var(--white); border-color: var(--white); }
+.in-boton--dorado { background: var(--gold-500); border-color: var(--gold-500); color: var(--white); }
+.in-boton--dorado:hover { background: var(--white); border-color: var(--white); color: var(--navy-950); }
 
 /* ---------- Historia: números apilados + línea de tiempo vertical ---------- */
 .in-historia { display: grid; grid-template-columns: 1fr 1.25fr; gap: 96px; align-items: start; }
@@ -4335,7 +4335,7 @@ button[disabled] {
   width: 20px;
   height: 18px;
   margin-top: -9px;
-  background: var(--navy-950);
+  background: var(--white);
   clip-path: polygon(0 36%, 52% 36%, 52% 8%, 100% 50%, 52% 92%, 52% 64%, 0 64%);
   animation: in-avanza 2.2s ease-in-out infinite;
 }
