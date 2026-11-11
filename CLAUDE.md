@@ -70,7 +70,7 @@ img/                        Fotos (cuando las haya)
   de espacio público para el barrio) → Responsabilidad Social (collage + lista de dos columnas + cifras) → tarjeta oscura de contacto.
 - **Íconos** (`.in-ic`, dibujados a mano en una grilla de 64): dos tonos (línea clara + acento dorado) sobre una baldosa azul,
   tanto en El Parque como en Proyecto Itapeby (cancha, plaza, pasaje-sendero y cañada con retroexcavadora). Sin borde amarillo y
-  quietos al pasar el mouse (decisión del equipo; las tarjetas de Proyecto tampoco se mueven). Clases del dibujo: `l` línea, `m` línea tenue, `a` acento, `af` acento con relleno, `fa` relleno,
+  quietos al pasar el mouse. Los 6 de El Parque van de un solo color (blanco) y los de Proyecto en dos tonos (decisión del equipo; las tarjetas de Proyecto tampoco se mueven). Clases del dibujo: `l` línea, `m` línea tenue, `a` acento, `af` acento con relleno, `fa` relleno,
   `w` rueda. Mismo estilo para todos los íconos nuevos.
 - **"Servicios", no "empresas"** (pedido del papá de Santi): en la landing los cuatro (Depósito nacional, Depósito aduanero,
   Flete terrestre, Fletes aéreos y marítimos) se presentan como servicios; la marca va en chico debajo. Pendiente definir si el
