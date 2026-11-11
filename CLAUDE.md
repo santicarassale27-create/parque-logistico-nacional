@@ -47,8 +47,8 @@ img/                        Fotos (cuando las haya)
 
 ## Diseño
 
-- Base: fondo blanco, textos oscuros y detalles en **bordó** (el color del logo de Geligold) con negro cálido para lo oscuro. Barra superior, portada y pie usan los tonos oscuros.
-  Por compatibilidad, las variables conservan su nombre viejo: `--gold-*` es el bordó y `--navy-*` es el negro cálido. Sobre bordó, el texto va en blanco (nunca oscuro).
+- Base: fondo blanco, textos oscuros y detalles en **bordó** (el color del logo de Geligold) con **azul noche** para lo oscuro (decisión del equipo; el negro cálido no convenció). Barra superior, portada y pie usan los tonos oscuros.
+  Por compatibilidad, las variables conservan su nombre viejo: `--gold-*` es el bordó y `--navy-*` es el azul noche. Sobre bordó, el texto va en blanco (nunca oscuro).
 - Usá SIEMPRE las variables de `:root` en `css/style.css` (`--gold-500`, `--gray-600`, etc.). Nunca colores sueltos.
 - Componentes existentes que hay que reutilizar antes de crear nuevos: `.btn`, `.card`, `.grid-2/3/4`,
   `.feature`, `.section-title`, `.section-lead`, `.eyebrow`, `.stats-strip`, `.cta-band`, `.timeline`.
