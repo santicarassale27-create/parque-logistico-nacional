@@ -151,7 +151,7 @@ img/                        Fotos (cuando las haya)
   cifras (700 m de muro, 6 locales, ~200 puestos previstos, 2025), transformación en 3 pasos (2016, 2022, Hoy),
   "relato al bajar" de los seis locales (anillo fijo que se completa en 4 pasos; lo maneja `initRelato()` en `main.js`;
   no repetir el estilo del plano de El Parque), mejoras para el barrio (lista de los 4 espacios + foto grande que cambia al tocar
-  y sola cada 6 segundos, `initEspacios()` en `main.js`; nunca texto encima de las fotos), franja dorada de Interés Municipal
+  y sola cada 6 segundos, `initEspacios()` en `main.js`; nunca texto encima de las fotos), franja blanca de Interés Municipal
   y "Conocé nuestro trabajo con la comunidad".
 - Sin textos chicos arriba de los títulos, sin íconos y sin nombres ni frases de la familia (mismas decisiones que el resto).
 - Los estados de los seis locales tienen que coincidir con el plano de El Parque (`DEPOSITOS` en `generar-plano.py`).

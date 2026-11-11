@@ -3618,12 +3618,10 @@ button[disabled] {
 .pi-espacios-capa.activo { opacity: 1; transform: none; }
 .pi-espacios-capa .foto { height: 100%; border-radius: 0; }
 
-/* ---------- Interés Municipal: franja dorada con el sello grande ---------- */
+/* ---------- Interés Municipal: franja blanca con el sello grande ---------- */
 .pi-interes {
   padding: 96px 0;
-  background:
-    repeating-linear-gradient(135deg, color-mix(in srgb, var(--white) 14%, transparent) 0 1px, transparent 1px 14px),
-    linear-gradient(120deg, var(--gold-400), var(--gold-500));
+  background: var(--white);
 }
 
 .pi-interes-grid {
