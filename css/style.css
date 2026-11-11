@@ -1259,52 +1259,6 @@ button[disabled] {
 .footer-contact a { transition: color 0.2s ease; }
 .footer-contact a:hover { color: var(--gold-400); }
 
-.footer-logos {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px;
-}
-
-.footer-logos-title {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gray-400);
-}
-
-.footer-logos ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 14px;
-}
-
-/* Cada logo va en una "placa" blanca, como los sellos de certificación */
-.footer-logos a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  height: 72px;
-  padding: 10px 14px;
-  background: var(--white);
-  border-radius: 12px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.footer-logos a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.footer-logos img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
 .footer-bottom {
   padding-top: 24px;
   font-size: 0.85rem;
@@ -1316,15 +1270,11 @@ button[disabled] {
   .footer-top { flex-direction: column; align-items: flex-start; }
   .footer-nav .btn { margin-left: 0; }
   .footer-mid { flex-direction: column; align-items: flex-start; margin-top: 48px; }
-  .footer-logos { align-items: flex-start; }
-  .footer-logos ul { justify-content: flex-start; }
 }
 
 @media (max-width: 760px) {
   .site-footer { padding: 56px 0 28px; }
   .footer-nav { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .footer-logos ul { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
-  .footer-logos a { width: 100%; }
 }
 
 /* ---------- Responsive ---------- */
