@@ -513,14 +513,13 @@ section {
 }
 
 /* Fondo de la misma familia que Historia (cuadrícula) y RSE (anillos),
-   pero distinto: trama de puntos (como un plano de depósito) que se
-   desvanece, con un solo resplandor bordó. */
+   pero distinto: líneas horizontales parejas, como estanterías de
+   depósito, que se desvanecen, con un solo resplandor bordó. */
 .emp-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(var(--navy-700) 1.5px, transparent 1.5px);
-  background-size: 28px 28px;
+  background-image: repeating-linear-gradient(var(--navy-700) 0 2px, transparent 2px 36px);
   -webkit-mask-image: radial-gradient(ellipse at 22% 35%, var(--navy-950) 15%, transparent 75%);
   mask-image: radial-gradient(ellipse at 22% 35%, var(--navy-950) 15%, transparent 75%);
   pointer-events: none;
