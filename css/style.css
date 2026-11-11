@@ -4245,13 +4245,20 @@ button[disabled] {
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 16%, transparent), 0 10px 24px color-mix(in srgb, var(--navy-950) 40%, transparent);
 }
 
-/* Íconos de El Parque: un solo color (blanco). Lo que antes era dorado ahora es blanco con relleno suave */
-.in-infra-ico { --ic-l: var(--white); --ic-a: var(--white); --ic-bg: var(--navy-800); }
-.in-infra-ico .in-ic .af { fill-opacity: 0.16; }
+/* Íconos de El Parque y de Proyecto: un solo color (blanco). Lo que antes era dorado ahora es blanco con relleno suave */
+.in-infra-ico,
+.in-barrio-ico { --ic-l: var(--white); --ic-a: var(--white); --ic-bg: var(--navy-800); }
+.in-infra-ico .in-ic .af,
+.in-barrio-ico .in-ic .af,
+.in-barrio-ico .in-ic .f { fill-opacity: 0.16; }
 .in-infra-ico .in-ic .l,
 .in-infra-ico .in-ic .a,
-.in-infra-ico .in-ic .af { stroke-width: 2.4; }
-.in-infra-ico .in-ic .m { stroke-opacity: 0.55; }
+.in-infra-ico .in-ic .af,
+.in-barrio-ico .in-ic .l,
+.in-barrio-ico .in-ic .a,
+.in-barrio-ico .in-ic .af { stroke-width: 2.4; }
+.in-infra-ico .in-ic .m,
+.in-barrio-ico .in-ic .m { stroke-opacity: 0.55; }
 
 .in-ic { display: block; width: 100%; height: 100%; fill: none; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
 .in-ic .l { stroke: var(--ic-l); stroke-width: 2.2; }
