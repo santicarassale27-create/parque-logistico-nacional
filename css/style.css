@@ -2059,14 +2059,15 @@ button[disabled] {
 /* Cifras: franja dorada sólida con rayado fino, números en azul noche */
 .pagina-historia .hist-cifras {
   padding: 80px 0;
-  background: var(--rayado), linear-gradient(120deg, var(--gold-400), var(--gold-500));
+  background: var(--navy-900);
+  border-top: 1px solid color-mix(in srgb, var(--white) 8%, transparent);
 }
 
 .pagina-historia .hist-cifras-list { padding: 0; background: none; border-radius: 0; }
-.pagina-historia .hist-cifras-list > div + div { border-left-color: color-mix(in srgb, var(--navy-950) 22%, transparent); }
-.pagina-historia .hist-cifras-list dt { color: var(--navy-950); }
-.pagina-historia .hist-cifras-list dd { color: var(--navy-800); }
-.pagina-historia .hist-cifras-list dd strong { color: var(--navy-950); }
+.pagina-historia .hist-cifras-list > div + div { border-left-color: color-mix(in srgb, var(--white) 14%, transparent); }
+.pagina-historia .hist-cifras-list dt { color: var(--white); }
+.pagina-historia .hist-cifras-list dd { color: var(--navy-300); }
+.pagina-historia .hist-cifras-list dd strong { color: var(--white); }
 
 /* Etapas: bandas blancas y gris claro punteado (como papel de plano), de borde a borde.
    Las bandas van detrás de todo (z-index negativo), así la línea
@@ -2225,7 +2226,16 @@ button[disabled] {
 .pq-ubicacion-head .pq-lead,
 .pq-extras-head .pq-lead { margin-top: 0; }
 
+/* El mapa 3D conserva su paleta original (azul noche + dorado), aunque el resto de la web cambió de colores (decisión del equipo) */
 .pq-mapa {
+  --navy-950: #0a1628;
+  --navy-900: #0f2038;
+  --navy-800: #16304f;
+  --navy-700: #1e3f66;
+  --navy-600: #2a5280;
+  --gold-500: #c9a227;
+  --gold-400: #dab93f;
+  --gold-300: #e8cf7a;
   position: relative;
   margin: 0;
   border-radius: 24px;
