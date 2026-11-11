@@ -3,14 +3,14 @@
    ============================================ */
 
 :root {
-  --navy-950: #0a1628;
-  --navy-900: #0f2038;
-  --navy-800: #16304f;
-  --navy-700: #1e3f66;
-  --navy-600: #2a5280;
-  --gold-500: #c9a227;
-  --gold-400: #dab93f;
-  --gold-300: #e8cf7a;
+  --navy-950: #1c1916;
+  --navy-900: #28231f;
+  --navy-800: #39322c;
+  --navy-700: #4a423a;
+  --navy-600: #5f554b;
+  --gold-500: #ad1218;
+  --gold-400: #ca2127;
+  --gold-300: #d3696d;
   --gray-50: #f7f8fa;
   --gray-100: #eef0f3;
   --gray-200: #dfe3e8;
@@ -169,7 +169,7 @@ section {
   z-index: 100;
   background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--gray-200);
+  box-shadow: 0 6px 20px rgba(10, 22, 40, 0.16);
 }
 
 .nav-wrap {
@@ -243,6 +243,10 @@ section {
   align-items: center;
   gap: 14px;
 }
+
+/* El botón "Contactanos" del encabezado, más bajo que el resto
+   de los botones de la web (que usan más padding arriba/abajo). */
+.nav-cta .btn { padding: 9px 22px; }
 
 .nav-toggle {
   display: none;
@@ -499,12 +503,21 @@ section {
   overflow: hidden;
 }
 
+/* "Conocé cada empresa": mismo hover dorado que el resto de los
+   botones con flecha de la web, en vez del fondo blanco translúcido
+   genérico de .btn-outline. */
+.emp-hero .btn-outline:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-950);
+}
+
 .emp-hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(680px circle at 10% 15%, rgba(201, 162, 39, 0.46), transparent 65%),
+    radial-gradient(680px circle at 10% 15%, rgba(173, 18, 24, 0.46), transparent 65%),
     radial-gradient(640px circle at 95% 10%, rgba(79, 143, 224, 0.44), transparent 65%),
     radial-gradient(640px circle at 15% 95%, rgba(224, 134, 63, 0.4), transparent 65%),
     radial-gradient(680px circle at 90% 90%, rgba(79, 157, 105, 0.44), transparent 65%);
@@ -1039,9 +1052,9 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(201, 162, 39, 0.12);
+  background: rgba(173, 18, 24, 0.12);
   color: var(--gold-500);
-  border: 1px solid rgba(201, 162, 39, 0.35);
+  border: 1px solid rgba(173, 18, 24, 0.35);
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 0.82rem;
@@ -1114,7 +1127,7 @@ section {
 .form-field textarea:focus {
   outline: none;
   border-color: var(--gold-500);
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
+  box-shadow: 0 0 0 3px rgba(173, 18, 24, 0.18);
 }
 
 .form-note {
@@ -1156,7 +1169,7 @@ section {
 }
 
 .form-status--ok {
-  background: rgba(201, 162, 39, 0.12);
+  background: rgba(173, 18, 24, 0.12);
   color: var(--navy-900);
   border: 1px solid var(--gold-500);
 }
@@ -1532,20 +1545,48 @@ button[disabled] {
   color: var(--gray-600);
 }
 
+/* Botón con forma de píldora: se usa para todos los links que bajan
+   a la próxima sección, para que se note que son botones y no texto
+   suelto. Variante clara por defecto (fondos blancos); las páginas
+   con apertura de fondo oscuro la invierten más abajo. */
 .hist-open-scroll {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   margin-top: 36px;
-  padding-bottom: 4px;
+  padding: 14px 24px 14px 26px;
   font-weight: 600;
   font-size: 0.95rem;
   color: var(--navy-950);
-  border-bottom: 2px solid var(--gold-500);
+  border: 1.5px solid var(--navy-200);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--navy-950) 4%, transparent);
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
-.hist-open-scroll span { transition: transform 0.25s ease; }
-.hist-open-scroll:hover span { transform: translateY(4px); }
+.hist-open-scroll span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  color: var(--navy-950);
+  font-size: 0.85rem;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.hist-open-scroll:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+}
+
+.hist-open-scroll:hover span {
+  transform: translateY(4px);
+  background: var(--navy-950);
+  color: var(--gold-500);
+}
 
 /* Collage: una foto alta a la izquierda y dos a la derecha, desfasadas */
 .hist-collage {
@@ -2010,7 +2051,17 @@ button[disabled] {
 .pagina-historia .hist-open h1 { color: var(--white); }
 .pagina-historia .hist-open-lead { color: var(--navy-100); }
 .pagina-historia .hist-open-sub { color: var(--navy-300); }
-.pagina-historia .hist-open-scroll { color: var(--white); }
+.pagina-historia .hist-open-scroll {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.35);
+  background: color-mix(in srgb, var(--white) 8%, transparent);
+}
+
+.pagina-historia .hist-open-scroll:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-950);
+}
 .pagina-historia .hist-collage .foto { box-shadow: var(--shadow-lg); }
 
 /* Cifras: franja dorada sólida con rayado fino, números en azul noche */
@@ -2096,12 +2147,12 @@ button[disabled] {
   --verde-500: #4f9d69;
   --verde-300: #a9d9b9;
   --verde-100: #e3f1e7;
-  --gold-800: #7a5f0d;
-  --gold-100: #f6efd6;
-  --gold-50: #fdf6df;
-  --navy-100: #e7edf5;
-  --navy-200: #c9d6e8;
-  --navy-300: #9fb3cf;
+  --gold-800: #570a0d;
+  --gold-100: #f4d7d9;
+  --gold-50: #faebeb;
+  --navy-100: #f0eeec;
+  --navy-200: #dcd8d5;
+  --navy-300: #beb7b0;
   /* Mar y arena del mapa 3D: colores propios para que se entienda qué son */
   --mar-900: #0e3352;
   --mar-700: #165a85;
@@ -2843,40 +2894,20 @@ button[disabled] {
   color: var(--navy-300);
 }
 
-/* Botón con forma de píldora, para que se note que baja a la próxima
-   sección (no es un link de texto suelto como en Historia/El Parque). */
+/* Variante clara → oscura: el botón ya es una píldora por defecto
+   (ver .hist-open-scroll); acá solo se invierten los colores para
+   el fondo de anillos oscuro de esta apertura. */
 .rse-open .hist-open-scroll {
   margin-top: 32px;
-  padding: 14px 24px 14px 26px;
   color: var(--white);
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.35);
-  border-radius: 999px;
+  border-color: rgba(255, 255, 255, 0.35);
   background: color-mix(in srgb, var(--white) 8%, transparent);
-  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-}
-
-.rse-open .hist-open-scroll span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--gold-500);
-  color: var(--navy-950);
-  font-size: 0.85rem;
 }
 
 .rse-open .hist-open-scroll:hover {
   background: var(--gold-500);
   border-color: var(--gold-500);
   color: var(--navy-950);
-}
-
-.rse-open .hist-open-scroll:hover span {
-  background: var(--navy-950);
-  color: var(--gold-500);
 }
 
 /* Collage: dos fotos superpuestas, sin inclinar — look editorial, no
