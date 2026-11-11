@@ -513,15 +513,14 @@ section {
 }
 
 /* Fondo de la misma familia que Historia (cuadrícula) y RSE (anillos),
-   pero distinto: una grilla en diagonal que se desvanece, con un
-   solo resplandor bordó (sin los cuatro colores de antes). */
+   pero distinto: trama de puntos (como un plano de depósito) que se
+   desvanece, con un solo resplandor bordó. */
 .emp-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    repeating-linear-gradient(45deg, var(--navy-700) 0 2px, transparent 2px 48px),
-    repeating-linear-gradient(-45deg, var(--navy-700) 0 2px, transparent 2px 48px);
+  background-image: radial-gradient(var(--navy-700) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
   -webkit-mask-image: radial-gradient(ellipse at 22% 35%, var(--navy-950) 15%, transparent 75%);
   mask-image: radial-gradient(ellipse at 22% 35%, var(--navy-950) 15%, transparent 75%);
   pointer-events: none;
