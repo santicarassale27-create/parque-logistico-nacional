@@ -4230,44 +4230,20 @@ button[disabled] {
 /* Ícono: baldosa con degradé dorado y un dibujo de dos tonos (línea clara + acento dorado) */
 .in-infra-ico,
 .in-barrio-ico {
-  --ic-l: var(--navy-100);
-  --ic-a: var(--gold-300);
-  --ic-bg: var(--navy-800);
   display: flex;
   align-items: center;
   justify-content: center;
   width: 84px;
   height: 84px;
   margin-bottom: 28px;
-  padding: 12px;
+  padding: 13px;
   border-radius: 26px;
   background: linear-gradient(150deg, var(--navy-600), var(--navy-900) 75%);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--white) 16%, transparent), 0 10px 24px color-mix(in srgb, var(--navy-950) 40%, transparent);
 }
 
-/* Íconos de El Parque y de Proyecto: un solo color (blanco). Lo que antes era dorado ahora es blanco con relleno suave */
-.in-infra-ico,
-.in-barrio-ico { --ic-l: var(--white); --ic-a: var(--white); --ic-bg: var(--navy-800); }
-.in-infra-ico .in-ic .af,
-.in-barrio-ico .in-ic .af,
-.in-barrio-ico .in-ic .f { fill-opacity: 0.16; }
-.in-infra-ico .in-ic .l,
-.in-infra-ico .in-ic .a,
-.in-infra-ico .in-ic .af,
-.in-barrio-ico .in-ic .l,
-.in-barrio-ico .in-ic .a,
-.in-barrio-ico .in-ic .af { stroke-width: 2.4; }
-.in-infra-ico .in-ic .m,
-.in-barrio-ico .in-ic .m { stroke-opacity: 0.55; }
-
-.in-ic { display: block; width: 100%; height: 100%; fill: none; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
-.in-ic .l { stroke: var(--ic-l); stroke-width: 2.2; }
-.in-ic .m { stroke: var(--ic-l); stroke-opacity: 0.5; stroke-width: 1.7; }
-.in-ic .a { stroke: var(--ic-a); stroke-width: 2.2; }
-.in-ic .af { stroke: var(--ic-a); stroke-width: 2.2; fill: var(--ic-a); fill-opacity: 0.2; }
-.in-ic .fa { fill: var(--ic-a); stroke: none; }
-.in-ic .f { fill: var(--ic-a); fill-opacity: 0.2; stroke: none; }
-.in-ic .w { fill: var(--ic-bg); stroke: var(--ic-l); stroke-width: 2.2; }
+/* Dibujo del ícono (Phosphor "light"): un solo color, blanco, con el color del texto */
+.in-ph { display: block; width: 100%; height: 100%; fill: currentColor; color: var(--white); }
 
 .in-infra h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; line-height: 1.25; color: var(--white); }
 .in-infra p { margin-top: 10px; font-size: 0.97rem; line-height: 1.6; color: var(--navy-300); }
@@ -4450,7 +4426,7 @@ button[disabled] {
   .in-barrio-grid { grid-template-columns: 1fr; gap: 14px; }
   .in-barrio { padding: 26px 24px 28px; border-radius: 22px; }
   .in-subtitulo { margin: 52px 0 20px; }
-  .in-infra-ico, .in-barrio-ico { width: 76px; height: 76px; padding: 11px; margin-bottom: 20px; border-radius: 24px; }
+  .in-infra-ico, .in-barrio-ico { width: 76px; height: 76px; padding: 12px; margin-bottom: 20px; border-radius: 24px; }
   .in-hero h1 { font-size: 2.5rem; }
   .in-hero-botones { gap: 20px; }
   .in-sec { padding: 80px 0; }

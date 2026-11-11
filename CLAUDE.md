@@ -68,10 +68,11 @@ img/                        Fotos (cuando las haya)
 - Orden: portada → Historia (números apilados + línea de tiempo) → El Parque (oscura: 6 tarjetas con ícono + distancias 12/10/11 km)
   → Servicios (4 tarjetas + recorrido de la mercadería; el bloque que más les gustó) → Proyecto Itapeby (4 cifras + 4 tarjetas
   de espacio público para el barrio) → Responsabilidad Social (collage + lista de dos columnas + cifras) → tarjeta oscura de contacto.
-- **Íconos** (`.in-ic`, dibujados a mano en una grilla de 64): un solo color (blanco) sobre una baldosa azul,
-  tanto en El Parque como en Proyecto Itapeby (cancha, plaza, pasaje-sendero y cañada con retroexcavadora). Sin borde amarillo y
-  quietos al pasar el mouse. Todos van de un solo color (blanco), los de El Parque y los de Proyecto (decisión del equipo; las tarjetas de Proyecto tampoco se mueven). Clases del dibujo: `l` línea, `m` línea tenue, `a` acento, `af` acento con relleno, `fa` relleno,
-  `w` rueda. Mismo estilo para todos los íconos nuevos.
+- **Íconos** (`.in-ph`): de la librería **Phosphor Icons**, estilo "light" (licencia MIT), en blanco sobre una baldosa azul, sin borde
+  y quietos al pasar el mouse (decisión del equipo; las tarjetas de Proyecto tampoco se mueven). Los 10 son: galpón, camión con acoplado,
+  escudo con tilde, matafuego, sello de aprobado y edificio (El Parque) y pelota, árbol, sendero y olas (Proyecto). El dibujo va copiado
+  dentro del HTML (sin instalar nada). Para uno nuevo: buscarlo en phosphoricons.com, copiar el contenido del `<svg>` del archivo "light" y
+  ponerlo dentro de `<svg class="in-ph" viewBox="0 0 256 256">`. No dibujar íconos a mano (decisión del equipo).
 - **"Servicios", no "empresas"** (pedido del papá de Santi): en la landing los cuatro (Depósito nacional, Depósito aduanero,
   Flete terrestre, Fletes aéreos y marítimos) se presentan como servicios; la marca va en chico debajo. Pendiente definir si el
   resto del sitio (menú, página Empresas, pie, contacto) también cambia.
