@@ -91,7 +91,7 @@ img/                        Fotos (cuando las haya)
 - Los textos con clase `pendiente` (subrayado punteado) esperan datos reales de la empresa: no inventarlos.
 - Sin foto ni frase del fundador: la familia prefiere no aparecer en la web (decisión confirmada).
 - Fondos por sección (para que la página no sea toda blanca): apertura en azul noche con cuadrícula de plano,
-  cifras en franja dorada con rayado fino, etapas alternando blanco y gris punteado (`hist-chapter--tono` en la 2 y la 4)
+  cifras (32 / 310 / 4) en una franja toda del color secundario (oscuro), sin rayado, etapas alternando blanco y gris punteado (`hist-chapter--tono` en la 2 y la 4)
   sin números de etapa grandes detrás de los títulos (decisión del equipo), reconocimientos en azul noche con
   cuadrícula y "Conocé más" en blanco (decisión del equipo). Sin fondos crema ni brillos dorados apagados (decisión del equipo).
   Los estilos van con `.pagina-historia` (clase del `<body>`), así no cambian El Parque ni Empresas,
@@ -111,7 +111,8 @@ img/                        Fotos (cuando las haya)
   cuanto más a la derecha más arriba; los de arriba, cuanto más a la derecha más abajo. Sin plaza en el plano.
   Estados confirmados: Fármaco Uruguayo y Gador operando; Droguería Uruguay confirmada; un laboratorio en negociación; 2 locales a definir.
   El plano está incompleto: falta el plano completo del predio que va a pasar la empresa.
-- **Mapa 3D de ubicación:** lo genera `herramientas/generar-mapa.py` (no editar el SVG a mano). Montevideo en maqueta
+- **Mapa 3D de ubicación:** lo genera `herramientas/generar-mapa.py` (no editar el SVG a mano).
+  **El mapa conserva su paleta original** (azul noche + dorado) aunque el resto de la web cambió de colores: se define en `.pq-mapa` (decisión del equipo). Montevideo en maqueta
   con relieve, edificios, el Parque en miniatura y arcos hasta el Puerto (12 km), Aeropuerto (10 km) y
   Zona Franca (11 km). Para mover un punto o cambiar la vista, editar `PUNTOS`, `GIRO` o `INCLINACION` y correr el script.
   Si un arco pisa un cartel, bajar su `"arco"`. Sin otras sedes ni leyenda (decisión del equipo).
