@@ -503,14 +503,14 @@ window.addEventListener("load", centrarDeslizables);
 /* ---------- Scroll suave con la rueda del mouse ----------
    La rueda del mouse salta de a 100 px y se siente brusca. Acá la frenamos un poco:
    cada vuelta de rueda suma una distancia más corta y la página "desliza" hasta ahí con una curva suave.
-   No toca el celular, el trackpad, el teclado, la barra lateral ni los links (esos ya son suaves).
+   No toca el celular, el teclado, la barra lateral ni los links (esos ya son suaves).
    Si la persona pidió menos movimiento en su sistema, no se activa. */
 function initScrollSuave() {
   if (prefersReducedMotion()) return;
   if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return;
 
-  var FUERZA = 0.8;      // cuánto avanza cada vuelta de rueda (1 = normal; menos = más lento)
-  var SUAVIDAD = 130;    // milisegundos que tarda en "asentarse" (más = más fluido)
+  var FUERZA = 0.7;      // cuánto avanza cada vuelta de rueda (1 = normal; menos = más lento)
+  var SUAVIDAD = 220;    // milisegundos que tarda en "asentarse" (más = más fluido)
   var destino = window.scrollY;
   var animando = false;
   var ultimo = 0;
@@ -557,9 +557,8 @@ function initScrollSuave() {
 
   window.addEventListener("wheel", function (e) {
     if (e.ctrlKey || e.defaultPrevented || e.deltaX !== 0 && Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-    // Rueda de mouse: saltos enteros y grandes. El trackpad manda valores chicos o con decimales, y ya es suave.
-    var esRueda = e.deltaMode === 1 || (Math.abs(e.deltaY) >= 50 && Number.isInteger(e.deltaY));
-    if (!esRueda || tieneScrollPropio(e.target)) return;
+    // Funciona con rueda de mouse y con trackpad (el trackpad manda muchos movimientos chicos y también se suaviza)
+    if (tieneScrollPropio(e.target)) return;
     e.preventDefault();
     if (!animando) destino = window.scrollY;
     var delta = e.deltaMode === 1 ? e.deltaY * 40 : e.deltaY;
