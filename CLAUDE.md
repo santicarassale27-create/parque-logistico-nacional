@@ -192,6 +192,12 @@ img/                        Fotos (cuando las haya)
   - Repremar Logistics — Fletes aéreos y marítimos (FCL/LCL) — Misiones 1372, 6.º piso — 2916 94 16 — logistics@repremar.com
 - Pendiente de confirmar con la empresa: año de fundación (la web dice 1994, el material dice "35 años").
 
+## Logo
+
+- El logo oficial (globo + "Parque Logístico Nacional") está en `img/logos/pln-logo.png` (a color, fondo transparente, para fondos claros)
+  y `img/logos/pln-logo-blanco.png` (todo en blanco, para fondos oscuros). Se usa con `<img class="brand-logo">` dentro de `<a class="brand">`:
+  la versión a color en el encabezado y la blanca en el pie, idénticos en las 7 páginas. No volver a dibujarlo con texto.
+
 ## Pie de página
 
 - Es **idéntico en las 7 páginas** (marca + menú, dirección y contacto, logos de las empresas, copyright).
