@@ -39,12 +39,11 @@
 
 <!-- ============ PORTADA: foto o video de fondo a pantalla completa ============ -->
 <section class="in-hero">
-  <!-- FONDO. Cuando lleguen la foto o el video del dron:
-       · Foto: ponerle a este div style="background-image:url(img/portada.jpg)".
-       · Video: pegar adentro  <video autoplay muted loop playsinline poster="img/portada.jpg"><source src="img/portada.mp4" type="video/mp4"></video>
-       y borrar el cartelito .in-hero-nota. Mientras tanto se ve un fondo dibujado. -->
-  <div class="in-hero-fondo" aria-hidden="true"><span class="in-orbita"></span></div>
-  <span class="in-hero-nota">FOTO o VIDEO de fondo · vista aérea del Parque (dron)</span>
+  <!-- FONDO: video del dron (img/landing/portada.mp4, sin sonido, en bucle). Si el video no carga, se ve la foto (poster).
+       Para cambiarlo, reemplazar los archivos de img/landing/ manteniendo los nombres. -->
+  <div class="in-hero-fondo" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" poster="img/landing/portada.jpg"><source src="img/landing/portada.mp4" type="video/mp4"></video>
+  </div>
   <div class="container in-hero-contenido">
     <h1>Toda la cadena logística, en <span>un solo predio.</span></h1>
     <p>Depósito nacional y aduanero, transporte terrestre y comercio exterior: cuatro servicios integrados en diez hectáreas de Montevideo.</p>
@@ -195,9 +194,9 @@
 <section class="in-sec in-sec--gris">
   <div class="container in-rse">
     <div class="in-rse-collage hist-anim">
-      <div class="foto foto--fondo in-r1"><span class="foto-label">FOTO · Aula Ceibal</span></div>
-      <div class="foto foto--fondo in-r2"><span class="foto-label">FOTO · Escuela de Conducción</span></div>
-      <div class="foto foto--fondo in-r3"><span class="foto-label">FOTO · Concurso de dibujo</span></div>
+      <div class="foto foto--fondo in-r1" role="img" aria-label="Autoelevadores en la Escuela de Conducción del Parque" style="background-image:url(img/landing/rse-escuela.jpg);background-position:45% 60%"></div>
+      <div class="foto foto--fondo in-r2" role="img" aria-label="Grupo de participantes de Aula Ceibal" style="background-image:url(img/landing/rse-aula.jpg)"></div>
+      <div class="foto foto--fondo in-r3" role="img" aria-label="Trabajadores con los premios del concurso de dibujo" style="background-image:url(img/landing/rse-concurso.jpg)"></div>
     </div>
     <div class="in-rse-texto">
       <h2 class="hist-anim">Crecer <span class="in-oro">junto al barrio.</span></h2>

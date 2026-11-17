@@ -4367,7 +4367,7 @@ button[disabled] {
 .in-rse { display: grid; grid-template-columns: 1fr 1.05fr; gap: 88px; align-items: center; }
 
 .in-rse-collage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.in-rse-collage .foto { border-radius: 26px; align-items: flex-start; }
+.in-rse-collage .foto { border-radius: 26px; align-items: flex-start; background-size: cover; background-position: center; }
 .in-r1 { grid-column: 1 / -1; aspect-ratio: 16 / 11; border-radius: 32px !important; box-shadow: var(--shadow-lg); }
 .in-r2, .in-r3 { aspect-ratio: 1 / 1; }
 .in-r3 { margin-top: 28px; }

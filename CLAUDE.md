@@ -61,8 +61,8 @@ img/                        Fotos (cuando las haya)
   con imágenes grandes, una paleta contenida y mucho aire (sin copiar a nadie).
 - **Portada:** una sola foto o video de fondo a pantalla completa (`.in-hero-fondo`), con el título, los botones y la invitación
   "Bajá para conocer más" con solo una flecha, sin círculo (sin barra de datos: decisión del equipo). Mientras no haya material se ve un fondo dibujado y un cartelito
-  ("FOTO o VIDEO de fondo"). Foto: `style="background-image:url(img/...)"` en `.in-hero-fondo`; video: `<video autoplay muted loop playsinline>`
-  adentro (las instrucciones están en un comentario del HTML); después se borra `.in-hero-nota`.
+  ("FOTO o VIDEO de fondo"). Ya tiene el video del dron (`img/landing/portada.mp4`, sin sonido, con la foto `portada.jpg` de respaldo). Para cambiarlo,
+  reemplazar esos archivos con el mismo nombre. Las fotos de Responsabilidad Social del collage están en `img/landing/rse-*.jpg`.
 - Reglas del estilo: todas las secciones usan la misma cabecera (`.in-cab`: título a la izquierda, texto y botón a la derecha);
   en cada título, una frase va en el color de acento (bordó, clase `.in-oro`); fondos que alternan oscuro / claro / gris; tarjetas redondeadas del mismo
   radio; números grandes separados por líneas finas.
