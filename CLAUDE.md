@@ -174,6 +174,8 @@ img/                        Fotos (cuando las haya)
 - **Animaciones al hacer scroll:** se aplican solas a títulos, tarjetas, grillas, `.feature`, línea de tiempo, etc.
   Para excluir algo: agregale la clase `no-reveal`. Para sumar algo: agregá su selector a `REVEAL_SELECTORS`.
   Nada dentro de `.hero` se anima.
+- **Scroll suave:** con la rueda del mouse la página desliza en vez de saltar (`initScrollSuave()`; `FUERZA` y `SUAVIDAD` arriba de la función
+  regulan la velocidad). No actúa en celular, trackpad, teclado ni con "reducir movimiento" activado.
 - **Contadores:** los `<strong>` dentro de `.stats-strip` que empiezan con un número (`27.000 m²`, `20`, `12 km`)
   cuentan desde 0. Para usarlo en otro lugar: atributo `data-counter`.
 - **Formulario:** envía con Web3Forms. Las keys de cada empresa van en `FORM_KEYS`, arriba de `main.js`.

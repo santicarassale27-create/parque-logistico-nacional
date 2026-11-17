@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initRelato();
   initEspacios();
   initSelects();
+  initScrollSuave();
 });
 
 /* ---------- 1. Menú del celular ---------- */
@@ -497,3 +498,77 @@ function centrarDeslizables() {
   });
 }
 window.addEventListener("load", centrarDeslizables);
+
+
+/* ---------- Scroll suave con la rueda del mouse ----------
+   La rueda del mouse salta de a 100 px y se siente brusca. Acá la frenamos un poco:
+   cada vuelta de rueda suma una distancia más corta y la página "desliza" hasta ahí con una curva suave.
+   No toca el celular, el trackpad, el teclado, la barra lateral ni los links (esos ya son suaves).
+   Si la persona pidió menos movimiento en su sistema, no se activa. */
+function initScrollSuave() {
+  if (prefersReducedMotion()) return;
+  if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return;
+
+  var FUERZA = 0.8;      // cuánto avanza cada vuelta de rueda (1 = normal; menos = más lento)
+  var SUAVIDAD = 130;    // milisegundos que tarda en "asentarse" (más = más fluido)
+  var destino = window.scrollY;
+  var animando = false;
+  var ultimo = 0;
+
+  function maximo() {
+    return document.documentElement.scrollHeight - window.innerHeight;
+  }
+
+  // Si el cursor está sobre algo que tiene su propio scroll (una lista, el menú), lo dejamos tranquilo
+  function tieneScrollPropio(el) {
+    while (el && el !== document.body && el !== document.documentElement) {
+      var estilo = window.getComputedStyle(el);
+      if ((estilo.overflowY === "auto" || estilo.overflowY === "scroll") && el.scrollHeight > el.clientHeight) return true;
+      el = el.parentElement;
+    }
+    return false;
+  }
+
+  var ultimaPosicion = 0;
+
+  function paso(ahora) {
+    var dt = Math.min(ahora - ultimo, 50);
+    ultimo = ahora;
+    var actual = window.scrollY;
+    // Si algo más movió la página (un link del menú, el teclado, la barra lateral), soltamos el control
+    if (Math.abs(actual - ultimaPosicion) > 2) {
+      animando = false;
+      return;
+    }
+    var falta = destino - actual;
+    if (Math.abs(falta) <= 1) {
+      window.scrollTo({ top: destino, behavior: "instant" });
+      animando = false;
+      return;
+    }
+    var avance = falta * (1 - Math.exp(-dt / SUAVIDAD));
+    // El navegador redondea a píxeles enteros: avanzamos al menos 1 para no quedar trabados
+    if (Math.abs(avance) < 1) avance = falta > 0 ? 1 : -1;
+    ultimaPosicion = actual + avance;
+    window.scrollTo({ top: ultimaPosicion, behavior: "instant" });
+    ultimaPosicion = window.scrollY;
+    requestAnimationFrame(paso);
+  }
+
+  window.addEventListener("wheel", function (e) {
+    if (e.ctrlKey || e.defaultPrevented || e.deltaX !== 0 && Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    // Rueda de mouse: saltos enteros y grandes. El trackpad manda valores chicos o con decimales, y ya es suave.
+    var esRueda = e.deltaMode === 1 || (Math.abs(e.deltaY) >= 50 && Number.isInteger(e.deltaY));
+    if (!esRueda || tieneScrollPropio(e.target)) return;
+    e.preventDefault();
+    if (!animando) destino = window.scrollY;
+    var delta = e.deltaMode === 1 ? e.deltaY * 40 : e.deltaY;
+    destino = Math.max(0, Math.min(maximo(), destino + delta * FUERZA));
+    if (!animando) {
+      animando = true;
+      ultimaPosicion = window.scrollY;
+      ultimo = performance.now();
+      requestAnimationFrame(paso);
+    }
+  }, { passive: false });
+}
